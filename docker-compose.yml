@@ -1,0 +1,7 @@
+version: "3.3"
+
+services:
+  app:
+    image: "registry.in2.es:5005/in2/diba-ds-frontend:master"
+    ports:
+      - 80:80
