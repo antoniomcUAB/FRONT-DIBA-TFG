@@ -1,3 +1,12 @@
-<p>
-  home works!
-</p>
+<!-- Home Component -->
+  <section id="home">
+    <h1 class="text-center mt-5">{{ city }}</h1>
+    <h2 class="text-center mb-4">{{ "TITLE.home-h2" | translate }}</h2>
+
+    <div class="card">
+      <!-- Table -->
+      <app-table-list [tableData]="data" [options]="options" (reloadData)="reloadData()"></app-table-list>
+      <!--/ Table -->
+    </div>
+  </section>
+<!--/ Home Component -->

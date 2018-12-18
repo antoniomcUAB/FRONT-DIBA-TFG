@@ -14,6 +14,7 @@ import {
   MatSelectModule,
   MatFormFieldModule
 } from '@angular/material';
+import {TableListModule} from "./modules/table-list";
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import {
     FormsModule,
     MatCardModule,
     MatButtonModule,
-    MatInputModule,
+    MatInputModule,TableListModule,
     MatSelectModule,
     MatFormFieldModule,
     ReactiveFormsModule,
@@ -44,7 +45,8 @@ import {
     MatSidenavModule,
     NgbModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    TableListModule
   ]
 })
 export class SharedModule { }

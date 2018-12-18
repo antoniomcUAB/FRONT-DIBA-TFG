@@ -1,0 +1,117 @@
+<!-- Form Detail -->
+<div class="card">
+  <div class="card-body">
+    <div class="form-group row">
+      <!-- File ID -->
+      <div class="col-6">
+        <div class="col-12">
+          <label for="fileId" class="col-form-label">{{ "FORM.fileId" | translate }}</label>
+          <input class="form-control" type="text" value="" id="fileId" disabled="disabled">
+        </div>
+      </div>
+      <!--/ File ID -->
+      <!-- File Owner -->
+      <div class="col-6">
+        <div class="col-12">
+          <label for="owner" class="col-form-label">{{ "FORM.fileOwner" | translate }}</label>
+          <input class="form-control" type="text" value="" id="owner" disabled="disabled">
+        </div>
+      </div>
+      <!-- File Owner -->
+    </div>
+    <div class="form-group row">
+      <!-- File Name -->
+      <div class="col-6">
+        <div class="col-12">
+          <label for="fileName" class="col-form-label">{{ "FORM.fileName" | translate }}</label>
+          <input class="form-control" type="text" value="" id="fileName" disabled="disabled">
+        </div>
+      </div>
+      <!-- File Name -->
+      <!-- File Date -->
+      <div class="col-6">
+        <div class="col-12">
+          <label for="fileDate" class="col-form-label">{{ "FORM.fileDate" | translate }}</label>
+          <input class="form-control" type="date" value="" id="fileDate" disabled="disabled">
+        </div>
+      </div>
+      <!--/ File Date -->
+    </div>
+    <div class="form-group row">
+      <!-- File Unity Family -->
+      <div class="col-6">
+        <div class="col-12">
+          <label for="fileUFamily" class="col-form-label">{{ "FORM.fileUFamily" | translate }}</label>
+          <input class="form-control" type="number" value="" id="fileUFamily">
+        </div>
+      </div>
+      <!--/ File Unity Family -->
+      <!-- File People Ref. -->
+      <div class="col-6">
+        <div class="col-12">
+          <label for="filePeopleRef" class="col-form-label">
+            {{ "FORM.filePeopleRef" | translate }}
+          </label>
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-user-plus"></i>
+              </div>
+            </div>
+            <select class="custom-select col-6" id="gender">
+              <option selected></option>
+              <option value="1">{{ "FORM.father" | translate }}</option>
+              <option value="2">{{ "FORM.mother" | translate }}</option>
+              <option value="3">{{ "FORM.son" | translate }}</option>
+              <option value="4">{{ "FORM.daughter" | translate }}</option>
+              <option value="5">{{ "FORM.husband" | translate }}</option>
+              <option value="6">{{ "FORM.wife" | translate }}</option>
+              <option value="7">{{ "FORM.other" | translate }}</option>
+            </select>
+            <input type="date" class="form-control col-6" id="birthday">
+            <input type="text" class="d-none form-control col-6" id="filePeopleRef">
+          </div>
+        </div>
+      </div>
+      <!--/ File People Ref. -->
+    </div>
+    <!-- File Observation -->
+    <div class="form-group row">
+      <div class="col-12 px-3">
+        <label for="fileObservation" class="col-form-label">
+          <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
+        </label>
+        <textarea class="form-control" type="text" value="" id="fileObservation"></textarea>
+      </div>
+    </div>
+    <!--/ File Observation -->
+    <div class="form-group row">
+      <div class="col-12 px-3">
+        <label for="filePeopleRef" class="col-form-label">
+          <i class="fa fa-eye"></i> {{ "FORM.fileValuate" | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+
+    <!-- Table Files -->
+  <div class="form-group px-4">
+    <ngx-datatable
+      [columnMode]="'force'"
+      [footerHeight]="40"
+      [headerHeight]="40"
+      [rowHeight]="40"
+      [rows]="rows"
+      [scrollbarH]="false"
+      [scrollbarV]="false"
+      [limit]="5"
+      [routerLink]="['diagnosis-detail']"
+      class="col-12 no-shadow rounded-0">
+      <ngx-datatable-column name="{{ 'TABLE.files' | translate }}" prop="id" [width]="90"></ngx-datatable-column>
+      <ngx-datatable-column name="{{ 'TABLE.actions' | translate }}"></ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+    <!--/ Table Files -->
+
+</div>
+<!--/ Form Detail -->

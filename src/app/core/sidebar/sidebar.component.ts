@@ -12,7 +12,7 @@ export class SidebarComponent {
     lang: 'en',
     theme: 'winter',
     settings: false,
-    docked: false,
+    docked: true,
     boxed: false,
     opened: false
   };
@@ -23,7 +23,7 @@ export class SidebarComponent {
   constructor (
     public translate: TranslateService) {
       const browserLang: string = translate.getBrowserLang();
-      translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+      translate.use(browserLang.match(/en|es/) ? browserLang : 'es');
   }
 
   sendMessage() {

@@ -1,0 +1,87 @@
+<table class="table {{ tClass ? tClass : 'table-striped table-bordered'}}">
+  <thead class="table-header" *ngIf="options.header">
+    <tr>
+      <ng-template let-col ngFor [ngForOf]="options.columns">
+        <th (click)="changeSort(col)">
+          <span>{{col.title}}</span>
+          <i class="table-sort-icon pull-right fa" aria-hidden="true"
+             *ngIf="col.sortable && options.sortable"
+             [class.fa-sort]="getSortStatus(col.name) == SortDir.NON"
+             [class.fa-sort-asc]="getSortStatus(col.name) == SortDir.ASC"
+             [class.fa-sort-desc]="getSortStatus(col.name) == SortDir.DESC"
+          ></i>
+        </th>
+      </ng-template>
+      <th translate *ngIf="options.actions">
+        Acciones
+      </th>
+    </tr>
+    <tr *ngIf="options.filterable">
+      <ng-template let-col ngFor [ngForOf]="options.columns">
+        <th>
+          <app-filter-input [(ngModel)]="col.filter" [type]="col.filterType" (ngModelChange)="reloadDataAndPagination()"
+                        *ngIf="col.filterable"></app-filter-input>
+        </th>
+      </ng-template>
+      <th *ngIf="options.actions">
+      </th>
+    </tr>
+  </thead>
+  <!--FOOTER-->
+  <tfoot *ngIf="options.footer">
+    <tr>
+      <td colspan="100%">
+        <span class="pull-left page-info">Página {{options.currentPage}} de {{options.totalPages}}
+        </span>
+        <ngb-pagination
+          class="d-flex justify-content-end"
+          size="sm"
+          [collectionSize]="options.totalItems + 1"
+          [pageSize]="options.itemsPerPage"
+          [maxSize]="5"
+          [page]="options.currentPage"
+          (pageChange)="changePage($event)"
+          [rotate]="false"
+          [boundaryLinks]="true"
+          aria-label="Default pagination"></ngb-pagination>
+      </td>
+    </tr>
+  </tfoot>
+  <!--BODY-->
+  <tbody>
+    <tr *ngIf="options.loading">
+      <td colspan="100%" class="center-text">
+        <div class="sk-spinner sk-spinner-wave">
+          <div class="sk-rect1"></div>
+          <div class="sk-rect2"></div>
+          <div class="sk-rect3"></div>
+          <div class="sk-rect4"></div>
+          <div class="sk-rect5"></div>
+        </div>
+      </td>
+    </tr>
+    <tr *ngIf="!data || (data.length === 0 && !options.loading)">
+      <td colspan="100%">
+        Sin resultados
+      </td>
+    </tr>
+    <tr *ngFor="let item of data; let rowIndex=index" (click)="selectEvent.emit(item)">
+      <ng-container *ngTemplateOutlet="(rowTemplate) ? rowTemplate : defaultRow; context:{$implicit:item, index: rowIndex }"></ng-container>
+      <ng-template #defaultRow>
+        <td *ngFor="let col of options.columns">
+          {{item[col.name] | dataType:col.filterType}}
+        </td>
+        <td *ngIf="options.actions" class="actions-header">
+          <ng-container *ngTemplateOutlet="(actionTemplate) ? actionTemplate : defaultActionTemplate; context:{$implicit:item, index: rowIndex }"></ng-container>
+          <ng-template #defaultActionTemplate>
+            <!--<button class="btn btn-primary fa fa-info-circle btn-sm" *ngIf="options.editBtn" (click)="selectEvent.emit(item)"></button>-->
+          </ng-template>
+          <ng-template #actions let-item>
+            <button>icono</button>
+          </ng-template>
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>
+

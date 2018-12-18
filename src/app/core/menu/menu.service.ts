@@ -32,12 +32,6 @@ const MENUITEMS: Menu[] = [
     icon: 'ion-ios-speedometer'
   },
   {
-    state: 'docs',
-    name: 'DOCS',
-    type: 'link',
-    icon: 'ion-ios-help'
-  },
-  {
     type: 'divider'
   },
   {

@@ -13,6 +13,14 @@ export const AppRoutes: Routes = [
         loadChildren: './modules/home#HomeRoutingModule'
       },
       {
+        path: 'file-detail',
+        loadChildren: './modules/files#FileDetailModule'
+      },
+      {
+        path: 'diagnosis-detail',
+        loadChildren: './modules/files#FileDetailModule'
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
@@ -22,10 +30,6 @@ export const AppRoutes: Routes = [
     path: '',
     component: AuthLayoutComponent,
     children: [
-      {
-        path: 'error',
-        loadChildren: './error/error.module#ErrorModule'
-      },
       {
         path: 'error',
         loadChildren: './error/error.module#ErrorModule'

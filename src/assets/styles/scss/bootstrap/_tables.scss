@@ -52,3 +52,12 @@
     content: attr(data-title);
   }
 }
+
+.datatable-header * {
+  text-align: center;
+  font-weight: bold;
+}
+
+.datatable-body * {
+  text-align: center;
+}

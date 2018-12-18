@@ -1,0 +1,20 @@
+<div [ngSwitch]="type" class="input-group full-width">
+  <!-- NUMBER -->
+  <input *ngSwitchCase="FilterType.number"
+         type="number"
+         [(ngModel)]="value"
+         class="form-control">
+
+  <!-- DATE -->
+    <input  *ngSwitchCase="FilterType.date"
+          type="date"
+          [(ngModel)]="value"
+          class="form-control">
+
+  <!-- TEXT & DEFAULT-->
+  <input *ngSwitchDefault
+         [(ngModel)]="value"
+         class="form-control">
+
+
+</div>
