@@ -4,19 +4,19 @@ import { SharedModule } from '../../shared';
 /* Components */
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { HomeComponent } from './components/home.component';
-import { FileDetailComponent } from "../files";
 import {FilesDetailService} from "../files/services/file-detail.service";
+import {RouterModule} from '@angular/router';
+import {HomeRoutes} from './home.routing';
 
 @NgModule({
   imports: [
     SharedModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    RouterModule.forChild(HomeRoutes)
   ],
   declarations: [
-    HomeComponent,
-    FileDetailComponent
+    HomeComponent
   ],
-  exports: [FileDetailComponent],
-  providers:[FilesDetailService]
+  providers: [FilesDetailService]
 })
 export class HomeModule { }

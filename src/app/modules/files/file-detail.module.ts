@@ -1,13 +1,12 @@
-import { FileDetailRoutes } from "./file-detail.routing";
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 /* Components */
 import { FileDetailComponent } from "./components/file-detail/file-detail.component";
-import { DiagnosisDetailComponent } from "../diagnosis/components/diagnosis-detail/diagnosis-detail.component";
+import {RouterModule} from '@angular/router';
+import {FileDetailRoutes} from './file-detail.routing';
 
 @NgModule({
   imports: [
@@ -17,9 +16,8 @@ import { DiagnosisDetailComponent } from "../diagnosis/components/diagnosis-deta
   ],
   declarations: [
     FileDetailComponent,
-    DiagnosisDetailComponent
   ],
-  exports: [DiagnosisDetailComponent]
+  exports: []
 })
 
 export class FileDetailModule { }

@@ -17,7 +17,7 @@ export class FileDetailComponent {
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', `http://localhost:3000/files`);
+    req.open('GET', `../../../../../../assets/api/files.json`);
 
     req.onload = () => {
       cb(JSON.parse(req.response));

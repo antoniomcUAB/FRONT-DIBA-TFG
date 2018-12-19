@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FilterType, TableListOptions, TableListResponse } from '../../../shared/modules/table-list';
 import { FilesDetailService } from "../../files/services/file-detail.service";
 import { TranslateService } from "@ngx-translate/core";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -16,32 +17,34 @@ export class HomeComponent {
   options = new TableListOptions();
 
   constructor(private _fileDetailService: FilesDetailService,
+              private _router: Router,
               private _translateService: TranslateService) {
     this.options.setColumns([
       {
         name: 'id',
         title: this._translateService.instant('TABLE.files'),
         sortable: true,
-        filterable: true
+        filterable: false
+
       }, {
-        name: 'action',
+        name: 'createdate',
         title: this._translateService.instant('TABLE.createDate'),
         sortable: true,
-        filterable: true
+        filterable: false
       }, {
-        name: 'dateInto',
+        name: 'owner',
         title: this._translateService.instant('TABLE.owner'),
         sortable: true,
-        filterable: true,
-        filterType: FilterType.date
+        filterable: false,
       }, {
-        name: 'details',
+        name: 'updatedate',
         title: this._translateService.instant('TABLE.updateDate'),
         sortable: true,
-        filterable: true
+        filterable: false,
+        filterType: FilterType.date
       }
     ]);
-
+    this.options.filterable = false;
     this.options.actions = false;
     this.options.itemsPerPage = 5;
     this.reloadData();

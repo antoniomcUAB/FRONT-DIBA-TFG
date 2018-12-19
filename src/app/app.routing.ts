@@ -10,7 +10,7 @@ export const AppRoutes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: './modules/home#HomeRoutingModule'
+        loadChildren: './modules/home#HomeModule'
       },
       {
         path: 'file-detail',
