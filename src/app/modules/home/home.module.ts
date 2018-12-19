@@ -4,9 +4,9 @@ import { SharedModule } from '../../shared';
 /* Components */
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { HomeComponent } from './components/home.component';
-import {FilesDetailService} from "../files/services/file-detail.service";
 import {RouterModule} from '@angular/router';
 import {HomeRoutes} from './home.routing';
+import {HomeService} from './services/home.service';
 
 @NgModule({
   imports: [
@@ -17,6 +17,6 @@ import {HomeRoutes} from './home.routing';
   declarations: [
     HomeComponent
   ],
-  providers: [FilesDetailService]
+  providers: [HomeService]
 })
 export class HomeModule { }

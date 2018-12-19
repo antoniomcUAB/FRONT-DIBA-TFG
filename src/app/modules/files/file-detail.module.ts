@@ -7,6 +7,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FileDetailComponent } from "./components/file-detail/file-detail.component";
 import {RouterModule} from '@angular/router';
 import {FileDetailRoutes} from './file-detail.routing';
+import {FilesDetailService} from './services/file-detail.service';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import {FileDetailRoutes} from './file-detail.routing';
   declarations: [
     FileDetailComponent,
   ],
-  exports: []
+  providers: [FilesDetailService]
 })
 
 export class FileDetailModule { }

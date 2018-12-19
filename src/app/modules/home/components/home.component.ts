@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FilterType, TableListOptions, TableListResponse } from '../../../shared/modules/table-list';
-import { FilesDetailService } from "../../files/services/file-detail.service";
 import { TranslateService } from "@ngx-translate/core";
 import {Router} from "@angular/router";
+import {HomeService} from '../services/home.service';
+
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent {
   data: any[] = [];
   options = new TableListOptions();
 
-  constructor(private _fileDetailService: FilesDetailService,
+  constructor(private _service: HomeService,
               private _router: Router,
               private _translateService: TranslateService) {
     this.options.setColumns([
@@ -52,7 +53,7 @@ export class HomeComponent {
 
   reloadData() {
     this.options.loading = true;
-    this._fileDetailService.getFiles(this.options).subscribe((res: TableListResponse ) => {
+    this._service.getFiles(this.options).subscribe((res: TableListResponse ) => {
       this.options = res.options;
       this.data = res.data;
       this.options.loading = false;

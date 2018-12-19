@@ -4,7 +4,7 @@ export * from './components/login/login.component';
 // Resources
 export * from './resources/jwt-options';
 
-// Services
+// services
 export * from './services/auth.service';
 export * from './services/token.service';
 export * from './services/authenticated.guard';
