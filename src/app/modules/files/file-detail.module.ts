@@ -9,6 +9,7 @@ import {RouterModule} from '@angular/router';
 import {FileDetailRoutes} from './file-detail.routing';
 import {FilesDetailService} from './services/file-detail.service';
 
+
 @NgModule({
   imports: [
     SharedModule,

@@ -21,6 +21,10 @@ export const AppRoutes: Routes = [
         loadChildren: './modules/files#FileDetailModule'
       },
       {
+        path: 'observations',
+        loadChildren: './modules/observations#ObservationsModule'
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

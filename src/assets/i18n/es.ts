@@ -12,6 +12,9 @@ export let TRANSLATION = {
     'updateDate' : 'Fecha ultima valoracion',
     'actions'    : 'Acciones'
   },
+  'OBSTABLE': {
+    'obs'      : 'Valoraciones Realizadas'
+  },
 
   /* Form */
   'FORM': {

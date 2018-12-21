@@ -34,7 +34,6 @@
           <label for="fileDate" class="col-form-label">{{ "FORM.fileDate" | translate }}</label>
           <input class="form-control" type="date" value="{{data.createdate}}" id="fileDate" disabled="disabled">
         </div>
-        {{data.valRealizadas[0].id}}
       </div>
       <!--/ File Date -->
     </div>
@@ -86,34 +85,35 @@
       </div>
     </div>
     <!--/ File Observation -->
+
+    <!-- Table Files Valoraciones-->
     <div class="form-group row">
       <div class="col-12 px-3">
-        <label for="filePeopleRef" class="col-form-label">
-          <i class="fa fa-eye"></i> {{ "FORM.fileValuate" | translate }}
+        <label for="fileObservation" class="col-form-label">
+          <i class="fa fa-eye"></i> {{ "OBSTABLE.obs" | translate }}
         </label>
       </div>
     </div>
-  </div>
+      <div class="col-12 text-center">
+       <app-table-list [tableData]="obsData"
+                        [options]="options"
+                       [rowTemplate]="myRowInitDysplay"
+                        (reloadData)="reloadData()">
 
-    <!-- Table Files -->
-  <div class="form-group px-4">
-   <!-- <app-table-list [tableData]="data"
-                    [options]="options"
-                    [rowTemplate]="myRowInitDysplay"
-                    (reloadData)="reloadData()">
+          <ng-template #myRowInitDysplay let-item>
 
-      <ng-template #myRowInitDysplay let-item>
-        <td>
-          {{item.Nexpedient}}
-        </td>
-        <td>
-          {{item.owner}}
-        </td>
-      </ng-template>
-    </app-table-list>-->
+              <td>
+                {{item.id}} {{item.fecha}}
+                <a [routerLink]="['/observations', {'id': item.id},{'date': item.fecha}]" > <i class="fa fa-eye"></i> </a>
+                <a [routerLink]="['/observations', {'id': item.id},{'date': item.fecha}]" > <i class="fa fa-pencil-square-o"> </i> </a>
+              </td>
 
-  </div>
-    <!--/ Table Files -->
-
+          </ng-template>
+        </app-table-list>
+      </div>
+    <!--/ Table Files Valoraciones-->
+    <div class="col-md-12 px-3 text-center">
+    <button type="button" class="btn btn-dark"> Crear nou diagnostic</button>
+    </div>
 </div>
 <!--/ Form Detail -->

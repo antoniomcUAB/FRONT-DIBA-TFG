@@ -15,4 +15,17 @@ export class FilesDetailService {
   getFileById(id: String): Observable<DatosPersonales> {
     return this._http.get<DatosPersonales>("../../../../assets/api/idFiles.json");
   }
+  getObservaciones(options: TableListOptions): Observable<TableListResponse> {
+    const pageParams = Object.assign({}, options.searchParams);
+    return this._http.get("../../../../assets/api/idFiles.json",
+      {params: pageParams, observe: 'response'})
+      .pipe(map((response: HttpResponse<any>) => {
+        const data = response.body['valRealizadas'];
+        options.getPagesInfo(response.body);
+        return {
+          data: data,
+          options: options
+        };
+      }), );
+  }
 }
