@@ -21,7 +21,6 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
-import { NewDiagnosticComponent } from './modules/newDiagnostic/components/new-diagnostic/new-diagnostic.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +33,7 @@ import { NewDiagnosticComponent } from './modules/newDiagnostic/components/new-d
     AuthLayoutComponent,
     AccordionAnchorDirective,
     AccordionLinkDirective,
-    AccordionDirective,
-    NewDiagnosticComponent,
+    AccordionDirective
 
   ],
   imports: [

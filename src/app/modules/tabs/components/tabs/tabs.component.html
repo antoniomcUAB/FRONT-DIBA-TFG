@@ -1,0 +1,55 @@
+<ngb-tabset [activeId]="index">
+  <ngb-tab id="1" [disabled]="true" #tab1 title="Ambit Autonomia">
+    <ng-template ngbTabContent>
+
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [viewButton]="stay" [comesFrom]="'l\'ambit d\'autonomia'">
+      </app-check-form>
+
+      <app-ambit-autonomia-tab *ngIf="stay"  (endForm)="goBackCheckForm()">
+      </app-ambit-autonomia-tab>
+
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="2" [disabled]="true" title="ambit material e instrumental">
+    <ng-template ngbTabContent>
+
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [viewButton]="stay" [comesFrom]="'l\'ambit material e instrumental'">
+      </app-check-form>
+
+      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm()">
+      </app-ambit-material-tab>
+
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="3" [disabled]="true" title="ambit relacional">
+    <ng-template ngbTabContent>
+
+      <app-check-form *ngIf="!disapear" (childEmitter)="fnStayChild($event)" (stay)="fnStay($event)" [viewButton]="stay" [comesFrom]="'l\'ambit relacional '" [child]="'true'" >
+      </app-check-form>
+
+      <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm()" [child]="child">
+      </app-ambit-relacional-tab>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="4" [disabled]="true" title="globalitat del cas">
+    <ng-template ngbTabContent>
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [viewButton]="stay" [comesFrom]="' la globalitat del cas'">
+      </app-check-form>
+
+      <app-globalitat-tab *ngIf="stay"  (endForm)="goBackCheckForm()">
+      </app-globalitat-tab>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="5" [disabled]="true" title="valoracio del diagnostic">
+    <ng-template ngbTabContent>
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [viewButton]="stay" [comesFrom]="'la valoracio del diagnostic'" >
+      </app-check-form>
+
+      <app-valoracio-diagnostic-tab *ngIf="stay"  (endForm)="goBackCheckForm()">
+      </app-valoracio-diagnostic-tab>
+    </ng-template>
+  </ngb-tab>
+
+
+
+</ngb-tabset>

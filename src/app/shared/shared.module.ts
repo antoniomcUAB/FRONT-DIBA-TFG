@@ -22,7 +22,8 @@ import {TableListModule} from "./modules/table-list";
     FormsModule,
     MatCardModule,
     MatButtonModule,
-    MatInputModule,TableListModule,
+    MatInputModule,
+    TableListModule,
     MatSelectModule,
     MatFormFieldModule,
     ReactiveFormsModule,
@@ -30,7 +31,7 @@ import {TableListModule} from "./modules/table-list";
     HttpClientModule,
     LoadingBarRouterModule,
     NgbModule.forRoot(),
-    MatSidenavModule
+    MatSidenavModule,
   ],
   providers: [
     GlobalService

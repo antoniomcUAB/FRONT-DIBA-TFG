@@ -104,8 +104,8 @@
 
               <td>
                 {{item.id}} {{item.fecha}}
-                <a [routerLink]="['/observations', {'id': item.id},{'date': item.fecha}]" > <i class="fa fa-eye"></i> </a>
-                <a [routerLink]="['/observations', {'id': item.id},{'date': item.fecha}]" > <i class="fa fa-pencil-square-o"> </i> </a>
+                <a [routerLink]="['/observations', {'id': item.id,'date': item.fecha}]" > <i class="fa fa-eye"></i> </a>
+                <a [routerLink]="['/observations', {'id': item.id,'date': item.fecha}]" > <i class="fa fa-pencil-square-o"> </i> </a>
               </td>
 
           </ng-template>
@@ -113,7 +113,7 @@
       </div>
     <!--/ Table Files Valoraciones-->
     <div class="col-md-12 px-3 text-center">
-    <button type="button" class="btn btn-dark"> Crear nou diagnostic</button>
+    <button type="button" class="btn btn-dark" [routerLink]="['/tabs']"> Crear nou diagnostic</button>
     </div>
 </div>
 <!--/ Form Detail -->

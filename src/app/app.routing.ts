@@ -23,6 +23,9 @@ export const AppRoutes: Routes = [
       {
         path: 'observations',
         loadChildren: './modules/observations#ObservationsModule'
+      }, {
+        path: 'tabs',
+        loadChildren: './modules/tabs#TabsModule'
       },
       {
         path: '',
