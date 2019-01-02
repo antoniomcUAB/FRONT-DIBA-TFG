@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {TableListOptions, TableListResponse} from "../../../shared/modules/table-list";
 import {Injectable} from "@angular/core";
-import {DatosPersonales} from '../../files/resources/datos-personales';
 
 @Injectable()
 export class AmbitAutonomiaTabService {
