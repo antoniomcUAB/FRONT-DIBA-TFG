@@ -11,14 +11,14 @@
       {{item.ssb}}
     </td>
     <td>
-      <select>
-        <option ng>
 
-        </option>
-      </select>
+        <select>
+          <option *ngFor="let method of item.persona">{{ method }}</option>
+        </select>
+
     </td>
     <td>
-
+      {{item[0].gravetat}}
     </td>
 
   </ng-template>

@@ -2,39 +2,44 @@
   "tabAutonomia": [
     {
       "ssb": "Lorem ipsum dolor",
-      "persona": [{
-        "persona1": "persona1",
-        "persona2": "persona2"
-      }],
+      "persona": [
+        {
+          "persona": "persona1"
+        },
+        {
+          "persona": "persona2"
+        }],
       "gravetat": [{
-        "graveta1": "greu",
-        "gravetat2": "lleu"
+        "gravetat": "greu"
+      },{
+        "gravetat": "lleu"
       }],
-      "frequencia": [{
-        "frequencia1": "molt",
-        "frequencia2": "poc"
-      }]
-    },
-    {
+      "frequencia": [
+        {
+          "frequencia": "molt"
+        },{
+          "frequencia": "poc"
+        }]
+    },{
       "ssb": "Lorem ipsum dolor",
       "persona": [
         {
-          "persona1": "persona1",
-          "persona2": "persona2"
-        }
-      ],
-      "gravetat": [
+          "persona": "persona1"
+        },
         {
-          "graveta1": "greu",
-          "gravetat2": "lleu"
-        }
-      ],
+          "persona": "persona2"
+        }],
+      "gravetat": [{
+        "gravetat": "greu"
+      },{
+        "gravetat": "lleu"
+      }],
       "frequencia": [
         {
-          "frequencia1": "molt",
-          "frequencia2": "poc"
-        }
-      ]
+          "frequencia": "molt"
+        },{
+          "frequencia": "poc"
+        }]
     }
   ]
 }

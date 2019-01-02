@@ -3,6 +3,7 @@ import {TableListOptions, TableListResponse} from '../../../../shared/modules/ta
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {AmbitAutonomiaTabService} from '../../services/ambit-autonomia-tab.service';
+import {Tabs} from '../../resources/tab-class-form';
 
 
 @Component({
@@ -13,11 +14,9 @@ import {AmbitAutonomiaTabService} from '../../services/ambit-autonomia-tab.servi
 export class AmbitAutonomiaTabComponent {
 
   persona: string [] = [];
-  gravetat: string [] = [];
-  frequencia: string [] = [];
   options = new TableListOptions();
   options2 = new TableListOptions();
-  data: any[] = [];
+  data: Tabs[] = [];
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private _service: AmbitAutonomiaTabService,
@@ -101,6 +100,7 @@ export class AmbitAutonomiaTabComponent {
       this.options = res.options;
       this.data = res.data;
       this.options.loading = false;
+      console.log(this.data);
     });
   }
   public emitEnd(){
