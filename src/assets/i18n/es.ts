@@ -10,12 +10,22 @@ export let TRANSLATION = {
     'createDate' : 'Fecha creacion',
     'owner'      : 'Propietario',
     'updateDate' : 'Fecha ultima valoracion',
-    'actions'    : 'Acciones'
+    'actions'    : 'Acciones',
+    'api' : 'api',
+    'person' : 'Persona',
+    'severity' : 'Gravedad',
+    'frequency' : 'Frequencia',
+    'riskFactors' : 'Factores de Riesgo',
+    'types': 'Tipos',
+    'basicSocialSituation' : 'Situacion social Basica',
   },
   'OBSTABLE': {
     'obs'      : 'Valoraciones Realizadas'
   },
-
+  /*Tabs*/
+  'TAB': {
+    'tabAutonomia': 'Ambito de autonomia'
+  },
   /* Form */
   'FORM': {
     'fileId'        : 'Nº expediente',

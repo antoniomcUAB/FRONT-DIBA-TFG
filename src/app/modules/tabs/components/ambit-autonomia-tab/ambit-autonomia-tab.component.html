@@ -1,5 +1,36 @@
 
+<p>Evidencies autonomia</p>
 
-<p>ambit autonomia works!</p>
+<app-table-list [tableData]="data"
+                [options]="options"
+                [rowTemplate]="myRow"
+                (reloadData)="reloadData()">
+
+  <ng-template #myRow let-item>
+    <td>
+      {{item.ssb}}
+    </td>
+    <td>
+      <select>
+        <option ng>
+
+        </option>
+      </select>
+    </td>
+    <td>
+
+    </td>
+
+  </ng-template>
+</app-table-list>
+
+<app-table-list [tableData]="data"
+                [options]="options"
+                (reloadData)="reloadData()">
+</app-table-list>
+<app-table-list [tableData]="data"
+                [options]="options2"
+                (reloadData)="reloadData()">
+</app-table-list>
 
 <button (click)="emitEnd()">-></button>

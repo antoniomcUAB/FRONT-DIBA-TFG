@@ -12,10 +12,11 @@ import {CommonModule} from '@angular/common';
 import { AmbitRelacionalTabComponent } from './components/ambit-relacional-tab/ambit-relacional-tab.component';
 import { GlobalitatTabComponent } from './components/globalitat-tab/globalitat-tab.component';
 import { ValoracioDiagnosticTabComponent } from './components/valoracio-diagnostic-tab/valoracio-diagnostic-tab.component';
-
-
+import { SharedModule } from '../../shared';
+import {AmbitAutonomiaTabService} from './services/ambit-autonomia-tab.service';
 @NgModule({
   imports: [
+    SharedModule,
     RouterModule.forChild(TabsRoutes),
     NgbModule,
     CommonModule
@@ -28,7 +29,8 @@ import { ValoracioDiagnosticTabComponent } from './components/valoracio-diagnost
     AmbitRelacionalTabComponent,
     GlobalitatTabComponent,
     ValoracioDiagnosticTabComponent
-  ]
+  ],
+  providers:[AmbitAutonomiaTabService]
 })
 
 export class TabsModule { }

@@ -47,7 +47,6 @@ export class FileDetailComponent implements OnInit{
       this.options = res.options;
       this.obsData = res.data;
       this.options.loading = false;
-      console.log(this.obsData);
     });
   }
 
