@@ -15,6 +15,7 @@ import {
   MatFormFieldModule
 } from '@angular/material';
 import {TableListModule} from "./modules/table-list";
+import {SearchModule} from './components/search.module';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import {TableListModule} from "./modules/table-list";
     LoadingBarRouterModule,
     NgbModule.forRoot(),
     MatSidenavModule,
+    SearchModule
   ],
   providers: [
     GlobalService
@@ -47,7 +49,8 @@ import {TableListModule} from "./modules/table-list";
     NgbModule,
     ReactiveFormsModule,
     TranslateModule,
-    TableListModule
+    TableListModule,
+    SearchModule
   ]
 })
 export class SharedModule { }

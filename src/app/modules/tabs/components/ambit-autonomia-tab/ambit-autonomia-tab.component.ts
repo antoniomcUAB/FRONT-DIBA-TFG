@@ -2,8 +2,8 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {TableListOptions, TableListResponse} from '../../../../shared/modules/table-list';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
-import {AmbitAutonomiaTabService} from '../../services/ambit-autonomia-tab.service';
-import {Tabs} from '../../resources/tab-class-form';
+import {TabsService} from '../../services/tabs.service';
+import {TableTabsForm} from '../../resources/tab-class-form';
 
 
 @Component({
@@ -16,10 +16,10 @@ export class AmbitAutonomiaTabComponent {
   persona: string [] = [];
   options = new TableListOptions();
   options2 = new TableListOptions();
-  data: Tabs[] = [];
+  data: TableTabsForm[] = [];
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private _service: AmbitAutonomiaTabService,
+  constructor(private _service: TabsService,
               private _router: Router,
               private _translateService: TranslateService) {
     this.options.setColumns([

@@ -13,7 +13,7 @@ import { AmbitRelacionalTabComponent } from './components/ambit-relacional-tab/a
 import { GlobalitatTabComponent } from './components/globalitat-tab/globalitat-tab.component';
 import { ValoracioDiagnosticTabComponent } from './components/valoracio-diagnostic-tab/valoracio-diagnostic-tab.component';
 import { SharedModule } from '../../shared';
-import {AmbitAutonomiaTabService} from './services/ambit-autonomia-tab.service';
+import { TabsService} from './services/tabs.service';
 @NgModule({
   imports: [
     SharedModule,
@@ -30,7 +30,7 @@ import {AmbitAutonomiaTabService} from './services/ambit-autonomia-tab.service';
     GlobalitatTabComponent,
     ValoracioDiagnosticTabComponent
   ],
-  providers:[AmbitAutonomiaTabService]
+  providers:[TabsService]
 })
 
 export class TabsModule { }

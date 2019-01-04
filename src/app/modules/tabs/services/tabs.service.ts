@@ -6,7 +6,7 @@ import {TableListOptions, TableListResponse} from "../../../shared/modules/table
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class AmbitAutonomiaTabService {
+export class TabsService {
 
   constructor(public _http: HttpClient) {}
   getFiles(options: TableListOptions): Observable<TableListResponse> {

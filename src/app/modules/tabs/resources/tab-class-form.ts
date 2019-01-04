@@ -1,4 +1,4 @@
-export class Tabs {
+export class TableTabsForm {
   ssb: string;
   persona: string[] = [];
   gravetat: string[] = [];
