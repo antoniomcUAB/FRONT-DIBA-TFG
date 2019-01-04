@@ -7,10 +7,10 @@
 <!--/ Search component -->
 
 <ngb-tabset [activeId]="index">
-  <ngb-tab id="1" [disabled]="true" #tab1 title="Ambit Autonomia">
+  <ngb-tab style="background-color: #0d47a1" id="1" [disabled]="true" #tab1 title="Ambit Autonomia">
     <ng-template ngbTabContent>
 
-      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [viewButton]="stay" [comesFrom]="'l\'ambit d\'autonomia'">
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [viewButton]="stay" [comesFrom] = "'l\'ambit d\'autonomia'">
       </app-check-form>
 
       <app-ambit-autonomia-tab *ngIf="stay"  (endForm)="goBackCheckForm()">

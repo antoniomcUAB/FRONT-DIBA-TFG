@@ -43,6 +43,12 @@ export class HomeComponent {
         sortable: true,
         filterable: false,
         filterType: FilterType.date
+      }, {
+        name: 'expedient',
+        title: this._translateService.instant('TABLE.expedient'),
+        sortable: true,
+        filterable: false,
+        filterType: FilterType.date
       }
     ]);
     this.options.filterable = false;

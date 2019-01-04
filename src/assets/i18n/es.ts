@@ -18,6 +18,7 @@ export let TRANSLATION = {
     'riskFactors' : 'Factores de Riesgo',
     'types': 'Tipos',
     'basicSocialSituation' : 'Situacion social Basica',
+    'expedient': 'Estat expedient'
   },
   'OBSTABLE': {
     'obs'      : 'Valoraciones Realizadas'

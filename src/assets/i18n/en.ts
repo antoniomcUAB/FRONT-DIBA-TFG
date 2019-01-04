@@ -17,6 +17,7 @@ export let TRANSLATION = {
     'frequency' : 'Frequencia',
     'riskFactors' : 'Factores de Riesgo',
     'basicSocialSituation' : 'Situacion social Basica',
+    'expedient': 'Estat expedient'
   },
   'OBSTABLE': {
     'obs'      : 'Valoraciones Realizadas'

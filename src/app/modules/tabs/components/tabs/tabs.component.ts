@@ -32,12 +32,11 @@ export class TabsComponent {
     this.disapear = false;
   }
 
-  public incIndex(){
+  public incIndex() {
 
-    let num = parseInt(this.index) + 1;
+    let num = parseInt (this.index) + 1;
     if (num <= MAX_N_TABS) {
       this.index = num.toString();
-      console.log(this.index);
     }
   }
 

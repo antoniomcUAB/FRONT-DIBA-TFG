@@ -4,49 +4,57 @@
       "id": "EXP2011/00191",
       "createdate": "23/11/2018 14:31",
       "owner": "Antonio Martinez",
-      "updatedate": "09/12/2018"
+      "updatedate": "09/12/2018",
+      "status": "complet"
     },
     {
       "id": "EXP2012/00191",
       "createdate": "23/11/2018 14:31",
       "owner": "Antonio Martinez",
-      "updatedate": "09/12/2018"
+      "updatedate": "09/12/2018",
+      "status": "complet"
     },
     {
       "id": "EXP2013/00191",
       "createdate": "23/11/2018 14:31",
       "owner": "Toni Martinez",
-      "updatedate": "09/12/2018"
+      "updatedate": "09/12/2018",
+      "status": "complet"
     },
     {
       "id": "EXP2014/00191",
       "createdate": "23/11/2018 14:31",
       "owner": "Toni Martinez",
-      "updatedate": "09/12/2018"
+      "updatedate": "09/12/2018",
+      "status": "incomplet"
     },
     {
       "id": "EXP2015/00191",
       "createdate": "23/11/2018 14:31",
       "owner": "Toni Martinez",
-      "updatedate": "09/12/2018"
+      "updatedate": "09/12/2018",
+      "status": "complet"
     },
     {
       "id": "EXP2016/00191",
       "createdate": "23/11/2018 14:31",
       "owner": "Antonio Martinez",
-      "updatedate": "09/12/2018"
+      "updatedate": "09/12/2018",
+      "status": "complet"
     },
     {
       "id": "EXP2017/00191",
       "createdate": "23/11/2018 14:31",
       "owner": "Toni Martinez",
-      "updatedate": "09/12/2018"
+      "updatedate": "09/12/2018",
+      "status": "complet"
     },
     {
       "id": "EXP2018/00191",
       "createdate": "23/11/2018 14:31",
       "owner": "Daniel Meller",
-      "updatedate": "09/12/2018"
+      "updatedate": "09/12/2018",
+      "status": "complet"
     }
   ]
 }
