@@ -11,7 +11,7 @@ export let TRANSLATION = {
     'owner'      : 'Propietario',
     'updateDate' : 'Fecha ultima valoracion',
     'actions'    : 'Acciones',
-    'api' : 'api',
+    'apl' : 'apl',
     'person' : 'Persona',
     'severity' : 'Gravedad',
     'frequency' : 'Frequencia',
@@ -26,6 +26,9 @@ export let TRANSLATION = {
   /*Tabs*/
   'TAB': {
     'tabAutonomia': 'Ambito de autonomia'
+  },
+  'TABTITLE': {
+    'titleAutonomia': 'Evidencies i necessitats en l\'ambit relacional'
   },
   /* Form */
   'FORM': {

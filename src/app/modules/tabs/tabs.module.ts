@@ -14,6 +14,7 @@ import { GlobalitatTabComponent } from './components/globalitat-tab/globalitat-t
 import { ValoracioDiagnosticTabComponent } from './components/valoracio-diagnostic-tab/valoracio-diagnostic-tab.component';
 import { SharedModule } from '../../shared';
 import { TabsService} from './services/tabs.service';
+import {NewService} from './services/new.service';
 @NgModule({
   imports: [
     SharedModule,
@@ -30,7 +31,7 @@ import { TabsService} from './services/tabs.service';
     GlobalitatTabComponent,
     ValoracioDiagnosticTabComponent
   ],
-  providers:[TabsService]
+  providers:[TabsService, NewService]
 })
 
 export class TabsModule { }

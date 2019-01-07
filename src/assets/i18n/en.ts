@@ -11,7 +11,7 @@ export let TRANSLATION = {
     'owner'      : 'Propietario',
     'updateDate' : 'Fecha ultima valoracion',
     'actions'    : 'Acciones',
-    'api' : 'api',
+    'apl' : 'Apl.',
     'person' : 'Persona',
     'severity' : 'Gravedad',
     'frequency' : 'Frequencia',
