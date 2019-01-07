@@ -9,5 +9,38 @@
   },{
     "id": "DS-DIBA2",
     "fecha":"05/10/2018"
-  }]
+  }],
+
+  "unityFamility": [
+    {
+      "relation": "Pare",
+      "sex": "Home",
+      "birthday": "02/09/1980",
+      "register": "01/01/2019",
+      "unsubscribe": "",
+      "personRef": true
+    },{
+      "relation": "Mare",
+      "sex": "Dona",
+      "birthday": "02/09/1980",
+      "register": "01/01/2019",
+      "unsubscribe": "",
+      "personRef": false
+    },{
+      "relation": "Fill",
+      "sex": "Home",
+      "birthday": "02/09/1980",
+      "register": "01/01/2019",
+      "unsubscribe": "",
+      "personRef": false
+    },{
+      "relation": "Filla",
+      "sex": "Dona",
+      "birthday": "02/09/1980",
+      "register": "01/01/2019",
+      "unsubscribe": "",
+      "personRef": false
+    }
+  ]
 }
+

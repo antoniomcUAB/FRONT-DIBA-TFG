@@ -15,6 +15,8 @@ $app-theme:   mat-light-theme($app-primary, $app-accent);
 @import "scss/theming";
 @import "scss/custom-bootstrap";
 @import "scss/core";
+@import "scss/custom";
+
 body {
   background-color: #f2f2f7;
 }
