@@ -41,7 +41,7 @@ export let TRANSLATION = {
     'fileDate'      : 'Data',
     'fileUFamily'   : 'Unitat familiar',
     'filePeopleRef' : 'Persona de referència',
-    'fileObs'       : 'Observacions',
+    'fileObs'       : 'Observacions i comentaris',
     'fileValuate'   : 'Valoracions realitzades',
     'son'           : 'Fill',
     'daughter'      : 'Filla',

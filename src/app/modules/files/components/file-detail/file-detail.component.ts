@@ -4,7 +4,7 @@ import {FilesDetailService} from '../../services/file-detail.service';
 import {DatosPersonales} from '../../resources/datos-personales';
 import {FilterType, TableListOptions, TableListResponse} from '../../../../shared/modules/table-list';
 import {TranslateService} from '@ngx-translate/core';
-
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-file-detail',
@@ -20,9 +20,13 @@ export class FileDetailComponent implements OnInit {
   public obsData: any;
   public dataUnityFamily: any;
 
+  closeResult: string;
+
   constructor(private _route: ActivatedRoute,
               private _service: FilesDetailService,
-              private _translateService: TranslateService) {
+              private _translateService: TranslateService,
+              private modalService: NgbModal) {
+
     this.id = this._route.snapshot.params['id'];
     /* Tabla Valoraciones realizadas */
     this.options.filterable = false;
@@ -83,11 +87,30 @@ export class FileDetailComponent implements OnInit {
   }
   reloadDataTable() {
     this.optionsUF.loading = true;
-    this._service.getObservaciones(this.optionsUF).subscribe((res: TableListResponse ) => {
+    this._service.getUnityFamily(this.optionsUF).subscribe((res: TableListResponse ) => {
       this.optionsUF = res.options;
       this.dataUnityFamily = res.data;
       this.optionsUF.loading = false;
     });
+  }
+
+  /* Modal */
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
 }

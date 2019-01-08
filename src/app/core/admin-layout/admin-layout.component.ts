@@ -85,7 +85,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   }
 
   setTitle( newTitle: string) {
-    this.titleService.setTitle( 'CEGE | ' + newTitle );
+    this.titleService.setTitle( '#EinaDS-DIBA | ' + newTitle );
   }
 
   isOver(): boolean {
