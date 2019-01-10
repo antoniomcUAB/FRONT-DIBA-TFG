@@ -1,186 +1,12 @@
-
-<div class="card">
-  <div class="card-body">
-    <!-- titulo -->
-    <div class="form-group row ">
-      <div class="form-group col-12 bg-grey-300">
-        <label for="ssb">{{ "TABTITLE.titleAutonomia" | translate }}</label>
-      </div>
-    </div>
-      <!--/ titulo -->
+<app-form-tab [data]="data">
 
 
-    <div class="form-group row">
+</app-form-tab>
+<div>
+    <div class="form-group row bg-grey-300">
       <!-- Situacion social Basica -->
       <div class="form-group col-2">
-        <label for="ssb">{{ "TABLE.basicSocialSituation" | translate }}</label>
-        <input type="email" class="form-control" id="ssb" value="{{data.ssb}}" disabled>
-      </div>
-      <!--/ Situacion social Basica -->
-
-
-      <!-- Aplicatiu -->
-      <div class="col-1">
-        <div class="col-12">
-        <div class="form-group text-center">
-          <label class=""> {{ "TABLE.apl" | translate }}</label>
-          <label class="custom-control custom-checkbox text-center">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"></span>
-          </label>
-        </div>
-        </div>
-      </div>
-
-
-      <!--/ Aplicatiu -->
-
-      <!-- Persones -->
-      <div class="col-2">
-        <div class="col-12">
-          <label for="t1person">{{ "TABLE.person" | translate }} </label>
-          <div class="input-group mb-2 mr-sm-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="fa fa-user-plus"></i>
-              </div>
-            </div>
-
-          <select class="form-control" id="t1person">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-          </div>
-
-        </div>
-      </div>
-
-      <!--/ Persones -->
-
-      <!-- Severity -->
-
-
-      <div class="col-2">
-        <div class="col-12">
-          <label for="t1severity">{{ "TABLE.severity" | translate }}</label>
-          <select class="form-control" id="t1severity">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-      </div>
-      <!--/ Severity -->
-      <!-- Frequencia -->
-      <div class="col-2">
-        <div class="col-12">
-          <label for="t1frequency">{{ "TABLE.frequency" | translate }}</label>
-          <select class="form-control" id="t1frequency">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-      </div>
-      <!--/ Frequencia -->
-      <!-- riskFactors -->
-      <div class="form-group col-2">
-        <label for="t1riskFactor">{{ "TABLE.riskFactors" | translate }}</label>
-        <input type="email" class="form-control" id="t1riskFactor"  disabled>
-      </div>
-      <!--/  riskFactors -->
-    </div>
-
-
-    <div class="form-group row">
-      <!-- Situacion social Basica -->
-      <div class="form-group col-2">
-        <label for="ssb">{{ "TABLE.basicSocialSituation" | translate }}</label>
-        <input type="email" class="form-control" id="ssb" value="{{data.ssb}}" disabled>
-      </div>
-      <!--/ Situacion social Basica -->
-
-
-      <!-- Aplicatiu -->
-      <div class="col-1">
-        <div class="col-12 text-center">
-
-          <label  class="col-form-label">{{ "TABLE.apl" | translate }}</label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"></span>
-          </label>
-        </div>
-      </div>
-      <!--/ Aplicatiu -->
-
-      <!-- Persones -->
-      <div class="col-2">
-        <div class="col-12">
-          <label for="t1person">{{ "TABLE.person" | translate }} </label>
-          <select class="form-control" id="t1person">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-      </div>
-
-      <!--/ Persones -->
-
-      <!-- Severity -->
-
-
-      <div class="col-2">
-        <div class="col-12">
-          <label for="t1severity">{{ "TABLE.severity" | translate }}</label>
-          <select class="form-control" id="t1severity">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-      </div>
-      <!--/ Severity -->
-      <!-- Frequencia -->
-      <div class="col-2">
-        <div class="col-12">
-          <label for="t1frequency">{{ "TABLE.frequency" | translate }}</label>
-          <select class="form-control" id="t1frequency">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-      </div>
-      <!--/ Frequencia -->
-      <!-- riskFactors -->
-      <div class="form-group col-2">
-        <label for="t1riskFactor">{{ "TABLE.riskFactors" | translate }}</label>
-        <input type="email" class="form-control" id="t1riskFactor"  disabled>
-      </div>
-      <!--/  riskFactors -->
-    </div>
-
-    <div class="form-group row">
-      <!-- Situacion social Basica -->
-      <div class="form-group col-2">
-        <label for="ssb">{{ "TABLE.basicSocialSituation" | translate }}</label>
+        <label for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
         <input type="email" class="form-control" id="ssb" value="{{data.ssb}}" disabled>
       </div>
       <!--/ Situacion social Basica -->
@@ -236,8 +62,10 @@
 
     </div>
 
-
   </div>
-</div>
 
-        <a (click)="emitEnd()">Seguent</a>
+
+
+  <a (click)="emitEnd()">Cancelar</a>
+  <a class="text-right" style="color: #01579b" (click)="emitEnd()">Seguent</a>
+

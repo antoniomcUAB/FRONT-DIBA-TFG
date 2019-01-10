@@ -1,7 +1,7 @@
 {
-  "tabAutonomia": [
+  "tableTabsForms": [
     {
-      "ssb": "Lorem ipsum dolor",
+      "ssb":["Situacion Social 1","Situacion Social 2","Situacion Social 3"],
       "persona": [
         {
           "persona": "persona1"
@@ -21,10 +21,11 @@
           "frequencia": "poc"
         }]
     },{
-      "ssb": "Lorem ipsum dolor",
+      "ssb":["Situacion Social 1","Situacion Social 6","Situacion Social 8"],
       "persona": [
         {
-          "persona": "persona1"
+          "persona": "persona29"
+
         },
         {
           "persona": "persona2"

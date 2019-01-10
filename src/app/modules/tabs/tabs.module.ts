@@ -15,6 +15,7 @@ import { ValoracioDiagnosticTabComponent } from './components/valoracio-diagnost
 import { SharedModule } from '../../shared';
 import { TabsService} from './services/tabs.service';
 import {NewService} from './services/new.service';
+import { FormTabComponent } from './components/form-tab/form-tab.component';
 @NgModule({
   imports: [
     SharedModule,
@@ -29,7 +30,8 @@ import {NewService} from './services/new.service';
     AmbitMaterialTabComponent,
     AmbitRelacionalTabComponent,
     GlobalitatTabComponent,
-    ValoracioDiagnosticTabComponent
+    ValoracioDiagnosticTabComponent,
+    FormTabComponent,
   ],
   providers:[TabsService, NewService]
 })

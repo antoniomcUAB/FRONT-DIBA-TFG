@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {TableTabsForm} from '../../resources/tab-class-form';
+import { TabAutonomia } from '../../resources/tab-class-form';
 import {NewService} from '../../services/new.service';
 
 
@@ -10,8 +10,7 @@ import {NewService} from '../../services/new.service';
 })
 export class AmbitAutonomiaTabComponent {
 
-
-  data: TableTabsForm;
+  data: TabAutonomia = new TabAutonomia();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private _service: NewService) {
@@ -21,12 +20,12 @@ export class AmbitAutonomiaTabComponent {
 
 
   reloadData() {
-    this._service.getFiles().subscribe((tab: TableTabsForm ) => {
+    this._service.getFiles().subscribe((tab: TabAutonomia ) => {
       this.data = tab;
       console.log(this.data);
     });
   }
-  public emitEnd(){
+  public emitEnd() {
     this.endForm.emit();
   }
 }
