@@ -1,0 +1,208 @@
+
+  <!-- titulo -->
+
+  <div class="form-group col-12 bg-grey-500  ">
+    <label for="ssb" style="color: white; vertical-align: auto" >{{ "TABTITLE.titleAutonomia" | translate }}</label>
+  </div>
+
+  <!--/ titulo -->
+
+  <div class="card-body ">
+    <div *ngFor="let item of data.tableTabsForms; let i = index;" class="form-group row bg-grey-300">
+      <!-- Situacion social Basica -->
+      <div class="form-group col-4">
+        <label for="ssb">{{ "TABLE.basicSocialSituation" | translate }}</label>
+        <input  type="text" class="form-control " id="ssb-${{i}}" [value]= "item.ssb " disabled>
+
+      </div>
+      <!--/ Situacion social Basica -->
+
+      <!-- Aplicatiu -->
+      <div class="col-xs-1">
+        <div class="col-12">
+          <div class="form-group text-center">
+            <label class=""> {{ "TABLE.apl" | translate }}</label>
+            <label class="custom-control custom-checkbox text-center">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-label"></span>
+              <span class="custom-control-description"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+
+      <!--/ Aplicatiu -->
+
+      <!-- Persones -->
+      <div class="col-2">
+        <div class="col-12">
+          <label for="t1person">{{ "TABLE.person" | translate }} </label>
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text " (click)="addRow(i,item.ssb)">
+                <i class="fa fa-user-plus " > </i>
+              </div>
+            </div>
+
+            <select  class="form-control" id="t1person">
+              <option *ngFor="let option of item.persona "> {{option.persona}} </option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+      <!--/ Persones -->
+
+      <!-- Severity -->
+
+
+      <div class="col-xs-2">
+        <div class="col-12">
+          <label for="t1severity">{{ "TABLE.severity" | translate }}</label>
+          <select class="form-control" id="t1severity">
+            <option *ngFor="let option of item.gravetat "> {{option.gravetat}} </option>
+          </select>
+        </div>
+      </div>
+      <!--/ Severity -->
+      <!-- Frequencia -->
+      <div class="col-2">
+        <div class="col-12">
+          <label for="t1frequency">{{ "TABLE.frequency" | translate }}</label>
+          <select class="form-control" id="t1frequency">
+            <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
+          </select>
+        </div>
+      </div>
+      <!--/ Frequencia -->
+      <!-- riskFactors -->
+      <div class="form-group col-2">
+        <label for="t1riskFactor">{{ "TABLE.riskFactors" | translate }}</label>
+        <input type="text" class="form-control" id="t1riskFactor"  disabled>
+      </div>
+
+      <!-- Bucle for para cada fila  -->
+      <ng-container *ngFor="let method of rows ; let x= index;">
+
+        <!-- Situacio Social-->
+        <div class="form-group col-4">
+        </div>
+        <!--/ Situacio Social-->
+
+        <!--Aplicatiu -->
+        <div class="col-xs-1">
+          <div class="col-12">
+            <div class="form-group text-center">
+                <label class="custom-control custom-checkbox text-center">
+                </label>
+            </div>
+          </div>
+        </div>
+        <!--/ Aplicatiu -->
+
+        <!-- Persones -->
+        <div class="col-2">
+          <div class="col-12">
+            <div class="input-group mb-2 mr-sm-2">
+              <select class="form-control" id="t2person-${{x}}">
+                <option *ngFor="let option of item.persona "> {{option.persona}} </option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+        <!--/ Persones -->
+
+        <!-- Severity -->
+
+
+        <div class="col-xs-2">
+          <div class="col-12">
+
+            <select class="form-control" id="t1severity">
+              <option *ngFor="let option of item.gravetat "> {{option.gravetat}} </option>
+            </select>
+          </div>
+        </div>
+        <!--/ Severity -->
+        <!-- Frequencia -->
+        <div class="col-2">
+          <div class="col-12">
+
+            <select class="form-control" id="t1frequency">
+              <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
+            </select>
+          </div>
+        </div>
+        <!--/ Frequencia -->
+        <!-- riskFactors -->
+        <div class="form-group col-2">
+          <input type="email" class="form-control" id="t1riskFactor"  disabled>
+        </div>
+        </ng-container>
+    </div>
+
+
+      <!-- FACTOR  DE CONTEXTUALITZACIO -->
+      <div class="form-group row bg-grey-300">
+        <!-- Situacion social Basica -->
+        <div class="form-group col-2">
+          <label for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
+          <input type="email" class="form-control" id="ssb" value="{{data.ssb}}" disabled>
+        </div>
+        <!--/ Situacion social Basica -->
+
+
+        <!-- Aplicatiu -->
+        <div class="col-1">
+          <div class="col-12 text-center">
+
+            <label  class="col-form-label">{{ "TABLE.apl" | translate }}</label>
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-label"></span>
+              <span class="custom-control-description"></span>
+            </label>
+          </div>
+        </div>
+        <!--/ Aplicatiu -->
+
+        <!-- Persones -->
+        <div class="col-2">
+          <div class="col-12">
+            <label for="t1person">{{ "TABLE.person" | translate }} </label>
+            <select class="form-control" id="t1person">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </div>
+
+        <!--/ Persones -->
+
+        <!-- Severity -->
+
+
+        <div class="col-2">
+          <div class="col-12">
+            <label for="t1severity">{{ "TABLE.types" | translate }}</label>
+            <select class="form-control" id="t1severity">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </div>
+        <!--/ Severity -->
+        <!--/ FACTOR DE CONTEXTUALITZACIO -->
+      <!--/  riskFactors -->
+    </div>
+  </div>

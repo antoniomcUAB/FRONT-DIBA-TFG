@@ -1,45 +1,70 @@
 {
   "tableTabsForms": [
     {
-      "ssb":["Situacion Social 1","Situacion Social 2","Situacion Social 3"],
+      "ssb":"Manca d’autonomia personal a les  activitats bàsiques  (A.1)\n" ,
       "persona": [
         {
-          "persona": "persona1"
+          "persona": "Unitat Familiar"
         },
         {
-          "persona": "persona2"
+          "persona": "Persona de referencia"
         }],
       "gravetat": [{
-        "gravetat": "greu"
+        "gravetat": "Baixa"
       },{
-        "gravetat": "lleu"
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
       }],
       "frequencia": [
         {
-          "frequencia": "molt"
+          "frequencia": "Ocasional"
         },{
-          "frequencia": "poc"
+          "frequencia": "Continua"
         }]
     },{
-      "ssb":["Situacion Social 1","Situacion Social 6","Situacion Social 8"],
+      "ssb":"Manca d’autonomia personal a les  activitats Instrumentals  (A.2)\n" ,
       "persona": [
         {
-          "persona": "persona29"
-
+          "persona": "Unitat Familiar"
         },
         {
-          "persona": "persona2"
+          "persona": "Persona de referencia"
         }],
       "gravetat": [{
-        "gravetat": "greu"
+        "gravetat": "Baixa"
       },{
-        "gravetat": "lleu"
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
       }],
       "frequencia": [
         {
-          "frequencia": "molt"
+          "frequencia": "Ocasional"
         },{
-          "frequencia": "poc"
+          "frequencia": "Continua"
+        }]
+    },{
+      "ssb":"Manca d’autonomia personal a les  activitats Relacionals  (A.3)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
         }]
     }
   ]

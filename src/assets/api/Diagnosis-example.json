@@ -1,0 +1,3595 @@
+// https://jsonblob.com/80c35930-ffa6-11e8-9bcd-d320db90d340
+
+{
+  "ambits": [
+    {
+      "id": 3747,
+      "descripcio": "Autonomia",
+      "Items": [
+        {
+          "id": 3748,
+          "descripcio": "Autonomia",
+          "Items": [
+            {
+              "id": 3749,
+              "definicio": "Situació en què la persona no pot desenvolupar les activitats bàsiques de la vida diaria (alimentació, higiene, seguiment mèdic i farmacològic, mobilitat personal, descans, etc.), independentment de la causa que la motiva: malaltia física o psíquica, trastorn mental, deteriorament cognitiu, discapacitat física, psíquica,  intel·lectual o sensorial, etc.",
+              "social": "Manca d’autonomia personal a les  activitats bàsiques de la vida diaria  (A.1)",
+              "Items": [
+                {
+                  "id": 3750,
+                  "evidencia": "Necessita suport/atenció/supervisió en algun moment puntual de la setmana/dia",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3751,
+                      "evidencia": "Pèrdua sobtada per causes sobrevingudes i possiblitats de millora",
+                      "frequencia": {
+                        "id": 3734,
+                        "descripcio": "Ocasional"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3752,
+                      "evidencia": "Crònica, sense possiblitats de millora",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3753,
+                  "evidencia": "Necessita suport/atenció/supervisió per les activitats de la vida diària",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3754,
+                      "evidencia": "Pèrdua sobtada per causes sobrevingudes i possiblitats de millora",
+                      "frequencia": {
+                        "id": 3734,
+                        "descripcio": "Ocasional"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3755,
+                      "evidencia": "Crònica, sense possiblitats de millora",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3756,
+                  "evidencia": "Necessita atenció/supervisió continua les 24h",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3757,
+                      "evidencia": "Pèrdua sobtada per causes sobrevingudes i possiblitats de millora",
+                      "frequencia": {
+                        "id": 3734,
+                        "descripcio": "Ocasional"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3758,
+                      "evidencia": "Crònica, sense possiblitats de millora",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3759,
+              "definicio": "Situació en què la persona no pot desenvolupar les activitats instrumentals de la vida diaria (utilització del transport públic, realització de tasques domèstiques, responsabilitat sobre la medicació, administració de diners, capacitat d’utilitzar el telèfon, entrar i sortir del domicili de forma autònoma, etc.), independentment de la causa que la motiva: malaltia física o psíquica, trastorn mental, deteriorament cognitiu, discapacitat física, psíquica,  intel·lectual o sensorial, etc.",
+              "social": "Manca d’autonomia personal a les  activitats bàsiques de la vida diaria  (A.1)",
+              "Items": [
+                {
+                  "id": 3760,
+                  "evidencia": "Necessita atenció/supervisió puntual en algun moment del dia/setmana",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3761,
+                      "evidencia": "Pèrdua sobtada per causes sobrevingudes i possiblitats de millora",
+                      "frequencia": {
+                        "id": 3734,
+                        "descripcio": "Ocasional"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3762,
+                      "evidencia": "Crònica, sense possiblitats de millora",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3763,
+                  "evidencia": "Necessita suport/atenció/supervisió per les activitats de la vida diària",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3764,
+                      "evidencia": "Pèrdua sobtada per causes sobrevingudes i possiblitats de millora",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3765,
+                      "evidencia": "Crònica, sense possiblitats de millora",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3766,
+                  "evidencia": "Necessita atenció/supervisió continua les 24h",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3767,
+                      "evidencia": "Pèrdua sobtada per causes sobrevingudes i possiblitats de millora",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3768,
+                      "evidencia": "Crònica, sense possiblitats de millora",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Factors_context": [
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 3996,
+                "descripcio": "La malaltia causa del dèficit d'autonomia està diagnosticada i en tractament"
+              },
+              "id": 3997
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 3998,
+                "descripcio": "La persona té reconeguts el grau de discapacitat i / o dependència"
+              },
+              "id": 3999
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4000,
+                "descripcio": "La persona és usuària d'un servei, recurs o prestació  en funció de la seva malaltia, discapacitat o situació de dependència"
+              },
+              "id": 4001
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4002,
+                "descripcio": "Hi ha una xarxa familiar i / o social de suport implicada en la cura"
+              },
+              "id": 4003
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4004,
+                "descripcio": "La persona segueix amb regularitat el tractament mèdic i/o té un hàbits saludables per la seva situació de salut"
+              },
+              "id": 4005
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4006,
+                "descripcio": "Es preveu que el dèficit d’autonomia de la persona s’agreugi en un curt termini (durant l’any)"
+              },
+              "id": 4007
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4008,
+                "descripcio": "La malaltia causa del dèficit d'autonomia no està diagnosticada i en tractament"
+              },
+              "id": 4009
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4010,
+                "descripcio": "La persona no segueix amb regularitat el tractament mèdic prescrit i/o no té uns hàbits saludables per la seva situació de salut"
+              },
+              "id": 4011
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4012,
+                "descripcio": "No existeix una xarxa familiar i / o social que s’impliqui en la cura"
+              },
+              "id": 4013
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4014,
+                "descripcio": "Cuidador / a habitual en risc o en situació de claudicació"
+              },
+              "id": 4015
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4016,
+                "descripcio": "La situació i/o característiques del domicili agreugen el dèficit d’autonomia  de les persones que hi viuen"
+              },
+              "id": 4017
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4018,
+                "descripcio": "La persona amb dèficit d’autonomia té responsabilitats/carregues familiars"
+              },
+              "id": 4019
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3769,
+      "descripcio": "MATERIAL I INSTRUMENTAL",
+      "Items": [
+        {
+          "id": 3770,
+          "descripcio": "Entorn habitatge",
+          "Items": [
+            {
+              "id": 3771,
+              "definicio": "Situacions de manca d'un habitatge estable on fixar la residència. Inclou persones en situacions de sense sostre o sense llar de les categories ETHOS i inclou persones acollides temporalment en una institució a través de xarxa o en domicilis de familiars o amics persones que perden l'acolliment al domicili on vivien o que fixen el seu domicili en habitacles que no es consideren un habitatge (per exemple un cotxe).",
+              "social": "Manca d'habitatge (H.1)",
+              "Items": [
+                {
+                  "id": 3772,
+                  "evidencia": "Necessita suport/atenció/supervisió en algun moment puntual de la setmana/dia",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3773,
+                      "evidencia": "Sobrevinguda",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3774,
+                      "evidencia": "Més d'un cop a l'any",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3775,
+                      "evidencia": "Sense sostre",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3776,
+                  "evidencia": "Sense xarxa de suport ni possiblitat d'activar recurs d'habitage. Amb xarxa de suport o habitatge temporal d'urgència i presència de menors o dependents a càrrec",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3777,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3778,
+              "definicio": "Situacions que es corresponen a la categoria ETHOS habitatge inadequat i inclou domicili que no reuneix les condicions adequades d'habitabilitat o les necessàries per garantir l'autonòmia i qualitat de vida de les persones que hi habiten. Inclou infrahabitatge (caravana i barraquisme). Inclou les situacions relacionades amb manca d'higiene/neteja greus.",
+              "social": "Habitatge deficient (H.2)",
+              "Items": [
+                {
+                  "id": 3779,
+                  "evidencia": "Sense risc en  la integritat física de les persones que hi habiten.",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3780,
+                      "evidencia": "Situacions excepcionals i restaruables",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3781,
+                      "evidencia": "Situacions estructurals ",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3782,
+                  "evidencia": "Existeix risc en la integritat física de les persones que hi habiten ",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3783,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3784,
+              "definicio": "\t",
+              "social": "Habitatge insegur (H.3)",
+              "Items": [
+                {
+                  "id": 3785,
+                  "evidencia": "Situació impagament prèvia a l’inici del procés judicial. Ocupació il·legal",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3786,
+                      "evidencia": "Situació puntual i capcitat de resolució",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3787,
+                      "evidencia": "Inferior 3 mesos consecutius",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3788,
+                      "evidencia": "Més de 3 mesos. Endeutament creixent",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3789,
+                  "evidencia": "Procés judicial iniciat",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3790,
+                      "evidencia": "Capacitat mediació. Moratòria",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3791,
+                      "evidencia": "En procés judicial sense capacitat mediació. \tMoratòria",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3792,
+                      "evidencia": "En subhasta",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3793,
+                  "evidencia": "Sentència amb ordre de llançament",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3794,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3795,
+              "definicio": "Situació d'habitatge massificat que es troba a la categoria ETHOS d'habitatge inadequat. Relació inadequada entre el nombre de persones que conviuen en un domicili i la superfície de l'habitatge, que no permet satisfer les activitats de la vida diària de forma satisfactòria. / salubritat llei habitatge.",
+              "social": "Habitatge massificat (H.4)",
+              "Items": [
+                {
+                  "id": 3796,
+                  "evidencia": "Un sol nucli familiar en espai reduït. Persones joves que comparteixen espais",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3797,
+                      "evidencia": "Des de fa menys de 3 mesos i de manera no repetida en el temps",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3798,
+                      "evidencia": "Fa més de 3 mesos",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3799,
+                  "evidencia": "«Invasió familiar»: existeix un nucli familiar i arriben de forma sobtada nous membres.",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3800,
+                      "evidencia": "Des de fa menys de 3 mesos i de manera no repetida en el temps",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3801,
+                      "evidencia": "Fa més de 3 mesos",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3802,
+                  "evidencia": "Diverses famílies amb menors o dependents compartint espais. Situacions de relloguers sense contracte.",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3803,
+                      "evidencia": "Des de fa menys de 3 mesos i de manera no repetida en el temps",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3804,
+                      "evidencia": "Fa més de 3 mesos",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3805,
+              "definicio": "Risc de perdua o manca de subministraments (gas, aigua, electricitat), manca de parament bàsic o estris domèstics imprescindibles per satisfer les necessitats bàsiques de la unitat familiar. Inclou els risc de perdua per connexió il·legal.",
+              "social": "Risc de pèrdua o manca serveis/subministraments (H.5)",
+              "Items": [
+                {
+                  "id": 3806,
+                  "evidencia": "Avís de tall. Manca de subministrament i és possible el restabliment",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3807,
+                      "evidencia": "Primer cop",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3808,
+                      "evidencia": "Segon cop durant l’any",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3809,
+                      "evidencia": "Més de 2 cops durant any",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3810,
+                  "evidencia": "Avís de tall i manca de més d'un subministrament però és possible el restabliment",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3811,
+                      "evidencia": "Primer cop",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3812,
+                      "evidencia": "Segon cop durant l’any",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3813,
+                      "evidencia": "Més de 2 cops durant any",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3814,
+                  "evidencia": "No es pot restablir el servei",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3815,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Factors_context": [
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4020,
+                "descripcio": "Una o més persones de la família disposa d'ingressos estables (pensions, prestacions, rendes, etc.)."
+              },
+              "id": 4021
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4023,
+                "descripcio": "Una o més persones de la família disposa d'estalvis"
+              },
+              "id": 4024
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4026,
+                "descripcio": "Una o més persones de la família disposa de patrimoni a part de la primera residència"
+              },
+              "id": 4027
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4029,
+                "descripcio": "Una o més persones de la família disposa de treball estable."
+              },
+              "id": 4030
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4032,
+                "descripcio": "Existeix xarxa familiar o relacional disposada a oferir suport econòmic"
+              },
+              "id": 4033
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4035,
+                "descripcio": "En cas de separació o divorci hi ha conveni regulador i es compleixen els seus termes"
+              },
+              "id": 4036
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4038,
+                "descripcio": "La persona té una bona predisposició per formar-se i/o treballar"
+              },
+              "id": 4039
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4041,
+                "descripcio": "Es disposa d’un habitatge habitual pel qual no s’ha d’assumir cap despesa o és un habitatge social"
+              },
+              "id": 4042
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4044,
+                "descripcio": "Existeix un impagament de pensions de manutenció i la corresponent demanda judicial"
+              },
+              "id": 4045
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4047,
+                "descripcio": "Existeixen responsabilitats i càrregues familiars que agreugen la manca de recursos materials/instrumentals"
+              },
+              "id": 4048
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4050,
+                "descripcio": "Hi ha un endeutament creixent i inassolible amb els recursos disponibles"
+              },
+              "id": 4051
+            }
+          ]
+        },
+        {
+          "id": 3816,
+          "descripcio": "Entorn Econòmic",
+          "Items": [
+            {
+              "id": 3817,
+              "definicio": "Unitats familiars que no tenen ingressos o que no els acrediten de forma estable o regular. Es proposa Comptabilitzar en aquesta categoria aquelles unitats familiars on s’han identificat més de 6 ítems dels qüestionari.",
+              "social": "Sense ingressos (E.1)",
+              "Items": [
+                {
+                  "id": 3818,
+                  "evidencia": "Disposen de xarxa o recursos que proporcionen  suport econòmic. No han d’afrontar pagament de l’habitatge habitual",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3819,
+                      "evidencia": "De forma puntual/sobrevinguda i amb capacitat de canvi",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3820,
+                      "evidencia": "De forma continua/crònica",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3821,
+                  "evidencia": "No disposen de xarxa o recursos de suport econòmic",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3822,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3823,
+              "definicio": "Unitats familiars que malgrat tenir uns ingressos tenen dificultats per cobrir determinades necessitats  dels seus integrants.",
+              "social": "Ingressos insuficients (E.2)",
+              "Items": [
+                {
+                  "id": 3824,
+                  "evidencia": "3-4 ítems del qüestionari privació econòmica i amb xarxa/recursos de suport econòmic",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3825,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3826,
+                  "evidencia": "3-4 ítems del qüestionari sense xarxa de suport o. 5-6 amb xarxa familiar de suport que proporciona els recursos",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3827,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3828,
+                  "evidencia": "5 o més ítems del qüestionari sense xarxa/recursos de suport econòmic",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3829,
+                      "evidencia": "De forma puntual/sobrevinguda i amb capacitat de canvi",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3830,
+                      "evidencia": "De forma continua i poca capacitat de canvi",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3831,
+              "definicio": "Unitat familiar amb ingressos però que presenta dificultats per administrar el pressupost  i no prioritzar la cobertura de les necessitats bàsiques.",
+              "social": "Administració deficient (E.3)",
+              "Items": [
+                {
+                  "id": 3832,
+                  "evidencia": "No saben fer front a despeses extres inesperades",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3833,
+                      "evidencia": "Situacions concretes  i capacitat de canvi",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3834,
+                      "evidencia": "De forma continua",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3835,
+                  "evidencia": "Degut a la mala gestió tenen dificultats per cobrir les despeses bàsiques de la unitat familiar ",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3836,
+                      "evidencia": "Situacions concretes  i capacitat de canvi",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3837,
+                      "evidencia": "De forma continua",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3838,
+                  "evidencia": "La mala gestió és cròncia i amb greus afectacions a la vída diària",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3839,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Factors_context": [
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4020,
+                "descripcio": "Una o més persones de la família disposa d'ingressos estables (pensions, prestacions, rendes, etc.)."
+              },
+              "id": 4022
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4023,
+                "descripcio": "Una o més persones de la família disposa d'estalvis"
+              },
+              "id": 4025
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4026,
+                "descripcio": "Una o més persones de la família disposa de patrimoni a part de la primera residència"
+              },
+              "id": 4028
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4029,
+                "descripcio": "Una o més persones de la família disposa de treball estable."
+              },
+              "id": 4031
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4032,
+                "descripcio": "Existeix xarxa familiar o relacional disposada a oferir suport econòmic"
+              },
+              "id": 4034
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4035,
+                "descripcio": "En cas de separació o divorci hi ha conveni regulador i es compleixen els seus termes"
+              },
+              "id": 4037
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4038,
+                "descripcio": "La persona té una bona predisposició per formar-se i/o treballar"
+              },
+              "id": 4040
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4041,
+                "descripcio": "Es disposa d’un habitatge habitual pel qual no s’ha d’assumir cap despesa o és un habitatge social"
+              },
+              "id": 4043
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4044,
+                "descripcio": "Existeix un impagament de pensions de manutenció i la corresponent demanda judicial"
+              },
+              "id": 4046
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4047,
+                "descripcio": "Existeixen responsabilitats i càrregues familiars que agreugen la manca de recursos materials/instrumentals"
+              },
+              "id": 4049
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4050,
+                "descripcio": "Hi ha un endeutament creixent i inassolible amb els recursos disponibles"
+              },
+              "id": 4052
+            }
+          ]
+        },
+        {
+          "id": 3840,
+          "descripcio": "Entorn Laboral",
+          "Items": [
+            {
+              "id": 3841,
+              "definicio": "La persona té dificultats per trobar una feina estable perquè desconeix els mecanismes per accedir al mercat laboral i no disposa de la formació i qualificació suficient per trobar una feina estable. En conseqüència, entra i surt del mercat laboral, realitza treballs que no donen continuïtat a la seva progressió professional o resta llargues temporades a l'atur.  Addicionalment, la persona pot tenir dificultats personals o legals que dificulten l'accés al mercat de treball o el manteniment d'una  feina.",
+              "social": "Manca de qualificació i/o d'orientació laboral  (L.1)",
+              "Items": [
+                {
+                  "id": 3842,
+                  "evidencia": "Voluntat de treballar però dificultat en l’accés al mercat de treball. Situacions sobrevingudes (salut, situació legal en tràmit, etc..)",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3843,
+                      "evidencia": "Ha treballat en el darrer any",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3844,
+                      "evidencia": "Ha treballat 6 mesos dels darrers 3 anys",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3845,
+                      "evidencia": "Atur de llarga durada/ fa més de 3 anys que no treballa",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3846,
+                  "evidencia": "Les dificultats en el manteniment de les carregues familiars i la cura agreujen la situació ",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3847,
+                      "evidencia": "Ha treballat en el darrer any",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3848,
+                      "evidencia": "Ha treballat 6 mesos dels darrers 3 anys",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3849,
+                      "evidencia": "Atur de llarga durada/ fa més de 3 anys que no treballa",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3850,
+              "definicio": "La persona desconeix o no té les competències professionals necessàries per accedir al mercat laboral i mantenir una feina. En conseqüència, entra i surt del mercat laboral per motius que tenen a veure amb l'actitud i la responsabilitat cap a la feina (inpuntualitat, manca de respecte als companys/es de feina o superior jeràrquic, imatge personal no adaptada als requeriments de la feina, manca d'anticipació de problemàtiques, etc).",
+              "social": "Manca de competències professionals transversals  (L.2)",
+              "Items": [
+                {
+                  "id": 3851,
+                  "evidencia": "Consciència de canvi i voluntat de millora",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3852,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3853,
+                  "evidencia": "Impossibilitat de canvi o millora a mig termini (1 any)",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3854,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Factors_context": []
+        }
+      ]
+    },
+    {
+      "id": 3855,
+      "descripcio": "RELACIONAL",
+      "Items": [
+        {
+          "id": 3856,
+          "descripcio": "Entorn Escolar",
+          "Items": [
+            {
+              "id": 3857,
+              "definicio": "Infant o adolescent que presenta dificultats en el seguiment educatiu que li correspon com procés evolutiu, com a conseqüència de dinàmiques familiars adverses (inclouen desvinculació del centre educatiu, manca de recolzament, etc.).",
+              "social": "Dificultats d'aprenentatge escolar (ES.1)",
+              "Items": [
+                {
+                  "id": 3858,
+                  "evidencia": "Dificultats associades a les capacitats de l'infant, identificades i existeix una intervenció conjunta per part dels diferents serveis. Situacions puntuals que afecten a la seva escolaritat",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3859,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3860,
+                  "evidencia": "Encara no existeix intervenció conjunta per part dels diferents serveis, possiblitats de canvi i millora de la situació.",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3861,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3862,
+                  "evidencia": "Família que entorpeix la intervenció social ni accepta el treball. Afectacions molt greus en el desenvolupament integral de l’infant o adolescent",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3863,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3864,
+              "definicio": "Infant o adolescent que no s'adapta al sistema educatiu en l'etapa obligatòria i que presenta conductes disruptives al centre, amb els adults i/o amb els seus iguals.",
+              "social": "Manca de competències relacionals a l'escola (ES.2)",
+              "Items": [
+                {
+                  "id": 3865,
+                  "evidencia": " Dificultats identificades i existeix una intervenció conjunta per part dels diferents serveis",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3866,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3867,
+                  "evidencia": "Encara no existeix intervenció conjunta per part dels diferents serveis, possiblitats de canvi i millora de la situació.",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3868,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3869,
+                  "evidencia": "Família que entorpeix la intervenció social ni accepta el treball. Afectacions molt greus en el desenvolupament integral de l’infant o adolesecent. Comportaments agressius envers companys o mestres",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3870,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3871,
+              "definicio": "Menor en edat d'escolarització obligatòria que no està matriculat en cap centre, o que ha abandonat els estudis abans de la seva finalització.",
+              "social": "Escolaritat obligatòria inacabada (ES.3)",
+              "Items": [
+                {
+                  "id": 3872,
+                  "evidencia": "Situació puntual que afecta a la tramitació de la seva escolaritat però amb voluntat i capacitat de resolució en un curt termini (mateix curs escolar)",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3873,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3874,
+                  "evidencia": "Situació amb marge de millora que requereix una intervenció conunta  dels diferents serveis i recursos especialitzats.",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3875,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3876,
+                  "evidencia": " No hi ha voluntat de canvi ni millora, La família incentiva o no col·labora per resoldre la situació. Afectacions molt greus en el desenvolupament integral de l’infant o adolesecent. Comportaments agressius envers companys o mestres",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3877,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3878,
+              "definicio": "No assistència al centre en que esta matriculat, de forma reiterada i no justificada, de l’alumnat en edat escolar (dels 3 als 16 anys) ja sigui per pròpia voluntat o per voluntat de la família.",
+              "social": "Absentisme escolar (ES.4)",
+              "Items": [
+                {
+                  "id": 3879,
+                  "evidencia": "Situació puntaul per causa sobrevenguida (Malaltia o motius de salut/ familiars)",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3880,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3881,
+                  "evidencia": "Encara no existeix intervenció conjunta per part dels diferents serveis, possiblitats de canvi i millora de la situació.",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3882,
+                      "evidencia": "De 2 a 5 vegades al mes",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3883,
+                      "evidencia": "Més de 5 vegades al mes",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3884,
+                      "evidencia": "No assiteix més de 5 dies consecutius",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3885,
+                  "evidencia": "La família incentiva o no col·labora per resoldre l'absentisme",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3886,
+                      "evidencia": "De 2 a 5 vegades al mes",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    },
+                    {
+                      "id": 3887,
+                      "evidencia": "Més de 5 vegades al mes",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    },
+                    {
+                      "id": 3888,
+                      "evidencia": "No assiteix més de 5 dies consecutius",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3889,
+              "definicio": "Infant o adolescent que està patint Situacions habituals de violència física i psíquica en el marc de l’escola, o que s’ha iniciat en aquest marc encara que les actuacions es produeixin fora, per part dels seus companys i companyes, ja sigui en l’entorn escolar o fora d’ell",
+              "social": "Assetjament escolar (ES.5)",
+              "Items": [
+                {
+                  "id": 3890,
+                  "evidencia": " S'identifiquen situacions de comentaris despectius provinents d'una sola persona.",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3891,
+                      "evidencia": "Fet puntual o en un període de màxim un mes",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3892,
+                      "evidencia": "Es repeteix durant tot un trimestre",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3893,
+                      "evidencia": "De forma reiterada i en més d'un trimestre",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3894,
+                  "evidencia": "S'identifiquen  situacions d'agressions verbals per part de grup reduït",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3895,
+                      "evidencia": "Fet puntual o en un període de màxim un mes",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3896,
+                      "evidencia": "Es repeteix durant tot un trimestre",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3897,
+                      "evidencia": "De forma reiterada i en més d'un trimestre",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3898,
+                  "evidencia": "Agressions físiques o agressions verbals provinents de gran grup",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3899,
+                      "evidencia": "Fet puntual o en un període de màxim un mes",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3900,
+                      "evidencia": "Es repeteix durant tot un trimestre",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3901,
+                      "evidencia": "De forma reiterada i en més d'un trimestre",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Factors_context": [
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4053,
+                "descripcio": "La persona mostra una vinculació relacional positiva amb la família extensa o les seves xarxes d’amics i relacions"
+              },
+              "id": 4054
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4056,
+                "descripcio": "La persona està vinculada i participa activament amb la comunitat, entitats o associacions del seu entorn"
+              },
+              "id": 4057
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4059,
+                "descripcio": "Existeix xarxa familiar o relacional disposada a oferir suport i acompanyament"
+              },
+              "id": 4060
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4062,
+                "descripcio": "En el cas d'infància que el nen / a manté relació afectiva amb els adults de referència i iguals"
+              },
+              "id": 4063
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4065,
+                "descripcio": "En el cas d'infància que el nen / a mostra una autonomia personal adequada per a la seva edat"
+              },
+              "id": 4066
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4068,
+                "descripcio": "En el cas d'infància que el nen / a participa en activitats fora de l'entorn familiar o escolar"
+              },
+              "id": 4069
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4071,
+                "descripcio": "La persona/família és usuària de recursos/serveis adreçats a cobrir la necessitat en l’àmbit relacional (escolar, familiar o comunitari) "
+              },
+              "id": 4072
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4074,
+                "descripcio": "Existeix una xarxa social (veïns, amics, família extensa..) que exerceix una influència negativa"
+              },
+              "id": 4075
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4077,
+                "descripcio": "Sospita o malaltia mental diagnosticada que agreugen la situació "
+              },
+              "id": 4078
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4080,
+                "descripcio": "Existeix una problemàtica de salut no diagnosticada que agreuja la situació"
+              },
+              "id": 4081
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4083,
+                "descripcio": "En el cas d'infància que el nen / a no manté relació afectiva amb els adults de referència i iguals"
+              },
+              "id": 4084
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4086,
+                "descripcio": "En el cas d'infància que el nen / a no mostra una autonomia personal adequada per a la seva edat"
+              },
+              "id": 4087
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4089,
+                "descripcio": "En el cas d'infància que el nen / a no participa en activitats fora de l'entorn familiar o escolar"
+              },
+              "id": 4090
+            }
+          ]
+        },
+        {
+          "id": 3902,
+          "descripcio": "Entorn Familiar",
+          "Items": [
+            {
+              "id": 3917,
+              "definicio": "Persones adultes que no són capaces d'assumir adequadament les seves responsabilitats en el si del nucli familiar, respecte de les persones que en depenen legalment",
+              "social": "Dificultats per assumir responsabilitats familiars i socials (F.4)",
+              "Items": [
+                {
+                  "id": 3918,
+                  "evidencia": " Manca de límits adequats a l’edat dels infants/adolescents/. No s’involucra activament en el desenvolupament/cura de la persona. Un altre adult assumeix les responsabilitats.Voluntat de canvi i capacitat de millora",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3919,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3920,
+                  "evidencia": "Manca de límits  o de cura de les persones que en depenen i ningú dins del nucli de convivència assumeix les responsabilitats. Voluntat de canvi i capacitat de millora",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3921,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3922,
+                  "evidencia": "No hi ha acceptació de la situació ni capacitat de millora a curt termini. Un/a menor assumeix les responsabilitats",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3923,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3924,
+              "definicio": "Situacions d'estrès derivades de canvis impactant en l'entorn familiar per situacions sobrevingudes, o com a conseqüència d'una sobrecàrrega motivada per les dinàmiques familiars.  Inclou risc de claudicació de cuidadors, si vénen motivats per un estat d'ansietat i sobrecàrrega.",
+              "social": "Estrès derivat de la situació familiar (F.5)",
+              "Items": [
+                {
+                  "id": 3925,
+                  "evidencia": "Relacionat a fets concrets sobrevinguts.",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3926,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3927,
+                  "evidencia": "Instaurat en les dinàmiques familiars sense que  interfereixi en les activitats bàsiques.",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3928,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3929,
+                  "evidencia": "Afectacions permanents en la cura i les responsabilitats familiars",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3930,
+                      "evidencia": "Porta menys de 6 mesos",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3931,
+                      "evidencia": "Porta més de 6 mesos",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3932,
+              "definicio": "Membre de la unitat de convivència, adult o menor, que assumeix responsabilitats familiars que es considera que es troben per sobre de les seves possibilitats. Aquí quedaria inclòs l’embaràs adolescent Amb menors cal tenir en compte: L’activitat causant de la sobre-responsabilitat- La maduresa i edat de l’infant. - La maduresa de la família (si la família vetlla o no per minimitzar l’impacte de la responsabilitat atribuïda al menor).- Si disposa de la supervisió d’algun adult de l’entorn de proximitat.- El temps que s’exposa a la sobre-responsabilitat",
+              "social": "Sobre-responsabilitat (F.6)",
+              "Items": [
+                {
+                  "id": 3933,
+                  "evidencia": "Relacionat a fets concrets sobrevinguts.",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3934,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3935,
+                  "evidencia": "La situació afecta a un adult amb mancances però amb capcitat de donar resposta a la situació mitjançant el suport necessari. La situació afecta a un/a menor major de 16 anys, sense que afecti greument a la seva integritat piscològica i amb possiblitat de canvis i millora.",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3936,
+                      "evidencia": "Menys de 2 mesos",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3937,
+                      "evidencia": "Entre 2 i 6 mesos",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3938,
+                      "evidencia": "Més de 6 mesos",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3939,
+                  "evidencia": "Afectació greu a menors o persones dependents. La situació afecta a un adult que no la reconeix ni accepta el suport necessari.",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3940,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3941,
+              "definicio": "Persona que presenta dificultats de relació i comportaments agressius amb un o més membres de la unitat de convivència.",
+              "social": "Dificultats en les relacions familiars (F.7)",
+              "Items": [
+                {
+                  "id": 3944,
+                  "evidencia": "Instaurat en la dinàmica familiar però amb voluntat de canvi i millora. Amb infants en el nucli de convivència",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3945,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3946,
+                  "evidencia": "Afectació greu en la dinàmica familiar i la salut física/emocional dels seus membres",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3947,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3942,
+                  "evidencia": "Fets molt concrets, amb reconeixement i voluntat de canvi. No instaurat en la dinàmica familiar. Sense infants en el nucli de convivència.",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3943,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3948,
+              "definicio": "Situació en la qual la persona mostra incapacitat d'afrontar aspectes de la vida quotidiana en l'àmbit de l'organització familiar, econòmic,  laboral, de relació social, etc.",
+              "social": "Manca de recursos personals i autonomia en la presa de decisions(F.8)",
+              "Items": [
+                {
+                  "id": 3949,
+                  "evidencia": "Situació recent, motivada per fets externs i reversible amb  recursos personals",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3950,
+                      "evidencia": "Passa puntualment",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3951,
+                      "evidencia": "Passa de manera reiterada",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3952,
+                      "evidencia": "Continu",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3953,
+                  "evidencia": "Situació  reversible amb suport extern",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3954,
+                      "evidencia": "Passa puntualment",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3955,
+                      "evidencia": "Passa de manera reiterada",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3956,
+                      "evidencia": "Continu",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3957,
+                  "evidencia": "Situació irreversibale i amb necessitat de suport",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3958,
+                      "evidencia": "Continu",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3959,
+              "definicio": "Domicili que, degut al comportament d’algun del seus habitants, reuneix condicions d’habitabilitat però presenta un mal estat d'higiene general o uns elevats nivells de desordre i/o acumulació d'estris o material divers, que dificulten la vida quotidiana de les persones que hi viuen. Inclou els casos vinculats a una malaltia mental (Síndrome de Diogenes o de Noé)",
+              "social": "Manca d'higiene o desordre al domicili (F.9)",
+              "Items": [
+                {
+                  "id": 3960,
+                  "evidencia": "Situació puntual i reversible amb el suport adequat. Persones diagnosticades que col·laboren.",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3961,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3962,
+                  "evidencia": "Situació reiterada amb necessitat de suport extern. Persones diagnosticades que no col·laboren",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3963,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3964,
+                  "evidencia": "Presència de menors o dependents al domicili. Greus afectacions per la integritat física de les persones. Indícis de malatia mental no diagnosticada ni en tractament",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3965,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3903,
+              "definicio": "Situacions de maltractament que rep un menor d'edat,  adult o  persona gran, inclou vexacions de caràcter físic, psicològic o emocional, així com les situacions de violència de gènere. Inclou la sospita per part del professional o bé l'evidència que el maltractament s'està produint.(Es consideren incloses en quest indicador totes les categories de maltractament relacionades al RUDEL)",
+              "social": "Maltractament (F.1)",
+              "Items": [
+                {
+                  "id": 3904,
+                  "evidencia": "Sense perill físic i l’afectació a nivell psíquic/emocional no interfereix en les competències bàsiques de la persona (autocura, comunicació, autonomia i iniciativa)",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3905,
+                      "evidencia": "1 cop a l'any/ vida",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3906,
+                      "evidencia": "Més d'un cop en el darrer any",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3907,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3908,
+              "definicio": "La participació del nen/a i/o adolescent, adult o persona gran, en activitats sexuals que no està en condicions de comprendre, que són inapropiades per a la seva edat i el seu desenvolupament psicosexual, per a les quals és incapaç de donar el seu consentiment i que transgredeixen els tabús i les regles familiars i socials, així com les lleis vigents. En l’abús sexual existeixen dos factors clau: la coerció i la asimetria d’edat o de moment evolutiu entre les persones implicades.",
+              "social": "Abús Sexual (F.2)",
+              "Items": [
+                {
+                  "id": 3909,
+                  "evidencia": "En qualsevol situació",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3910,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3911,
+              "definicio": "Situacions en les quals les necessitats bàsiques (físiques, socials, psicològiques) d'una persona vulnerable del nucli familiar (menor, depenent, gent gran , etc.) no són ateses de manera temporal o permanent per cap dels membres del grup on conviu. Val a dir que situacions de negligència cronificada amb conseqüències greus per a la salut i el benestar de la persona que els rep s'han de considerar una forma de maltractament.",
+              "social": "Negligència amb persones vulnerables (F.3)",
+              "Items": [
+                {
+                  "id": 3912,
+                  "evidencia": "Sense perill físic i l’afectació a nivell psíquic/emocional no interfereix en les competències bàsiques de la persona (autocura, comunicació, autonomia i iniciativa).",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3913,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3914,
+                  "evidencia": "Afectacions greu per la integritat de la persona",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3915,
+                      "evidencia": "Situació puntual",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3916,
+                      "evidencia": "Situació reiterada",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Factors_context": [
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4053,
+                "descripcio": "La persona mostra una vinculació relacional positiva amb la família extensa o les seves xarxes d’amics i relacions"
+              },
+              "id": 4055
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4056,
+                "descripcio": "La persona està vinculada i participa activament amb la comunitat, entitats o associacions del seu entorn"
+              },
+              "id": 4058
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4059,
+                "descripcio": "Existeix xarxa familiar o relacional disposada a oferir suport i acompanyament"
+              },
+              "id": 4061
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4062,
+                "descripcio": "En el cas d'infància que el nen / a manté relació afectiva amb els adults de referència i iguals"
+              },
+              "id": 4064
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4065,
+                "descripcio": "En el cas d'infància que el nen / a mostra una autonomia personal adequada per a la seva edat"
+              },
+              "id": 4067
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4068,
+                "descripcio": "En el cas d'infància que el nen / a participa en activitats fora de l'entorn familiar o escolar"
+              },
+              "id": 4070
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4071,
+                "descripcio": "La persona/família és usuària de recursos/serveis adreçats a cobrir la necessitat en l’àmbit relacional (escolar, familiar o comunitari) "
+              },
+              "id": 4073
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4074,
+                "descripcio": "Existeix una xarxa social (veïns, amics, família extensa..) que exerceix una influència negativa"
+              },
+              "id": 4076
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4077,
+                "descripcio": "Sospita o malaltia mental diagnosticada que agreugen la situació "
+              },
+              "id": 4079
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4080,
+                "descripcio": "Existeix una problemàtica de salut no diagnosticada que agreuja la situació"
+              },
+              "id": 4082
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4083,
+                "descripcio": "En el cas d'infància que el nen / a no manté relació afectiva amb els adults de referència i iguals"
+              },
+              "id": 4085
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4086,
+                "descripcio": "En el cas d'infància que el nen / a no mostra una autonomia personal adequada per a la seva edat"
+              },
+              "id": 4088
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4089,
+                "descripcio": "En el cas d'infància que el nen / a no participa en activitats fora de l'entorn familiar o escolar"
+              },
+              "id": 4091
+            }
+          ]
+        },
+        {
+          "id": 3966,
+          "descripcio": "Entorn Social",
+          "Items": [
+            {
+              "id": 3967,
+              "definicio": "Persona amb dificultats per adaptar-se al seu medi social (aïllament, no respecta els límits normatius ni socials del seu entorn).",
+              "social": "Dificultats en les relacions socials i a la participació a la comunitat (S.1)",
+              "Items": [
+                {
+                  "id": 3968,
+                  "evidencia": "Existeix algun xarxa relacional de suport tot i que es detecten dificultats per crear o mantenir noves relacions. Participa en alguns entorns puntuals però presenta una manca d’habilitats i capacitats per participar a la comunitat",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3969,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3970,
+                  "evidencia": "Manca de motivació i voluntat per relacionar-se amb l’entorn comunitari. Aïllament social. Comportaments agressius en l'entorn. Els contactes són amb un entorn relacional tòxic/negatiu",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3971,
+                      "evidencia": "Puntual. Conjuntural amb possibilitats de canvi",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3972,
+                      "evidencia": "Continu",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3973,
+              "definicio": "Persona socialment aïllada i/o rebutjada per raons físiques,  de gènere, ètnia, religió, orientació sexual, conducta o qualsevol altra raó.",
+              "social": "Rebuig social (S.2)",
+              "Items": [
+                {
+                  "id": 3974,
+                  "evidencia": "Rebuig en un sol entorn i sense afectacions a la integritats física o emocional de la personal",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3975,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3976,
+                  "evidencia": "En més d’un entorn. Amb afectacions a la integritat de la persona",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3977,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3978,
+              "definicio": "Persona que fa un ús abusiu d'alguna substància tòxica i/o que presenta conductes addictives (joc, noves tecnologies, etc.), que deriven en problemes familiars, econòmics i/o laborals, i de salut.",
+              "social": "Addiccions (S.3)",
+              "Items": [
+                {
+                  "id": 3979,
+                  "evidencia": "En tractament i sense afectacions en les activitats essencials per la vida diària ",
+                  "gravetat": {
+                    "id": 3742,
+                    "descripcio": "Baixa"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3980,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3981,
+                  "evidencia": "Sense tractar o No compliment de les pautes de tractament. Afectacions no interfereixen en les activitats essencials de la vida diària o les responsabilitats familiars  ",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3982,
+                      "evidencia": "De 1 a 3 vegades per setmana",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3983,
+                      "evidencia": "Més de 3 vegades per setmana",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3984,
+                  "evidencia": "Abús sever i afectació important en les activitats essencials de la vida diària o les responsabilitats familiars",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3985,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3986,
+              "definicio": "Persones que per la seva situació legal o adminsitrativa no tenen accés a determinats recursos de l'àmbit de  salut, educació i protecció social.",
+              "social": "Desatenció institucional  (S.4)",
+              "Items": [
+                {
+                  "id": 3987,
+                  "evidencia": "Sense valoració",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3988,
+                      "evidencia": "Capacitat de resolució / legalització",
+                      "frequencia": {
+                        "id": 3735,
+                        "descripcio": "Freqüent"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    },
+                    {
+                      "id": 3989,
+                      "evidencia": "Incapacitat de resolució ",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 3990,
+              "definicio": "Treball no legalitzat, activitats marginals (Prostitució, venda ambulant il·lega, recollida de ferralla, altres).",
+              "social": "Activitats marginals (S.5)",
+              "Items": [
+                {
+                  "id": 3991,
+                  "evidencia": "Treball estable, sense coercions ni situacions de risc greu per la persona. Contacte esporàdic amb la policia i/o mesures penals pendent",
+                  "gravetat": {
+                    "id": 3743,
+                    "descripcio": "Moderada"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3992,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3736,
+                        "descripcio": "Continua"
+                      },
+                      "risc": {
+                        "id": 3739,
+                        "descripcio": "Vulnerabilitat"
+                      }
+                    },
+                    {
+                      "id": 3993,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3737,
+                        "descripcio": "Puntual"
+                      },
+                      "risc": {
+                        "id": 3740,
+                        "descripcio": "Risc"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3994,
+                  "evidencia": "Les activitats marginals comporten un alt risc (salut física i emocianal, delictes penals) per la persona.",
+                  "gravetat": {
+                    "id": 3744,
+                    "descripcio": "Alta"
+                  },
+                  "Freqüència": [
+                    {
+                      "id": 3995,
+                      "evidencia": "Sense valoració",
+                      "frequencia": {
+                        "id": 3738,
+                        "descripcio": "Sense valoració"
+                      },
+                      "risc": {
+                        "id": 3741,
+                        "descripcio": "Alt Risc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Factors_context": []
+        }
+      ]
+    },
+    {
+      "id": 4101,
+      "descripcio": "Globalitat del cas",
+      "Items": [
+        {
+          "id": 4102,
+          "descripcio": "Globalitat del cas",
+          "Items": [],
+          "Factors_context": [
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4103,
+                "descripcio": "La persona i / o família té consciencia i accepta  les dificultats / malaltia causants de la seva situació"
+              },
+              "id": 4104
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4105,
+                "descripcio": "La persona i / o família accepta el suport i l'orientació professional"
+              },
+              "id": 4106
+            },
+            {
+              "gravetat": {
+                "id": 3745,
+                "descripcio": "Protecció"
+              },
+              "factor": {
+                "id": 4107,
+                "descripcio": "La persona coneix i té una actitud proactiva i participativa envers el sistema i les xarxes de protecció"
+              },
+              "id": 4108
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4109,
+                "descripcio": "La persona i / o família no té consciencia i/o no accepta  les dificultats/malaltia causants de la seva situació"
+              },
+              "id": 4110
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4111,
+                "descripcio": "La persona i / o família no accepta el suport i l'orientació professional"
+              },
+              "id": 4112
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4113,
+                "descripcio": "La persona no té una actitud activa i ni participativa envers el sistema i les xarxes de protecció i/o té una posicionament victimista respecte els sistemes de protecció"
+              },
+              "id": 4114
+            },
+            {
+              "gravetat": {
+                "id": 3746,
+                "descripcio": "Risc"
+              },
+              "factor": {
+                "id": 4115,
+                "descripcio": "Composició familiar vulnerable (monoparental, famílies nombroses de categoria especial)"
+              },
+              "id": 4116
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "factorEconomic": [
+    {
+      "id": 3996,
+      "descripcio": "La malaltia causa del dèficit d'autonomia està diagnosticada i en tractament"
+    },
+    {
+      "id": 3998,
+      "descripcio": "La persona té reconeguts el grau de discapacitat i / o dependència"
+    },
+    {
+      "id": 4000,
+      "descripcio": "La persona és usuària d'un servei, recurs o prestació  en funció de la seva malaltia, discapacitat o situació de dependència"
+    },
+    {
+      "id": 4002,
+      "descripcio": "Hi ha una xarxa familiar i / o social de suport implicada en la cura"
+    },
+    {
+      "id": 4004,
+      "descripcio": "La persona segueix amb regularitat el tractament mèdic i/o té un hàbits saludables per la seva situació de salut"
+    },
+    {
+      "id": 4006,
+      "descripcio": "Es preveu que el dèficit d’autonomia de la persona s’agreugi en un curt termini (durant l’any)"
+    },
+    {
+      "id": 4008,
+      "descripcio": "La malaltia causa del dèficit d'autonomia no està diagnosticada i en tractament"
+    },
+    {
+      "id": 4010,
+      "descripcio": "La persona no segueix amb regularitat el tractament mèdic prescrit i/o no té uns hàbits saludables per la seva situació de salut"
+    },
+    {
+      "id": 4012,
+      "descripcio": "No existeix una xarxa familiar i / o social que s’impliqui en la cura"
+    },
+    {
+      "id": 4014,
+      "descripcio": "Cuidador / a habitual en risc o en situació de claudicació"
+    },
+    {
+      "id": 4016,
+      "descripcio": "La situació i/o característiques del domicili agreugen el dèficit d’autonomia  de les persones que hi viuen"
+    },
+    {
+      "id": 4018,
+      "descripcio": "La persona amb dèficit d’autonomia té responsabilitats/carregues familiars"
+    },
+    {
+      "id": 4020,
+      "descripcio": "Una o més persones de la família disposa d'ingressos estables (pensions, prestacions, rendes, etc.)."
+    },
+    {
+      "id": 4023,
+      "descripcio": "Una o més persones de la família disposa d'estalvis"
+    },
+    {
+      "id": 4026,
+      "descripcio": "Una o més persones de la família disposa de patrimoni a part de la primera residència"
+    },
+    {
+      "id": 4029,
+      "descripcio": "Una o més persones de la família disposa de treball estable."
+    },
+    {
+      "id": 4032,
+      "descripcio": "Existeix xarxa familiar o relacional disposada a oferir suport econòmic"
+    },
+    {
+      "id": 4035,
+      "descripcio": "En cas de separació o divorci hi ha conveni regulador i es compleixen els seus termes"
+    },
+    {
+      "id": 4038,
+      "descripcio": "La persona té una bona predisposició per formar-se i/o treballar"
+    },
+    {
+      "id": 4041,
+      "descripcio": "Es disposa d’un habitatge habitual pel qual no s’ha d’assumir cap despesa o és un habitatge social"
+    },
+    {
+      "id": 4044,
+      "descripcio": "Existeix un impagament de pensions de manutenció i la corresponent demanda judicial"
+    },
+    {
+      "id": 4047,
+      "descripcio": "Existeixen responsabilitats i càrregues familiars que agreugen la manca de recursos materials/instrumentals"
+    },
+    {
+      "id": 4050,
+      "descripcio": "Hi ha un endeutament creixent i inassolible amb els recursos disponibles"
+    },
+    {
+      "id": 4053,
+      "descripcio": "La persona mostra una vinculació relacional positiva amb la família extensa o les seves xarxes d’amics i relacions"
+    },
+    {
+      "id": 4056,
+      "descripcio": "La persona està vinculada i participa activament amb la comunitat, entitats o associacions del seu entorn"
+    },
+    {
+      "id": 4059,
+      "descripcio": "Existeix xarxa familiar o relacional disposada a oferir suport i acompanyament"
+    },
+    {
+      "id": 4062,
+      "descripcio": "En el cas d'infància que el nen / a manté relació afectiva amb els adults de referència i iguals"
+    },
+    {
+      "id": 4065,
+      "descripcio": "En el cas d'infància que el nen / a mostra una autonomia personal adequada per a la seva edat"
+    },
+    {
+      "id": 4068,
+      "descripcio": "En el cas d'infància que el nen / a participa en activitats fora de l'entorn familiar o escolar"
+    },
+    {
+      "id": 4071,
+      "descripcio": "La persona/família és usuària de recursos/serveis adreçats a cobrir la necessitat en l’àmbit relacional (escolar, familiar o comunitari) "
+    },
+    {
+      "id": 4074,
+      "descripcio": "Existeix una xarxa social (veïns, amics, família extensa..) que exerceix una influència negativa"
+    },
+    {
+      "id": 4077,
+      "descripcio": "Sospita o malaltia mental diagnosticada que agreugen la situació "
+    },
+    {
+      "id": 4080,
+      "descripcio": "Existeix una problemàtica de salut no diagnosticada que agreuja la situació"
+    },
+    {
+      "id": 4083,
+      "descripcio": "En el cas d'infància que el nen / a no manté relació afectiva amb els adults de referència i iguals"
+    },
+    {
+      "id": 4086,
+      "descripcio": "En el cas d'infància que el nen / a no mostra una autonomia personal adequada per a la seva edat"
+    },
+    {
+      "id": 4089,
+      "descripcio": "En el cas d'infància que el nen / a no participa en activitats fora de l'entorn familiar o escolar"
+    },
+    {
+      "id": 4092,
+      "descripcio": "Pagar les factures d'habitatge o serveis públics."
+    },
+    {
+      "id": 4093,
+      "descripcio": "Mantenir la llar adequadament calenta."
+    },
+    {
+      "id": 4094,
+      "descripcio": "Assumir despeses inesperades."
+    },
+    {
+      "id": 4095,
+      "descripcio": "Menjar carn o les proteïnes de forma regular."
+    },
+    {
+      "id": 4096,
+      "descripcio": "Anar de vacances."
+    },
+    {
+      "id": 4097,
+      "descripcio": "Disposar de cotxe."
+    },
+    {
+      "id": 4098,
+      "descripcio": "Disposar de rentadora."
+    },
+    {
+      "id": 4099,
+      "descripcio": "Disposar de connexió a internet."
+    },
+    {
+      "id": 4100,
+      "descripcio": "Disposar de telèfon mòbil"
+    },
+    {
+      "id": 4103,
+      "descripcio": "La persona i / o família té consciencia i accepta  les dificultats / malaltia causants de la seva situació"
+    },
+    {
+      "id": 4105,
+      "descripcio": "La persona i / o família accepta el suport i l'orientació professional"
+    },
+    {
+      "id": 4107,
+      "descripcio": "La persona coneix i té una actitud proactiva i participativa envers el sistema i les xarxes de protecció"
+    },
+    {
+      "id": 4109,
+      "descripcio": "La persona i / o família no té consciencia i/o no accepta  les dificultats/malaltia causants de la seva situació"
+    },
+    {
+      "id": 4111,
+      "descripcio": "La persona i / o família no accepta el suport i l'orientació professional"
+    },
+    {
+      "id": 4113,
+      "descripcio": "La persona no té una actitud activa i ni participativa envers el sistema i les xarxes de protecció i/o té una posicionament victimista respecte els sistemes de protecció"
+    },
+    {
+      "id": 4115,
+      "descripcio": "Composició familiar vulnerable (monoparental, famílies nombroses de categoria especial)"
+    }
+  ]
+}

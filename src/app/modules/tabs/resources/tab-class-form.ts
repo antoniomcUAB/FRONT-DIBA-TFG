@@ -1,5 +1,5 @@
 export class TableTabsForm {
-  ssb: string[] = [];
+  ssb: string;
   persona: string[] = [];
   gravetat: string[] = [];
   frequencia: string[] = [];
@@ -9,12 +9,13 @@ export class TabAutonomia {
 }
 
 export class RowsQuest {
-  constructor( prefSsb?: string ) {
+  constructor( prefId: number , prefSsb: string ) {
 
     this.ssb = prefSsb;
+    this.id = prefId;
 
   }
-  id: number;
+  public id: number;
   ssb: string;
   persona: string;
   gravetat: string;

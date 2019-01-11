@@ -9,7 +9,6 @@ const MAX_N_TABS = 5;
 
 export class TabsComponent {
 
-  public child = false;
   public stay = false;
   public disapear = false;
   public index: string = '1';
@@ -24,11 +23,9 @@ export class TabsComponent {
       }
 
   }
-  public fnStayChild(child: boolean ) {
-    this.child = child;
-  }
-  public goBackCheckForm(){
+  public goBackCheckForm() {
     this.stay = false;
+    this.incIndex();
     this.disapear = false;
   }
 
