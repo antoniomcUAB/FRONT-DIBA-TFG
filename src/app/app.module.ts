@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {SharedModule} from './shared';
 import {
+
   MenuComponent,
   HeaderComponent,
   SidebarComponent,
@@ -17,7 +18,7 @@ import {RouterModule} from '@angular/router';
 import {AppRoutes} from './app.routing';
 import {TranslateLoaderFactory} from './app-translate';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -33,6 +34,7 @@ import {BrowserModule} from '@angular/platform-browser';
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective
+
   ],
   imports: [
     AuthModule,

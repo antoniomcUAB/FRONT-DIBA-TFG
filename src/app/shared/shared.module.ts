@@ -14,6 +14,8 @@ import {
   MatSelectModule,
   MatFormFieldModule
 } from '@angular/material';
+import {TableListModule} from "./modules/table-list";
+import {SearchModule} from './components/search.module';
 
 @NgModule({
   imports: [
@@ -22,6 +24,7 @@ import {
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    TableListModule,
     MatSelectModule,
     MatFormFieldModule,
     ReactiveFormsModule,
@@ -29,7 +32,8 @@ import {
     HttpClientModule,
     LoadingBarRouterModule,
     NgbModule.forRoot(),
-    MatSidenavModule
+    MatSidenavModule,
+    SearchModule
   ],
   providers: [
     GlobalService
@@ -44,7 +48,9 @@ import {
     MatSidenavModule,
     NgbModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    TableListModule,
+    SearchModule
   ]
 })
 export class SharedModule { }

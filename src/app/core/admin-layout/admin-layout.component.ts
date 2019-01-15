@@ -26,15 +26,15 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   routeOptions: Options;
 
   options = {
-    lang: 'en',
+    lang: 'es',
     theme: 'winter',
     settings: false,
-    docked: false,
+    docked: true,
     boxed: false,
     opened: false
   };
 
-  currentLang = 'en';
+  currentLang = 'es';
 
   @ViewChild('sidebar') sidebar;
   @ViewChild('sidemenu') sidemenu;
@@ -85,7 +85,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   }
 
   setTitle( newTitle: string) {
-    this.titleService.setTitle( 'Stacked - Bootstrap 4 Angular Admin Template | ' + newTitle );
+    this.titleService.setTitle( 'CEGE | ' + newTitle );
   }
 
   isOver(): boolean {

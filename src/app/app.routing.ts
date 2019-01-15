@@ -10,7 +10,22 @@ export const AppRoutes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: './modules/home#HomeRoutingModule'
+        loadChildren: './modules/home#HomeModule'
+      },
+      {
+        path: 'file-detail',
+        loadChildren: './modules/files#FileDetailModule'
+      },
+      {
+        path: 'diagnosis-detail',
+        loadChildren: './modules/files#FileDetailModule'
+      },
+      {
+        path: 'observations',
+        loadChildren: './modules/observations#ObservationsModule'
+      }, {
+        path: 'tabs',
+        loadChildren: './modules/tabs#TabsModule'
       },
       {
         path: '',
@@ -22,10 +37,6 @@ export const AppRoutes: Routes = [
     path: '',
     component: AuthLayoutComponent,
     children: [
-      {
-        path: 'error',
-        loadChildren: './error/error.module#ErrorModule'
-      },
       {
         path: 'error',
         loadChildren: './error/error.module#ErrorModule'

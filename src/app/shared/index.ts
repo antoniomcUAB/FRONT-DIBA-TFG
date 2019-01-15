@@ -1,4 +1,4 @@
-// Services
+// services
 export * from './services/global.service';
 
 // Resources

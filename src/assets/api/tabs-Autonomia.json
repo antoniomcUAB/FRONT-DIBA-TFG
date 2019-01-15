@@ -1,0 +1,45 @@
+{
+  "tabAutonomia": [
+    {
+      "ssb": "Lorem ipsum dolor",
+      "persona": [
+        {
+          "persona": "persona1"
+        },
+        {
+          "persona": "persona2"
+        }],
+      "gravetat": [{
+        "gravetat": "greu"
+      },{
+        "gravetat": "lleu"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "molt"
+        },{
+          "frequencia": "poc"
+        }]
+    },{
+      "ssb": "Lorem ipsum dolor",
+      "persona": [
+        {
+          "persona": "persona1"
+        },
+        {
+          "persona": "persona2"
+        }],
+      "gravetat": [{
+        "gravetat": "greu"
+      },{
+        "gravetat": "lleu"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "molt"
+        },{
+          "frequencia": "poc"
+        }]
+    }
+  ]
+}

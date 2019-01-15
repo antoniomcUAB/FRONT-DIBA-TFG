@@ -6,6 +6,16 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
+  public user = { name:`Daniel Meller` };
+
   @Input() heading: string;
   @Output() toggleSidenav = new EventEmitter<void>();
+
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
 }

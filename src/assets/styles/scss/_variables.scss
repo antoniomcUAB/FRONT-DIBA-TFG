@@ -9,7 +9,7 @@ $header-footer-height: ($header-height * 2) !default;
 // Bootstrap Variables
 //
 $theme-colors: (
-  primary: map_get($mat-indigo, 400),
+  primary: #A41E34, //map_get($mat-indigo, 400),
   secondary: #868e96,
   success: map_get($mat-green, 400),
   info: map_get($mat-light-blue, 400),

@@ -1,0 +1,72 @@
+<p>
+  ambit-material-tab works!
+</p>
+<app-table-list [tableData]="data"
+                [options]="options"
+                [rowTemplate]="myRow"
+                (reloadData)="reloadData()">
+
+  <ng-template #myRow let-item>
+    <td>
+      {{item.ssb}}
+    </td>
+    <td>
+
+    </td>
+    <td>
+
+      <select>
+        <option *ngFor="let method of item.persona">{{ method.persona }}</option>
+      </select>
+
+    </td>
+    <td>
+      <select>
+        <option *ngFor="let method of item.gravetat">{{ method.gravetat }}</option>
+      </select>
+    </td> <td>
+    <select>
+      <option *ngFor="let method of item.frequencia">{{ method.frequencia }}</option>
+    </select>
+  </td>
+
+  </ng-template>
+</app-table-list><app-table-list [tableData]="data"
+                                 [options]="options"
+                                 [rowTemplate]="myRow"
+                                 (reloadData)="reloadData()">
+
+  <ng-template #myRow let-item>
+    <td>
+      {{item.ssb}}
+    </td>
+    <td>
+
+    </td>
+    <td>
+
+      <select>
+        <option *ngFor="let method of item.persona">{{ method.persona }}</option>
+      </select>
+
+    </td>
+    <td>
+      <select>
+        <option *ngFor="let method of item.gravetat">{{ method.gravetat }}</option>
+      </select>
+    </td> <td>
+    <select>
+      <option *ngFor="let method of item.frequencia">{{ method.frequencia }}</option>
+    </select>
+  </td>
+
+  </ng-template>
+</app-table-list>
+
+<app-table-list [tableData]="data"
+                [options]="options2"
+                (reloadData)="reloadData()">
+</app-table-list>
+
+<a (click)="emitEnd()">Seguent</a>
+

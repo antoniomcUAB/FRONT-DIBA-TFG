@@ -1,0 +1,23 @@
+
+
+
+<h3>Hi ha alguna situacio mes que afecti a {{comesFrom}}</h3>
+<label for="yes">yes</label>
+<input id="yes" name="form" type="radio" (click)="emitStay(true)">
+<label for="no">no</label>
+<input id="no" name="form" type="radio" (click)="emitStay(false)">
+
+
+
+<div style="padding: 0px" *ngIf="child">
+<h3> La situacio afecta a menors</h3>
+<label for="yes1">yes</label>
+<input id="yes1" name="form1" type="radio" (click)="emitChild(true)">
+<label for="no1">no</label>
+<input id="no1" name="form1" type="radio" (click)="emitChild(false)">
+</div>
+
+
+<button *ngIf="viewButton"> Guardar </button>
+
+

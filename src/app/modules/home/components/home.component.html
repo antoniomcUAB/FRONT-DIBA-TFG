@@ -1,3 +1,42 @@
-<p>
-  home works!
-</p>
+<!-- Search component -->
+<app-search>
+
+</app-search>
+
+<!--/ Search component -->
+
+
+<!-- Home Component -->
+  <section id="home">
+    <h1 class="text-center mt-5">{{ city }}</h1>
+    <h2 class="text-center mb-4">{{ "TITLE.home-h2" | translate }}</h2>
+
+    <div class="card">
+      <!-- Table -->
+      <app-table-list [tableData]="data"
+                      [options]="options"
+                      [rowTemplate]="myRow"
+                      (reloadData)="reloadData()">
+
+        <ng-template #myRow let-item>
+          <td>
+            <a style="color: #01579b"  [routerLink]="['/file-detail', {'id': item.id}]">{{item.id}}</a>
+          </td>
+          <td>
+            {{item.createdate}}
+          </td>
+          <td>
+            {{item.owner}}
+          </td>
+          <td>
+            {{item.updatedate}}
+          </td>
+          <td>
+            {{item.status}}
+          </td>
+        </ng-template>
+      </app-table-list>
+      <!--/ Table -->
+    </div>
+  </section>
+<!--/ Home Component -->

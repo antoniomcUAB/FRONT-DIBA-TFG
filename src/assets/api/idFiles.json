@@ -1,0 +1,13 @@
+{
+  "id": "300",
+  "createdate": "23/11/2018 14:31",
+  "owner": "Antonio Martinez",
+  "expName": "Exp 434",
+  "valRealizadas": [{
+    "id": "DS-DIBA1",
+    "fecha":"18/05/2018"
+  },{
+    "id": "DS-DIBA2",
+    "fecha":"05/10/2018"
+  }]
+}
