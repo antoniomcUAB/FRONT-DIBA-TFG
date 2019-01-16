@@ -2,7 +2,10 @@
   <!-- titulo -->
 
   <div class="form-group col-12 bg-grey-500  ">
-    <label for="ssb" style="color: white; vertical-align: auto" >{{ "TABTITLE.titleAutonomia" | translate }}</label>
+    <label for="ssb" style="color: white;" >{{ "TABTITLE.titleAutonomia" | translate }}</label>
+  </div>
+  <div class="form-group col-12 text-right">
+    <a style="color: #01579b; text-decoration: underline "(click)="emitBefore()">Tornar pagina anterior</a>
   </div>
 
   <!--/ titulo -->
@@ -10,8 +13,8 @@
   <div class="card-body ">
     <div *ngFor="let item of data.tableTabsForms; let i = index;" class="form-group row bg-grey-300">
       <!-- Situacion social Basica -->
-      <div class="form-group col-4">
-        <label for="ssb">{{ "TABLE.basicSocialSituation" | translate }}</label>
+      <div class="form-group col-4" style="vertical-align: middle">
+        <label for="ssb" *ngIf="i===0">{{ "TABLE.basicSocialSituation" | translate }}</label>
         <input  type="text" class="form-control " id="ssb-${{i}}" [value]= "item.ssb " disabled>
 
       </div>
@@ -21,8 +24,8 @@
       <div class="col-xs-1">
         <div class="col-12">
           <div class="form-group text-center">
-            <label class=""> {{ "TABLE.apl" | translate }}</label>
-            <label class="custom-control custom-checkbox text-center">
+            <label *ngIf="i===0"> {{ "TABLE.apl" | translate }}</label>
+            <label class="custom-control custom-checkbox  ">
               <input type="checkbox" class="custom-control-input">
               <span class="custom-control-label"></span>
               <span class="custom-control-description"></span>
@@ -37,7 +40,7 @@
       <!-- Persones -->
       <div class="col-2">
         <div class="col-12">
-          <label for="t1person">{{ "TABLE.person" | translate }} </label>
+          <label for="t1person" *ngIf="i===0">{{ "TABLE.person" | translate }} </label>
           <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend">
               <div class="input-group-text " (click)="addRow(i,item.ssb)">
@@ -60,7 +63,7 @@
 
       <div class="col-xs-2">
         <div class="col-12">
-          <label for="t1severity">{{ "TABLE.severity" | translate }}</label>
+          <label for="t1severity" *ngIf="i===0">{{ "TABLE.severity" | translate }}</label>
           <select class="form-control" id="t1severity">
             <option *ngFor="let option of item.gravetat "> {{option.gravetat}} </option>
           </select>
@@ -70,7 +73,7 @@
       <!-- Frequencia -->
       <div class="col-2">
         <div class="col-12">
-          <label for="t1frequency">{{ "TABLE.frequency" | translate }}</label>
+          <label for="t1frequency" *ngIf="i===0">{{ "TABLE.frequency" | translate }}</label>
           <select class="form-control" id="t1frequency">
             <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
           </select>
@@ -79,13 +82,13 @@
       <!--/ Frequencia -->
       <!-- riskFactors -->
       <div class="form-group col-2">
-        <label for="t1riskFactor">{{ "TABLE.riskFactors" | translate }}</label>
+        <label for="t1riskFactor" *ngIf="i===0">{{ "TABLE.riskFactors" | translate }}</label>
         <input type="text" class="form-control" id="t1riskFactor"  disabled>
       </div>
 
       <!-- Bucle for para cada fila  -->
       <ng-container *ngFor="let method of rows ; let x= index;">
-
+        <ng-container *ngIf="method.id === i">
         <!-- Situacio Social-->
         <div class="form-group col-4">
         </div>
@@ -143,66 +146,7 @@
           <input type="email" class="form-control" id="t1riskFactor"  disabled>
         </div>
         </ng-container>
+        </ng-container>
     </div>
 
-
-      <!-- FACTOR  DE CONTEXTUALITZACIO -->
-      <div class="form-group row bg-grey-300">
-        <!-- Situacion social Basica -->
-        <div class="form-group col-2">
-          <label for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
-          <input type="email" class="form-control" id="ssb" value="{{data.ssb}}" disabled>
-        </div>
-        <!--/ Situacion social Basica -->
-
-
-        <!-- Aplicatiu -->
-        <div class="col-1">
-          <div class="col-12 text-center">
-
-            <label  class="col-form-label">{{ "TABLE.apl" | translate }}</label>
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input">
-              <span class="custom-control-label"></span>
-              <span class="custom-control-description"></span>
-            </label>
-          </div>
-        </div>
-        <!--/ Aplicatiu -->
-
-        <!-- Persones -->
-        <div class="col-2">
-          <div class="col-12">
-            <label for="t1person">{{ "TABLE.person" | translate }} </label>
-            <select class="form-control" id="t1person">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-        </div>
-
-        <!--/ Persones -->
-
-        <!-- Severity -->
-
-
-        <div class="col-2">
-          <div class="col-12">
-            <label for="t1severity">{{ "TABLE.types" | translate }}</label>
-            <select class="form-control" id="t1severity">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-        </div>
-        <!--/ Severity -->
-        <!--/ FACTOR DE CONTEXTUALITZACIO -->
-      <!--/  riskFactors -->
-    </div>
   </div>

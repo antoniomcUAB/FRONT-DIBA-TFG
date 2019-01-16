@@ -1,0 +1,56 @@
+{
+  "contextRows": [
+    {
+      "fdc":"La malaltia causa del dèficit d'autonomia està diagnosticada i en tractament\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "tipo": [
+        {
+          "tipo": "leve"
+        },
+        {
+          "tipo": "grave"
+        }
+      ]
+    },{
+      "fdc":"La persona té reconeguts el grau de discapacitat i / o dependència\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "tipo": [
+        {
+          "tipo": "leve"
+        },
+        {
+          "tipo": "grave"
+        }
+      ]
+    },{
+      "fdc":"La persona és usuària d'un servei especialitzat en funció de la seva malaltia, discapacitat o situació de dependència\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "tipo": [
+        {
+          "tipo": "leve"
+        },
+        {
+          "tipo": "grave"
+        }
+      ]
+    }
+  ]
+}

@@ -1,32 +1,63 @@
 <div class="card-body text-center align-items-center align-content-center">
 <div class="form-group row align-items-center text-center  ">
   <!-- Situacion social Basica -->
-  <div class="form-group col-xs-6">
-
-    <h3>Hi ha alguna situacio que afecti a {{comesFrom}} ?</h3>
+  <div  class="form-group row col-12">
+    <div class="form-group col-12">
+    <h3 *ngIf="!access">Hi ha alguna situacio que afecti a {{comesFrom}} ?</h3>
+    <h3 *ngIf="access">Quins entorns has de treballar ?</h3>
+    </div>
   </div>
-  <div class="form-group col-1">
 
-
-
+  <div *ngIf="!access" class="form-group row col-12">
+  <div  class="form-group col-12">
     <label class="custom-control custom-radio">
       <input id="radio1" name="radio" type="radio" class="custom-control-input" (click)="emitStay(true)">
       <span class="custom-control-label">Si</span>
-      <span class="custom-control-description"></span>
     </label>
   </div>
+  </div>
 
-  <div class="form-group col-xs-1">
+  <div *ngIf="!access" class="form-group row col-12">
+  <div class="form-group col-12">
     <label class="custom-control custom-radio">
       <input id="radio2" name="radio" type="radio" class="custom-control-input" (click)="emitStay(false)">
       <span class="custom-control-label">No</span>
-      <span class="custom-control-description"></span>
     </label>
+  </div>
+  </div>
+
+  <div *ngIf="access" class="form-group row col-12">
+    <div class="form-group col-12">
+      <label  class="custom-control custom-radio">
+        <input id="radioEscolar" name="radio" type="radio" class="custom-control-input" (click)="emitStay(true)">
+        <span class="custom-control-label">Entorn escolar</span>
+      </label>
+    </div>
+  </div>
+
+  <div *ngIf="access" class="form-group row col-12 ">
+    <div class="form-group col-12">
+      <label  class="custom-control custom-radio">
+        <input id="radioFamiliar" name="radio" type="radio" class="custom-control-input" (click)="emitStay(true)">
+        <span class="custom-control-label">Entorn familiar</span>
+      </label>
+    </div>
+  </div>
+
+  <div *ngIf="access" class="form-group row col-12 ">
+    <div class="form-group col-12">
+      <label  class="custom-control custom-radio">
+        <input id="radioSocial" name="radio" type="radio" class="custom-control-input" (click)="emitStay(true)">
+        <span class="custom-control-label">Entorn Social</span>
+      </label>
+    </div>
+  </div>
+
+
 
   </div>
 
   </div>
-</div>
 
 
 

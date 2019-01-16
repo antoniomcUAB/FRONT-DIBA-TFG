@@ -1,4 +1,11 @@
-<p>
-  globalitat-tab works!
-</p>
-<a (click)="emitEnd()">Seguent</a>
+<div class="form-group col-12 text-right">
+  <a style="color: #01579b; text-decoration: underline "(click)="emitBefore()">Tornar pagina anterior</a>
+</div>
+<app-form-tab-context (endForm)="emitEnd()" [context]="contextData">
+
+</app-form-tab-context>
+
+
+
+
+

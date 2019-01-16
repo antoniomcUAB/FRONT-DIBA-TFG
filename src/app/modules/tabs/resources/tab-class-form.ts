@@ -21,3 +21,12 @@ export class RowsQuest {
   gravetat: string;
   frequencia: string;
 }
+export class ContextRows {
+  contextRows: Context[];
+}
+export class Context {
+  fdc: string;
+  persona: string[] = [];
+  tipo: string[] = [];
+}
+

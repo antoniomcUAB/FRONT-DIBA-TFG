@@ -5,8 +5,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   templateUrl: './check-form.component.html',
   styleUrls: ['./check-form.component.scss']
 })
-export class CheckFormComponent{
+export class CheckFormComponent {
   @Input () comesFrom: string;
+  @Input () access: boolean;
   @Input () viewButton: boolean;
   @Output () stay: EventEmitter<boolean> = new EventEmitter();
   @Output () childEmitter: EventEmitter<boolean> = new EventEmitter();

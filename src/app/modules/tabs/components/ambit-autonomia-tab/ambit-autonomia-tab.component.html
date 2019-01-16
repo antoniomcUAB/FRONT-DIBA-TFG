@@ -1,10 +1,10 @@
-<app-form-tab [data]="data">
+<app-form-tab (before)="emitBefore()" [data]="data">
 
 
 </app-form-tab>
+<app-form-tab-context (endForm)="emitEnd()"  [context]="contextData">
+
+</app-form-tab-context>
 
 
-
-  <a (click)="emitEnd()">Cancelar</a>
-  <a class="text-right" style="color: #01579b" (click)="emitEnd()">Seguent</a>
 

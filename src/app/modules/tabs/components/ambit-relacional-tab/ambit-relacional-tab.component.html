@@ -1,72 +1,8 @@
-<p>
-  ambit-relacional-tab works!
-</p>
-<app-table-list [tableData]="data"
-                [options]="options"
-                [rowTemplate]="myRow"
-                (reloadData)="reloadData()">
+<app-form-tab (before)="emitBefore()" [data]="data">
 
-  <ng-template #myRow let-item>
-    <td>
-      {{item.ssb}}
-    </td>
-    <td>
 
-    </td>
-    <td>
+</app-form-tab>
+<app-form-tab-context (endForm)="emitEnd()" [context]="contextData">
 
-      <select>
-        <option *ngFor="let method of item.persona">{{ method.persona }}</option>
-      </select>
-
-    </td>
-    <td>
-      <select>
-        <option *ngFor="let method of item.gravetat">{{ method.gravetat }}</option>
-      </select>
-    </td> <td>
-    <select>
-      <option *ngFor="let method of item.frequencia">{{ method.frequencia }}</option>
-    </select>
-  </td>
-
-  </ng-template>
-</app-table-list><app-table-list [tableData]="data"
-                                 [options]="options"
-                                 [rowTemplate]="myRow"
-                                 (reloadData)="reloadData()">
-
-  <ng-template #myRow let-item>
-    <td>
-      {{item.ssb}}
-    </td>
-    <td>
-
-    </td>
-    <td>
-
-      <select>
-        <option *ngFor="let method of item.persona">{{ method.persona }}</option>
-      </select>
-
-    </td>
-    <td>
-      <select>
-        <option *ngFor="let method of item.gravetat">{{ method.gravetat }}</option>
-      </select>
-    </td> <td>
-    <select>
-      <option *ngFor="let method of item.frequencia">{{ method.frequencia }}</option>
-    </select>
-  </td>
-
-  </ng-template>
-</app-table-list>
-
-<app-table-list [tableData]="data"
-                [options]="options2"
-                (reloadData)="reloadData()">
-</app-table-list>
-
-<a (click)="emitEnd()">Seguent</a>
+</app-form-tab-context>
 

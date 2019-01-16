@@ -5,55 +5,53 @@
 <br>
 
 <!--/ Search component -->
-
 <ngb-tabset [activeId]="index">
-  <ngb-tab id="1" [disabled]="true" class="bg-danger" #tab1 title="Autonomia">
+  <ngb-tab id="1"  title="Autonomia" (click)="print()">
     <ng-template ngbTabContent>
-
-      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [comesFrom] = "'l\'ambit d\'autonomia'">
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [comesFrom] = "'l\'ambit d\'autonomia'" [access]="false">
       </app-check-form>
 
-      <app-ambit-autonomia-tab *ngIf="stay"  (endForm)="goBackCheckForm()">
+      <app-ambit-autonomia-tab *ngIf="stay"  (endForm)="goBackCheckForm()" (before)= "beforeTab()">
       </app-ambit-autonomia-tab>
 
     </ng-template>
   </ngb-tab>
-  <ngb-tab id="2" [disabled]="true" title="Material e instrumental">
+  <ngb-tab id="2"  title="Material e instrumental">
     <ng-template ngbTabContent>
 
-      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)"  [comesFrom]="'l\'ambit material e instrumental'">
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)"  [comesFrom]="'l\'ambit material e instrumental'" [access]="true">
       </app-check-form>
 
-      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm()">
+      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm()" (before)="beforeTab()">
       </app-ambit-material-tab>
 
     </ng-template>
   </ngb-tab>
-  <ngb-tab id="3" [disabled]="true" title="Relacional">
+  <ngb-tab id="3"  title="Relacional">
     <ng-template ngbTabContent>
 
-      <app-check-form *ngIf="!disapear"  (stay)="fnStay($event)"  [comesFrom]="'l\'ambit relacional '"  >
+      <app-check-form *ngIf="!disapear"  (stay)="fnStay($event)"  [comesFrom]="'l\'ambit relacional '" [access]="true" >
       </app-check-form>
 
-      <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm()">
+      <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm()" (before)="beforeTab()">
       </app-ambit-relacional-tab>
     </ng-template>
   </ngb-tab>
-  <ngb-tab id="4" [disabled]="true" title="Globalitat del cas">
+  <ngb-tab id="4"  title="Globalitat del cas">
     <ng-template ngbTabContent>
-      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [comesFrom]="' la globalitat del cas'">
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [comesFrom]="' la globalitat del cas'" [access]="true">
       </app-check-form>
 
-      <app-globalitat-tab *ngIf="stay"  (endForm)="goBackCheckForm()">
+      <app-globalitat-tab *ngIf="stay"  (endForm)="goBackCheckForm()" (before)="beforeTab()">
       </app-globalitat-tab>
     </ng-template>
   </ngb-tab>
-  <ngb-tab id="5" [disabled]="true" title="Valoracio del diagnostic">
+  <ngb-tab id="5"  title="Valoracio del diagnostic">
     <ng-template ngbTabContent>
-      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [comesFrom]="'la valoracio del diagnostic'" >
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [comesFrom]="'la valoracio del diagnostic'" [access]="true" >
       </app-check-form>
 
-      <app-valoracio-diagnostic-tab *ngIf="stay"  (endForm)="goBackCheckForm()">
+      <app-valoracio-diagnostic-tab *ngIf="stay"  (endForm)="goBackCheckForm()" (before)="beforeTab()">
       </app-valoracio-diagnostic-tab>
     </ng-template>
   </ngb-tab>

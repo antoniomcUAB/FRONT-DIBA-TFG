@@ -36,6 +36,24 @@ export class TabsComponent {
       this.index = num.toString();
     }
   }
+  public decIndex() {
+
+    let num = parseInt (this.index) - 1;
+    if (num > 0 ) {
+      this.index = num.toString();
+    }
+  }
+
+  public beforeTab() {
+    this.stay = false;
+    this.disapear = false;
+
+  }
+
+  public print(tab:string)
+  {
+    console.log("he clickado en este" )
+  }
 
 
 

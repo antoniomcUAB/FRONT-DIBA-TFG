@@ -8,10 +8,14 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class ValoracioDiagnosticTabComponent  {
 
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
+  @Output () before: EventEmitter<boolean> = new EventEmitter();
 
 
   public emitEnd(){
     this.endForm.emit();
+  }
+  public emitBefore() {
+    this.before.emit();
   }
 
 
