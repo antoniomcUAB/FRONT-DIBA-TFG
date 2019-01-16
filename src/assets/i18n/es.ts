@@ -1,11 +1,13 @@
 export let TRANSLATION = {
   /* Title */
   'TITLE': {
-    'home-h2': 'Listado expedientes por municipio'
+    'home-h2': 'Llistat expedients per municipi',
+    'file-h2': 'Fitxa d\'expedient'
   },
 
   /*  Table */
   'TABLE': {
+<<<<<<< HEAD
     'files'      : 'Expediente',
     'createDate' : 'Fecha creacion',
     'owner'      : 'Propietario',
@@ -21,42 +23,61 @@ export let TRANSLATION = {
     'replySocialSituation': 'Situacion social Repetitva',
     'contextFactor': 'Factor de contextualizacion',
     'expedient': 'Estat expedient'
+=======
+    'files'      : 'Expedient',
+    'createDate' : 'Data creació',
+    'owner'      : 'Professional',
+    'updateDate' : 'Data ultima valoració',
+    'actions'    : 'Accions',
+    'api' : 'Aplica',
+    'person' : 'Persona',
+    'severity' : 'Gravetat',
+    'frequency' : 'Freqüència',
+    'riskFactors' : 'Factors de risc',
+    'types': 'Tipus',
+    'basicSocialSituation' : 'Situació social bàsica',
+    'expedient': 'Estat expedient',
+    'relation': 'Relació',
+    'sex': 'Sexe',
+    'birthday': 'Data naixement',
+    'register': 'Alta',
+    'unsubscribe': 'Baixa'
+>>>>>>> features/DSDIBA-12_Pantallas_Listado_y_Detalle
   },
   'OBSTABLE': {
-    'obs'      : 'Valoraciones Realizadas'
+    'obs'      : 'Valoracions realitzades'
   },
   /*Tabs*/
   'TAB': {
-    'tabAutonomia': 'Ambito de autonomia'
+    'tabAutonomia': 'Àmbit d\'autonomia'
   },
   'TABTITLE': {
     'titleAutonomia': 'Evidencies i necessitats en l\'ambit relacional'
   },
   /* Form */
   'FORM': {
-    'fileId'        : 'Nº expediente',
-    'fileName'      : 'Nombre expediente',
-    'fileOwner'     : 'Nombre profesional',
-    'fileDate'      : 'Fecha',
-    'fileUFamily'   : 'Nº de personas que componen la unidad familiar',
-    'filePeopleRef' : 'Persona de referencia',
-    'fileObs'       : 'Observaciones',
-    'fileValuate'   : 'Valoraciones realizadas',
-    'son'           : 'Niño',
-    'daughter'      : 'Niña',
-    'father'        : 'Padre',
-    'mother'        : 'Madre',
-    'wife'          : 'Esposa',
-    'husband'       : 'Esposo',
+    'fileId'        : 'Nº expedient',
+    'fileName'      : 'Nom expedient',
+    'fileOwner'     : 'Nom profesional',
+    'fileDate'      : 'Data',
+    'fileUFamily'   : 'Unitat familiar',
+    'filePeopleRef' : 'Persona de referència',
+    'fileObs'       : 'Observacions i comentaris',
+    'fileValuate'   : 'Valoracions realitzades',
+    'son'           : 'Fill',
+    'daughter'      : 'Filla',
+    'father'        : 'Pare',
+    'mother'        : 'Mare',
     'other'         : 'Otros',
-    'submit'        : 'Crear nuevo diagnóstico'
+    'save'          : 'Guardar',
+    'newDiagnosis'  : 'Crear nou diagnòstic'
   },
 
   /* Search */
   'SEARCH': {
-    'search' : 'Buscar',
-    'model'  : 'Consultar Módelo',
+    'search' : 'Cercar',
+    'model'  : 'Consultar Módel',
     },
-  'ORDER_BY': 'Ordenar por',
-  'TAGS': 'Etiquetas'
+  'ORDER_BY': 'Ordenar per',
+  'TAGS': 'Etiquetes'
 };

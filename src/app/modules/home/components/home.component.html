@@ -1,10 +1,6 @@
 <!-- Search component -->
-<app-search>
-
-</app-search>
-
+<app-search></app-search>
 <!--/ Search component -->
-
 
 <!-- Home Component -->
   <section id="home">
@@ -19,20 +15,20 @@
                       (reloadData)="reloadData()">
 
         <ng-template #myRow let-item>
-          <td>
-            <a style="color: #01579b"  [routerLink]="['/file-detail', {'id': item.id}]">{{item.id}}</a>
+          <td class="bg-table text-black-50 text-center">
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.id}}</a>
+          </td>
+          <td class="text-center">
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.createdate}}</a>
           </td>
           <td>
-            {{item.createdate}}
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.owner}}</a>
           </td>
-          <td>
-            {{item.owner}}
+          <td class="text-center">
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.updatedate}}</a>
           </td>
-          <td>
-            {{item.updatedate}}
-          </td>
-          <td>
-            {{item.status}}
+          <td class="text-center text-capitalize" [ngClass]="{'warning' : item.status === 'incomplet', 'success' : item.status === 'complet'}">
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.status}}</a>
           </td>
         </ng-template>
       </app-table-list>

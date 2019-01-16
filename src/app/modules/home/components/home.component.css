@@ -1,0 +1,9 @@
+.table .table-header th {
+  padding: 0.75rem;
+  text-align: center;
+  background: rgba(0,0,0, 0.05);
+}
+
+.table .table-header th input {
+  padding: 1rem;
+}

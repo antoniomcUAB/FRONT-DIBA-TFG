@@ -4,4 +4,5 @@ export class DatosPersonales {
   owner: string;
   expName: string;
   valRealizadas: string [] = [];
+  unityFamility: string [] = [];
 }

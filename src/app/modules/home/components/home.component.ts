@@ -25,44 +25,43 @@ export class HomeComponent {
         name: 'id',
         title: this._translateService.instant('TABLE.files'),
         sortable: true,
-        filterable: false
-
+        filterable: true
       }, {
         name: 'createdate',
         title: this._translateService.instant('TABLE.createDate'),
         sortable: true,
-        filterable: false
+        filterable: true,
+        filterType: FilterType.date
       }, {
         name: 'owner',
         title: this._translateService.instant('TABLE.owner'),
         sortable: true,
-        filterable: false,
+        filterable: true
       }, {
         name: 'updatedate',
         title: this._translateService.instant('TABLE.updateDate'),
         sortable: true,
-        filterable: false,
+        filterable: true,
         filterType: FilterType.date
       }, {
         name: 'expedient',
         title: this._translateService.instant('TABLE.expedient'),
         sortable: true,
-        filterable: false,
-        filterType: FilterType.date
+        filterable: true
       }
     ]);
-    this.options.filterable = false;
+    this.options.filterable = true;
     this.options.actions = false;
     this.options.itemsPerPage = 5;
     this.reloadData();
   }
 
   reloadData() {
-    this.options.loading = true;
+    this.options.loading = false;
     this._service.getFiles(this.options).subscribe((res: TableListResponse ) => {
       this.options = res.options;
       this.data = res.data;
-      this.options.loading = false;
+      this.options.loading = true;
     });
   }
 }
