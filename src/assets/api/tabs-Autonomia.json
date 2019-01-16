@@ -66,6 +66,443 @@
         },{
           "frequencia": "Continua"
         }]
+    },{
+      "entorn": "school",
+      "ssb":"Dificultats d'aprenentatge escolar (ES.1)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "school",
+      "ssb":"Manca de competències relacionals a l'escola (ES.2)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "school",
+      "ssb":"Escolaritat obligatòria inacabada (ES.3)",
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "school",
+      "ssb":"Absentisme escolar (ES.4)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "school",
+      "ssb":"Assetjament escolar (ES.5)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "family",
+      "ssb":"Maltractament (F.1)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "family",
+      "ssb":"Abús Sexual (F.2)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "family",
+      "ssb":"Negligència amb persones vulnerables (F.3)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "family",
+      "ssb":"Dificultats per assumir responsabilitats familiars i socials (F.4)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "family",
+      "ssb":"Estrès derivat de la situació familiar (F.5)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "family",
+      "ssb":"Sobre-responsabilitat (F.6)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "family",
+      "ssb":"Dificultats en les relacions familiars (F.7)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "family",
+      "ssb":"Manca de recursos personals i autonomia en la presa de decisions (F.8)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "family",
+      "ssb":"Manca d'higiene o desordre al domicili (F.9) \n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "social",
+      "ssb":"Dificultats en les relacions socials i a la participació a la comunitat (S.1)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "social",
+      "ssb":"Rebuig social (S.2)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "social",
+      "ssb":"Addiccions (S.3)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "social",
+      "ssb":"Desatenció institucional  (S.4)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "social",
+      "ssb":"Activitats marginals (S.5)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
     }
   ]
 }

@@ -1,4 +1,5 @@
-import {Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Entorn} from '../../resources/tab-class-form';
 
 const MAX_N_TABS = 5;
 
@@ -8,6 +9,7 @@ const MAX_N_TABS = 5;
 })
 
 export class TabsComponent {
+  @Input() entorns: Entorn;
 
   public stay = false;
   public disapear = false;
@@ -50,10 +52,6 @@ export class TabsComponent {
 
   }
 
-  public print(tab:string)
-  {
-    console.log("he clickado en este" )
-  }
 
 
 

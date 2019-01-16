@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {RowsQuest, TabAutonomia} from '../../resources/tab-class-form';
+import {Entorn, RowsQuest, TabAutonomia} from '../../resources/tab-class-form';
 
 @Component({
   selector: 'app-form-tab',
@@ -9,6 +9,7 @@ import {RowsQuest, TabAutonomia} from '../../resources/tab-class-form';
 export class FormTabComponent implements OnInit {
   rows: RowsQuest [] = [];
   @Input() data: TabAutonomia = new TabAutonomia();
+  @Input() filter: Entorn = new Entorn();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   constructor() {
 

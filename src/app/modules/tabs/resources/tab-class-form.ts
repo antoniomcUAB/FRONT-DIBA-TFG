@@ -3,7 +3,9 @@ export class TableTabsForm {
   persona: string[] = [];
   gravetat: string[] = [];
   frequencia: string[] = [];
+  entorn: string = '' ;
 }
+
 export class TabAutonomia {
   tableTabsForms: TableTabsForm [] ;
 }
@@ -28,5 +30,10 @@ export class Context {
   fdc: string;
   persona: string[] = [];
   tipo: string[] = [];
+}
+export class Entorn {
+  school: boolean = false;
+  social: boolean = false;
+  family: boolean = false;
 }
 

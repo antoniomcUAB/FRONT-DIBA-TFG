@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {Context, ContextRows, TabAutonomia, TableTabsForm} from '../../resources/tab-class-form';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Context, ContextRows, Entorn, TabAutonomia, TableTabsForm} from '../../resources/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
 
 @Component({
@@ -10,6 +10,7 @@ import {TabsFormService} from '../../services/tabsForm.service';
 export class AmbitMaterialTabComponent {
   data: TabAutonomia = new TabAutonomia();
   contextData: ContextRows = new ContextRows();
+  @Input() entorns: Entorn;
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
 

@@ -6,7 +6,7 @@
 
 <!--/ Search component -->
 <ngb-tabset [activeId]="index">
-  <ngb-tab id="1"  title="Autonomia" (click)="print()">
+  <ngb-tab id="1"  title="Autonomia" >
     <ng-template ngbTabContent>
       <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [comesFrom] = "'l\'ambit d\'autonomia'" [access]="false">
       </app-check-form>
@@ -19,10 +19,10 @@
   <ngb-tab id="2"  title="Material e instrumental">
     <ng-template ngbTabContent>
 
-      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)"  [comesFrom]="'l\'ambit material e instrumental'" [access]="true">
+      <app-check-form (entorns)="entorns = $event;"  *ngIf="!disapear" (stay)="fnStay($event)"  [comesFrom]="'l\'ambit material e instrumental'" [access]="true">
       </app-check-form>
 
-      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm()" (before)="beforeTab()">
+      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm()" (before)="beforeTab()" [entorns] ="entorns" >
       </app-ambit-material-tab>
 
     </ng-template>
