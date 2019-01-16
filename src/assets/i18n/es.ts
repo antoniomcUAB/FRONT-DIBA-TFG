@@ -7,23 +7,6 @@ export let TRANSLATION = {
 
   /*  Table */
   'TABLE': {
-<<<<<<< HEAD
-    'files'      : 'Expediente',
-    'createDate' : 'Fecha creacion',
-    'owner'      : 'Propietario',
-    'updateDate' : 'Fecha ultima valoracion',
-    'actions'    : 'Acciones',
-    'apl' : 'apl',
-    'person' : 'Persona',
-    'severity' : 'Gravedad',
-    'frequency' : 'Frequencia',
-    'riskFactors' : 'Factores de Riesgo',
-    'types': 'Tipos',
-    'basicSocialSituation' : 'Situacion social Basica',
-    'replySocialSituation': 'Situacion social Repetitva',
-    'contextFactor': 'Factor de contextualizacion',
-    'expedient': 'Estat expedient'
-=======
     'files'      : 'Expedient',
     'createDate' : 'Data creació',
     'owner'      : 'Professional',
@@ -42,7 +25,6 @@ export let TRANSLATION = {
     'birthday': 'Data naixement',
     'register': 'Alta',
     'unsubscribe': 'Baixa'
->>>>>>> features/DSDIBA-12_Pantallas_Listado_y_Detalle
   },
   'OBSTABLE': {
     'obs'      : 'Valoracions realitzades'
