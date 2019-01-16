@@ -4,7 +4,7 @@ stages:
 - build
 - build-docker
 - release
-#- deploy
+- deploy
 
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
@@ -90,32 +90,31 @@ release-image:
   - docker push $CONTAINER_RELEASE_IMAGE
 
 ## DEV
-#deploy:dev:
-#  stage: deploy
-#  image: kinogmt/centos-ssh
-#  environment:
-#    name: develop
-#    url: https://prod.example.com
-#  only:
-#  - develop
-#  variables:
-#    DOCKER_FILE: 'docker-compose-dev.yml'
-#    DEPLOYMENT_KEY: $DEPLOYMENT_DEV_KEY
-#    DEPLOYMENT_SERVER: $DEPLOYMENT_DEV_SERVER
-#    DEPLOYMENT_USER: $DEPLOYMENT_DEV_USER
-#    DEPLOYMENT_PATH: $DEPLOYMENT_DEV_PATH
-#  dependencies:
-#  before_script:
-#  - mkdir -p ~/.ssh
-#  - echo "$DEPLOYMENT_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-#  - chmod 600 ~/.ssh/id_rsa
-#  - eval "$(ssh-agent -s)"
-#  - ssh-add ~/.ssh/id_rsa
-#  - ssh-keyscan -H $DEPLOYMENT_SERVER >> ~/.ssh/known_hosts
-#  script:
-#  - scp -r ./${DOCKER_FILE} ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/
-#  - ssh ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} "cd ${DEPLOYMENT_PATH}; docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}; docker-compose -f ${DOCKER_FILE} stop; docker-compose -f ${DOCKER_FILE} rm app --force; docker-compose -f ${DOCKER_FILE} pull; docker-compose -f ${DOCKER_FILE} up -d"
-
+deploy:dev:
+  stage: deploy
+  image: kinogmt/centos-ssh
+  environment:
+    name: develop
+    url: http://dsdiba.demo.in2.es
+  only:
+  - develop
+  variables:
+    DOCKER_FILE: 'docker-compose-dev.yml'
+    DEPLOYMENT_KEY: $DEPLOYMENT_DEV_KEY
+    DEPLOYMENT_SERVER: $DEPLOYMENT_DEV_SERVER
+    DEPLOYMENT_USER: $DEPLOYMENT_DEV_USER
+    DEPLOYMENT_PATH: $DEPLOYMENT_DEV_PATH
+  dependencies:
+  before_script:
+  - mkdir -p ~/.ssh
+  - echo "$DEPLOYMENT_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - eval "$(ssh-agent -s)"
+  - ssh-add ~/.ssh/id_rsa
+  - ssh-keyscan -H $DEPLOYMENT_SERVER >> ~/.ssh/known_hosts
+  script:
+  - scp -r ./${DOCKER_FILE} ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/
+  - ssh ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} "cd ${DEPLOYMENT_PATH}; docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}; docker-compose -f ${DOCKER_FILE} stop; docker-compose -f ${DOCKER_FILE} rm app --force; docker-compose -f ${DOCKER_FILE} pull; docker-compose -f ${DOCKER_FILE} up -d"
 
 ## PROD
 #deploy:prod:
