@@ -3,11 +3,11 @@ export class TableTabsForm {
   persona: string[] = [];
   gravetat: string[] = [];
   frequencia: string[] = [];
-  entorn: string = '' ;
+  entorn: string = "Basic" ;
 }
 
 export class TabAutonomia {
-  tableTabsForms: TableTabsForm [] ;
+  tableTabsForms: TableTabsForm [];
 }
 
 export class RowsQuest {

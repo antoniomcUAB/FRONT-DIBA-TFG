@@ -10,7 +10,7 @@ import {TabsFormService} from '../../services/tabsForm.service';
 export class AmbitMaterialTabComponent {
   data: TabAutonomia = new TabAutonomia();
   contextData: ContextRows = new ContextRows();
-  @Input() entorns: Entorn;
+  @Input() entorns: Entorn = new Entorn();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
 
@@ -27,7 +27,6 @@ export class AmbitMaterialTabComponent {
 
     this._service.getFilesRelacional().subscribe((contx: ContextRows) => {
       this.contextData = contx;
-      console.log(this.contextData);
     });
   }
   public emitEnd() {

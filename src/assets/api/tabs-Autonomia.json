@@ -1,6 +1,7 @@
 {
   "tableTabsForms": [
     {
+      "entorn": "Basic",
       "ssb":"Manca d’autonomia personal a les  activitats bàsiques  (A.1)\n" ,
       "persona": [
         {
@@ -23,6 +24,7 @@
           "frequencia": "Continua"
         }]
     },{
+      "entorn": "Basic",
       "ssb":"Manca d’autonomia personal a les  activitats Instrumentals  (A.2)\n" ,
       "persona": [
         {
@@ -45,6 +47,7 @@
           "frequencia": "Continua"
         }]
     },{
+      "entorn": "Basic",
       "ssb":"Manca d’autonomia personal a les  activitats Relacionals  (A.3)\n" ,
       "persona": [
         {

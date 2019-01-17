@@ -17,7 +17,9 @@ export class AmbitAutonomiaTabComponent {
 
   constructor(private _service: TabsFormService) {
     this.reloadData();
+
   }
+
 
 
 

@@ -14,28 +14,31 @@ export class TabsComponent {
   public stay = false;
   public disapear = false;
   public index: string = '1';
+  public indexMaxActive: number = 1;
 
 
   public fnStay(stay: boolean){
       this.stay = stay;
       this.disapear = true;
       if (!stay) {
-        this.incIndex();
+        this.incIndex(1);
         this.disapear = false;
       }
 
   }
-  public goBackCheckForm() {
+  public goBackCheckForm(id: number) {
     this.stay = false;
-    this.incIndex();
+    this.incIndex(id);
     this.disapear = false;
+    if (this.indexMaxActive < MAX_N_TABS) {
+      this.indexMaxActive++;
+    }
   }
 
-  public incIndex() {
+  public incIndex(id: number) {
 
-    let num = parseInt (this.index) + 1;
-    if (num <= MAX_N_TABS) {
-      this.index = num.toString();
+    if (id <= MAX_N_TABS) {
+      this.index = (id + 1).toString();
     }
   }
   public decIndex() {
@@ -50,6 +53,10 @@ export class TabsComponent {
     this.stay = false;
     this.disapear = false;
 
+  }
+  public activeTab(indexTab: number) {
+
+    return !(indexTab <= this.indexMaxActive);
   }
 
 
