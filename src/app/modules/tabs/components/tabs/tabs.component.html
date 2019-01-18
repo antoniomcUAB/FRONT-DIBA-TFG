@@ -13,7 +13,7 @@
     <ng-template ngbTabTitle> <p> Autonomia</p> </ng-template>
 
     <ng-template ngbTabContent >
-      <app-check-form *ngIf="!disapear" (stay)="fnStay($event)" [comesFrom] = "'l\'ambit d\'autonomia'" [access]="false">
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event,1)" [comesFrom] = "'l\'ambit d\'autonomia'" [access]="false">
       </app-check-form>
 
       <app-ambit-autonomia-tab *ngIf="stay"  (endForm)="goBackCheckForm(1);" (before)= "beforeTab()">
@@ -25,10 +25,10 @@
     <ng-template ngbTabTitle > <p > Material e instrumental</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-check-form (entorns)="entorns = $event;"  *ngIf="!disapear" (stay)="fnStay($event)"  [comesFrom]="'l\'ambit material e instrumental'" [access]="true">
+      <app-check-form (entornsMaterial)="entornsMaterial = $event;"  *ngIf="!disapear" (stay)="fnStay($event,2)"  [comesFrom]="'l\'ambit material e instrumental'" [access]="true" [ambit]="material">
       </app-check-form>
 
-      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm(2)" (before)="beforeTab()" [entorns] ="entorns" >
+      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm(2)" (before)="beforeTab()" [groupMaterial] ="entornsMaterial" >
       </app-ambit-material-tab>
 
     </ng-template>
@@ -37,10 +37,10 @@
     <ng-template ngbTabTitle > <p > Relacional</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-check-form (entorns)="entorns = $event;" *ngIf="!disapear"  (stay)="fnStay($event)"  [comesFrom]="'l\'ambit relacional '" [access]="true" >
+      <app-check-form (entornsRelacional)="entornsRelacional = $event;" *ngIf="!disapear"  (stay)="fnStay($event,3)"  [comesFrom]="'l\'ambit relacional '" [access]="true" [ambit]="relacional" >
       </app-check-form>
 
-      <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm(3)" (before)="beforeTab()" [entorns] ="entorns">
+      <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm(3)" (before)="beforeTab()" [groupRelacional] ="entornsRelacional" >
       </app-ambit-relacional-tab>
     </ng-template>
   </ngb-tab>

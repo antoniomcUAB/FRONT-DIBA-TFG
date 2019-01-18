@@ -2,6 +2,7 @@
   "tableTabsForms": [
     {
       "entorn": "Basic",
+      "help": "Situació en què la\n        persona no pot desenvolupar les activitats bàsiques de la vida diaria\n         (alimentació, higiene, seguiment mèdic i farmacològic, mobilitat personal, descans, etc.), independentment\n         de la causa que la motiva: malaltia física o psíquica, trastorn mental,\n        deteriorament cognitiu, discapacitat física, psíquica,  intel·lectual o sensorial, etc.\"",
       "ssb":"Manca d’autonomia personal a les  activitats bàsiques  (A.1)\n" ,
       "persona": [
         {
@@ -25,6 +26,7 @@
         }]
     },{
       "entorn": "Basic",
+      "help": "Situació en què la persona no pot desenvolupar les activitats instrumentals de la vida diaria (utilització del transport públic, realització de tasques domèstiques, responsabilitat sobre la medicació, administració de diners, capacitat d’utilitzar el telèfon, entrar i sortir del domicili de forma autònoma, etc.), independentment de la causa que la motiva: malaltia física o psíquica, trastorn mental, deteriorament cognitiu, discapacitat física, psíquica,  intel·lectual o sensorial, etc.\n\n\n\n\n\n\n\n",
       "ssb":"Manca d’autonomia personal a les  activitats Instrumentals  (A.2)\n" ,
       "persona": [
         {
@@ -48,6 +50,7 @@
         }]
     },{
       "entorn": "Basic",
+      "help": "",
       "ssb":"Manca d’autonomia personal a les  activitats Relacionals  (A.3)\n" ,
       "persona": [
         {
@@ -71,6 +74,7 @@
         }]
     },{
       "entorn": "school",
+      "help":"Infant o adolescent que presenta dificultats en el seguiment educatiu que li correspon com procés evolutiu, com a conseqüència de dinàmiques familiars adverses (inclouen desvinculació del centre educatiu, manca de recolzament, etc.).\n\n\n",
       "ssb":"Dificultats d'aprenentatge escolar (ES.1)\n" ,
       "persona": [
         {
@@ -94,6 +98,7 @@
         }]
     },{
       "entorn": "school",
+      "help": "Infant o adolescent que no s'adapta al sistema educatiu en l'etapa obligatòria i que presenta conductes disruptives al centre, amb els adults i/o amb els seus iguals.\n\n\n",
       "ssb":"Manca de competències relacionals a l'escola (ES.2)\n" ,
       "persona": [
         {
@@ -117,6 +122,7 @@
         }]
     },{
       "entorn": "school",
+      "help":"Menor en edat d'escolarització obligatòria que no està matriculat en cap centre, o que ha abandonat els estudis abans de la seva finalització.\n\n\n",
       "ssb":"Escolaritat obligatòria inacabada (ES.3)",
       "persona": [
         {
@@ -486,6 +492,236 @@
     },{
       "entorn": "social",
       "ssb":"Activitats marginals (S.5)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "house",
+      "ssb":"Manca d'habitatge (H.1)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "house",
+      "ssb":"Habitatge deficient (H.2)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "house",
+      "ssb":"Habitatge insegur (H.3)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "house",
+      "ssb":"Habitatge massificat (H.4)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "house",
+      "ssb":"Risc de pèrdua o Manca serveis/subministraments (H.5)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "economic",
+      "ssb":"Sense ingressos (E.1)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "economic",
+      "ssb":"Ingressos insuficients (E.2)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "economic",
+      "ssb":"Administració deficient (E.3)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "work",
+      "ssb":"Manca de qualificació i/o d'orientació laboral (L.1)\n" ,
+      "persona": [
+        {
+          "persona": "Unitat Familiar"
+        },
+        {
+          "persona": "Persona de referencia"
+        }],
+      "gravetat": [{
+        "gravetat": "Baixa"
+      },{
+        "gravetat": "Moderada"
+      },{
+        "gravetat": "Alta"
+      }],
+      "frequencia": [
+        {
+          "frequencia": "Ocasional"
+        },{
+          "frequencia": "Continua"
+        }]
+    },{
+      "entorn": "work",
+      "ssb":"Manca de competències professionals transversals (L.2)\n" ,
       "persona": [
         {
           "persona": "Unitat Familiar"

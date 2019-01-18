@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Entorn, RowsQuest, TabAutonomia} from '../../resources/tab-class-form';
+import { EnvironmentMaterial, EnvironmentRelacional, RowsQuest, TabAutonomia} from '../../resources/tab-class-form';
 
 @Component({
   selector: 'app-form-tab',
@@ -9,7 +9,8 @@ import {Entorn, RowsQuest, TabAutonomia} from '../../resources/tab-class-form';
 export class FormTabComponent implements OnInit {
   rows: RowsQuest [] = [];
   @Input() data: TabAutonomia = new TabAutonomia();
-  @Input() filter: Entorn = new Entorn();
+  @Input () groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
+  @Input () groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   constructor() {
 

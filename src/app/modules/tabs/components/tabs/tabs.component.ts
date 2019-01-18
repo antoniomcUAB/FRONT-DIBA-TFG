@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Entorn} from '../../resources/tab-class-form';
+import { EnvironmentMaterial, EnvironmentRelacional} from '../../resources/tab-class-form';
 
 const MAX_N_TABS = 5;
 
@@ -9,20 +9,26 @@ const MAX_N_TABS = 5;
 })
 
 export class TabsComponent {
-  @Input() entorns: Entorn;
+  @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional();
+  @Input() entornsMaterial: EnvironmentMaterial = new  EnvironmentMaterial();
 
   public stay = false;
   public disapear = false;
   public index: string = '1';
   public indexMaxActive: number = 1;
+  public material: string = "material";
+  public relacional: string = "relacional";
 
 
-  public fnStay(stay: boolean){
+  public fnStay(stay: boolean, id: number ){
       this.stay = stay;
       this.disapear = true;
       if (!stay) {
-        this.incIndex(1);
+        this.incIndex(id);
         this.disapear = false;
+        if (id < 5) {
+          this.goBackCheckForm(id);
+        }
       }
 
   }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ContextRows, Entorn, TabAutonomia} from '../../resources/tab-class-form';
+import {ContextRows, EnvironmentRelacional, TabAutonomia} from '../../resources/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class AmbitRelacionalTabComponent {
   contextData: ContextRows = new ContextRows();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
-  @Input() entorns: Entorn = new Entorn();
+  @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
 
   constructor(private _service: TabsFormService) {
     this.reloadData();

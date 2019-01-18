@@ -4,6 +4,7 @@ export class TableTabsForm {
   gravetat: string[] = [];
   frequencia: string[] = [];
   entorn: string = "Basic" ;
+  help: string ;
 }
 
 export class TabAutonomia {
@@ -31,9 +32,16 @@ export class Context {
   persona: string[] = [];
   tipo: string[] = [];
 }
-export class Entorn {
+
+export class EnvironmentRelacional {
   school: boolean = false;
   social: boolean = false;
   family: boolean = false;
+}
+
+export class EnvironmentMaterial {
+  house: boolean = false;
+  economic: boolean = false;
+  work: boolean = false;
 }
 

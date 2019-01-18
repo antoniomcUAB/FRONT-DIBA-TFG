@@ -2,7 +2,7 @@
   <!-- titulo -->
 
   <div class="form-group col-12 bg-grey-500  ">
-    <label for="ssb" style="color: white;" >{{ "TABTITLE.titleAutonomia" | translate }}</label>
+    <label for="ssb" style="color: white;" >{{ "TABTITLE.titleAutonomia" | translate }} <i class="fa fa-question-circle" aria-hidden="true" ngbTooltip="Ayuda"></i> </label>
   </div>
   <div class="form-group col-12 text-right">
     <button type="button" class="float-right btn btn-outline-primary" (click)="emitBefore()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
@@ -14,15 +14,19 @@
   <div class="card-body ">
 
       <ng-container *ngFor="let item of data.tableTabsForms; let i = index;">
-      <ng-container *ngIf="(filter.social && item.entorn === 'social' )
-      || (filter.family && item.entorn === 'family')
-      || (filter.school && item.entorn === 'school')
-       || (item.entorn==='Basic' && !filter.school && !filter.family && !filter.social) ">
+      <ng-container *ngIf="(groupRelacional.social && item.entorn === 'social' )
+      || (groupRelacional.family && item.entorn === 'family')
+      || (groupRelacional.school && item.entorn === 'school')
+      ||(groupMaterial.house && item.entorn === 'house' )
+      || (groupMaterial.economic && item.entorn === 'economic')
+      || (groupMaterial.work && item.entorn === 'work')
+       || (item.entorn==='Basic' && !groupRelacional.school && !groupRelacional.family
+       && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house) ">
 
       <div class="form-group row bg-grey-300">
       <!-- Situacion social Basica -->
       <div class="form-group col-4">
-        <label for="ssb" >{{ "TABLE.basicSocialSituation" | translate }}</label>
+        <label for="ssb" >{{ "TABLE.basicSocialSituation" | translate }}<i class="fa fa-question-circle" aria-hidden="true" [ngbTooltip]="item.help"></i></label>
         <input  type="text" class="form-control " id="ssb-${{i}}" [value]= "item.ssb " disabled>
 
       </div>
@@ -73,7 +77,7 @@
         <div class="col-12">
           <label for="t1severity" >{{ "TABLE.severity" | translate }}</label>
           <select class="form-control" id="t1severity">
-            <option *ngFor="let option of item.gravetat "> {{option.gravetat}} </option>
+            <option *ngFor="let option of item.gravetat "> {{option.gravetat}}  </option>
           </select>
         </div>
       </div>
@@ -159,5 +163,6 @@
       </div>
       </ng-container>
       </ng-container>
+
     </div>
 

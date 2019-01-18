@@ -1,13 +1,15 @@
 <div class="card-body text-center align-items-center align-content-center">
 <div class="form-group row align-items-center text-center  ">
-  <!-- Situacion social Basica -->
+  <!-- Titulo-->
   <div  class="form-group row col-12">
     <div class="form-group col-12">
     <h3 *ngIf="!access">Hi ha alguna situacio que afecti a {{comesFrom}} ?</h3>
     <h3 *ngIf="access">Quins entorns has de treballar ?</h3>
     </div>
   </div>
+  <!--/ Titulo-->
 
+<!-- Basic -->
   <div *ngIf="!access" class="form-group row col-12">
   <div  class="form-group col-12">
     <label class="custom-control custom-radio">
@@ -24,15 +26,53 @@
       <span class="custom-control-label">No</span>
     </label>
   </div>
-  </div>
+  </div><!--/ Basic -->
+
+  <!--/ Ambit Material -->
+  <form *ngIf="access && ambit==='material' " class="form-group row col-12"  (ngSubmit)="groupMaterial;emitStayMaterial()" >
+    <div  class="form-group row col-12">
+      <div class="form-group col-12">
+        <label  class="custom-control custom-radio">
+          <input id="house" name="house" type="checkbox" class="custom-control-input" [(ngModel)]="groupMaterial.house">
+          <span class="custom-control-label">Entorn Habitatge</span>
+        </label>
+      </div>
+    </div>
+
+    <div  class="form-group row col-12 ">
+      <div class="form-group col-12">
+        <label  class="custom-control custom-radio">
+          <input id="economic" name="economic" type="checkbox" class="custom-control-input" [(ngModel)]="groupMaterial.economic" >
+          <span class="custom-control-label">Entorn Economic</span>
+        </label>
+      </div>
+    </div>
+
+    <div  class="form-group row col-12 ">
+      <div class="form-group col-12">
+        <label  class="custom-control custom-radio">
+          <input id="work" name="work" type="checkbox" class="custom-control-input" [(ngModel)]="groupMaterial.work">
+          <span class="custom-control-label">Entorn Laboral</span>
+        </label>
+      </div>
+    </div>
+
+    <div  class="form-group row col-12 ">
+      <div class="form-group col-12">
+        <button type="submit" class="btn btn-outline-dark"  >Guardar</button>
+      </div>
+    </div>
+
+  </form>
+  <!--/ Ambit Material -->
 
 
-
-<form *ngIf="access" class="form-group row col-12"  (ngSubmit)="group;emitStay(true)" >
+<!-- Ambit relacional -->
+<form *ngIf="access && ambit==='relacional'" class="form-group row col-12"  (ngSubmit)="groupRelacional;emitStayRelacional()" >
   <div  class="form-group row col-12">
     <div class="form-group col-12">
       <label  class="custom-control custom-radio">
-        <input id="school" name="school" type="checkbox" class="custom-control-input" [(ngModel)]="group.school">
+        <input id="school" name="school" type="checkbox" class="custom-control-input" [(ngModel)]="groupRelacional.school">
         <span class="custom-control-label">Entorn escolar</span>
       </label>
     </div>
@@ -41,7 +81,7 @@
   <div  class="form-group row col-12 ">
     <div class="form-group col-12">
       <label  class="custom-control custom-radio">
-        <input id="familiar" name="familiar" type="checkbox" class="custom-control-input" [(ngModel)]="group.family" >
+        <input id="familiar" name="familiar" type="checkbox" class="custom-control-input" [(ngModel)]="groupRelacional.family" >
         <span class="custom-control-label">Entorn familiar</span>
       </label>
     </div>
@@ -50,7 +90,7 @@
   <div  class="form-group row col-12 ">
     <div class="form-group col-12">
       <label  class="custom-control custom-radio">
-        <input id="social" name="social" type="checkbox" class="custom-control-input" [(ngModel)]="group.social">
+        <input id="social" name="social" type="checkbox" class="custom-control-input" [(ngModel)]="groupRelacional.social">
         <span class="custom-control-label">Entorn Social</span>
       </label>
     </div>
@@ -61,10 +101,9 @@
  <button type="submit" class="btn btn-outline-dark"  >Guardar</button>
     </div>
   </div>
-
 </form>
 
-
+  <!--/ Ambit relacional -->
   </div>
 
   </div>

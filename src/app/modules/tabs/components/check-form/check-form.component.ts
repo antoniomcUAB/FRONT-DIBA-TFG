@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Entorn} from '../../resources/tab-class-form';
+import {EnvironmentMaterial, EnvironmentRelacional} from '../../resources/tab-class-form';
 
 @Component({
   selector: 'app-check-form',
@@ -9,18 +9,33 @@ import {Entorn} from '../../resources/tab-class-form';
 export class CheckFormComponent {
   @Input () comesFrom: string;
   @Input () access: boolean;
+  @Input () ambit: string;
   @Input () viewButton: boolean;
   @Output () stay: EventEmitter<boolean> = new EventEmitter();
   @Output () childEmitter: EventEmitter<boolean> = new EventEmitter();
-  @Input () group: Entorn = new Entorn();
-  @Output() entorns: EventEmitter <Entorn> = new EventEmitter();
+  @Input () groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
+  @Output() entornsRelacional: EventEmitter <EnvironmentRelacional> = new EventEmitter();
+  @Input () groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
+  @Output() entornsMaterial: EventEmitter <EnvironmentMaterial> = new EventEmitter();
 
   public emitStay(stay: boolean) {
       this.stay.emit(stay);
-      this.entorns.emit(this.group);
   }
-  public print() {
-    console.log(this.group);
+  public emitStayRelacional() {
+    let clicked = false;
+    if (this.groupRelacional.family || this.groupRelacional.school || this.groupRelacional.social ) {
+      clicked = true;
+    }
+    this.entornsRelacional.emit(this.groupRelacional);
+    this.stay.emit(clicked);
+  }
+  public emitStayMaterial() {
+    let clicked = false;
+    if (this.groupMaterial.house || this.groupMaterial.work || this.groupMaterial.economic ) {
+      clicked = true;
+    }
+    this.entornsMaterial.emit(this.groupMaterial);
+    this.stay.emit(clicked);
   }
 
 }
