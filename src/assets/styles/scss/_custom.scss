@@ -1,3 +1,7 @@
+.app > .mat-drawer-content .main-content {
+  overflow-y: auto;
+}
+
 .table {
   .table-header th {
     padding: 0.75rem;
