@@ -30,14 +30,14 @@
         "birthday": "02/09/1980",
         "register": "01/01/2019",
         "unsubscribe": "",
-        "personRef": false
+        "personRef": true
       },{
         "relation": "Mare",
         "sex": "Dona",
         "birthday": "02/09/1980",
         "register": "01/01/2019",
         "unsubscribe": "",
-        "personRef": true
+        "personRef": false
       },{
         "relation": "Fill",
         "sex": "Home",

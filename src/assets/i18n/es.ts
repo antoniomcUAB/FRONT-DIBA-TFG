@@ -58,5 +58,11 @@ export let TRANSLATION = {
     'model'  : 'Consultar Módel',
     },
   'ORDER_BY': 'Ordenar per',
-  'TAGS': 'Etiquetes'
+  'TAGS': 'Etiquetes',
+
+  /* Resumen */
+  'RESUMEN' : {
+    'pdf': 'Generar PDF',
+    '': ''
+  }
 };
