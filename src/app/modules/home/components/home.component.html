@@ -1,6 +1,6 @@
-<!-- Search component -->
+<!-- Search Component -->
 <app-search></app-search>
-<!--/ Search component -->
+<!--/ Search Component -->
 
 <!-- Home Component -->
   <section id="home">
@@ -33,6 +33,51 @@
         </ng-template>
       </app-table-list>
       <!--/ Table -->
+
+      <!-- Add New File -->
+      <div class="form-group row">
+        <div class="col-12 text-center pt-4 pb-3">
+          <button type="button" class="btn btn-primary btn-large" (click)="open(content)"> {{ "FORM.newFile" | translate }} </button>
+        </div>
+      </div>
+      <!--/ Add New File -->
+
+      <!-- Modal -->
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-register"><span class="text-primary">{{ "FORM.newFile" | translate }}</span></h4>
+          <button type="button" class="close bg-primary text-white" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="type-code">{{ "FORM.typeCode" | translate }}<span class="text-primary">*</span></label>
+              <div class="input-group">
+                <select id="type-code" class="form-control">
+                  <option></option>
+                  <option value="0">{{ "FORM.hestia" | translate }}</option>
+                  <option value="1">{{ "FORM.otherType" | translate }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>{{ "FORM.codeFile" | translate }} <span class="text-primary">*</span></label>
+              <div class="input-group">
+                <input *ngIf="true" class="form-control" placeholder="{{maskPlaceholder}}" type="text" [textMask]="{mask: mask}" />
+                <input *ngIf="false" class="form-control" placeholder="Sence format" type="text" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">{{ "FORM.create" | translate }}</button>
+            <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">{{ "FORM.cancel" | translate }}</button>
+          </div>
+        </form>
+      </ng-template>
+      <!--/ Modal -->
+
     </div>
   </section>
 <!--/ Home Component -->

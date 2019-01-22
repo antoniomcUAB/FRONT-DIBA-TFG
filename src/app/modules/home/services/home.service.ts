@@ -7,13 +7,18 @@ import {TableListOptions, TableListResponse} from "../../../shared/modules/table
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class HomeService {
+export class HomeService extends GlobalService {
 
-  constructor(public _http: HttpClient) {}
+  constructor(public _http: HttpClient) {
+    super();
+  }
 
+  /** GET LIST OF FILES **/
   getFiles(options: TableListOptions): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
-    return this._http.get("../../../../assets/api/files.json",
+
+    return this._http.get("../../../../assets/api/files.json",  // Local API
+    // return this._http.get(`${this.apiURL}/files`,                // DES API
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body['files'];

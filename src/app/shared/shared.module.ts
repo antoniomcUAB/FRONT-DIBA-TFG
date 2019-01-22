@@ -16,6 +16,7 @@ import {
 } from '@angular/material';
 import {TableListModule} from "./modules/table-list";
 import {SearchModule} from './components/search.module';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import {SearchModule} from './components/search.module';
     LoadingBarRouterModule,
     NgbModule.forRoot(),
     MatSidenavModule,
-    SearchModule
+    SearchModule,
+    TextMaskModule
   ],
   providers: [
     GlobalService
@@ -50,7 +52,8 @@ import {SearchModule} from './components/search.module';
     ReactiveFormsModule,
     TranslateModule,
     TableListModule,
-    SearchModule
+    SearchModule,
+    TextMaskModule
   ]
 })
 export class SharedModule { }
