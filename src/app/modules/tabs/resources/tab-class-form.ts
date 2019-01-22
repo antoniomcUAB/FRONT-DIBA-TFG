@@ -45,3 +45,13 @@ export class EnvironmentMaterial {
   work: boolean = false;
 }
 
+export class TabsDisabled{
+  tabAmbitAutonomiaActivate: boolean = true;
+  tabAmbitMaterialActivate: boolean = true;
+  tabAmbitRelacionalActivate: boolean = true;
+  tabGlobalitatCasActivate: boolean = true;
+  tabValoracioDiagnosticActivate: boolean = true;
+
+
+}
+

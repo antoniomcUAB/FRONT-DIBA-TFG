@@ -26,6 +26,84 @@
     </form>
   </ng-template>
 
+  <ng-template #valoration let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id=""><span class="text-primary">La família/unitat conviència té dificultats per:</span></h4>
+    </div>
+
+    <form>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>1.</b> Pagar les factures d'habitatge o serveis públics</span>
+          </label>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>2</b>. Mantenir la llar adequadament calenta.</span>
+          </label>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>3</b>. Assumir despeses inesperades.</span>
+          </label>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>4</b>. Menjar carn o les proteïnes de forma regular.</span>
+          </label>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>5</b>. Anar de vacances.</span>
+          </label>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>6</b>. Disposar de cotxe.</span>
+          </label>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>7</b>. Disposar de rentadora.</span>
+          </label>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>8</b>. Disposar de connexió a internet.</span>
+          </label>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>9</b>. Disposar de telèfon mòbil</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description">  Existeix una xarxa familiar/relacional disposada a oferir suport econòmic?</span>
+          </label>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description">  Les dificultats en l'àmbit econòmic són contïnuades i sense possiblitat de canvi o millora en el curt termini?</span>
+          </label>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Guardar</button>
+          <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
+        </div>
+    </form>
+  </ng-template>
+
   <!--/ titulo -->
 
   <div class="card-body ">
@@ -43,8 +121,15 @@
       <div class="form-group row bg-grey-300">
       <!-- Situacion social Basica -->
       <div class="form-group col-4">
-        <label for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]="item.help" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="item.ssb"></i></label>
-        <input  type="text" class="form-control " id="ssb-${{i}}" [value]= "item.ssb " disabled>
+        <label class="col-12" for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class= "fa fa-question-circle" aria-hidden="true" [ngbPopover]="item.help" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="item.ssb"></i></label>
+        <input  *ngIf="!item.ssb.includes('Ingressos insuficients (E.2)')" type="text" class="form-control " id="" [value]= "item.ssb " disabled >
+        <!-- situacio social De Ingressos insuficients-->
+        <div *ngIf="item.ssb.includes('Ingressos insuficients (E.2)')" class="form-group row col-12">
+        <input  type="text" class="form-control col-9 " id="" [value]= "item.ssb " disabled >
+        <button class=" col-3 btn btn-outline-primary" (click)="open(valoration)" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
+        </div>
+        <!--/ situacio social De Ingressos insuficients-->
+
 
       </div>
       <!--/ Situacion social Basica -->
@@ -78,6 +163,7 @@
             </div>
 
             <select  class="form-control" id="t1person">
+              <option disabled selected value></option>
               <option *ngFor="let option of item.persona "> {{option.persona}} </option>
             </select>
           </div>
@@ -94,6 +180,7 @@
         <div class="col-12">
           <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentSeverity placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
           <select class="form-control" id="t1severity">
+            <option disabled selected value></option>
             <option *ngFor="let option of item.gravetat "> {{option.gravetat}}  </option>
           </select>
         </div>
@@ -105,6 +192,7 @@
         <div class="col-12">
           <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentFrequency placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
           <select class="form-control" id="t1frequency">
+            <option disabled selected value></option>
             <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
           </select>
         </div>
@@ -141,6 +229,7 @@
           <div class="col-12">
             <div class="input-group mb-2 mr-sm-2">
               <select class="form-control" id="t2person-${{x}}">
+                <option disabled selected value></option>
                 <option *ngFor="let option of item.persona "> {{option.persona}} </option>
               </select>
             </div>
@@ -157,6 +246,7 @@
           <div class="col-12">
 
             <select class="form-control" id="t1severity">
+              <option disabled selected value></option>
               <option *ngFor="let option of item.gravetat "> {{option.gravetat}} </option>
             </select>
           </div>
@@ -167,6 +257,7 @@
           <div class="col-12">
 
             <select class="form-control" id="t1frequency">
+              <option disabled selected value></option>
               <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
             </select>
           </div>

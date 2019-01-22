@@ -14,15 +14,19 @@ export class AmbitAutonomiaTabComponent {
   contextData: ContextRows = new ContextRows();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
+  @Output () active: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private _service: TabsFormService) {
     this.reloadData();
+    this.activate();
 
   }
 
 
 
-
+  public activate() {
+    this.active.emit(true);
+  }
   reloadData() {
     this._service.getFilesForm().subscribe((tab: TabAutonomia ) => {
       this.data = tab;

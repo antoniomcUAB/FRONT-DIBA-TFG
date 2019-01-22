@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ContextRows, TabAutonomia} from '../../resources/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
 
@@ -7,13 +7,19 @@ import {TabsFormService} from '../../services/tabsForm.service';
   templateUrl: './globalitat-tab.component.html',
   styleUrls: ['./globalitat-tab.component.scss']
 })
-export class GlobalitatTabComponent{
+export class GlobalitatTabComponent implements OnInit{
   contextData: ContextRows = new ContextRows();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
+  @Output() tabActivated: EventEmitter <void> = new EventEmitter();
 
   constructor(private _service: TabsFormService) {
     this.reloadData();
+  }
+
+  ngOnInit(): void {
+    this.reloadData();
+    this.tabActivated.emit();
   }
 
 

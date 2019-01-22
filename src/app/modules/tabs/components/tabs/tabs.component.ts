@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import { EnvironmentMaterial, EnvironmentRelacional} from '../../resources/tab-class-form';
+import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../resources/tab-class-form';
 
 const MAX_N_TABS = 5;
 
@@ -11,7 +11,7 @@ const MAX_N_TABS = 5;
 export class TabsComponent {
   @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional();
   @Input() entornsMaterial: EnvironmentMaterial = new  EnvironmentMaterial();
-
+  public tabsActivate: TabsDisabled = new TabsDisabled();
   public stay = false;
   public disapear = false;
   public index: string = '1';
@@ -47,26 +47,12 @@ export class TabsComponent {
       this.index = (id + 1).toString();
     }
   }
-  public decIndex() {
-
-    let num = parseInt (this.index) - 1;
-    if (num > 0 ) {
-      this.index = num.toString();
-    }
-  }
 
   public beforeTab() {
     this.stay = false;
     this.disapear = false;
 
   }
-  public activeTab(indexTab: number) {
-
-    return !(indexTab <= this.indexMaxActive);
-  }
-
-
-
 
 }
 

@@ -29,6 +29,7 @@
     <div class="col-12">
       <label for="t1person">{{ "TABLE.person" | translate }} </label>
       <select class="form-control" id="t1person">
+        <option disabled selected value></option>
         <option *ngFor="let option of item.persona "> {{option.persona}} </option>
       </select>
     </div>
@@ -43,6 +44,7 @@
     <div class="col-12">
       <label for="t1severity">{{ "TABLE.types" | translate }}</label>
       <select class="form-control" id="t1severity">
+        <option disabled selected value></option>
         <option *ngFor="let option of item.tipo "> {{option.tipo}} </option>
       </select>
     </div>
