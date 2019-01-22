@@ -2,12 +2,29 @@
   <!-- titulo -->
 
   <div class="form-group col-12 bg-grey-500  ">
-    <label for="ssb" style="color: white;" >{{ "TABTITLE.titleAutonomia" | translate }} <i class="fa fa-question-circle" aria-hidden="true" ngbTooltip="Ayuda"></i> </label>
+    <label for="ssb" style="color: white;" >{{ "TABTITLE.titleAutonomia" | translate }} </label>
   </div>
   <div class="form-group col-12 text-right">
-    <button type="button" class="float-right btn btn-outline-primary" (click)="emitBefore()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
+    <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
     <br>
   </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-unsubscribe"><span class="text-primary">ALERTA</span></h4>
+    </div>
+    <form>
+      <div class="modal-body">
+        <div class="form-group">
+          <label >Es perdran els canvis no guardats <span class="text-primary"></span></label>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark" (click)="emitBefore();modal.dismiss('Cross click')">Tornar pagina anterior</button>
+        <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
+      </div>
+      </div>
+    </form>
+  </ng-template>
 
   <!--/ titulo -->
 
@@ -26,7 +43,7 @@
       <div class="form-group row bg-grey-300">
       <!-- Situacion social Basica -->
       <div class="form-group col-4">
-        <label for="ssb" >{{ "TABLE.basicSocialSituation" | translate }}<i class="fa fa-question-circle" aria-hidden="true" [ngbTooltip]="item.help"></i></label>
+        <label for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]="item.help" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="item.ssb"></i></label>
         <input  type="text" class="form-control " id="ssb-${{i}}" [value]= "item.ssb " disabled>
 
       </div>
@@ -71,11 +88,11 @@
       <!--/ Persones -->
 
       <!-- Severity -->
-
+        <ng-template #popContentSeverity><b>Baixa:</b> Necessita suport/atenció/supervisió en algun moment puntual de la setmana/dia. <br> <b>Moderada:</b> Necessita suport/atenció/supervisió per les activitats de la vida diària. <br><b>Alta:</b> Necessita atenció/supervisió continua les 24h!</ng-template>
 
       <div class="col-xs-2">
         <div class="col-12">
-          <label for="t1severity" >{{ "TABLE.severity" | translate }}</label>
+          <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentSeverity placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
           <select class="form-control" id="t1severity">
             <option *ngFor="let option of item.gravetat "> {{option.gravetat}}  </option>
           </select>
@@ -83,9 +100,10 @@
       </div>
       <!--/ Severity -->
       <!-- Frequencia -->
+        <ng-template #popContentFrequency><b>Ocasional:</b> Pèrdua sobtada per causes sobrevingudes i possiblitats de millora.<br> <b>Continua:</b> Crònica, sense possiblitats de millora.</ng-template>
       <div class="col-2">
         <div class="col-12">
-          <label for="t1frequency" >{{ "TABLE.frequency" | translate }}</label>
+          <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentFrequency placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
           <select class="form-control" id="t1frequency">
             <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
           </select>
