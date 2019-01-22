@@ -7,32 +7,32 @@ export let TRANSLATION = {
 
   /*  Table */
   'TABLE': {
-    'files'      : 'Expedient',
-    'createDate' : 'Data creació',
-    'owner'      : 'Professional',
-    'updateDate' : 'Data ultima valoració',
-    'actions'    : 'Accions',
-    'apl' : 'Aplica',
-    'person' : 'Persona',
-    'severity' : 'Gravetat',
-    'frequency' : 'Freqüència',
-    'riskFactors' : 'Factors de risc',
-    'types': 'Tipus',
+    'files'                : 'Expedient',
+    'createDate'           : 'Data creació',
+    'owner'                : 'Professional',
+    'updateDate'           : 'Data ultima valoració',
+    'actions'              : 'Accions',
+    'apl'                  : 'Aplica',
+    'person'               : 'Persona',
+    'severity'             : 'Gravetat',
+    'frequency'            : 'Freqüència',
+    'riskFactors'          : 'Factors de risc',
+    'types'                : 'Tipus',
     'basicSocialSituation' : 'Situació social bàsica',
-    'contextFactor': 'Factor de contextualizacion',
-    'expedient': 'Estat expedient',
-    'relation': 'Relació',
-    'sex': 'Sexe',
-    'birthday': 'Data naixement',
-    'register': 'Alta',
-    'unsubscribe': 'Baixa'
+    'contextFactor'        : 'Factor de contextualizacion',
+    'expedient'            : 'Estat expedient',
+    'relation'             : 'Relació',
+    'sex'                  : 'Sexe',
+    'birthday'             : 'Data naixement',
+    'register'             : 'Alta',
+    'unsubscribe'          : 'Baixa'
   },
   'OBSTABLE': {
-    'obs'      : 'Valoracions realitzades'
+    'obs'           : 'Valoracions realitzades'
   },
   /*Tabs*/
   'TAB': {
-    'tabAutonomia': 'Àmbit d\'autonomia'
+    'tabAutonomia'  : 'Àmbit d\'autonomia'
   },
   'TABTITLE': {
     'titleAutonomia': 'Evidencies i necessitats en l\'ambit relacional'
@@ -53,20 +53,26 @@ export let TRANSLATION = {
     'mother'        : 'Mare',
     'other'         : 'Otros',
     'save'          : 'Guardar',
-    'newDiagnosis'  : 'Crear nou diagnòstic'
+    'newDiagnosis'  : 'Crear nou diagnòstic',
+    'newFile'       : 'Crear nou expedient',
+    'create'        : 'Crear',
+    'cancel'        : 'Cancelar',
+    'typeCode'      : 'Tipus de codificació ',
+    'hestia'        : 'HESTIA',
+    'otherType'     : 'Un altre tipus',
+    'codeFile'      : 'Codi d\'expedient'
   },
 
   /* Search */
   'SEARCH': {
-    'search' : 'Cercar',
-    'model'  : 'Consultar Módel',
+    'search'        : 'Cercar',
+    'model'         : 'Consultar Módel',
     },
-  'ORDER_BY': 'Ordenar per',
-  'TAGS': 'Etiquetes',
+  'ORDER_BY'        : 'Ordenar per',
+  'TAGS'            : 'Etiquetes',
 
   /* Resumen */
   'RESUMEN' : {
-    'pdf': 'Generar PDF',
-    '': ''
+    'pdf'           : 'Generar PDF'
   }
 };

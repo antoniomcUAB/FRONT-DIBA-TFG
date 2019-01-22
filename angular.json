@@ -31,7 +31,9 @@
               "node_modules/angular-calendar/scss/angular-calendar.scss",
               "node_modules/font-awesome/css/font-awesome.css",
               "src/assets/fonts/ionicons/ionicons.css",
-              "src/assets/styles/app.scss"
+              "src/assets/styles/app.scss",
+              "src/assets/styles/scss/ds-diba/diba-template.css",
+              "src/assets/styles/scss/ds-diba/diba-fam.css"
             ],
             "scripts": []
           },

@@ -67,3 +67,34 @@ a.navbar-brand.mr-auto {
 .modal-header .close {
   padding: 1.3rem;
 }
+
+
+/* Styles DIBA */
+.navbar-default {
+  border-top: solid 1px;
+  padding: 0;
+}
+
+.collapse:not(.show) {
+  display: inline-block;
+}
+
+.navbar-left {
+  float: left;
+}
+.navbar-right {
+  float: right;
+}
+
+.navbar-nav {display: block !important;}
+
+.navbar-default .nav>li {
+  float: left;
+}
+
+#regio-cap .navbar-default .nav>li a {
+  padding: 7px 20px;
+  line-height: 16px;
+  float: left;
+  display: block;
+}
