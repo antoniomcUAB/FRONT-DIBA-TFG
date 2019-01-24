@@ -11,7 +11,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './file-detail.component.html',
   styleUrls: ['./file-detail.component.css']
 })
-export class FileDetailComponent implements OnInit {
+export class FileDetailComponent {
 
   public data: Expedient;
   public id: string;
@@ -41,23 +41,23 @@ export class FileDetailComponent implements OnInit {
     /* Tabla Unidad Familiar */
     this.optionsUF.setColumns([
       {
-        name: 'id',
+        name: 'relation',
         title: this._translateService.instant('TABLE.relation'),
         sortable: true
       }, {
-        name: 'createdate',
+        name: 'sex',
         title: this._translateService.instant('TABLE.sex'),
         sortable: true
       }, {
-        name: 'owner',
+        name: 'birthday',
         title: this._translateService.instant('TABLE.birthday'),
         sortable: true
       }, {
-        name: 'updatedate',
+        name: 'register',
         title: this._translateService.instant('TABLE.register'),
         sortable: true
       }, {
-        name: 'expedient',
+        name: 'unsubscribe',
         title: this._translateService.instant('TABLE.unsubscribe'),
         sortable: true
       }
