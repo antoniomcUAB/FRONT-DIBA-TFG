@@ -5,6 +5,7 @@ export class TableTabsForm {
   frequencia: string[] = [];
   entorn: string = "Basic" ;
   help: string ;
+  apl: boolean = false ;
 }
 
 export class TabAutonomia {
@@ -31,6 +32,7 @@ export class Context {
   fdc: string;
   persona: string[] = [];
   tipo: string[] = [];
+  apl: boolean = false;
 }
 
 export class EnvironmentRelacional {
@@ -46,7 +48,6 @@ export class EnvironmentMaterial {
 }
 
 export class TabsDisabled{
-  tabAmbitAutonomiaActivate: boolean = true;
   tabAmbitMaterialActivate: boolean = true;
   tabAmbitRelacionalActivate: boolean = true;
   tabGlobalitatCasActivate: boolean = true;

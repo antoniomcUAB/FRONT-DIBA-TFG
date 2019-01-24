@@ -72,7 +72,6 @@ export class FileDetailComponent {
   getFile() {
     this._service.getFileById(this.id).subscribe( (data: Expedient) => {
       this.data = data;
-      console.log(this.data);
     }, error => {
       console.log("ERROR al recuperar el dato");
     });

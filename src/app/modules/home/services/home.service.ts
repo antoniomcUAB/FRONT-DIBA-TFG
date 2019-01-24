@@ -26,7 +26,6 @@ export class HomeService extends GlobalService {
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body;
-        console.log(data);
         // options.getPagesInfo(response.body); TODO - Añadir para función de paginación
         return {
           data: data,

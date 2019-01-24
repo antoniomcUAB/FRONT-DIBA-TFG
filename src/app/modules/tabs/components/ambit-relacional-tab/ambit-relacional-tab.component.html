@@ -1,8 +1,4 @@
-<app-form-tab (before)="emitBefore()" [data]="data" [groupRelacional]="groupRelacional">
+<app-form-tab (before)="emitBefore()" (endForm)="emitEnd()" [context]="contextData" [data]="data" [groupRelacional]="groupRelacional" >
 
 
 </app-form-tab>
-<app-form-tab-context (endForm)="emitEnd()" [context]="contextData">
-
-</app-form-tab-context>
-

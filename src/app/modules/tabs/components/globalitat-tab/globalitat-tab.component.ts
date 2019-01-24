@@ -27,7 +27,6 @@ export class GlobalitatTabComponent implements OnInit{
   reloadData() {
     this._service.getFilesRelacional().subscribe((contx: ContextRows) => {
       this.contextData = contx;
-      console.log(this.contextData);
     });
   }
   public emitEnd() {

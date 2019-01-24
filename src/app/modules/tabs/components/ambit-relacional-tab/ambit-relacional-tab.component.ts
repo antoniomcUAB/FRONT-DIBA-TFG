@@ -28,7 +28,6 @@ export class AmbitRelacionalTabComponent {
 
     this._service.getFilesRelacional().subscribe((contx: ContextRows) => {
       this.contextData = contx;
-      console.log(this.contextData);
     });
   }
   public emitEnd() {
