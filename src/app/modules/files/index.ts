@@ -6,5 +6,6 @@ export * from './components/file-detail/file-detail.component';
 
 // Interfaces
 export * from './models/file-detail';
+export * from './models/expedient';
 
 

@@ -114,4 +114,9 @@ export class HomeComponent {
   onChangeHestia(event) {
     this.codeHestia = event;
   }
+
+  /* Create File (Expedient )*/
+  createExpedient() {
+    console.log('');
+  }
 }

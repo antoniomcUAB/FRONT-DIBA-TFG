@@ -34,4 +34,9 @@ export class HomeService extends GlobalService {
         };
       }), );
   }
+
+  /** CREATE FILE **/
+  createFile(expedient: Expedient): Observable<Expedient> {
+      return this._http.post<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
+  }
 }
