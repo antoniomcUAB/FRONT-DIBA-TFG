@@ -1,8 +1,7 @@
-import { Diagnostic } from "../../diagnosis/models/diagnosis";
 import { Professional } from "../../home/models/professional";
 
 /* Expedient */
-export interface Expedient {
+export class Expedient {
   id: string;                             // ID Expediente
   expedient: string;                      // Codigo Expediente
   nom: string;                            // Nombre del Expediente
@@ -19,7 +18,7 @@ export interface Expedient {
 }
 
 /* Person */
-export interface Persona {
+export class Persona {
   id: string;                 // ID Persona
   sexe: string;               // Sexo/Género
   dataNaixement: string;      // Fecha de nacimiento
@@ -27,19 +26,24 @@ export interface Persona {
 }
 
 /* Person Type */
-export interface TipusPersona {
-  id: number;           // ID TipusPersona
-  descripcio: string;   // Descripción
+export class TipusPersona {
+  id: number;                 // ID TipusPersona
+  descripcio: string;         // Descripción
 }
 
 /* Model */
-export interface Model {
-  id: number;       // ID Model
-  versio: string;   // Versión
-  data: number;     // Fecha
+export class Model {
+  id: number;                 // ID Model
+  versio: string;             // Versión
+  data: number;               // Fecha
 }
 
 /* Contextualizacion */
-export interface Contextualitzacio {
-  id: number;       // ID Contextualización
+export class Diagnostic {
+  id: number;                 // ID Diagnostic
+}
+
+/* Contextualizacion */
+export class Contextualitzacio {
+  id: number;                 // ID Contextualización
 }

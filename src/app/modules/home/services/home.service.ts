@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {TableListOptions, TableListResponse} from "../../../shared/modules/table-list";
 import {Injectable} from "@angular/core";
 import {Professional} from "../models/professional";
+import {Expedient} from "../../files";
 
 @Injectable()
 export class HomeService extends GlobalService {
