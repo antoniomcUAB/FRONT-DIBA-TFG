@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FilesDetailService} from '../../services/file-detail.service';
-import {DatosPersonales} from '../../resources/datos-personales';
+import {Expedient} from '../../models/expedient';
 import {FilterType, TableListOptions, TableListResponse} from '../../../../shared/modules/table-list';
 import {TranslateService} from '@ngx-translate/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -13,7 +13,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class FileDetailComponent implements OnInit {
 
-  public data: DatosPersonales;
+  public data: Expedient;
   public id: string;
   public options = new TableListOptions();
   public optionsUF = new TableListOptions();
@@ -28,6 +28,9 @@ export class FileDetailComponent implements OnInit {
               private modalService: NgbModal) {
 
     this.id = this._route.snapshot.params['id'];
+
+    this.getFile();
+
     /* Tabla Valoraciones realizadas */
     this.options.filterable = false;
     this.options.actions = false;
@@ -66,13 +69,10 @@ export class FileDetailComponent implements OnInit {
     this.reloadDataTable();
   }
 
-  ngOnInit(): void {
-    this.getFile();
-  }
-
   getFile() {
-    this._service.getFileById(this.id).subscribe( (data: DatosPersonales) => {
+    this._service.getFileById(this.id).subscribe( (data: Expedient) => {
       this.data = data;
+      console.log(this.data);
     }, error => {
       console.log("ERROR al recuperar el dato");
     });

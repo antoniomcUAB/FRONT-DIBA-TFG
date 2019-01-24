@@ -12,7 +12,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="fileId" class="col-form-label">{{ "FORM.fileId" | translate }}</label>
-            <input class="form-control" type="text" value="{{id}}" id="fileId" disabled="disabled">
+            <input class="form-control" type="text" value="{{data.expedient}}" id="fileId" disabled="disabled">
           </div>
         </div>
         <!--/ File ID -->
@@ -20,7 +20,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="owner" class="col-form-label">{{ "FORM.fileOwner" | translate }}</label>
-            <input class="form-control" type="text" value="{{data.owner}}" id="owner" disabled="disabled">
+            <input class="form-control" type="text" value="{{data?.professional?.nom}} {{data?.professional?.cognom1}} {{data?.professional?.cognom2}}" id="owner" disabled="disabled">
           </div>
         </div>
         <!-- File Owner -->
@@ -30,7 +30,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="fileName" class="col-form-label">{{ "FORM.fileName" | translate }}</label>
-            <input class="form-control" type="text" value="{{data.expName}}" id="fileName" disabled="disabled">
+            <input class="form-control" type="text" value="{{data.nom}}" id="fileName" disabled="disabled">
           </div>
         </div>
         <!-- File Name -->
@@ -38,7 +38,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="fileDate" class="col-form-label">{{ "FORM.fileDate" | translate }}</label>
-            <input class="form-control" type="text" value="{{data.createdate}}" id="fileDate" disabled="disabled">
+            <input class="form-control" type="text" value="{{data.data}}" id="fileDate" disabled="disabled">
           </div>
         </div>
         <!--/ File Date -->
@@ -210,7 +210,7 @@
       <!--/ Table Files Valoraciones -->
       <div class="form-group row">
         <div class="col-12 text-center pt-4 pb-3">
-          <button type="button" class="btn btn-primary btn-large" [routerLink]="['/tabs']"> Crear nou diagnostic</button>
+          <button type="button" class="btn btn-primary btn-large" [routerLink]="['/tabs']"> Crear nou diagnostic </button>
         </div>
       </div>
     </div>

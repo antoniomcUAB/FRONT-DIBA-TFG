@@ -5,16 +5,19 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {TableListOptions, TableListResponse} from "../../../shared/modules/table-list";
 import {Injectable} from "@angular/core";
-import {DatosPersonales} from '../resources/datos-personales';
+import {Expedient} from "..";
 
 @Injectable()
-export class FilesDetailService {
+export class FilesDetailService extends GlobalService {
 
-  constructor(public _http: HttpClient) {}
-
-  getFileById(id: String): Observable<DatosPersonales> {
-    return this._http.get<DatosPersonales>("../../../../assets/api/idFiles.json");
+  constructor(public _http: HttpClient) {
+    super();
   }
+  /** GET FILES BY ID **/
+  getFileById(id: String): Observable<Expedient> {
+    return this._http.get<Expedient>(`${this.apiURL}/dsdiba/expedient/${id}`);
+  }
+  /**/
   getObservaciones(options: TableListOptions): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
     return this._http.get("../../../../assets/api/idFiles.json",
@@ -28,6 +31,7 @@ export class FilesDetailService {
         };
       }), );
   }
+  /**/
   getUnityFamily(options: TableListOptions): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
     return this._http.get("../../../../assets/api/idFiles.json",
