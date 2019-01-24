@@ -1,20 +1,15 @@
+/* Core */
 import { Component } from '@angular/core';
 import { FilterType, TableListOptions, TableListResponse } from '../../../shared/modules/table-list';
 import { TranslateService } from "@ngx-translate/core";
 import { Router } from "@angular/router";
-import { HomeService } from '../services/home.service';
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-
-import { placeholderChars, alphabetic, digit } from './constants';
-
-const defaultValues = {
-  placeholderChar: placeholderChars.whitespace,
-  guide: true,
-  pipe: null,
-  keepCharPositions: false,
-  help: null,
-  placeholder: null
-};
+/* Models */
+import { Professional } from "../models/professional";
+/* Service */
+import { HomeService } from '../services/home.service';
+/* Constants */
+import { alphabetic, digit } from './constants';
 
 @Component({
   selector: 'app-home',
@@ -22,59 +17,75 @@ const defaultValues = {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
-  public city = "Vilafranca del Penedès";
+  /* Variables Professional */
+  idProfessional = 13695;
+  professional: Professional;
+  /* Variables Table */
   data: any[] = [];
   options = new TableListOptions();
   closeResult: string;
 
-  mask = [alphabetic, alphabetic, alphabetic, digit, digit, digit, digit, '/', digit, digit, digit, digit, digit];
+  /* Variables Modal */
+  newFile = [];
+  mask = ['E', 'X', 'P', digit, digit, digit, digit, '/', digit, digit, digit, digit, digit];
   maskPlaceholder = 'EXP0000/00000';
-  typeCode: any;
+  codeHestia = 0;
 
   constructor(private _service: HomeService,
               private _router: Router,
               private _translateService: TranslateService,
               private modalService: NgbModal) {
-    this.options.setColumns([
-      {
-        name: 'id',
+    /* Get Professional Data */
+    this.getProfessionalData(this.idProfessional);
+    /* Set Table List of Files */
+    this.options.setColumns([{
+        name: 'expedient',
         title: this._translateService.instant('TABLE.files'),
         sortable: true,
         filterable: true
       }, {
-        name: 'createdate',
+        name: 'data',
         title: this._translateService.instant('TABLE.createDate'),
         sortable: true,
         filterable: true,
         filterType: FilterType.date
       }, {
-        name: 'owner',
+        name: 'professional',
         title: this._translateService.instant('TABLE.owner'),
         sortable: true,
         filterable: true
       }, {
-        name: 'updatedate',
+        name: 'data',
         title: this._translateService.instant('TABLE.updateDate'),
         sortable: true,
         filterable: true,
         filterType: FilterType.date
       }, {
-        name: 'expedient',
+        name: 'estat',
         title: this._translateService.instant('TABLE.expedient'),
         sortable: true,
         filterable: true
-      }
-    ]);
+      }]);
     this.options.filterable = true;
     this.options.actions = false;
     this.options.itemsPerPage = 5;
-    this.reloadData();
   }
 
+  /** GET PROFESSIONAL DATA **/
+  getProfessionalData(id: number) {
+    this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
+      this.professional = data;
+      /* Reload Table  */
+      this.reloadData();
+    }, error => {
+      console.log("ERROR al recuperar el datos");
+    });
+  }
+
+  /** LOAD TABLE **/
   reloadData() {
     this.options.loading = false;
-    this._service.getFiles(this.options).subscribe((res: TableListResponse ) => {
+    this._service.getFiles(this.options, this.professional.municipi.id).subscribe((res: TableListResponse ) => {
       this.options = res.options;
       this.data = res.data;
       this.options.loading = true;
@@ -98,5 +109,9 @@ export class HomeComponent {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  onChangeHestia(event) {
+    this.codeHestia = event;
   }
 }

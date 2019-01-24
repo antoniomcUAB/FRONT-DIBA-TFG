@@ -1,8 +1,8 @@
 export const env = {
-  serverURL: 'http://localhost:4201',
-  // apiURL   : 'http://localhost:3000' // LOCAL
-  apiURL   : 'http://dsdiba-api.demo.in2.es' // DES
-
+  serverURL: 'http://localhost:4200',
+  // apiURL   : 'http://10.14.1.165:8080' // LOCAL
+  apiURL   : 'http://10.14.1.165:7001' // LOCAL
+  // apiURL   : 'http://dsdiba-api.demo.in2.es' // DES
 };
 
 export const environment = {

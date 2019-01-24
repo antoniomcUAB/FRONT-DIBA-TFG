@@ -4,7 +4,7 @@
 
 <!-- Home Component -->
   <section id="home">
-    <h1 class="text-center mt-5">{{ city }}</h1>
+    <h1 class="text-center mt-5">{{ professional?.municipi?.descripcio }}</h1>
     <h2 class="text-center mb-4">{{ "TITLE.home-h2" | translate }}</h2>
 
     <div class="card font-weight-bold">
@@ -16,19 +16,19 @@
 
         <ng-template #myRow let-item>
           <td class="bg-table text-black-50 text-center">
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.id}}</a>
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.expedient}}</a>
           </td>
           <td class="text-center">
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.createdate}}</a>
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.data}}</a>
           </td>
           <td>
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.owner}}</a>
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}</a>
           </td>
           <td class="text-center">
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.updatedate}}</a>
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.data}}</a>
           </td>
-          <td class="text-center text-capitalize" [ngClass]="{'warning' : item.status === 'incomplet', 'success' : item.status === 'complet'}">
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.status}}</a>
+          <td class="text-center text-capitalize" [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat === 'COMPLET'}">
+            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.estat}}</a>
           </td>
         </ng-template>
       </app-table-list>
@@ -55,8 +55,7 @@
             <div class="form-group">
               <label for="type-code">{{ "FORM.typeCode" | translate }}<span class="text-primary">*</span></label>
               <div class="input-group">
-                <select id="type-code" class="form-control">
-                  <option></option>
+                <select id="type-code" class="form-control" (change)="onChangeHestia($event.target.value)">
                   <option value="0">{{ "FORM.hestia" | translate }}</option>
                   <option value="1">{{ "FORM.otherType" | translate }}</option>
                 </select>
@@ -65,8 +64,8 @@
             <div class="form-group">
               <label>{{ "FORM.codeFile" | translate }} <span class="text-primary">*</span></label>
               <div class="input-group">
-                <input *ngIf="true" class="form-control" placeholder="{{maskPlaceholder}}" type="text" [textMask]="{mask: mask}" />
-                <input *ngIf="false" class="form-control" placeholder="Sence format" type="text" />
+                <input [ngModel]="newFile" name="newFile" *ngIf="codeHestia == 0" class="form-control" placeholder="{{maskPlaceholder}}" type="text" [textMask]="{mask: mask}" />
+                <input [ngModel]="newFile" name="newFile" *ngIf="codeHestia == 1" class="form-control" placeholder="Sense format" type="text" />
               </div>
             </div>
           </div>

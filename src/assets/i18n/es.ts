@@ -1,7 +1,7 @@
 export let TRANSLATION = {
   /* Title */
   'TITLE': {
-    'home-h2': 'Llistat expedients per municipi',
+    'home-h2': 'Llistat d\'expedients per municipi',
     'file-h2': 'Fitxa d\'expedient'
   },
 
@@ -10,7 +10,7 @@ export let TRANSLATION = {
     'files'                : 'Expedient',
     'createDate'           : 'Data creació',
     'owner'                : 'Professional',
-    'updateDate'           : 'Data ultima valoració',
+    'updateDate'           : 'Data última valoració',
     'actions'              : 'Accions',
     'apl'                  : 'Aplica',
     'person'               : 'Persona',
@@ -19,7 +19,7 @@ export let TRANSLATION = {
     'riskFactors'          : 'Factors de risc',
     'types'                : 'Tipus',
     'basicSocialSituation' : 'Situació social bàsica',
-    'contextFactor'        : 'Factor de contextualizacion',
+    'contextFactor'        : 'Factor de contextualització',
     'expedient'            : 'Estat expedient',
     'relation'             : 'Relació',
     'sex'                  : 'Sexe',
@@ -35,13 +35,13 @@ export let TRANSLATION = {
     'tabAutonomia'  : 'Àmbit d\'autonomia'
   },
   'TABTITLE': {
-    'titleAutonomia': 'Evidencies i necessitats en l\'ambit relacional'
+    'titleAutonomia': 'Evidències i necessitats en l\'àmbit relacional'
   },
   /* Form */
   'FORM': {
     'fileId'        : 'Nº expedient',
     'fileName'      : 'Nom expedient',
-    'fileOwner'     : 'Nom profesional',
+    'fileOwner'     : 'Nom professional',
     'fileDate'      : 'Data',
     'fileUFamily'   : 'Unitat familiar',
     'filePeopleRef' : 'Persona de referència',
@@ -51,14 +51,15 @@ export let TRANSLATION = {
     'daughter'      : 'Filla',
     'father'        : 'Pare',
     'mother'        : 'Mare',
-    'other'         : 'Otros',
+    'other'         : 'Altres',
     'save'          : 'Guardar',
     'newDiagnosis'  : 'Crear nou diagnòstic',
     'newFile'       : 'Crear nou expedient',
     'create'        : 'Crear',
-    'cancel'        : 'Cancelar',
+    'cancel'        : 'Cancel·lar',
+    'delete'        : 'Esborrar',
     'typeCode'      : 'Tipus de codificació ',
-    'hestia'        : 'HESTIA',
+    'hestia'        : 'HÈSTIA',
     'otherType'     : 'Un altre tipus',
     'codeFile'      : 'Codi d\'expedient'
   },
@@ -66,8 +67,8 @@ export let TRANSLATION = {
   /* Search */
   'SEARCH': {
     'search'        : 'Cercar',
-    'model'         : 'Consultar Módel',
-    },
+    'model'         : 'Consultar Model',
+  },
   'ORDER_BY'        : 'Ordenar per',
   'TAGS'            : 'Etiquetes',
 
