@@ -1,10 +1,8 @@
-<app-form-tab (before)="emitBefore()" [data]="data" >
+<app-form-tab (before)="emitBefore()" (endForm)="emitEnd()" [context]="contextData" [data]="data" >
 
 
 </app-form-tab>
-<app-form-tab-context (endForm)="emitEnd()"  [context]="contextData">
 
-</app-form-tab-context>
 
 
 

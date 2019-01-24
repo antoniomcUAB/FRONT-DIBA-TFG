@@ -1,4 +1,4 @@
-import { Diagnostic } from "../../diagnosis/models/diagnosis";
+
 import { Professional } from "../../home/models/professional";
 
 /* Expedient */
@@ -12,7 +12,7 @@ export interface Expedient {
   persona: Persona[];                     // Unidad Familiar
   versioModel: Model[];                   // Modelo
   profesional: Professional;              // Profesional
-  diagnostic: Diagnostic[];               // Evaluaciones
+  // diagnostic: Diagnostic[];               // Evaluaciones
   contextualitzacio: Contextualitzacio[]; // Contextualizaciones
   valoracio: number;                      // Valoracion
   observacions: string;                   // Observaciones

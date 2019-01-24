@@ -53,6 +53,10 @@ export class TabsComponent {
     this.disapear = false;
 
   }
+  public console()
+  {
+    console.log(this.entornsMaterial);
+  }
 
 }
 

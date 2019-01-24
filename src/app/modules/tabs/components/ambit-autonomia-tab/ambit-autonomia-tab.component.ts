@@ -43,4 +43,8 @@ export class AmbitAutonomiaTabComponent {
   public emitEnd() {
     this.endForm.emit();
   }
+  public console()
+  {
+    console.log("entro");
+  }
 }

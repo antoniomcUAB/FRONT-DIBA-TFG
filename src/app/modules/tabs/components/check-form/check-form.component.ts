@@ -34,6 +34,7 @@ export class CheckFormComponent implements OnInit{
     if (this.groupRelacional.family || this.groupRelacional.school || this.groupRelacional.social ) {
       clicked = true;
     }
+    console.log(this.groupRelacional);
     this.entornsRelacional.emit(this.groupRelacional);
     this.stay.emit(clicked);
   }

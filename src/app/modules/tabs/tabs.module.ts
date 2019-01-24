@@ -16,7 +16,6 @@ import { SharedModule } from '../../shared';
 import { TabsService} from './services/tabs.service';
 import {TabsFormService} from './services/tabsForm.service';
 import { FormTabComponent } from './components/form-tab/form-tab.component';
-import { FormTabContextComponent } from './components/form-tab-context/form-tab-context.component';
 @NgModule({
   imports: [
     SharedModule,
@@ -33,9 +32,8 @@ import { FormTabContextComponent } from './components/form-tab-context/form-tab-
     GlobalitatTabComponent,
     ValoracioDiagnosticTabComponent,
     FormTabComponent,
-    FormTabContextComponent,
   ],
-  providers:[TabsService, TabsFormService]
+  providers: [TabsService, TabsFormService]
 })
 
 export class TabsModule { }

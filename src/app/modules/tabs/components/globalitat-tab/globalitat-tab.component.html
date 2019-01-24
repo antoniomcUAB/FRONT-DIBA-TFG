@@ -1,10 +1,7 @@
-<div class="form-group col-12 text-right">
-  <button type="button" class="float-right btn btn-outline-primary" (click)="emitBefore()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
-  <br>
-</div>
-<app-form-tab-context (endForm)="emitEnd()" [context]="contextData">
+<app-form-tab (before)="emitBefore()" (endForm)="emitEnd()" [context]="contextData" >
 
-</app-form-tab-context>
+
+</app-form-tab>
 
 
 

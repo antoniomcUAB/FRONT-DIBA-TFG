@@ -1,11 +1,15 @@
 
   <!-- titulo -->
 
-  <div class="form-group col-12 bg-grey-500  ">
+  <div class="form-group col-12 ">
+    <div class="form-group col-12 bg-grey-500" >
     <label for="ssb" style="color: white;" >{{ "TABTITLE.titleAutonomia" | translate }} </label>
+    </div>
   </div>
-  <div class="form-group col-12 text-right">
+  <div class="form-group col-12">
+    <div class="form-group col-12 text-right">
     <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
+    </div>
     <br>
   </div>
 
@@ -98,17 +102,17 @@
         </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Guardar</button>
+          <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Guardar</button>
           <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
         </div>
     </form>
   </ng-template>
 
   <!--/ titulo -->
-
+<form ngNativeValidate (ngSubmit)="emitEnd()">
   <div class="card-body ">
 
-      <ng-container *ngFor="let item of data.tableTabsForms; let i = index;">
+      <ng-container *ngFor="let item of data.tableTabsForms; let i = index; " >
       <ng-container *ngIf="(groupRelacional.social && item.entorn === 'social' )
       || (groupRelacional.family && item.entorn === 'family')
       || (groupRelacional.school && item.entorn === 'school')
@@ -116,17 +120,18 @@
       || (groupMaterial.economic && item.entorn === 'economic')
       || (groupMaterial.work && item.entorn === 'work')
        || (item.entorn==='Basic' && !groupRelacional.school && !groupRelacional.family
-       && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house) ">
+      && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house) ">
 
-      <div class="form-group row bg-grey-300">
+
+      <div class="form-group row bg-grey-300 border border-top border-bottom">
       <!-- Situacion social Basica -->
       <div class="form-group col-4">
         <label class="col-12" for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class= "fa fa-question-circle" aria-hidden="true" [ngbPopover]="item.help" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="item.ssb"></i></label>
-        <input  *ngIf="!item.ssb.includes('Ingressos insuficients (E.2)')" type="text" class="form-control " id="" [value]= "item.ssb " disabled >
+        <input  *ngIf="!item.ssb.includes('Ingressos insuficients (E.2)')" type="text" class="form-control " [value]= "item.ssb " disabled  >
         <!-- situacio social De Ingressos insuficients-->
         <div *ngIf="item.ssb.includes('Ingressos insuficients (E.2)')" class="form-group row col-12">
         <input  type="text" class="form-control col-9 " id="" [value]= "item.ssb " disabled >
-        <button class=" col-3 btn btn-outline-primary" (click)="open(valoration)" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
+        <button type="button" class=" col-3 btn btn-outline-primary" (click)="open(valoration)" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
         </div>
         <!--/ situacio social De Ingressos insuficients-->
 
@@ -140,7 +145,7 @@
           <div class="form-group align-items-center col-12 ">
             <label > {{ "TABLE.apl" | translate }}</label>
             <label class="custom-control custom-checkbox  ">
-              <input type="checkbox" class="custom-control-input position-relative" >
+              <input type="checkbox" class="custom-control-input position-relative" [(ngModel)]="item.apl" name="aplica" >
               <span class="custom-control-label"></span>
               <span class="custom-control-description"></span>
             </label>
@@ -157,13 +162,13 @@
           <label for="t1person" >{{ "TABLE.person" | translate }} </label>
           <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend">
-              <div class="input-group-text " (click)="addRow(i,item.ssb)">
+              <div class="input-group-text " (click)="addRow(i,item.ssb) ">
                 <i class="fa fa-user-plus " > </i>
               </div>
             </div>
 
-            <select  class="form-control" id="t1person">
-              <option disabled selected value></option>
+            <select class="form-control" id="t2person" [required]="item.apl" >
+              <option disabled selected value  ></option>
               <option *ngFor="let option of item.persona "> {{option.persona}} </option>
             </select>
           </div>
@@ -179,7 +184,7 @@
       <div class="col-xs-2">
         <div class="col-12">
           <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentSeverity placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
-          <select class="form-control" id="t1severity">
+          <select class="form-control" id="t1severity" [required]="item.apl">
             <option disabled selected value></option>
             <option *ngFor="let option of item.gravetat "> {{option.gravetat}}  </option>
           </select>
@@ -191,7 +196,7 @@
       <div class="col-2">
         <div class="col-12">
           <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentFrequency placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
-          <select class="form-control" id="t1frequency">
+          <select class="form-control" id="t1frequency" [required]="item.apl" >
             <option disabled selected value></option>
             <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
           </select>
@@ -228,7 +233,7 @@
         <div class="col-2">
           <div class="col-12">
             <div class="input-group mb-2 mr-sm-2">
-              <select class="form-control" id="t2person-${{x}}">
+              <select class="form-control" id="t2person-${{x}}" [required]="item.apl">
                 <option disabled selected value></option>
                 <option *ngFor="let option of item.persona "> {{option.persona}} </option>
               </select>
@@ -245,7 +250,7 @@
         <div class="col-xs-2">
           <div class="col-12">
 
-            <select class="form-control" id="t1severity">
+            <select class="form-control" id="t1severity" [required]="item.apl">
               <option disabled selected value></option>
               <option *ngFor="let option of item.gravetat "> {{option.gravetat}} </option>
             </select>
@@ -256,7 +261,7 @@
         <div class="col-2">
           <div class="col-12">
 
-            <select class="form-control" id="t1frequency">
+            <select class="form-control" id="t1frequency" [required]="item.apl">
               <option disabled selected value></option>
               <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
             </select>
@@ -272,6 +277,71 @@
       </div>
       </ng-container>
       </ng-container>
+      <br>
+      <div *ngFor="let item of context.contextRows;" class="form-group row bg-grey-300">
+        <!-- Situacion social Basica -->
+        <div class="form-group col-6">
+          <label for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
+          <input type="email" class="form-control" id="ssb" value="{{item.fdc}}" disabled>
+        </div>
+        <!--/ Situacion social Basica -->
+
+
+        <!-- Aplicatiu -->
+        <div class="col-xs-1">
+          <div class="col-12">
+            <div class="form-group align-items-center col-12 ">
+              <label > {{ "TABLE.apl" | translate }}</label>
+              <label class="custom-control custom-checkbox  ">
+                <input type="checkbox" class="custom-control-input position-relative" [(ngModel)]="item.apl" name="aplicaContext" >
+                <span class="custom-control-label"></span>
+                <span class="custom-control-description"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <!--/ Aplicatiu -->
+
+        <!-- Persones -->
+        <div class="col-2">
+          <div class="col-12">
+            <label for="t1person">{{ "TABLE.person" | translate }} </label>
+            <select class="form-control" id="t1person" [required]="item.apl">
+              <option disabled selected value></option>
+              <option *ngFor="let option of item.persona "> {{option.persona}} </option>
+            </select>
+          </div>
+        </div>
+
+        <!--/ Persones -->
+
+        <!-- Severity -->
+
+
+        <div class="col-2">
+          <div class="col-12">
+            <label for="t1severity">{{ "TABLE.types" | translate }}</label>
+            <select class="form-control" id="t1severity" [required]="item.apl">
+              <option disabled selected value></option>
+              <option *ngFor="let option of item.tipo "> {{option.tipo}} </option>
+            </select>
+          </div>
+        </div>
+        <!--/ Severity -->
+        <!--/ FACTOR DE CONTEXTUALITZACIO -->
+        <!--/  riskFactors -->
+      </div>
+  </div>
+    <div class="form-group col-12">
+      <div class="form-group col-6 float-left">
+        <button type="button" class="btn btn-danger" (click)="emitEnd()"><i class="fa fa-times" aria-hidden="true"></i> Cancelar </button>
+      </div>
+      <div class="form-group col-6 float-right text-right">
+        <button  type="submit"  class="btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>
+      </div>
 
     </div>
+
+      </form>
+
 
