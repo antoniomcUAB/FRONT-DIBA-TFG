@@ -13,17 +13,20 @@ export class FilesDetailService extends GlobalService {
   constructor(public _http: HttpClient) {
     super();
   }
+
   /** GET FILES BY ID **/
-  getFileById(id: String): Observable<Expedient> {
+  getFileById(id: string): Observable<Expedient> {
     return this._http.get<Expedient>(`${this.apiURL}/dsdiba/expedient/${id}`);
   }
-  /**/
-  getObservaciones(options: TableListOptions): Observable<TableListResponse> {
+
+  /** GET DIAGNOSIS LIST **/
+  getObservaciones(id: string, options: TableListOptions): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
-    return this._http.get("../../../../assets/api/idFiles.json",
+    return this._http.get(`${this.apiURL}/dsdiba/expedient/${id}`,
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
-        const data = response.body['valRealizadas'];
+        const data = response.body['diagnostic'];
+        console.log(data);
         options.getPagesInfo(response.body);
         return {
           data: data,
@@ -31,13 +34,15 @@ export class FilesDetailService extends GlobalService {
         };
       }), );
   }
-  /**/
-  getUnityFamily(options: TableListOptions): Observable<TableListResponse> {
+
+  /** GET UNITY FAMILY **/
+  getUnityFamily(id: string, options: TableListOptions): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
-    return this._http.get("../../../../assets/api/idFiles.json",
+    return this._http.get(`${this.apiURL}/dsdiba/expedient/${id}`,
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
-        const data = response.body['unityFamility'];
+        const data = response.body['persona'];
+        console.log(data);
         options.getPagesInfo(response.body);
         return {
           data: data,

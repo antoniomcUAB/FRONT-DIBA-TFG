@@ -17,8 +17,8 @@ export class FileDetailComponent {
   public id: string;
   public options = new TableListOptions();
   public optionsUF = new TableListOptions();
-  public obsData: any;
-  public dataUnityFamily: any;
+  public obsData = null;
+  public dataUnityFamily = null;
 
   closeResult: string;
 
@@ -37,7 +37,8 @@ export class FileDetailComponent {
     this.options.pagination = false;
     this.options.footer = false;
     this.options.header = false;
-    this.reloadData();
+
+    this.reloadData(this.id);
     /* Tabla Unidad Familiar */
     this.optionsUF.setColumns([
       {
@@ -66,7 +67,7 @@ export class FileDetailComponent {
     this.optionsUF.actions = false;
     this.optionsUF.pagination = false;
     this.optionsUF.footer = false;
-    this.reloadDataTable();
+    this.reloadDataTable(this.id);
   }
 
   getFile() {
@@ -76,17 +77,19 @@ export class FileDetailComponent {
       console.log("ERROR al recuperar el dato");
     });
   }
-  reloadData() {
+  /* Load Table Diagnosis & Observation */
+  reloadData(id) {
     this.options.loading = true;
-    this._service.getObservaciones(this.options).subscribe((res: TableListResponse ) => {
+    this._service.getObservaciones(id, this.options).subscribe((res: TableListResponse ) => {
       this.options = res.options;
       this.obsData = res.data;
       this.options.loading = false;
     });
   }
-  reloadDataTable() {
+  /* Load Table Unity Famility */
+  reloadDataTable(id) {
     this.optionsUF.loading = true;
-    this._service.getUnityFamily(this.optionsUF).subscribe((res: TableListResponse ) => {
+    this._service.getUnityFamily(id, this.optionsUF).subscribe((res: TableListResponse ) => {
       this.optionsUF = res.options;
       this.dataUnityFamily = res.data;
       this.optionsUF.loading = false;
