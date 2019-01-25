@@ -13,7 +13,6 @@ import { AmbitRelacionalTabComponent } from './components/ambit-relacional-tab/a
 import { GlobalitatTabComponent } from './components/globalitat-tab/globalitat-tab.component';
 import { ValoracioDiagnosticTabComponent } from './components/valoracio-diagnostic-tab/valoracio-diagnostic-tab.component';
 import { SharedModule } from '../../shared';
-import { TabsService} from './services/tabs.service';
 import {TabsFormService} from './services/tabsForm.service';
 import { FormTabComponent } from './components/form-tab/form-tab.component';
 @NgModule({
@@ -33,7 +32,7 @@ import { FormTabComponent } from './components/form-tab/form-tab.component';
     ValoracioDiagnosticTabComponent,
     FormTabComponent,
   ],
-  providers: [TabsService, TabsFormService]
+  providers: [ TabsFormService]
 })
 
 export class TabsModule { }
