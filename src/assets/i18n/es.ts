@@ -25,7 +25,13 @@ export let TRANSLATION = {
     'sex'                  : 'Sexe',
     'birthday'             : 'Data naixement',
     'register'             : 'Alta',
-    'unsubscribe'          : 'Baixa'
+    'toRegister'           : 'Donar d\'alta',
+    'dataRegister'         : 'Data d\'alta',
+    'unsubscribe'          : 'Baixa',
+    'toUnsubscribe'        : 'Donar de Baixa',
+    'dataUnsubscribe'      : 'Data de baixa',
+    'newMember'            : 'Afegir nou member',
+    'isPersonRef'          : 'És persona de referència'
   },
   'OBSTABLE': {
     'obs'           : 'Valoracions realitzades'
@@ -61,7 +67,8 @@ export let TRANSLATION = {
     'typeCode'      : 'Tipus de codificació ',
     'hestia'        : 'HÈSTIA',
     'otherType'     : 'Un altre tipus',
-    'codeFile'      : 'Codi d\'expedient'
+    'codeFile'      : 'Codi d\'expedient',
+    'newRef'        : 'Quien sera la nueva persona de referencia'
   },
 
   /* Search */
