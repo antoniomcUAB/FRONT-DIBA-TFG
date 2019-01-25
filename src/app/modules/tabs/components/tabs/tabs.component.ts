@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../resources/tab-class-form';
+import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../models/tab-class-form';
 
 const MAX_N_TABS = 5;
 

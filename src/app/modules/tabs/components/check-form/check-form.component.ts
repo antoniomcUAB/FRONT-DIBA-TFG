@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {EnvironmentMaterial, EnvironmentRelacional} from '../../resources/tab-class-form';
+import {EnvironmentMaterial, EnvironmentRelacional} from '../../models/tab-class-form';
 import {TabsFormService} from "../../services/tabsForm.service";
 
 @Component({

@@ -109,7 +109,7 @@
   </ng-template>
 
   <!--/ titulo -->
-<form ngNativeValidate (ngSubmit)="emitEnd()">
+<form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()">
   <div class="card-body ">
 
       <ng-container *ngFor="let item of data.tableTabsForms; let i = index; " >
@@ -162,12 +162,12 @@
           <label for="t1person" >{{ "TABLE.person" | translate }} </label>
           <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend">
-              <div class="input-group-text " (click)="addRow(i,item.ssb) ">
+              <div *ngIf="item.apl" class="input-group-text " (click)="addRow(i,item.ssb) ">
                 <i class="fa fa-user-plus " > </i>
               </div>
             </div>
 
-            <select class="form-control" id="t2person" [required]="item.apl" >
+            <select class="form-control" id="t2person" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl" >
               <option disabled selected value  ></option>
               <option *ngFor="let option of item.persona "> {{option.persona}} </option>
             </select>
@@ -184,7 +184,7 @@
       <div class="col-xs-2">
         <div class="col-12">
           <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentSeverity placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
-          <select class="form-control" id="t1severity" [required]="item.apl">
+          <select class="form-control" id="t1severity" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
             <option disabled selected value></option>
             <option *ngFor="let option of item.gravetat "> {{option.gravetat}}  </option>
           </select>
@@ -196,7 +196,7 @@
       <div class="col-2">
         <div class="col-12">
           <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentFrequency placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
-          <select class="form-control" id="t1frequency" [required]="item.apl" >
+          <select class="form-control" id="t1frequency" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
             <option disabled selected value></option>
             <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
           </select>
@@ -233,7 +233,7 @@
         <div class="col-2">
           <div class="col-12">
             <div class="input-group mb-2 mr-sm-2">
-              <select class="form-control" id="t2person-${{x}}" [required]="item.apl">
+              <select class="form-control" id="t2person-${{x}}" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
                 <option disabled selected value></option>
                 <option *ngFor="let option of item.persona "> {{option.persona}} </option>
               </select>
@@ -250,7 +250,7 @@
         <div class="col-xs-2">
           <div class="col-12">
 
-            <select class="form-control" id="t1severity" [required]="item.apl">
+            <select class="form-control" id="t1severity" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
               <option disabled selected value></option>
               <option *ngFor="let option of item.gravetat "> {{option.gravetat}} </option>
             </select>
@@ -261,7 +261,7 @@
         <div class="col-2">
           <div class="col-12">
 
-            <select class="form-control" id="t1frequency" [required]="item.apl">
+            <select class="form-control" id="t1frequency" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
               <option disabled selected value></option>
               <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
             </select>
@@ -306,7 +306,7 @@
         <div class="col-2">
           <div class="col-12">
             <label for="t1person">{{ "TABLE.person" | translate }} </label>
-            <select class="form-control" id="t1person" [required]="item.apl">
+            <select class="form-control" id="t1person" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
               <option disabled selected value></option>
               <option *ngFor="let option of item.persona "> {{option.persona}} </option>
             </select>
@@ -321,7 +321,7 @@
         <div class="col-2">
           <div class="col-12">
             <label for="t1severity">{{ "TABLE.types" | translate }}</label>
-            <select class="form-control" id="t1severity" [required]="item.apl">
+            <select class="form-control" id="t1severity" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl" >
               <option disabled selected value></option>
               <option *ngFor="let option of item.tipo "> {{option.tipo}} </option>
             </select>
@@ -334,7 +334,7 @@
   </div>
     <div class="form-group col-12">
       <div class="form-group col-6 float-left">
-        <button type="button" class="btn btn-danger" (click)="emitEnd()"><i class="fa fa-times" aria-hidden="true"></i> Cancelar </button>
+        <button type="button" class="btn btn-danger" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Netejar </button>
       </div>
       <div class="form-group col-6 float-right text-right">
         <button  type="submit"  class="btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>

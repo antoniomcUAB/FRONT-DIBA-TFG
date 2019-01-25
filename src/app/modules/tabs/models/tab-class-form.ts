@@ -47,7 +47,7 @@ export class EnvironmentMaterial {
   work: boolean = false;
 }
 
-export class TabsDisabled{
+export class TabsDisabled {
   tabAmbitMaterialActivate: boolean = true;
   tabAmbitRelacionalActivate: boolean = true;
   tabGlobalitatCasActivate: boolean = true;

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ContextRows, EnvironmentMaterial, EnvironmentRelacional, TabAutonomia} from '../../resources/tab-class-form';
+import {ContextRows, EnvironmentMaterial, EnvironmentRelacional, TabAutonomia} from '../../models/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
 
 @Component({

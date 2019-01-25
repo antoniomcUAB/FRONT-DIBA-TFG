@@ -3,7 +3,7 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {Injectable} from "@angular/core";
-import { ContextRows, TabAutonomia} from '../resources/tab-class-form';
+import { ContextRows, TabAutonomia} from '../models/tab-class-form';
 
 @Injectable()
 export class TabsFormService {
