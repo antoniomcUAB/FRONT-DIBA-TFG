@@ -26,7 +26,6 @@ export class HomeService extends GlobalService {
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body;
-        console.log(data);
         // options.getPagesInfo(response.body); TODO - Añadir para función de paginación
         return {
           data: data,
@@ -37,6 +36,7 @@ export class HomeService extends GlobalService {
 
   /** CREATE FILE **/
   createFile(expedient: Expedient): Observable<Expedient> {
-      return this._http.post<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
+    console.log(expedient);
+    return this._http.post<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
   }
 }

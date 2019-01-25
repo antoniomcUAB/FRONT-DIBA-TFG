@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 /* Models */
 import { Professional } from "../models/professional";
+import { Expedient } from "../../files";
 /* Service */
 import { HomeService } from '../services/home.service';
 /* Constants */
@@ -18,7 +19,7 @@ import { alphabetic, digit } from './constants';
 })
 export class HomeComponent {
   /* Variables Professional */
-  idProfessional = 13695;
+  idProfessional = 14406;
   professional: Professional;
   /* Variables Table */
   data: any[] = [];
@@ -26,7 +27,7 @@ export class HomeComponent {
   closeResult: string;
 
   /* Variables Modal */
-  newFile = [];
+  newFile: Expedient = new Expedient;
   mask = ['E', 'X', 'P', digit, digit, digit, digit, '/', digit, digit, digit, digit, digit];
   maskPlaceholder = 'EXP0000/00000';
   codeHestia = 0;
@@ -116,7 +117,13 @@ export class HomeComponent {
   }
 
   /* Create File (Expedient )*/
-  createExpedient() {
-    console.log('');
+  createExpedient(expedient) {
+    this.newFile.profesional = this.professional;
+    this.newFile.expedient = expedient;
+    this._service.createFile(this.newFile).subscribe((result) => {
+      this._router.navigate(['/file-detail', {'id': this.newFile.id}]);
+    }, (err) => {
+      console.log(err);
+    });
   }
 }
