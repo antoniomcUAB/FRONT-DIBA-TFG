@@ -68,7 +68,8 @@ export let TRANSLATION = {
     'hestia'        : 'HÈSTIA',
     'otherType'     : 'Un altre tipus',
     'codeFile'      : 'Codi d\'expedient',
-    'newRef'        : 'Quien sera la nueva persona de referencia'
+    'newRef'        : 'Quien sera la nueva persona de referencia',
+    'totalFamilia'  : 'Nombre de presones que componen la unitat familiar'
   },
 
   /* Search */

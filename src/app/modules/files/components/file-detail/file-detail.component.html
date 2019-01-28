@@ -12,7 +12,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="fileId" class="col-form-label">{{ "FORM.fileId" | translate }}</label>
-            <input class="form-control" type="text" value="{{data?.expedient}}" id="fileId" disabled="disabled">
+            <input class="form-control" type="text" value="{{expedient[0]?.expedient}}" id="fileId" disabled="disabled">
           </div>
         </div>
         <!--/ File ID -->
@@ -20,7 +20,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="owner" class="col-form-label">{{ "FORM.fileOwner" | translate }}</label>
-            <input class="form-control" type="text" value="{{data?.professional?.nom}} {{data?.professional?.cognom1}} {{data?.professional?.cognom2}}" id="owner" disabled="disabled">
+            <input class="form-control" type="text" value="{{expedient[0]?.professional?.nom}} {{expedient[0]?.professional?.cognom1}} {{expedient[0]?.professional?.cognom2}}" id="owner" disabled="disabled">
           </div>
         </div>
         <!-- File Owner -->
@@ -30,7 +30,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="fileName" class="col-form-label">{{ "FORM.fileName" | translate }}</label>
-            <input class="form-control" type="text" value="{{data?.nom}}" id="fileName" disabled="disabled">
+            <input class="form-control" type="text" value="{{expedient[0]?.nom}}" id="fileName" disabled="disabled">
           </div>
         </div>
         <!--/ File Name -->
@@ -38,10 +38,18 @@
         <div class="col-6">
           <div class="col-12">
             <label for="fileDate" class="col-form-label">{{ "FORM.fileDate" | translate }}</label>
-            <input class="form-control" type="text" value="{{data?.data | date:'dd/MM/yyyy'}}" id="fileDate" disabled="disabled">
+            <input class="form-control" type="text" value="{{expedient[0]?.data | date:'dd/MM/yyyy'}}" id="fileDate" disabled="disabled">
           </div>
         </div>
         <!--/ File Date -->
+        <!-- File Family -->
+        <div class="col-6">
+          <div class="col-12">
+            <label for="totalFamilia" class="col-form-label">{{ "FORM.totalFamilia" | translate }}</label>
+            <input class="form-control" type="text" value="{{expedient[0]?.totalFamilia}}" id="totalFamilia" disabled="disabled">
+          </div>
+        </div>
+        <!--/ File Family -->
       </div>
       <div class="form-group row">
         <!-- Unity Family -->
@@ -192,7 +200,7 @@
           <label for="fileObservation" class="col-form-label">
             <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
           </label>
-          <textarea class="form-control" rows="3" type="text" value="{{ data?.observacions }}" id="fileObservation"></textarea>
+          <textarea class="form-control" rows="3" type="text" value="{{ expedient[expedient.length-1]?.observacions }}" id="fileObservation"></textarea>
         </div>
       </div>
       <!--/ File Observation -->
@@ -213,17 +221,39 @@
                           [rowTemplate]="myRowInitDysplay"
                           (reloadData)="reloadData()">
             <ng-template #myRowInitDysplay let-item>
-              <td>{{item.id}} {{item.fecha}}</td>
-              <td><a [routerLink]="['/observations', {'id': item.id,'date': item.fecha}]" > <i class="fa fa-eye"></i> </a></td>
-              <td><a *ngIf="item.permissionEdit === true" [routerLink]="['/observations', {'id': item.id,'date': item.fecha}]" > <i class="fa fa-pencil-square-o"> </i> </a></td>
+              <td> DSDIBA-{{item.data | date:'dd/MM/yyyy'}} </td>
+              <td><a [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-eye"></i> </a></td>
+              <td><a *ngIf="item.permissionEdit === true" [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-pencil-square-o"> </i> </a></td>
             </ng-template>
           </app-table-list>
           <!--/ Table List Diagnosis -->
         </div>
-        <div *ngIf="obsData?.length > 1" class="col-6">
+        <div class="col-6">
           <!-- Chart -->
-          <img class="px-5" src="../../../../../assets/images/chart-demo.png" height="auto" width="100%"/>
-          <!--/ Chart -->
+          <!--<ngx-charts-line-chart
+            class="chart-container"
+            [scheme]="colorScheme"
+            [schemeType]="schemeType"
+            [results]="single"
+            [legend]="showLegend"
+            (legendLabelClick)="1"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [autoScale]="autoScale"
+            [timeline]="timeline"
+            [showGridLines]="showGridLines"
+            [curve]="curve"
+            [rangeFillOpacity]="rangeFillOpacity"
+            [roundDomains]="roundDomains"
+            [tooltipDisabled]="true"
+            (select)="1">
+        </ngx-charts-line-chart>-->
+        <!--/ Chart -->
         </div>
       </div>
       <!--/ Table Files Valoraciones -->

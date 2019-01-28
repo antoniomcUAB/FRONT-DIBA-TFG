@@ -16,19 +16,19 @@
 
         <ng-template #myRow let-item>
           <td class="bg-table text-black-50 text-center">
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.expedient}}</a>
+            <a [routerLink]="['/file-detail', {'codi': item.codi}]">{{item.codi}}</a>
           </td>
           <td class="text-center">
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.data | date:'dd/MM/yyyy'}}</a>
+            <a [routerLink]="['/file-detail', {'codi': item.codi}]">{{item.dataCreacio | date:'dd/MM/yyyy'}}</a>
           </td>
           <td>
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}</a>
+            <a [routerLink]="['/file-detail', {'codi': item.codi}]">{{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}</a>
           </td>
           <td class="text-center">
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.data | date:'dd/MM/yyyy' }}</a>
+            <a [routerLink]="['/file-detail', {'codi': item.codi}]">{{item.dataValidacio | date:'dd/MM/yyyy' }}</a>
           </td>
-          <td class="text-center text-capitalize" [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat === 'VALIDAT'}">
-            <a [routerLink]="['/file-detail', {'id': item.id}]">{{item.estat}}</a>
+          <td class="text-center text-capitalize" [ngClass]="{'warning' : item.estat === 'COMPLET', 'success' : item.estat === 'INCOMPLET'}">
+            <a [routerLink]="['/file-detail', {'codi': item.codi}]">{{item.estat}}</a>
           </td>
         </ng-template>
       </app-table-list>

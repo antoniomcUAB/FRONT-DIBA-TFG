@@ -19,7 +19,7 @@ import { alphabetic, digit } from './constants';
 })
 export class HomeComponent {
   /* Variables Professional */
-  idProfessional = 14406;
+  idProfessional = 15518; /* TODO - Petición id Profesional */
   professional: Professional;
   /* Variables Table */
   data: any[] = [];
@@ -40,12 +40,12 @@ export class HomeComponent {
     this.getProfessionalData(this.idProfessional);
     /* Set Table List of Files */
     this.options.setColumns([{
-        name: 'expedient',
+        name: 'codi',
         title: this._translateService.instant('TABLE.files'),
         sortable: true,
         filterable: true
       }, {
-        name: 'data',
+        name: 'dataCreacio',
         title: this._translateService.instant('TABLE.createDate'),
         sortable: true,
         filterable: true,
@@ -56,7 +56,7 @@ export class HomeComponent {
         sortable: true,
         filterable: true
       }, {
-        name: 'data',
+        name: 'dataValidacio',
         title: this._translateService.instant('TABLE.updateDate'),
         sortable: true,
         filterable: true,
@@ -112,6 +112,7 @@ export class HomeComponent {
     }
   }
 
+  /* Function Select Onchange */
   onChangeHestia(event) {
     this.codeHestia = event;
   }
@@ -119,9 +120,9 @@ export class HomeComponent {
   /* Create File (Expedient )*/
   createExpedient(expedient) {
     this.newFile.profesional = this.professional;
-    this.newFile.expedient = expedient;
+    this.newFile.codi = expedient;
     this._service.createFile(this.newFile).subscribe((result) => {
-      this._router.navigate(['/file-detail', {'id': this.newFile.id}]);
+      this._router.navigate(['/file-detail', {'id': this.newFile.codi}]);
     }, (err) => {
       console.log(err);
     });

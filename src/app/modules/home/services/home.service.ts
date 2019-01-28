@@ -22,7 +22,7 @@ export class HomeService extends GlobalService {
   /** GET LIST OF FILES **/
   getFiles(options: TableListOptions, idMunicipal: number): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
-    return this._http.get(`${this.apiURL}/dsdiba/expedient/municipi/${idMunicipal}`,
+    return this._http.get(`${this.apiURL}/dsdiba/expedient/${idMunicipal}`,
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body;
@@ -37,6 +37,6 @@ export class HomeService extends GlobalService {
   /** CREATE FILE **/
   createFile(expedient: Expedient): Observable<Expedient> {
     console.log(expedient);
-    return this._http.post<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
+    return this._http.put<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
   }
 }
