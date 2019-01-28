@@ -27,7 +27,7 @@
           <td class="text-center">
             <a [routerLink]="['/file-detail', {'codi': item.codi}]">{{item.dataValidacio | date:'dd/MM/yyyy' }}</a>
           </td>
-          <td class="text-center text-capitalize" [ngClass]="{'warning' : item.estat === 'COMPLET', 'success' : item.estat === 'INCOMPLET'}">
+          <td class="text-center text-capitalize" [ngClass]="{'warning' : item.estat === 'INCOMPLET', 'success' : item.estat === 'COMPLET'}">
             <a [routerLink]="['/file-detail', {'codi': item.codi}]">{{item.estat}}</a>
           </td>
         </ng-template>
@@ -64,13 +64,13 @@
             <div class="form-group">
               <label>{{ "FORM.codeFile" | translate }} <span class="text-primary">*</span></label>
               <div class="input-group">
-                <input [(ngModel)]="newFile.expedient" name="newFile" *ngIf="codeHestia == 0" class="form-control" placeholder="{{maskPlaceholder}}" type="text" [textMask]="{mask: mask}" required="required" />
-                <input [(ngModel)]="newFile.expedient" name="newFile" *ngIf="codeHestia == 1" class="form-control" placeholder="Sense format" type="text" required="required" />
+                <input [(ngModel)]="newFile.codi" name="newFile" *ngIf="codeHestia == 0" class="form-control" placeholder="{{maskPlaceholder}}" type="text" [textMask]="{mask: mask}" required="required" />
+                <input [(ngModel)]="newFile.codi" name="newFile" *ngIf="codeHestia == 1" class="form-control" placeholder="Sense format" type="text" required="required" />
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-outline-dark" (click)="createExpedient(newFile.expedient); modal.close('Save click')">{{ "FORM.create" | translate }}</button>
+            <button type="submit" class="btn btn-outline-dark" (click)="createExpedient(newFile.codi); modal.close('Save click')">{{ "FORM.create" | translate }}</button>
             <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">{{ "FORM.cancel" | translate }}</button>
           </div>
         </form>

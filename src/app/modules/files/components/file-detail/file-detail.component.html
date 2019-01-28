@@ -200,11 +200,11 @@
           <label for="fileObservation" class="col-form-label">
             <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
           </label>
-          <textarea class="form-control" rows="3" type="text" value="{{ expedient[expedient.length-1]?.observacions }}" id="fileObservation"></textarea>
+          <textarea class="form-control cdk-textarea-autosize-measuring" rows="3" type="text" value="{{ expedient[expedient?.length - 1].observacions }}" id="fileObservation"></textarea>
         </div>
       </div>
       <!--/ File Observation -->
-
+      <br/>
       <!-- Table Files Valoraciones -->
       <div class="form-group row">
         <div class="col-12 px-3">
@@ -221,9 +221,13 @@
                           [rowTemplate]="myRowInitDysplay"
                           (reloadData)="reloadData()">
             <ng-template #myRowInitDysplay let-item>
-              <td> DSDIBA-{{item.data | date:'dd/MM/yyyy'}} </td>
-              <td><a [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-eye"></i> </a></td>
-              <td><a *ngIf="item.permissionEdit === true" [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-pencil-square-o"> </i> </a></td>
+              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat === 'VALIDAT'}">DSDIBA-{{item.data | date:'dd/MM/yyyy'}}</td>
+              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat === 'VALIDAT'}">{{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}</td>
+              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat === 'VALIDAT'}">
+                <a [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-eye"></i> </a>
+                <span class="px-2" *ngIf="item.estat==='BORRADOR'"> </span>
+                <a *ngIf="item.estat==='BORRADOR'" [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-pencil-square-o"> </i> </a>
+              </td>
             </ng-template>
           </app-table-list>
           <!--/ Table List Diagnosis -->

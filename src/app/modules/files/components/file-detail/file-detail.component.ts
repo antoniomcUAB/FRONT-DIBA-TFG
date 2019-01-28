@@ -136,11 +136,25 @@ export class FileDetailComponent {
     this.getFile();
 
     /* Tabla Valoraciones realizadas */
+    this.options.setColumns([
+      {
+        name: 'codi',
+        title: this._translateService.instant('TABLE.files'),
+        sortable: false
+      }, {
+        name: 'professional',
+        title: this._translateService.instant('TABLE.owner'),
+        sortable: false
+      }, {
+        name: 'actions',
+        title: this._translateService.instant('TABLE.actions'),
+        sortable: false
+      }
+    ]);
     this.options.filterable = false;
     this.options.actions = false;
     this.options.pagination = false;
     this.options.footer = false;
-    this.options.header = false;
 
     this.reloadData(this.codi);
     /* Tabla Unidad Familiar */
@@ -196,7 +210,8 @@ export class FileDetailComponent {
     this.optionsUF.loading = true;
     this._service.getUnityFamily(id, this.optionsUF).subscribe((res: TableListResponse ) => {
       this.optionsUF = res.options;
-      this.dataUnityFamily = res.data;
+      this.dataUnityFamily = res.data[res.data.length - 1].persona;
+      console.log(this.dataUnityFamily);
       this.optionsUF.loading = false;
     });
   }
