@@ -1,65 +1,234 @@
 {
-    "id": "EXP2011/00191",
-    "createdate": "23/11/2018 14:31",
-    "owner": "Antonio Martinez",
-    "expName": "Exp 434",
-
-    "valRealizadas": [{
-      "id": "DS-DIBA1",
-      "fecha":"18/05/2018",
-      "permissionEdit" : true
-    },{
-      "id": "DS-DIBA2",
-      "fecha":"05/10/2018",
-      "permissionEdit" : true
-
-    },{
-      "id": "DS-DIBA2",
-      "fecha":"05/10/2018",
-      "permissionEdit" : false
-    },{
-      "id": "DS-DIBA2",
-      "fecha":"05/10/2018",
-      "permissionEdit" : true
-    }],
-
-    "unityFamility": [
+  "contextualitzacio": [
+    {
+      "factor": {
+        "descripcio": "string",
+        "fc1m": 0,
+        "fctots": 0,
+        "gravetat": {
+          "descripcio": "string",
+          "id": 0
+        },
+        "id": 0,
+        "infants": true
+      },
+      "id": 0,
+      "membreUnic": true,
+      "mesUc": true,
+      "persona": {
+        "dataAlta": "2019-01-28T12:38:25.803Z",
+        "dataBaixa": "2019-01-28T12:38:25.803Z",
+        "dataNaixement": "2019-01-28T12:38:25.803Z",
+        "id": 0,
+        "referencia": true,
+        "sexe": "string",
+        "tipusPersona": {
+          "descripcio": "string",
+          "id": 0
+        }
+      }
+    }
+  ],
+  "data": "2019-01-28T12:38:25.803Z",
+  "estat": "string",
+  "expedient": "string",
+  "id": 0,
+  "nom": "string",
+  "observacions": "string",
+  "persona": [
+    {
+      "dataAlta": "2019-01-28T12:38:25.803Z",
+      "dataBaixa": "2019-01-28T12:38:25.803Z",
+      "dataNaixement": "2019-01-28T12:38:25.803Z",
+      "id": 0,
+      "referencia": true,
+      "sexe": "string",
+      "tipusPersona": {
+        "descripcio": "string",
+        "id": 0
+      }
+    }
+  ],
+  "preguntes": [
+    {
+      "factor": {
+        "descripcio": "string",
+        "id": 0,
+        "value": 0
+      },
+      "factorEconomic": [
+        {
+          "descripcio": "string",
+          "id": 0
+        }
+      ],
+      "frequencia": {
+        "descripcio": "string",
+        "id": 0
+      },
+      "gravetat": {
+        "descripcio": "string",
+        "id": 0
+      },
+      "id": 0,
+      "persona": {
+        "dataAlta": "2019-01-28T12:38:25.803Z",
+        "dataBaixa": "2019-01-28T12:38:25.803Z",
+        "dataNaixement": "2019-01-28T12:38:25.803Z",
+        "id": 0,
+        "referencia": true,
+        "sexe": "string",
+        "tipusPersona": {
+          "descripcio": "string",
+          "id": 0
+        }
+      },
+      "risc": {
+        "descripcio": "string",
+        "id": 0,
+        "value": 0
+      },
+      "situacioSocial": {
+        "Items": [
+          {
+            "Freqüencia": [
+              {
+                "evidencia": "string",
+                "frequencia": {
+                  "descripcio": "string",
+                  "id": 0
+                },
+                "id": 0,
+                "risc": {
+                  "descripcio": "string",
+                  "id": 0,
+                  "value": 0
+                }
+              }
+            ],
+            "evidencia": "string",
+            "gravetat": {
+              "descripcio": "string",
+              "id": 0
+            },
+            "id": 0
+          }
+        ],
+        "altRisc": 0,
+        "definicio": "string",
+        "id": 0,
+        "risc": 0,
+        "social": "string",
+        "vulnerabilitat": 0
+      },
+      "unitatFamiliar": true
+    }
+  ],
+  "professional": {
+    "cognom1": "string",
+    "cognom2": "string",
+    "id": 0,
+    "municipi": {
+      "descripcio": "string",
+      "id": 0
+    },
+    "nom": "string",
+    "rol": [
       {
-        "relation": "Pare",
-        "sex": "Home",
-        "birthday": "02/09/1980",
-        "register": "01/01/2019",
-        "unsubscribe": "",
-        "personRef": true
-      },{
-        "relation": "Mare",
-        "sex": "Dona",
-        "birthday": "02/09/1980",
-        "register": "01/01/2019",
-        "unsubscribe": "",
-        "personRef": false
-      },{
-        "relation": "Fill",
-        "sex": "Home",
-        "birthday": "02/09/1980",
-        "register": "01/01/2019",
-        "unsubscribe": "",
-        "personRef": false
-      },{
-        "relation": "Filla",
-        "sex": "Dona",
-        "birthday": "02/09/1980",
-        "register": "01/01/2019",
-        "unsubscribe": "",
-        "personRef": false
-      },{
-        "relation": "Avi",
-        "sex": "Home",
-        "birthday": "02/09/1980",
-        "register": "01/01/2019",
-        "unsubscribe": "02/01/2019",
-        "personRef": false
+        "descripcio": "string",
+        "id": 0
       }
     ]
+  },
+  "totalFamilia": 0,
+  "valoracio": {
+    "data": "2019-01-28T12:38:25.804Z",
+    "evaluacions": [
+      {
+        "ambit": {
+          "Factors_context": [
+            {
+              "descripcio": "string",
+              "fc1m": 0,
+              "fctots": 0,
+              "gravetat": {
+                "descripcio": "string",
+                "id": 0
+              },
+              "id": 0,
+              "infants": true
+            }
+          ],
+          "Items": [
+            {
+              "Items": [
+                {
+                  "Items": [
+                    {
+                      "Freqüencia": [
+                        {
+                          "evidencia": "string",
+                          "frequencia": {
+                            "descripcio": "string",
+                            "id": 0
+                          },
+                          "id": 0,
+                          "risc": {
+                            "descripcio": "string",
+                            "id": 0,
+                            "value": 0
+                          }
+                        }
+                      ],
+                      "evidencia": "string",
+                      "gravetat": {
+                        "descripcio": "string",
+                        "id": 0
+                      },
+                      "id": 0
+                    }
+                  ],
+                  "altRisc": 0,
+                  "definicio": "string",
+                  "id": 0,
+                  "risc": 0,
+                  "social": "string",
+                  "vulnerabilitat": 0
+                }
+              ],
+              "descripcio": "string",
+              "id": 0
+            }
+          ],
+          "descripcio": "string",
+          "id": 0,
+          "risc": 0,
+          "valAltrisc": 0,
+          "valRisc": 0,
+          "valVulnerabilitat": 0,
+          "vulnerabilitat": 0
+        },
+        "id": 0,
+        "risc": {
+          "descripcio": "string",
+          "id": 0,
+          "value": 0
+        },
+        "riscProfessional": {
+          "descripcio": "string",
+          "id": 0,
+          "value": 0
+        }
+      }
+    ],
+    "factors": 0,
+    "id": 0,
+    "total": 0
+  },
+  "versioModel": {
+    "data": "2019-01-28T12:38:25.804Z",
+    "id": 0,
+    "preguntaEconomica": 0,
+    "versio": "string"
+  }
 }
-

@@ -1,3 +1,25 @@
+export class Ambits {
+  ambit: Ambit [];
+}
+
+export class Ambit {
+  descripcio: string;
+  id: string;
+  items: ItemsEntorn [];
+
+}
+export class ItemsEntorn {
+  descripcio: string;
+  id: number;
+  preguntes: Pregunta [];
+}
+export class Pregunta {
+  social: string;
+  definicio: string;
+  id: number;
+
+}
+
 export class TableTabsForm {
   ssb: string;
   persona: string[] = [];
