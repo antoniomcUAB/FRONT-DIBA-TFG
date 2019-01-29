@@ -26,14 +26,6 @@
         <!-- File Owner -->
       </div>
       <div class="form-group row">
-        <!-- File Name -->
-        <div class="col-6">
-          <div class="col-12">
-            <label for="fileName" class="col-form-label">{{ "FORM.fileName" | translate }}</label>
-            <input class="form-control" type="text" value="{{expedient[0]?.nom}}" id="fileName" disabled="disabled">
-          </div>
-        </div>
-        <!--/ File Name -->
         <!-- File Date -->
         <div class="col-6">
           <div class="col-12">
@@ -226,7 +218,7 @@
               <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat === 'VALIDAT'}">
                 <a [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-eye"></i> </a>
                 <span class="px-2" *ngIf="item.estat==='BORRADOR'"> </span>
-                <a *ngIf="item.estat==='BORRADOR'" [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-pencil-square-o"> </i> </a>
+                <a *ngIf="item.estat==='BORRADOR'" [routerLink]="['/tabs', {'id': item.id,'date': item.data}]" > <i class="fa fa-pencil-square-o"> </i> </a>
               </td>
             </ng-template>
           </app-table-list>
@@ -240,7 +232,6 @@
             [schemeType]="schemeType"
             [results]="single"
             [legend]="showLegend"
-            (legendLabelClick)="1"
             [gradient]="gradient"
             [xAxis]="showXAxis"
             [yAxis]="showYAxis"
@@ -254,8 +245,7 @@
             [curve]="curve"
             [rangeFillOpacity]="rangeFillOpacity"
             [roundDomains]="roundDomains"
-            [tooltipDisabled]="true"
-            (select)="1">
+            [tooltipDisabled]="true">
         </ngx-charts-line-chart>-->
         <!--/ Chart -->
         </div>

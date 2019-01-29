@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 /* Models */
 import { Professional } from "../models/professional";
-import { Expedient } from "../../files";
+import { Diagnosis, Model } from "../../files";
 /* Service */
 import { HomeService } from '../services/home.service';
 /* Constants */
@@ -18,8 +18,9 @@ import { alphabetic, digit } from './constants';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  model: Model;
   /* Variables Professional */
-  idProfessional = 15518; /* TODO - Petición id Profesional */
+  idProfessional = 16220; /* TODO - Petición id Profesional */
   professional: Professional;
   /* Variables Table */
   data: any[] = [];
@@ -27,20 +28,22 @@ export class HomeComponent {
   closeResult: string;
 
   /* Variables Modal */
-  newFile: Expedient = new Expedient;
-  mask = ['E', 'X', 'P', digit, digit, digit, digit, '/', digit, digit, digit, digit, digit];
-  maskPlaceholder = 'EXP0000/00000';
+  newFile: Diagnosis = new Diagnosis;
+  mask = ['E', 'X', 'P', digit, digit, digit, digit, '-', digit, digit, digit, digit, digit];
+  maskPlaceholder = 'EXP0000-00000';
   codeHestia = 0;
 
   constructor(private _service: HomeService,
               private _router: Router,
               private _translateService: TranslateService,
               private modalService: NgbModal) {
+    /* Get Last version Model */
+    this.getModel();
     /* Get Professional Data */
     this.getProfessionalData(this.idProfessional);
     /* Set Table List of Files */
     this.options.setColumns([{
-        name: 'codi',
+        name: 'expedient',
         title: this._translateService.instant('TABLE.files'),
         sortable: true,
         filterable: true
@@ -119,12 +122,22 @@ export class HomeComponent {
 
   /* Create File (Expedient )*/
   createExpedient(expedient) {
-    this.newFile.profesional = this.professional;
-    this.newFile.codi = expedient;
-    this._service.createFile(this.newFile).subscribe((result) => {
-      this._router.navigate(['/file-detail', {'id': this.newFile.codi}]);
+    this.newFile.expedient = expedient;
+    this.newFile.professional = this.professional;
+    this._service.createFile(this.newFile, this.model.id).subscribe((result) => {
+      console.log(result);
+      this._router.navigate(['/file-detail', {'codi': result.expedient}]);
     }, (err) => {
       console.log(err);
+    });
+  }
+
+  /* Get Model */
+  getModel() {
+    this._service.getModelVersion().subscribe( (data: Model) => {
+      this.model = data[0];
+    }, error => {
+      console.log("ERROR al recuperar el dato");
     });
   }
 }

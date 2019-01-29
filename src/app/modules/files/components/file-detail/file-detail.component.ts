@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilesDetailService } from '../../services/file-detail.service';
 import { Diagnosis } from '../../models/expedient';
 import { TableListOptions, TableListResponse } from '../../../../shared/modules/table-list';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { area, line, curveLinear } from 'd3-shape';
 
 export const colors = [
   '#5c6bc0', '#66bb6a', '#29b6f6', '#ffee58', '#ef5350', '#868e96'
@@ -16,13 +17,12 @@ export const colors = [
   styleUrls: ['./file-detail.component.css']
 })
 export class FileDetailComponent {
-
-  public expedient: Diagnosis;
-  public codi: string;
-  public options = new TableListOptions();
-  public optionsUF = new TableListOptions();
-  public obsData = null;
-  public dataUnityFamily = null;
+  expedient: Diagnosis;
+  codi: string;
+  options = new TableListOptions();
+  optionsUF = new TableListOptions();
+  obsData = null;
+  dataUnityFamily = null;
   closeResult: string;
 
   /* Charts */
@@ -117,7 +117,7 @@ export class FileDetailComponent {
   minRadius = 3;
 
   // line Interpolation
-  curve = 'd3-shape';
+  curve = new curveLinear;
   colorScheme = { domain: colors };
   schemeType = 'ordinal';
   rangeFillOpacity = 0.15;
@@ -139,7 +139,7 @@ export class FileDetailComponent {
     this.options.setColumns([
       {
         name: 'codi',
-        title: this._translateService.instant('TABLE.files'),
+        title: this._translateService.instant('TABLE.evaluate'),
         sortable: false
       }, {
         name: 'professional',
@@ -188,9 +188,9 @@ export class FileDetailComponent {
     this.reloadDataTable(this.codi);
   }
 
+  /* Get File (Expedient) */
   getFile() {
     this._service.getFileById(this.codi).subscribe( (data: Diagnosis) => {
-      console.log(data);
       this.expedient = data;
     }, error => {
       console.log("ERROR al recuperar el dato");
@@ -211,7 +211,6 @@ export class FileDetailComponent {
     this._service.getUnityFamily(id, this.optionsUF).subscribe((res: TableListResponse ) => {
       this.optionsUF = res.options;
       this.dataUnityFamily = res.data[res.data.length - 1].persona;
-      console.log(this.dataUnityFamily);
       this.optionsUF.loading = false;
     });
   }

@@ -2,7 +2,7 @@ import { Professional } from "../../home/models/professional";
 
 /* Expedient */
 export class Expedient {
-  codi: string;               // Codigo Expediente
+  expedient: string;          // Codigo Expediente
   nom: string;                // Nombre del Expediente
   dataCreacio: number;        // Fecha de creación
   dataValidacio: number;      // Fecha de validación

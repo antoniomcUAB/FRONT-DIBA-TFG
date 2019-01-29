@@ -26,7 +26,6 @@ export class FilesDetailService extends GlobalService {
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body;
-        console.log(data);
         options.getPagesInfo(response.body);
         return {
           data: data,
@@ -42,7 +41,6 @@ export class FilesDetailService extends GlobalService {
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body;
-        console.log(data);
         options.getPagesInfo(response.body);
         return {
           data: data,
