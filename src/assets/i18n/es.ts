@@ -7,6 +7,7 @@ export let TRANSLATION = {
 
   /*  Table */
   'TABLE': {
+    'evaluate'             : 'Valoració',
     'files'                : 'Expedient',
     'createDate'           : 'Data creació',
     'owner'                : 'Professional',
