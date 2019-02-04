@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ContextRows, EnvironmentRelacional, TabAutonomia} from '../../models/tab-class-form';
+import {Ambits, ContextRows, EnvironmentRelacional, TabAutonomia} from '../../models/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
 
 @Component({
@@ -9,8 +9,8 @@ import {TabsFormService} from '../../services/tabsForm.service';
 })
 export class AmbitRelacionalTabComponent {
 
-  data: TabAutonomia = new TabAutonomia();
-  contextData: ContextRows = new ContextRows();
+  ambits: Ambits = new Ambits();
+  context: string = 'RELACIONAL';
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
@@ -22,12 +22,8 @@ export class AmbitRelacionalTabComponent {
 
 
   reloadData() {
-    this._service.getFilesForm().subscribe((tab: TabAutonomia ) => {
-      this.data = tab;
-    });
-
-    this._service.getFilesRelacional().subscribe((contx: ContextRows) => {
-      this.contextData = contx;
+    this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
+      this.ambits = tab;
     });
   }
   public emitEnd() {

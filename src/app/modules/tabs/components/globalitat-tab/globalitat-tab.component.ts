@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ContextRows, TabAutonomia} from '../../models/tab-class-form';
+import {Ambits, ContextRows, TabAutonomia} from '../../models/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
 
 @Component({
@@ -8,7 +8,7 @@ import {TabsFormService} from '../../services/tabsForm.service';
   styleUrls: ['./globalitat-tab.component.scss']
 })
 export class GlobalitatTabComponent implements OnInit{
-  contextData: ContextRows = new ContextRows();
+  ambits: Ambits = new Ambits();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output() tabActivated: EventEmitter <void> = new EventEmitter();
@@ -25,8 +25,8 @@ export class GlobalitatTabComponent implements OnInit{
 
 
   reloadData() {
-    this._service.getFilesRelacional().subscribe((contx: ContextRows) => {
-      this.contextData = contx;
+    this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
+      this.ambits = tab;
     });
   }
   public emitEnd() {

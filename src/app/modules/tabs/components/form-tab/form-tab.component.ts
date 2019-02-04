@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ContextRows, EnvironmentMaterial, EnvironmentRelacional, RowsQuest, TabAutonomia} from '../../models/tab-class-form';
+import {Ambits, ContextRows, EnvironmentMaterial, EnvironmentRelacional, RowsQuest} from '../../models/tab-class-form';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -12,13 +12,17 @@ export class FormTabComponent implements OnInit {
   closeResult: string;
   cleanSelects: string = null;
   @ViewChild('formTab') formValues;
-  @Input() data: TabAutonomia = new TabAutonomia();
+  @Input() data: Ambits = new Ambits();
   @Input () groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
   @Input () groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
-  @Input() context: ContextRows = new ContextRows();
-  @Input() DataBack: TabAutonomia = new TabAutonomia();
+  @Input () contextualitzacio: string;
+  selectorTest: {
+    severity: string;
+    preguntaID: number;
+  };
+  lista: number[] = [1, 2 , 3 , 4 , 5 , 6 , 7];
 
   constructor(private modalService: NgbModal) {
 

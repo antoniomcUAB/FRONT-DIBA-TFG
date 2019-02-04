@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {Context, ContextRows, TabAutonomia} from '../../models/tab-class-form';
+import {Ambits, ContextRows, TabAutonomia} from '../../models/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
 
 
@@ -9,9 +9,8 @@ import {TabsFormService} from '../../services/tabsForm.service';
   styleUrls: ['./ambit-autonomia-tab.component.scss']
 })
 export class AmbitAutonomiaTabComponent {
-
-  data: TabAutonomia = new TabAutonomia();
-  contextData: ContextRows = new ContextRows();
+  ambits: Ambits = new Ambits();
+  context: string = 'Autonomia';
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output () active: EventEmitter<boolean> = new EventEmitter();
@@ -28,13 +27,8 @@ export class AmbitAutonomiaTabComponent {
     this.active.emit(true);
   }
   reloadData() {
-    this._service.getFilesForm().subscribe((tab: TabAutonomia ) => {
-      this.data = tab;
-    });
-
-    this._service.getFilesRelacional().subscribe((contx: ContextRows) => {
-      this.contextData = contx;
-
+    this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
+      this.ambits = tab;
     });
   }
   public emitBefore() {

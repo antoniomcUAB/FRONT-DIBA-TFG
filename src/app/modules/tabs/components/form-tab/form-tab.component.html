@@ -1,347 +1,362 @@
 
-  <!-- titulo -->
+<!-- titulo -->
 
-  <div class="form-group col-12 ">
-    <div class="form-group col-12 bg-grey-500" >
+<div class="form-group col-12 ">
+  <div class="form-group col-12 bg-grey-500" >
     <label for="ssb" style="color: white;" >{{ "TABTITLE.titleAutonomia" | translate }} </label>
-    </div>
   </div>
-  <div class="form-group col-12">
-    <div class="form-group col-12 text-right">
+</div>
+<div class="form-group col-12">
+  <div class="form-group col-12 text-right">
     <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
-    </div>
-    <br>
   </div>
+  <br>
+</div>
 
-  <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-unsubscribe"><span class="text-primary">ALERTA</span></h4>
-    </div>
-    <form>
-      <div class="modal-body">
-        <div class="form-group">
-          <label >Es perdran els canvis no guardats <span class="text-primary"></span></label>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-unsubscribe"><span class="text-primary">ALERTA</span></h4>
+  </div>
+  <form>
+    <div class="modal-body">
+      <div class="form-group">
+        <label >Es perdran els canvis no guardats <span class="text-primary"></span></label>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-outline-dark" (click)="emitBefore();modal.dismiss('Cross click')">Tornar pagina anterior</button>
         <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
       </div>
-      </div>
-    </form>
-  </ng-template>
-
-  <ng-template #valoration let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id=""><span class="text-primary">La família/unitat conviència té dificultats per:</span></h4>
     </div>
+  </form>
+</ng-template>
 
-    <form>
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"><b>1.</b> Pagar les factures d'habitatge o serveis públics</span>
-          </label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"><b>2</b>. Mantenir la llar adequadament calenta.</span>
-          </label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"><b>3</b>. Assumir despeses inesperades.</span>
-          </label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"><b>4</b>. Menjar carn o les proteïnes de forma regular.</span>
-          </label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"><b>5</b>. Anar de vacances.</span>
-          </label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"><b>6</b>. Disposar de cotxe.</span>
-          </label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"><b>7</b>. Disposar de rentadora.</span>
-          </label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"><b>8</b>. Disposar de connexió a internet.</span>
-          </label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description"><b>9</b>. Disposar de telèfon mòbil</span>
-          </label>
-        </div>
-      </div>
-      <div class="modal-header">
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description">  Existeix una xarxa familiar/relacional disposada a oferir suport econòmic?</span>
-          </label>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-            <span class="custom-control-label"></span>
-            <span class="custom-control-description">  Les dificultats en l'àmbit econòmic són contïnuades i sense possiblitat de canvi o millora en el curt termini?</span>
-          </label>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Guardar</button>
-          <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
-        </div>
-    </form>
-  </ng-template>
+<ng-template #valoration let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id=""><span class="text-primary">La família/unitat conviència té dificultats per:</span></h4>
+  </div>
 
-  <!--/ titulo -->
+  <form>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description"><b>1.</b> Pagar les factures d'habitatge o serveis públics</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description"><b>2</b>. Mantenir la llar adequadament calenta.</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description"><b>3</b>. Assumir despeses inesperades.</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description"><b>4</b>. Menjar carn o les proteïnes de forma regular.</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description"><b>5</b>. Anar de vacances.</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description"><b>6</b>. Disposar de cotxe.</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description"><b>7</b>. Disposar de rentadora.</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description"><b>8</b>. Disposar de connexió a internet.</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description"><b>9</b>. Disposar de telèfon mòbil</span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-header">
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description">  Existeix una xarxa familiar/relacional disposada a oferir suport econòmic?</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label"></span>
+          <span class="custom-control-description">  Les dificultats en l'àmbit econòmic són contïnuades i sense possiblitat de canvi o millora en el curt termini?</span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Guardar</button>
+      <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
+    </div>
+  </form>
+</ng-template>
+
+<!--/ titulo -->
 <form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()">
   <div class="card-body ">
 
-      <ng-container *ngFor="let item of data.tableTabsForms; let i = index; " >
-      <ng-container *ngIf="(groupRelacional.social && item.entorn === 'social' )
-      || (groupRelacional.family && item.entorn === 'family')
-      || (groupRelacional.school && item.entorn === 'school')
-      ||(groupMaterial.house && item.entorn === 'house' )
-      || (groupMaterial.economic && item.entorn === 'economic')
-      || (groupMaterial.work && item.entorn === 'work')
-       || (item.entorn==='Basic' && !groupRelacional.school && !groupRelacional.family
+    <ng-container *ngFor="let ambit of data.ambits;">
+      <ng-container *ngFor="let entorn of ambit.entorns;">
+        <ng-container *ngIf="(groupRelacional.social && entorn.descripcio === 'Entorn Social' )
+      || (groupRelacional.family && entorn.descripcio === 'Entorn Familiar')
+      || (groupRelacional.school && entorn.descripcio === 'Entorn Escolar')
+      ||(groupMaterial.house && entorn.descripcio === 'Entorn habitatge' )
+      || (groupMaterial.economic && entorn.descripcio === 'Entorn Económic')
+      || (groupMaterial.work && entorn.descripcio === 'Entorn Laboral')
+       || (entorn.descripcio==='Autonomia' && !groupRelacional.school && !groupRelacional.family
       && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house) ">
 
-
-      <div class="form-group row bg-grey-300 border border-top border-bottom">
-      <!-- Situacion social Basica -->
-      <div class="form-group col-4">
-        <label class="col-12" for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class= "fa fa-question-circle" aria-hidden="true" [ngbPopover]="item.help" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="item.ssb"></i></label>
-        <input  *ngIf="!item.ssb.includes('Ingressos insuficients (E.2)')" type="text" class="form-control " [value]= "item.ssb " disabled  >
-        <!-- situacio social De Ingressos insuficients-->
-        <div *ngIf="item.ssb.includes('Ingressos insuficients (E.2)')" class="form-group row col-12">
-        <input  type="text" class="form-control col-9 " id="" [value]= "item.ssb " disabled >
-        <button type="button" class=" col-3 btn btn-outline-primary" (click)="open(valoration)" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
-        </div>
-        <!--/ situacio social De Ingressos insuficients-->
-
-
-      </div>
-      <!--/ Situacion social Basica -->
-
-      <!-- Aplicatiu -->
-      <div class="col-xs-1">
-        <div class="col-12">
-          <div class="form-group align-items-center col-12 ">
-            <label > {{ "TABLE.apl" | translate }}</label>
-            <label class="custom-control custom-checkbox  ">
-              <input type="checkbox" class="custom-control-input position-relative" [(ngModel)]="item.apl" name="aplica" >
-              <span class="custom-control-label"></span>
-              <span class="custom-control-description"></span>
-            </label>
-          </div>
-        </div>
-      </div>
+          <ng-container *ngFor="let pregunta of entorn.preguntes; let i = index; " >
+            <div class="form-group row bg-grey-300 border border-top border-bottom">
+              <!-- Situacion social Basica -->
+              <div class="form-group col-4">
+                <label class="col-12" for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class= "fa fa-question-circle" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.definicio"></i></label>
+                <input  *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')" type="text" class="form-control " [value]= "pregunta.social " disabled  >
+                <!-- situacio social De Ingressos insuficients-->
+                <div *ngIf="pregunta.social.includes('Ingressos insuficients (E.2)')" class="form-group row col-12">
+                  <input  type="text" class="form-control col-9 "[value]= "pregunta.social " disabled >
+                  <button type="button" class=" col-3 btn btn-outline-primary" (click)="open(valoration)" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
+                </div>
+                <!--/ situacio social De Ingressos insuficients-->
 
 
-      <!--/ Aplicatiu -->
+              </div>
+              <!--/ Situacion social Basica -->
 
-      <!-- Persones -->
-      <div class="col-2">
-        <div class="col-12">
-          <label for="t1person" >{{ "TABLE.person" | translate }} </label>
-          <div class="input-group mb-2 mr-sm-2">
-            <div class="input-group-prepend">
-              <div *ngIf="item.apl" class="input-group-text " (click)="addRow(i,item.ssb) ">
-                <i class="fa fa-user-plus " > </i>
+              <!-- Aplicatiu -->
+              <div class="col-xs-1">
+                <div class="col-12">
+                  <div class="form-group align-items-center col-12 ">
+                    <label > {{ "TABLE.apl" | translate }}</label>
+                    <label class="custom-control custom-checkbox  ">
+                      <input type="checkbox" class="custom-control-input position-relative"  [(ngModel)]="pregunta.apl" name="aplica" >
+                      <span class="custom-control-label"></span>
+                      <span class="custom-control-description"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+
+              <!--/ Aplicatiu -->
+
+              <!-- Persones -->
+              <div class="col-2">
+                <div class="col-12">
+                  <label for="t1person" >{{ "TABLE.person" | translate }} </label>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                      <div *ngIf="pregunta.apl" class="input-group-text " (click)="addRow(i,pregunta.social) ">
+                        <i class="fa fa-user-plus " > </i>
+                      </div>
+                    </div>
+
+                    <select class="form-control" id="t2person" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!pregunta.apl" >
+                      <option disabled selected value ></option>
+                      <option> 2 </option>
+                      <option> 3 </option>
+                      <option> 4 </option>
+                      <option> 5 </option>
+                      <option> 6 </option>
+                    </select>
+                  </div>
+
+                </div>
+              </div>
+
+              <!--/ Persones -->
+
+              <!-- Severity -->
+              <ng-template #popContentSeverity></ng-template>
+              <div class="col-xs-2">
+                <div class="col-12">
+                  <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentSeverity placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
+                  <select class="form-control" id="t2severity" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!pregunta.apl"  >
+                    <option disabled selected value></option>
+                    <option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>
+                  </select>
+                </div>
+              </div>
+              <!--/ Severity -->
+              <!-- Frequencia -->
+              <ng-template #popContentFrequency></ng-template>
+              <div class="col-2">
+                <div class="col-12">
+                  <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentFrequency placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
+                  <select class="form-control" id="t2frequency" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!pregunta.apl">
+                    <ng-container *ngFor="let gravedades of pregunta.selectors ">
+                      <option disabled selected value></option>
+                      <option *ngFor="let frequencia of gravedades.frequencia"> {{frequencia.frequencia.descripcio}}  </option>
+                    </ng-container>
+                  </select>
+                </div>
+              </div>
+              <!--/ Frequencia -->
+              <!-- riskFactors -->
+              <div class="form-group col-2">
+                <label for="t1riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
+                <input type="text" class="form-control" id="t1riskFactor"  disabled>
+              </div>
+
+              <!-- Bucle for para cada fila  -->
+              <ng-container *ngFor="let method of rows ; let x= index;">
+                <ng-container *ngIf="method.id === i">
+                  <!-- Situacio Social-->
+                  <div class="form-group col-4">
+                  </div>
+                  <!--/ Situacio Social-->
+
+                  <!--Aplicatiu -->
+                  <div class="col-xs-1">
+                    <div class="col-12">
+                      <div class="form-group align-items-center col-12 ">
+                        <label class="custom-control custom-checkbox position-relative">
+
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/ Aplicatiu -->
+
+                  <!-- Persones -->
+                  <!--<div class="col-2">-->
+                  <!--<div class="col-12">-->
+                  <!--<div class="input-group mb-2 mr-sm-2">-->
+                  <!--<select class="form-control" id="t2person-${{x}}" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!item.apl">-->
+                  <!--<option disabled selected value></option>-->
+                  <!--<option *ngFor="let option of item.persona "> {{option.persona}} </option>-->
+                  <!--</select>-->
+                  <!--</div>-->
+
+                  <!--</div>-->
+                  <!--</div>-->
+
+                  <!--/ Persones -->
+
+                  <!-- Severity -->
+
+
+                  <div class="col-xs-2">
+                    <div class="col-12">
+                      <select class="form-control" id="t1severity" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!pregunta.apl" [(ngModel)]="selectorTest" >
+                        <option disabled selected value></option>
+                        <option *ngFor="let option of pregunta.selectors" > {{option.gravetat.descripcio}} </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/ Severity -->
+                  <!-- Frequencia -->
+                  <div class="col-2">
+                    <div class="col-12">
+
+                      <select class="form-control" id="t1frequency" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="">
+                        <ng-container *ngFor="let gravedades of pregunta.selectors">
+                          <option disabled selected value></option>
+                          <option *ngFor="let frequencia of gravedades.frequencia"> {{frequencia.frequencia.descripcio}}  </option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/ Frequencia -->
+                  <!-- riskFactors -->
+                  <div class="form-group col-2">
+                    <input type="text" class="form-control" id="t5riskFactor"  disabled>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <br>
+    <div class="form-group row bg-grey-300">
+      <ng-container *ngFor="let ambit of data.ambits;">
+        <ng-container *ngFor="let cont of ambit.factors_context">
+          <ng-container *ngIf="cont.ambit.descripcio === contextualitzacio">
+            <!-- Situacion social Basica -->
+            <div class="form-group col-6">
+              <label for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
+              <input type="text" class="form-control" id="ssb" value="{{cont.descripcio}}" disabled>
+            </div>
+            <!--/ Situacion social Basica -->
+
+
+            <!-- Aplicatiu -->
+            <div class="col-xs-1">
+              <div class="col-12">
+                <div class="form-group align-items-center col-12 ">
+                  <label > {{ "TABLE.apl" | translate }}</label>
+                  <label class="custom-control custom-checkbox  ">
+                    <input type="checkbox" class="custom-control-input position-relative" [(ngModel)]="cont.apl" name="aplicaContext" >
+                    <span class="custom-control-label"></span>
+                    <span class="custom-control-description"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!--/ Aplicatiu -->
+
+            <!-- Persones -->
+            <div class="col-2">
+              <div class="col-12">
+                <label for="t1person">{{ "TABLE.person" | translate }} </label>
+                <select class="form-control" id="t1person" [required]="cont.apl" [value]="cleanSelects" [disabled]="!cont.apl">
+                  <option disabled selected value></option>
+                  <!--<option *ngFor="let option of ambit "> {{option}} </option>-->
+                </select>
               </div>
             </div>
 
-            <select class="form-control" id="t2person" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl" >
-              <option disabled selected value  ></option>
-              <option *ngFor="let option of item.persona "> {{option.persona}} </option>
-            </select>
-          </div>
+            <!--/ Persones -->
 
-        </div>
-      </div>
+            <!-- Severity -->
 
-      <!--/ Persones -->
 
-      <!-- Severity -->
-        <ng-template #popContentSeverity><b>Baixa:</b> Necessita suport/atenció/supervisió en algun moment puntual de la setmana/dia. <br> <b>Moderada:</b> Necessita suport/atenció/supervisió per les activitats de la vida diària. <br><b>Alta:</b> Necessita atenció/supervisió continua les 24h!</ng-template>
-
-      <div class="col-xs-2">
-        <div class="col-12">
-          <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentSeverity placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
-          <select class="form-control" id="t1severity" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
-            <option disabled selected value></option>
-            <option *ngFor="let option of item.gravetat "> {{option.gravetat}}  </option>
-          </select>
-        </div>
-      </div>
-      <!--/ Severity -->
-      <!-- Frequencia -->
-        <ng-template #popContentFrequency><b>Ocasional:</b> Pèrdua sobtada per causes sobrevingudes i possiblitats de millora.<br> <b>Continua:</b> Crònica, sense possiblitats de millora.</ng-template>
-      <div class="col-2">
-        <div class="col-12">
-          <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentFrequency placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
-          <select class="form-control" id="t1frequency" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
-            <option disabled selected value></option>
-            <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
-          </select>
-        </div>
-      </div>
-      <!--/ Frequencia -->
-      <!-- riskFactors -->
-      <div class="form-group col-2">
-        <label for="t1riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
-        <input type="text" class="form-control" id="t1riskFactor"  disabled>
-      </div>
-
-      <!-- Bucle for para cada fila  -->
-      <ng-container *ngFor="let method of rows ; let x= index;">
-        <ng-container *ngIf="method.id === i">
-        <!-- Situacio Social-->
-        <div class="form-group col-4">
-        </div>
-        <!--/ Situacio Social-->
-
-        <!--Aplicatiu -->
-        <div class="col-xs-1">
-          <div class="col-12">
-            <div class="form-group align-items-center col-12 ">
-                <label class="custom-control custom-checkbox position-relative">
-
-                </label>
+            <div class="col-2">
+              <div class="col-12">
+                <label for="t1severity">{{ "TABLE.types" | translate }}</label>
+                <select class="form-control" id="t1severity" [required]="cont.apl" [value]="cleanSelects" [disabled]="!cont.apl" >
+                  <option disabled selected value></option>
+                  <!--<option *ngFor="let gravetat of cont. "> {{gravetat.descripcio}} </option>-->
+                </select>
+              </div>
             </div>
-          </div>
-        </div>
-        <!--/ Aplicatiu -->
-
-        <!-- Persones -->
-        <div class="col-2">
-          <div class="col-12">
-            <div class="input-group mb-2 mr-sm-2">
-              <select class="form-control" id="t2person-${{x}}" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
-                <option disabled selected value></option>
-                <option *ngFor="let option of item.persona "> {{option.persona}} </option>
-              </select>
-            </div>
-
-          </div>
-        </div>
-
-        <!--/ Persones -->
-
-        <!-- Severity -->
-
-
-        <div class="col-xs-2">
-          <div class="col-12">
-
-            <select class="form-control" id="t1severity" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
-              <option disabled selected value></option>
-              <option *ngFor="let option of item.gravetat "> {{option.gravetat}} </option>
-            </select>
-          </div>
-        </div>
-        <!--/ Severity -->
-        <!-- Frequencia -->
-        <div class="col-2">
-          <div class="col-12">
-
-            <select class="form-control" id="t1frequency" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
-              <option disabled selected value></option>
-              <option *ngFor="let option of item.frequencia "> {{option.frequencia}} </option>
-            </select>
-          </div>
-        </div>
-        <!--/ Frequencia -->
-        <!-- riskFactors -->
-        <div class="form-group col-2">
-          <input type="email" class="form-control" id="t1riskFactor"  disabled>
-        </div>
+            <!--/ Severity -->
+            <!--/ FACTOR DE CONTEXTUALITZACIO -->
+            <!--/  riskFactors -->
+          </ng-container>
         </ng-container>
-        </ng-container>
-      </div>
       </ng-container>
-      </ng-container>
-      <br>
-      <div *ngFor="let item of context.contextRows;" class="form-group row bg-grey-300">
-        <!-- Situacion social Basica -->
-        <div class="form-group col-6">
-          <label for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
-          <input type="email" class="form-control" id="ssb" value="{{item.fdc}}" disabled>
-        </div>
-        <!--/ Situacion social Basica -->
-
-
-        <!-- Aplicatiu -->
-        <div class="col-xs-1">
-          <div class="col-12">
-            <div class="form-group align-items-center col-12 ">
-              <label > {{ "TABLE.apl" | translate }}</label>
-              <label class="custom-control custom-checkbox  ">
-                <input type="checkbox" class="custom-control-input position-relative" [(ngModel)]="item.apl" name="aplicaContext" >
-                <span class="custom-control-label"></span>
-                <span class="custom-control-description"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <!--/ Aplicatiu -->
-
-        <!-- Persones -->
-        <div class="col-2">
-          <div class="col-12">
-            <label for="t1person">{{ "TABLE.person" | translate }} </label>
-            <select class="form-control" id="t1person" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl">
-              <option disabled selected value></option>
-              <option *ngFor="let option of item.persona "> {{option.persona}} </option>
-            </select>
-          </div>
-        </div>
-
-        <!--/ Persones -->
-
-        <!-- Severity -->
-
-
-        <div class="col-2">
-          <div class="col-12">
-            <label for="t1severity">{{ "TABLE.types" | translate }}</label>
-            <select class="form-control" id="t1severity" [required]="item.apl" [value]="cleanSelects" [disabled]="!item.apl" >
-              <option disabled selected value></option>
-              <option *ngFor="let option of item.tipo "> {{option.tipo}} </option>
-            </select>
-          </div>
-        </div>
-        <!--/ Severity -->
-        <!--/ FACTOR DE CONTEXTUALITZACIO -->
-        <!--/  riskFactors -->
-      </div>
+    </div>
   </div>
-    <div class="form-group col-12">
-      <div class="form-group col-6 float-left">
-        <button type="button" class="btn btn-danger" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Netejar </button>
-      </div>
-      <div class="form-group col-6 float-right text-right">
-        <button  type="submit"  class="btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>
-      </div>
-
+  <div class="form-group col-12">
+    <div class="form-group col-6 float-left">
+      <button type="button" class="btn btn-danger" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Netejar </button>
+    </div>
+    <div class="form-group col-6 float-right text-right">
+      <button  type="submit"  class="btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>
     </div>
 
-      </form>
+  </div>
+
+</form>
 
 

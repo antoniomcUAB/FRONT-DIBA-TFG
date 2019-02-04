@@ -71,7 +71,7 @@ export class Preguntes {
 }
 export class Valoracio {
   data: string;
-  evaluacions: Evaluacions;
+  evaluacions: Evaluacions [];
   id: number;
   factors: number;
   total: number;

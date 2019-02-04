@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ContextRows, EnvironmentMaterial, EnvironmentRelacional, TabAutonomia} from '../../models/tab-class-form';
+import {Ambits, ContextRows, EnvironmentMaterial, EnvironmentRelacional, TabAutonomia} from '../../models/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
 
 @Component({
@@ -8,8 +8,8 @@ import {TabsFormService} from '../../services/tabsForm.service';
   styleUrls: ['./ambit-material-tab.component.scss']
 })
 export class AmbitMaterialTabComponent {
-  data: TabAutonomia = new TabAutonomia();
-  contextData: ContextRows = new ContextRows();
+  ambits: Ambits = new Ambits();
+  context: string = 'MATERIAL I INSTRUMENTAL';
   @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
@@ -21,12 +21,8 @@ export class AmbitMaterialTabComponent {
 
 
   reloadData() {
-    this._service.getFilesForm().subscribe((tab: TabAutonomia ) => {
-      this.data = tab;
-    });
-
-    this._service.getFilesRelacional().subscribe((contx: ContextRows) => {
-      this.contextData = contx;
+    this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
+      this.ambits = tab;
     });
   }
   public emitEnd() {
