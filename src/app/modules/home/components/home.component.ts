@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 /* Models */
 import { Professional } from "../models/professional";
-import { Diagnosis, Model } from "../../files";
+import { Expedient } from "../../files";
 /* Service */
 import { HomeService } from '../services/home.service';
 /* Constants */
@@ -18,9 +18,8 @@ import { alphabetic, digit } from './constants';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  model: Model;
   /* Variables Professional */
-  idProfessional = 16220; /* TODO - Petición id Profesional */
+  idProfessional = 17118; /* TODO - Petición id Profesional */
   professional: Professional;
   /* Variables Table */
   data: any[] = [];
@@ -28,7 +27,7 @@ export class HomeComponent {
   closeResult: string;
 
   /* Variables Modal */
-  newFile: Diagnosis = new Diagnosis;
+  newFile: Expedient = new Expedient;
   mask = ['E', 'X', 'P', digit, digit, digit, digit, '-', digit, digit, digit, digit, digit];
   maskPlaceholder = 'EXP0000-00000';
   codeHestia = 0;
@@ -37,13 +36,11 @@ export class HomeComponent {
               private _router: Router,
               private _translateService: TranslateService,
               private modalService: NgbModal) {
-    /* Get Last version Model */
-    this.getModel();
     /* Get Professional Data */
     this.getProfessionalData(this.idProfessional);
-    /* Set Table List of Files */
+    /* Set Options Table List of Files */
     this.options.setColumns([{
-        name: 'expedient',
+        name: 'codi',
         title: this._translateService.instant('TABLE.files'),
         sortable: true,
         filterable: true
@@ -104,40 +101,35 @@ export class HomeComponent {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return  `with: ${reason}`;
+      }
     }
-  }
 
   /* Function Select Onchange */
   onChangeHestia(event) {
+    this.newFile.codi = '';
     this.codeHestia = event;
   }
 
   /* Create File (Expedient )*/
-  createExpedient(expedient) {
-    this.newFile.expedient = expedient;
+  createExpedient(codi) {
+    /* Set Variables */
+    this.newFile.codi = codi;
     this.newFile.professional = this.professional;
-    this._service.createFile(this.newFile, this.model.id).subscribe((result) => {
-      console.log(result);
-      this._router.navigate(['/file-detail', {'codi': result.expedient}]);
+    console.log(this.newFile);
+    /* Subscribe to Create */
+    this._service.createFile(this.newFile).subscribe((result) => {
+      this._router.navigate(['/file-detail', {'id': result.id}]);
     }, (err) => {
       console.log(err);
     });
   }
 
-  /* Get Model */
-  getModel() {
-    this._service.getModelVersion().subscribe( (data: Model) => {
-      this.model = data[0];
-    }, error => {
-      console.log("ERROR al recuperar el dato");
-    });
-  }
+
 }

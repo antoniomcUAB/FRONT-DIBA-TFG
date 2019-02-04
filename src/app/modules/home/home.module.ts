@@ -8,7 +8,6 @@ import {RouterModule} from '@angular/router';
 import {HomeRoutes} from './home.routing';
 import {HomeService} from './services/home.service';
 
-
 @NgModule({
   imports: [
     SharedModule,

@@ -12,7 +12,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="fileId" class="col-form-label">{{ "FORM.fileId" | translate }}</label>
-            <input class="form-control" type="text" value="{{expedient[0]?.expedient}}" id="fileId" disabled="disabled">
+            <input class="form-control" type="text" value="{{expedient?.codi}}" id="fileId" disabled="disabled">
           </div>
         </div>
         <!--/ File ID -->
@@ -20,7 +20,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="owner" class="col-form-label">{{ "FORM.fileOwner" | translate }}</label>
-            <input class="form-control" type="text" value="{{expedient[0]?.professional?.nom}} {{expedient[0]?.professional?.cognom1}} {{expedient[0]?.professional?.cognom2}}" id="owner" disabled="disabled">
+            <input class="form-control" type="text" value="{{expedient?.professional?.nom}} {{expedient?.professional?.cognom1}} {{expedient?.professional?.cognom2}}" id="owner" disabled="disabled">
           </div>
         </div>
         <!-- File Owner -->
@@ -30,7 +30,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="fileDate" class="col-form-label">{{ "FORM.fileDate" | translate }}</label>
-            <input class="form-control" type="text" value="{{expedient[0]?.data | date:'dd/MM/yyyy'}}" id="fileDate" disabled="disabled">
+            <input class="form-control" type="text" value="{{expedient?.dataCreacio | date:'dd/MM/yyyy'}}" id="fileDate" disabled="disabled">
           </div>
         </div>
         <!--/ File Date -->
@@ -38,7 +38,7 @@
         <div class="col-6">
           <div class="col-12">
             <label for="totalFamilia" class="col-form-label">{{ "FORM.totalFamilia" | translate }}</label>
-            <input class="form-control" type="text" value="{{expedient[0]?.totalFamilia}}" id="totalFamilia" disabled="disabled">
+            <input class="form-control" type="text" value="{{expedient?.totalFamilia}}" id="totalFamilia" disabled="disabled">
           </div>
         </div>
         <!--/ File Family -->
@@ -53,7 +53,7 @@
                             [rowTemplate]="unityFamily"
                             (reloadData)="reloadDataTable()">
 
-              <ng-template #unityFamily let-item>
+              <ng-template #unityFamily let-item >
                   <td class="text-center" [ngClass]="{'info' : item.referencia === true}">
                     {{item.tipusPersona.descripcio}} <i *ngIf="item.referencia === true" class="icon ion-information-circled float-left" placement="right" ngbTooltip="Persona de referencia"></i>
                   </td>
@@ -92,9 +92,7 @@
                             <label for="date-unsubscribe">{{ "TABLE.newRef" | translate }} <span class="text-primary">*</span></label>
                             <div class="input-group">
                               <select id="new-person-ref" class="form-control">
-                                <option>Mare</option>
-                                <option>Fill</option>
-                                <option>Filla</option>
+                                <option *ngFor="let member of expedient?.persona" value="{{ member }}">{{ member.tipusPersona.descripcio }}</option>
                               </select>
                             </div>
                           </div>
@@ -130,7 +128,7 @@
               <div class="modal-body">
                 <div class="form-group">
                   <label class="custom-control custom-checkbox">
-                    <input id="person-ref" type="checkbox" class="custom-control-input">
+                    <input id="person-ref" name="referencia" type="checkbox" class="custom-control-input" [(ngModel)]="member.referencia">
                     <span class="custom-control-label">{{ "TABLE.isPersonRef" | translate }}</span>
                     <span class="custom-control-description"></span>
                   </label>
@@ -138,27 +136,21 @@
                 <div class="form-group">
                   <label for="date-register">{{ "TABLE.dataRegister" | translate }} <span class="text-primary">*</span></label>
                   <div class="input-group">
-                    <input id="date-register" class="form-control" placeholder="dd-mm-yyyy" type="date">
+                    <input id="date-register" name="dataAlta" class="form-control" placeholder="dd-mm-yyyy" type="date" [(ngModel)]="member.dataAlta">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="relation-register">{{ "TABLE.relation" | translate }} <span class="text-primary">*</span></label>
                   <div class="input-group">
-                    <select id="relation-register" class="form-control">
-                      <option>Mare</option>
-                      <option>Fill</option>
-                      <option>Filla</option>
-                      <option>Avi</option>
-                      <option>Avia</option>
-                      <option>Tiet</option>
-                      <option>Tieta</option>
+                    <select id="relation-register" name="tipusPersona" class="form-control" [(ngModel)]="member.tipusPersona">
+                      <option *ngFor="let type of personType" [ngValue]="type"> {{ type.descripcio }}</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="sex-register">{{ "TABLE.sex" | translate }} <span class="text-primary">*</span></label>
                   <div class="input-group">
-                    <select id="sex-register" class="form-control">
+                    <select id="sex-register" name="sexe" class="form-control" [(ngModel)]="member.sexe">
                       <option>Home</option>
                       <option>Dona</option>
                     </select>
@@ -167,12 +159,12 @@
                 <div class="form-group">
                   <label for="date-birthday">{{ "TABLE.birthday" | translate }} <span class="text-primary">*</span></label>
                   <div class="input-group">
-                    <input id="date-birthday" class="form-control" placeholder="dd-mm-yyyy" type="date">
+                    <input id="date-birthday" name="dataNaixement" class="form-control" placeholder="dd-mm-yyyy" type="date" [(ngModel)]="member.dataNaixement">
                   </div>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">
+                <button type="submit" class="btn btn-outline-dark" (click)="createMember(member); modal.close('Save click')">
                   {{ "FORM.save" | translate }}
                 </button>
                 <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -192,7 +184,7 @@
           <label for="fileObservation" class="col-form-label">
             <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
           </label>
-          <textarea class="form-control cdk-textarea-autosize-measuring" rows="3" type="text" value="{{ expedient[expedient?.length - 1].observacions }}" id="fileObservation"></textarea>
+          <textarea class="form-control cdk-textarea-autosize-measuring" rows="3" type="text" value="{{ expedient?.diagnostic[expedient.diagnostic.length - 1]?.observacions }}" id="fileObservation"></textarea>
         </div>
       </div>
       <!--/ File Observation -->
@@ -213,12 +205,12 @@
                           [rowTemplate]="myRowInitDysplay"
                           (reloadData)="reloadData()">
             <ng-template #myRowInitDysplay let-item>
-              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat === 'VALIDAT'}">DSDIBA-{{item.data | date:'dd/MM/yyyy'}}</td>
-              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat === 'VALIDAT'}">{{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}</td>
-              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat === 'VALIDAT'}">
-                <a [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-eye"></i> </a>
-                <span class="px-2" *ngIf="item.estat==='BORRADOR'"> </span>
-                <a *ngIf="item.estat==='BORRADOR'" [routerLink]="['/tabs', {'id': item.id,'date': item.data}]" > <i class="fa fa-pencil-square-o"> </i> </a>
+              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">DSDIBA-{{item.data | date:'dd/MM/yyyy'}}</td>
+              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}"><!--{{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}--></td>
+              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
+                <a *ngIf="item.estat.descripcio === 'VALIDAT'" [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-eye"></i> </a>
+                <span class="px-2" *ngIf="item.estat.descripcio ==='BORRADOR'"> </span>
+                <a *ngIf="item.estat.descripcio === 'BORRADOR'" [routerLink]="['/tabs', {'id': item.id,'date': item.data}]" > <i class="fa fa-pencil-square-o"> </i> </a>
               </td>
             </ng-template>
           </app-table-list>

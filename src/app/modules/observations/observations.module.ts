@@ -6,8 +6,7 @@ import { SharedModule } from '../../shared';
 import { ObservationsComponent } from "./components/observations.component";
 import {RouterModule} from '@angular/router';
 import {ObservationsRoutes} from './observations.routing';
-
-
+import {ObservationsService} from './services/observations.service';
 
 @NgModule({
   imports: [
@@ -16,7 +15,8 @@ import {ObservationsRoutes} from './observations.routing';
   ],
   declarations: [
     ObservationsComponent
-  ]
+  ],
+  providers: [ObservationsService]
 })
 
 export class ObservationsModule { }
