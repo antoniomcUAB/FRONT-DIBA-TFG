@@ -6,17 +6,12 @@ import {map} from 'rxjs/operators';
 import {TableListOptions, TableListResponse} from "../../../shared/modules/table-list";
 import {Injectable} from "@angular/core";
 import {Professional} from "../models/professional";
-import {Diagnosis, Expedient, Model} from "../../files";
+import {Expedient, Model} from "../../files";
 
 @Injectable()
 export class HomeService extends GlobalService {
   constructor(public _http: HttpClient) {
     super();
-  }
-
-  /** GET MODEL VERSION **/
-  getModelVersion(): Observable<Model> {
-    return this._http.get<Model>(`${this.apiURL}/dsdiba/versio/`);
   }
 
   /** GET PROFESSIONAL BY ID **/
@@ -27,7 +22,7 @@ export class HomeService extends GlobalService {
   /** GET LIST OF FILES **/
   getFiles(options: TableListOptions, idMunicipal: number): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
-    return this._http.get(`${this.apiURL}/dsdiba/expedient/${idMunicipal}`,
+    return this._http.get(`${this.apiURL}/dsdiba/expedient/llista/${idMunicipal}`,
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body;
@@ -40,7 +35,7 @@ export class HomeService extends GlobalService {
   }
 
   /** CREATE FILE **/
-  createFile(expedient: Diagnosis, model: number): Observable<Expedient> {
-    return this._http.put<Expedient>(`${this.apiURL}/dsdiba/expedient/${model}`, expedient);
+  createFile(expedient: Expedient): Observable<Expedient> {
+    return this._http.put<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
   }
 }

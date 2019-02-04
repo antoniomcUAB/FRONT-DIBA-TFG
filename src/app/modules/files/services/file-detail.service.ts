@@ -1,11 +1,10 @@
-import {GlobalService} from "../../../shared";
-
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {TableListOptions, TableListResponse} from "../../../shared/modules/table-list";
-import {Injectable} from "@angular/core";
-import {Diagnosis} from "..";
+import { GlobalService } from "../../../shared";
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { TableListOptions, TableListResponse } from "../../../shared/modules/table-list";
+import { Injectable } from "@angular/core";
+import {Expedient, TipusPersona} from "..";
 
 @Injectable()
 export class FilesDetailService extends GlobalService {
@@ -15,17 +14,17 @@ export class FilesDetailService extends GlobalService {
   }
 
   /** GET FILES BY ID **/
-  getFileById(codi: string): Observable<Diagnosis> {
-    return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/llista/${codi}`);
+  getFileById(id: number): Observable<Expedient> {
+    return this._http.get<Expedient>(`${this.apiURL}/dsdiba/expedient/${id}`);
   }
 
   /** GET DIAGNOSIS LIST **/
-  getObservaciones(codi: string, options: TableListOptions): Observable<TableListResponse> {
+  getObservaciones(id: number, options: TableListOptions): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
-    return this._http.get(`${this.apiURL}/dsdiba/diagnostic/llista/${codi}`,
+    return this._http.get(`${this.apiURL}/dsdiba/expedient/${id}`,
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
-        const data = response.body;
+        const data = response.body['diagnostic'];
         options.getPagesInfo(response.body);
         return {
           data: data,
@@ -35,17 +34,27 @@ export class FilesDetailService extends GlobalService {
   }
 
   /** GET UNITY FAMILY **/
-  getUnityFamily(codi: string, options: TableListOptions): Observable<TableListResponse> {
+  getUnityFamily(id: number, options: TableListOptions): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
-    return this._http.get(`${this.apiURL}/dsdiba/diagnostic/llista/${codi}`,
+    return this._http.get(`${this.apiURL}/dsdiba/expedient/${id}`,
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
-        const data = response.body;
+        const data = response.body['persona'];
         options.getPagesInfo(response.body);
         return {
           data: data,
           options: options
         };
       }), );
+  }
+
+  /** GET TYPE PERSON **/
+  getTypePerson(): Observable<TipusPersona> {
+    return this._http.get<TipusPersona>(`${this.apiURL}/dsdiba/tipusPersona/`);
+  }
+
+  /** CREATE PERSON UNITY FAMILY **/
+  createPerson(expedient: Expedient): Observable<Expedient> {
+    return this._http.put<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
   }
 }

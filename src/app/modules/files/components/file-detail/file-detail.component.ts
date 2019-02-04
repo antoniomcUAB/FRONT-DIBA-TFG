@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilesDetailService } from '../../services/file-detail.service';
-import { Diagnosis } from '../../models/expedient';
+import { Expedient, Persona, TipusPersona} from '../../models/expedient';
 import { TableListOptions, TableListResponse } from '../../../../shared/modules/table-list';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -17,8 +17,11 @@ export const colors = [
   styleUrls: ['./file-detail.component.css']
 })
 export class FileDetailComponent {
-  expedient: Diagnosis;
-  codi: string;
+  expedient: Expedient;
+  id: number;
+  member = {};
+  personType: TipusPersona;
+
   options = new TableListOptions();
   optionsUF = new TableListOptions();
   obsData = null;
@@ -131,9 +134,10 @@ export class FileDetailComponent {
               private _translateService: TranslateService,
               private modalService: NgbModal) {
 
-    this.codi = this._route.snapshot.params['codi'];
+    this.id = this._route.snapshot.params['id'];
 
     this.getFile();
+    this.getTypePerson();
 
     /* Tabla Valoraciones realizadas */
     this.options.setColumns([
@@ -156,7 +160,7 @@ export class FileDetailComponent {
     this.options.pagination = false;
     this.options.footer = false;
 
-    this.reloadData(this.codi);
+    this.reloadData(this.id);
     /* Tabla Unidad Familiar */
     this.optionsUF.setColumns([
       {
@@ -185,17 +189,27 @@ export class FileDetailComponent {
     this.optionsUF.actions = false;
     this.optionsUF.pagination = false;
     this.optionsUF.footer = false;
-    this.reloadDataTable(this.codi);
+    this.reloadDataTable(this.id);
   }
 
   /* Get File (Expedient) */
   getFile() {
-    this._service.getFileById(this.codi).subscribe( (data: Diagnosis) => {
+    this._service.getFileById(this.id).subscribe( (data: Expedient) => {
       this.expedient = data;
     }, error => {
       console.log("ERROR al recuperar el dato");
     });
   }
+
+  /* Get Person Type */
+  getTypePerson() {
+    this._service.getTypePerson().subscribe( (data: TipusPersona) => {
+      this.personType = data;
+    }, error => {
+      console.log("ERROR al recuperar el dato");
+    });
+  }
+
   /* Load Table Diagnosis & Observation */
   reloadData(id) {
     this.options.loading = true;
@@ -205,13 +219,25 @@ export class FileDetailComponent {
       this.options.loading = false;
     });
   }
+
   /* Load Table Unity Famility */
   reloadDataTable(id) {
     this.optionsUF.loading = true;
     this._service.getUnityFamily(id, this.optionsUF).subscribe((res: TableListResponse ) => {
       this.optionsUF = res.options;
-      this.dataUnityFamily = res.data[res.data.length - 1].persona;
+      this.dataUnityFamily = res.data;
       this.optionsUF.loading = false;
+    });
+  }
+
+  /* Create Unity Family Member */
+  createMember(persona) {
+    this.expedient.persona = persona;
+    console.log(persona);
+    console.log(this.expedient);
+    this._service.createPerson(this.expedient).subscribe((result) => {
+    }, (err) => {
+      console.log(err);
     });
   }
 
@@ -233,5 +259,4 @@ export class FileDetailComponent {
       return  `with: ${reason}`;
     }
   }
-
 }
