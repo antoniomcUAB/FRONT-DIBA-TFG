@@ -46,7 +46,7 @@
       <div class="form-group row">
         <!-- Unity Family -->
         <div class="col-12">
-          <div class="col-12">
+          <div class="col-12 text-center">
             <label class="col-form-label">{{ "FORM.fileUFamily" | translate }}</label>
             <app-table-list [tableData]="dataUnityFamily"
                             [options]="optionsUF"
@@ -75,7 +75,9 @@
                     <!-- Modal -->
                     <ng-template #content let-modal>
                       <div class="modal-header">
-                        <h4 class="modal-title" id="modal-unsubscribe"><span class="text-primary">{{ "TABLE.toUnsubscribe" | translate }}:</span> {{item.tipusPersona.descripcio}}</h4>
+                        <h4 class="modal-title" id="modal-unsubscribe">
+                          <span class="text-primary">{{ "TABLE.toUnsubscribe" | translate }}:</span> {{item.tipusPersona.descripcio}}
+                        </h4>
                         <button type="button" class="close bg-primary text-white" aria-label="Close" (click)="modal.dismiss('Cross click')">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -85,20 +87,22 @@
                           <div class="form-group">
                             <label for="date-unsubscribe">{{ "TABLE.dataUnsubscribe" | translate }} <span class="text-primary">*</span></label>
                             <div class="input-group">
-                              <input id="date-unsubscribe" class="form-control" placeholder="dd-mm-yyyy" type="date">
+                              <input id="date-unsubscribe" name="dataBaixa" class="form-control" placeholder="dd-mm-yyyy" type="date" [(ngModel)]="item.dataBaixa" required="required">
                             </div>
                           </div>
                           <div class="form-group" *ngIf="item.referencia === true">
                             <label for="date-unsubscribe">{{ "TABLE.newRef" | translate }} <span class="text-primary">*</span></label>
                             <div class="input-group">
-                              <select id="new-person-ref" class="form-control">
-                                <option *ngFor="let member of expedient?.persona" value="{{ member }}">{{ member.tipusPersona.descripcio }}</option>
+                              <select id="new-person-ref" class="form-control" required="required">
+                                <ng-container *ngFor="let member of expedient?.persona">
+                                  <option *ngIf="member.id != item.id" value="{{ member }}">{{ member.tipusPersona.descripcio }}</option>
+                                </ng-container>
                               </select>
                             </div>
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">{{ "FORM.save" | translate }}</button>
+                          <button type="submit" class="btn btn-outline-dark" (click)="updateMember(item); modal.close('Save click')">{{ "FORM.save" | translate }}</button>
                           <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">{{ "FORM.cancel" | translate }}</button>
                         </div>
                       </form>
@@ -136,13 +140,13 @@
                 <div class="form-group">
                   <label for="date-register">{{ "TABLE.dataRegister" | translate }} <span class="text-primary">*</span></label>
                   <div class="input-group">
-                    <input id="date-register" name="dataAlta" class="form-control" placeholder="dd-mm-yyyy" type="date" [(ngModel)]="member.dataAlta">
+                    <input id="date-register" name="dataAlta" class="form-control" placeholder="dd-mm-yyyy" type="date" [(ngModel)]="member.dataAlta" required="required">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="relation-register">{{ "TABLE.relation" | translate }} <span class="text-primary">*</span></label>
                   <div class="input-group">
-                    <select id="relation-register" name="tipusPersona" class="form-control" [(ngModel)]="member.tipusPersona">
+                    <select id="relation-register" name="tipusPersona" class="form-control" [(ngModel)]="member.tipusPersona" required="required">
                       <option *ngFor="let type of personType" [ngValue]="type"> {{ type.descripcio }}</option>
                     </select>
                   </div>
@@ -150,7 +154,7 @@
                 <div class="form-group">
                   <label for="sex-register">{{ "TABLE.sex" | translate }} <span class="text-primary">*</span></label>
                   <div class="input-group">
-                    <select id="sex-register" name="sexe" class="form-control" [(ngModel)]="member.sexe">
+                    <select id="sex-register" name="sexe" class="form-control" [(ngModel)]="member.sexe" required="required">
                       <option>Home</option>
                       <option>Dona</option>
                     </select>
@@ -159,7 +163,7 @@
                 <div class="form-group">
                   <label for="date-birthday">{{ "TABLE.birthday" | translate }} <span class="text-primary">*</span></label>
                   <div class="input-group">
-                    <input id="date-birthday" name="dataNaixement" class="form-control" placeholder="dd-mm-yyyy" type="date" [(ngModel)]="member.dataNaixement">
+                    <input id="date-birthday" name="dataNaixement" class="form-control" placeholder="dd-mm-yyyy" type="date" [(ngModel)]="member.dataNaixement" required="required">
                   </div>
                 </div>
               </div>
@@ -198,50 +202,57 @@
         </div>
       </div>
       <div class="row">
-        <div [ngClass]="{'col-12' : obsData?.length == 1, 'col-6' : obsData?.length > 1}" class="text-center">
-          <!-- Table List Diagnosis -->
-          <app-table-list [tableData]="obsData"
-                          [options]="options"
-                          [rowTemplate]="myRowInitDysplay"
-                          (reloadData)="reloadData()">
-            <ng-template #myRowInitDysplay let-item>
-              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">DSDIBA-{{item.data | date:'dd/MM/yyyy'}}</td>
-              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}"><!--{{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}--></td>
-              <td [ngClass]="{'warning' : item.estat === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
-                <a *ngIf="item.estat.descripcio === 'VALIDAT'" [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-eye"></i> </a>
-                <span class="px-2" *ngIf="item.estat.descripcio ==='BORRADOR'"> </span>
-                <a *ngIf="item.estat.descripcio === 'BORRADOR'" [routerLink]="['/tabs', {'id': item.id,'date': item.data}]" > <i class="fa fa-pencil-square-o"> </i> </a>
-              </td>
-            </ng-template>
-          </app-table-list>
-          <!--/ Table List Diagnosis -->
-        </div>
-        <div class="col-6">
-          <!-- Chart -->
-          <!--<ngx-charts-line-chart
-            class="chart-container"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="single"
-            [legend]="showLegend"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [autoScale]="autoScale"
-            [timeline]="timeline"
-            [showGridLines]="showGridLines"
-            [curve]="curve"
-            [rangeFillOpacity]="rangeFillOpacity"
-            [roundDomains]="roundDomains"
-            [tooltipDisabled]="true">
-        </ngx-charts-line-chart>-->
-        <!--/ Chart -->
+        <div class="col-12">
+          <div [ngClass]="{'col-12' : obsData?.length <= 1, 'col-6' : obsData?.length > 1}" class="text-center">
+            <!-- Table List Diagnosis -->
+            <app-table-list [tableData]="obsData"
+                            [options]="options"
+                            [rowTemplate]="myRowInitDysplay"
+                            (reloadData)="reloadData()">
+              <ng-template #myRowInitDysplay let-item>
+                <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
+                  DSDIBA-{{item.data | date:'dd/MM/yyyy'}}
+                </td>
+                <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
+                  {{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}
+                </td>
+                <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
+                  <a *ngIf="item.estat.descripcio === 'VALIDAT'" [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-eye"></i> </a>
+                  <span class="px-2" *ngIf="item.estat.descripcio ==='BORRADOR'"> </span>
+                  <a *ngIf="item.estat.descripcio === 'BORRADOR'" [routerLink]="['/tabs', {'id': item.id,'date': item.data}]" > <i class="fa fa-pencil-square-o"> </i> </a>
+                </td>
+              </ng-template>
+            </app-table-list>
+            <!--/ Table List Diagnosis -->
+          </div>
+          <div class="col-6">
+            <!-- Chart -->
+            <!--<ngx-charts-line-chart
+                class="chart-container"
+                [scheme]="colorScheme"
+                [schemeType]="schemeType"
+                [results]="single"
+                [legend]="showLegend"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                [autoScale]="autoScale"
+                [timeline]="timeline"
+                [showGridLines]="showGridLines"
+                [curve]="curve"
+                [rangeFillOpacity]="rangeFillOpacity"
+                [roundDomains]="roundDomains"
+                [tooltipDisabled]="true">
+              </ngx-charts-line-chart>-->
+            <!--/ Chart -->
+          </div>
         </div>
       </div>
+
       <!--/ Table Files Valoraciones -->
       <div class="form-group row">
         <div class="col-12 text-center pt-4 pb-3">

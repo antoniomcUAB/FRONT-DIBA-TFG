@@ -6,6 +6,7 @@ import { TableListOptions, TableListResponse } from '../../../../shared/modules/
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { area, line, curveLinear } from 'd3-shape';
+import {json} from "ng2-validation/dist/json";
 
 export const colors = [
   '#5c6bc0', '#66bb6a', '#29b6f6', '#ffee58', '#ef5350', '#868e96'
@@ -19,7 +20,8 @@ export const colors = [
 export class FileDetailComponent {
   expedient: Expedient;
   id: number;
-  member = {};
+  member;
+  personRef;
   personType: TipusPersona;
 
   options = new TableListOptions();
@@ -232,10 +234,31 @@ export class FileDetailComponent {
 
   /* Create Unity Family Member */
   createMember(persona) {
-    this.expedient.persona = persona;
-    console.log(persona);
-    console.log(this.expedient);
+    this.expedient.persona.push(persona);
+    /** Total Unity Family **/
+    this.getTotalSizeFamily();
     this._service.createPerson(this.expedient).subscribe((result) => {
+      this.reloadDataTable(this.id);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  /* Update Unity Family Member */
+  updateMember(persona) {
+    let index;
+    for (index in this.expedient.persona) {
+      if (this.expedient.persona[index].id === persona.id) {
+        this.expedient.persona[index] = persona;
+      }
+    }
+    /** Total Unity Family **/
+    this.getTotalSizeFamily();
+    /** New Reference Person  **/
+    this.newRefPerson();
+    /** Call Service **/
+    this._service.createPerson(this.expedient).subscribe((result) => {
+      this.reloadDataTable(this.id);
     }, (err) => {
       console.log(err);
     });
@@ -243,6 +266,7 @@ export class FileDetailComponent {
 
   /* Modal */
   open(content) {
+    this.member = new Persona();
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -258,5 +282,15 @@ export class FileDetailComponent {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  /* Total Unity Family */
+  getTotalSizeFamily() {
+    this.expedient.totalFamilia = this.expedient.persona.length;
+  }
+
+  /* New Reference Person */
+  newRefPerson() {
+
   }
 }

@@ -19,7 +19,7 @@ import { alphabetic, digit } from './constants';
 })
 export class HomeComponent {
   /* Variables Professional */
-  idProfessional = 17118; /* TODO - Petición id Profesional */
+  idProfessional = 18109; /* TODO - Petición id Profesional */
   professional: Professional;
   /* Variables Table */
   data: any[] = [];
