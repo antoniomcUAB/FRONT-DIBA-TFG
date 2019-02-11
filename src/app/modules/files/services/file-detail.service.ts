@@ -4,13 +4,24 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TableListOptions, TableListResponse } from "../../../shared/modules/table-list";
 import { Injectable } from "@angular/core";
-import {Expedient, TipusPersona} from "..";
+import {Expedient, TipusPersona, Diagnosis, Model } from "..";
+import {Professional} from "../../home/models/professional";
 
 @Injectable()
 export class FilesDetailService extends GlobalService {
 
   constructor(public _http: HttpClient) {
     super();
+  }
+
+  /** GET CURRENT MODEL **/
+  getCurrentModel(): Observable<Model> {
+    return this._http.get<Model>(`${this.apiURL}/dsdiba/versio/current/`);
+  }
+
+  /** GET PROFESSIONAL BY ID **/
+  getProfessionalByID(idProfessional: number): Observable<Professional> {
+    return this._http.get<Professional>(`${this.apiURL}/dsdiba/professional/${idProfessional}`);
   }
 
   /** GET FILES BY ID **/
@@ -56,5 +67,15 @@ export class FilesDetailService extends GlobalService {
   /** CREATE PERSON UNITY FAMILY **/
   createPerson(expedient: Expedient): Observable<Expedient> {
     return this._http.put<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
+  }
+
+  /** UPDATE OBSERVATIONS **/
+  updateObservations(expedient: Expedient): Observable<Expedient> {
+    return this._http.put<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
+  }
+
+  /** CREATE DIAGNOSIS **/
+  createDiagnosis(diagnosis: Diagnosis, expedientID: string, modelID): Observable<Diagnosis> {
+    return this._http.put<Diagnosis>(`${this.apiURL}/dsdiba/expedient/${expedientID}/diagnostic/${modelID}`, diagnosis);
   }
 }

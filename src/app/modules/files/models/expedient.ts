@@ -16,14 +16,14 @@ export class Expedient {
 
   /* Diagnosis */
   export class Diagnosis {
-    id: number;                           // ID Diagnostico
-    data: number;                         // Fecha de creación
-    observacions: string;                 // Observaciones
-    estat: Estado;                        // Estado
-    versioModel: Model;                   // Versión del Modelo
-    contextualitzacio: Contextualitzacio; // Contextualización
-    valoracio: Valoracio;                 // Valoración
-    preguntes: Preguntes;                 // Preguntas
+    id: number;                   // ID Diagnostico
+    data: number;                 // Fecha de creación
+    estat: Estado;                // Estado
+    ambit: Ambit;                 // Ambit
+    observacions: string;         // Observaciones
+    professional: Professional;   // Profesional
+    valoracio: Valoracio;         // Valoración
+    versioModel: Model;           // Versión del Modelo
   }
 
     /* Person */
@@ -39,46 +39,46 @@ export class Expedient {
 
       /* Person Type */
       export class TipusPersona {
-        id: number;                 // ID TipusPersona
-        descripcio: string;         // Descripción
+        id: number;               // ID TipusPersona
+        descripcio: string;       // Descripción
       }
 
       /* Estado */
       export class Estado {
-        id: number;                 // ID Estado
-        descripcio: string;         // Descripción
+        id: number;               // ID Estado
+        descripcio: string;       // Descripción
       }
 
       /* Model */
       export class Model {
-        id: number;                 // ID Model
-        versio: string;             // Versión
-        data: number;               // Fecha
-        preguntaEconomica: number;  // Pregunta Economica
+        id: number;                // ID Model
+        versio: string;            // Versión
+        data: number;              // Fecha
+        preguntaEconomica: number; // Pregunta Economica
       }
 
-/* Contextualizacion */
-export class Contextualitzacio {
-  id: number;                 // ID Contextualización
-  factor: Factor;
-  membreUnic: boolean;
-  mesUc: boolean;
-  persona: Persona;
+/* Ambit */
+export class Ambit {
+  id: number;
+  descripcio: string;
+  contextualitzacio: Contextualitzacio;
+  entorn: Entorn;
+  factors_contetxt: FactorsCcontext;
+  risc: number;
+  valAltrisc: number;
+  valRisc: number;
+  valVulnerabilitat: number ;
+  vulnerabilitat: number;
 }
 
-/* Preguntes */
-export class Preguntes {
-  id: number; // ID Preguntas
-  factor: FactorValue;
-  factorEconomic: FactorEconomic;
-  frequencia: Frequencia;
-  gravetat: Gravetat;
-  persona: Persona;
-  risc: Risc;
-  situacioSocial: SituacionSocial;
-  unitatFamiliar: boolean;
-}
+  /* Entorn */
+  export class Entorn {
+    id: number;
+    descripcio: string;
+    pregunta: Preguntas;
+  }
 
+/* Valoracio */
 export class Valoracio {
   data: string;
   evaluacions: Evaluacions;
@@ -87,88 +87,86 @@ export class Valoracio {
   total: number;
 }
 
-export class Evaluacions {
-  ambit: Ambit;
-  id: number;
-  risc: Risc;
-  riscProfesional: Risc;
-}
-
-export class Ambit {
-  Factors_Context: Factor;
-  items: Items2; /*Hay que cambiarle el nombre*/
-  descripcio: string;
-  id: number;
-  risc: number;
-  valAltrisc: number;
-  valRisc: number;
-  valVulnerabilitat: number ;
-  vulnerabilitat: number;
-}
-
-export class Items2 /*Hay que cambiarle el nombre*/ {
-  descripcio: string;
-  id: number;
-  SituacionSocial: SituacionSocial;
-}
-
-export class FactorValue {
-  id: number;                 // ID TipusPersona
-  descripcio: string;         // Descripción
-  value: number;
-}
-
-export class Factor {
-    descripcio: string;
-    fc1m: number;
-    fctots: number;
-    gravetat: Gravetat;
+  /* Evaluacions */
+  export class Evaluacions {
+    ambit: Ambit;
     id: number;
-    infants: boolean;
-}
+    risc: Risc;
+    riscProfesional: Risc;
+  }
 
-export class Gravetat {
-  id: number;                 // ID TipusPersona
-  descripcio: string;         // Descripción
-}
+/* Contextualizacion */
+  export class Contextualitzacio {
+    id: number;                 // ID Contextualización
+    factor: Factor;
+    membreUnic: boolean;
+    mesUc: boolean;
+    persona: Persona;
+  }
 
-export class Frequencia {
-  id: number;                 // ID TipusPersona
-  descripcio: string;         // Descripción
-}
+  /* Factor */
+  export class Factor {
+    id: number;
+    descripcio: string;
+  }
 
-export class FrequenciaResp {
-  id: number;                 // ID TipusPersona
-  evidencia: string;         // Descripción
-  frequencia: Frequencia;
-  risc: Risc;
-}
+  /* Preguntes */
+  export class Preguntas {
+    id: number;                           // ID Preguntas
+    definicio: string;
+    altRisc: number;
+    unitatFamiliar: boolean;
+    risc: Risc;
+    factor: Factor;
+    persona: Persona;
+    selectors: Selectors;
+    social: string;
+    vulnerabilitat: number;
+  }
 
-export class FactorEconomic {
-  id: number;                 // ID TipusPersona
-  descripcio: string;         // Descripción
-}
+  /* Selectors */
+  export class Selectors {
+    id: number;
+    evidencia: string;
+    frequencia: SelectorFrequencia;
+    gravetat: Gravetat;
+  }
 
-export class Risc {
-  id: number;                 // ID TipusPersona
-  descripcio: string;         // Descripción
-  value: number;
-}
+    /* Selector Frequencia */
+    export class SelectorFrequencia {
+      evidencia: string;
+      frequencia: Frequencia;
+      id: number;
+      risc: Risc;
+    }
 
-export class SituacionSocial {
-  id: number;                 // ID TipusPersona
-  items: Items;
-  value: number;
-  altRisc: number;
-  definicio: string;
-  risc: number;
-  social: string;
-  vulnerabilitat: number;
-}
-
-export class Items {
-  id: number;                 // ID TipusPersona
-  frequencia: FrequenciaResp;
-  evidencia: string;
+/* Factors de Context */
+export class FactorsCcontext {
+  descripcio: string;
+  fc1m: number;
+  fctots: number;
   gravetat: Gravetat;
+  id: number;
+  infants: boolean;
 }
+
+    /* Gravetat */
+    export class Gravetat {
+      id: number;                 // ID TipusPersona
+      descripcio: string;         // Descripción
+      value: number;              // Valor
+    }
+
+    /* Frequencia */
+    export class Frequencia {
+      id: number;                 // ID TipusPersona
+      descripcio: string;         // Descripción
+      value: number;              // Valor
+    }
+
+    /* Risc */
+    export class Risc {
+      id: number;                 // ID TipusPersona
+      descripcio: string;         // Descripción
+      value: number;              // Valor
+    }
