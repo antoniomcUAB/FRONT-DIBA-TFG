@@ -98,3 +98,8 @@ a.navbar-brand.mr-auto {
   float: left;
   display: block;
 }
+
+.form-control:focus {
+  border-color: #d1ecf1;
+  box-shadow: 0 0 0 0.2rem rgba(209, 236, 241, 0.5);
+}

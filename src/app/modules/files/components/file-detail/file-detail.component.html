@@ -143,6 +143,7 @@
                                      class="form-control"
                                      placeholder="dd-mm-yyyy"
                                      type="date"
+                                     min="{{ toDate | date:'dd/MM/yyyy' }}"
                                      [(ngModel)]="item.dataBaixa"
                                      required="required">
                             </div>
@@ -156,10 +157,14 @@
                             <div class="input-group">
                               <select id="new-person-ref"
                                       class="form-control"
-                                      required="required">
-                                <ng-container *ngFor="let member of expedient?.persona">
-                                  <option *ngIf="member.id != item.id" value="{{ member }}">
-                                    {{ member.tipusPersona.descripcio }}
+                                      required="required"
+                                      name="newRefPerson"
+                                      (change)="newRefPerson(newRefMember)"
+                                      (ngModelChange)="newRefMember = $event"
+                                      [(ngModel)]="newRefMember">
+                                <ng-container *ngFor="let memberRef of expedient?.persona">
+                                  <option *ngIf="memberRef.id != item.id && !memberRef.dataBaixa" [ngValue]="memberRef">
+                                    {{ memberRef.tipusPersona.descripcio }}
                                   </option>
                                 </ng-container>
                               </select>
@@ -169,7 +174,7 @@
                         <div class="modal-footer">
                           <button type="submit"
                                   class="btn btn-outline-dark"
-                                  (click)="updateMember(item); modal.close('Save click')">
+                                  (click)="updateMember(item, newRefMember); modal.close('Save click')">
                             {{ "FORM.save" | translate }}
                           </button>
                           <button type="button"
