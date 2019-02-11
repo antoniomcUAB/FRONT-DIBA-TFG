@@ -64,9 +64,9 @@ export class Preguntes {
   entorn: Entorn;
   frequencia: Frequencia = new Frequencia();
   gravetat: Gravetat = new Gravetat();
-  persona: Persona = new Persona();
+  persona: Persona ;
   risc: Risc;
-  factor: Factor;
+  factor: Factor = new Factor();
   situacioSocial: SituacionSocial = new SituacionSocial();
   unitatFamiliar: boolean;
 }
@@ -105,11 +105,13 @@ export class Ambit {
 export class Gravetat {
   id: number;                 // ID TipusPersona
   descripcio: string;         // Descripción
+  value: number;
 }
 
 export class Frequencia {
   id: number;                 // ID TipusPersona
   descripcio: string;         // Descripción
+  value: number;
 }
 
 export class FrequenciaResp {

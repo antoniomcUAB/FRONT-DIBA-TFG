@@ -1,6 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../models/tab-class-form';
 import {Diagnosis } from '../../models/diagnostic';
+import {Persona} from "../../../files";
+import {TabsFormService} from "../../services/tabsForm.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 const MAX_N_TABS = 5;
 
@@ -20,6 +23,19 @@ export class TabsComponent implements OnInit {
   public material: string = "material";
   public relacional: string = "relacional";
   public diagnostico: Diagnosis;
+
+
+  idDiagnosis;
+  persons: Persona[];
+
+  constructor(private _router: ActivatedRoute) {
+
+    this.idDiagnosis = this._router.snapshot.params['id'];
+    this.persons = this._router.snapshot.params['personas'];
+    console.log(this.idDiagnosis);
+
+  }
+
   public fnStay(stay: boolean, id: number ) {
       this.stay = stay;
       this.disapear = true;

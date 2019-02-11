@@ -6,9 +6,8 @@
       <button type="button" class="float-right btn btn-outline-primary"><i class="fa fa-file-pdf-o"></i> {{ "RESUMEN.pdf" | translate }}</button>
     </div>
   </div>
-
+  <!-- Ambito -->
   <div class="row">
-    <!-- Ambito Autonomico -->
     <div class="col-12">
       <div class="card">
         <div class="card-header bg-warning text-black-50 font-weight-bold">
@@ -49,8 +48,8 @@
               <table class="table table-bordered">
                 <thead class="table-active">
                 <th>Factor Contextualizació</th>
-                <th>Persona</th>
-                <th>Tipus</th>
+                <th class="text-center">Persona</th>
+                <th class="text-center">Tipus</th>
                 </thead>
                 <tbody>
                   <tr>
@@ -86,165 +85,8 @@
         </div>
       </div>
     </div>
-    <!--/ Ambito Autonomico -->
-
-    <!-- Ambito Material -->
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header bg-danger text-white font-weight-bold">
-          Àmbit Material i instrumental
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                <th>Situació social</th>
-                <th class="text-center">Persona</th>
-                <th class="text-center">Risc</th>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td class="text-center">Pare</td>
-                  <td class="text-center warning">Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                  <td class="text-center">Mare</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-borderless">
-                <tbody>
-                <tr>
-                  <td class="text-right">Risc automàtic segon situació</td>
-                  <td class="text-center warning">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                <th>Factor Contextualizació</th>
-                <th>Persona</th>
-                <th>Tipus</th>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td class="text-center">Fill</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                  <td class="text-center">Filla</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-borderless">
-                <tbody>
-                <tr>
-                  <td class="text-right">Risc automàtic segon situació</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-12 px-3">
-              <label for="fileObservationMaterial" class="col-form-label">
-                <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
-              </label>
-              <textarea class="form-control" type="text" value="" id="fileObservationMaterial" disabled="disabled"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
   <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header bg-success text-white font-weight-bold">
-          Àmbit Relacional
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                <th>Situació social</th>
-                <th class="text-center">Persona</th>
-                <th class="text-center">Risc</th>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td class="text-center">Pare</td>
-                  <td class="text-center warning">Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                  <td class="text-center">Mare</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-borderless">
-                <tbody>
-                <tr>
-                  <td class="text-right">Risc automàtic segon situació</td>
-                  <td class="text-center warning">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                <th>Factor Contextualizació</th>
-                <th>Persona</th>
-                <th>Tipus</th>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td class="text-center">Fill</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                  <td class="text-center">Filla</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-borderless">
-                <tbody>
-                <tr>
-                  <td class="text-right">Risc automàtic segon situació</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-12 px-3">
-              <label for="fileObservationRelationship" class="col-form-label">
-                <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
-              </label>
-              <textarea class="form-control" type="text" value="" id="fileObservationRelationship" disabled="disabled"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="col-12">
       <div class="card">
         <div class="card-header bg-info text-white font-weight-bold">
@@ -256,16 +98,14 @@
               <table class="table table-bordered">
                 <thead class="table-active">
                   <th>Factor Contextualizació</th>
-                  <th>Tipus</th>
+                  <th class="text-center">Risc</th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td>Morbi facilisis</td>
-                  </tr>
-                  <tr>
-                    <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                    <td>Phasellus</td>
+                  <tr *ngFor="let val of valoracio.evaluacions">
+                    <td>{{ val.ambit.descripcio }}</td>
+                    <td [ngClass]="{'danger' : val.risc.descripcio.toUpperCase() === 'ALT RISC',
+                                    'warning' : val.risc.descripcio.toUpperCase() === 'RISC',
+                                    'success' : val.risc.descripcio.toUpperCase() === 'SENSE RISC'}" class="text-center">{{ val.risc.descripcio }}</td>
                   </tr>
                 </tbody>
               </table>

@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { FilesDetailService } from '../../services/file-detail.service';
-import { Expedient, Persona, TipusPersona} from '../../models/expedient';
+import { Diagnosis, Expedient, Model, Persona, TipusPersona } from '../../models/expedient';
 import { TableListOptions, TableListResponse } from '../../../../shared/modules/table-list';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { area, line, curveLinear } from 'd3-shape';
+import {Professional} from "../../../home/models/professional";
 
 export const colors = [
   '#5c6bc0', '#66bb6a', '#29b6f6', '#ffee58', '#ef5350', '#868e96'
@@ -17,11 +18,18 @@ export const colors = [
   styleUrls: ['./file-detail.component.css']
 })
 export class FileDetailComponent {
+  model: Model;
+  professional: Professional;
+  idProfessional = 18109; /* TODO - Petición id Profesional */
   expedient: Expedient;
+  diagnosis: Diagnosis;
+
   id: number;
-  member = {};
+  member;
+  observations: string;
   personType: TipusPersona;
 
+  /** Tables options **/
   options = new TableListOptions();
   optionsUF = new TableListOptions();
   obsData = null;
@@ -29,113 +37,18 @@ export class FileDetailComponent {
   closeResult: string;
 
   /* Charts */
-  single = [
-    {
-      name: 'Fiji',
-      series: [
-        {
-          name: '2010',
-          value: 40
-        },
-        {
-          name: '2000',
-          value: 36
-        },
-        {
-          name: '1990',
-          value: 31
-        }
-      ]
-    },
-    {
-      name: 'USA',
-      series: [
-        {
-          name: '2010',
-          value: 49
-        },
-        {
-          name: '2000',
-          value: 45
-        },
-        {
-          name: '1990',
-          value: 37
-        }
-      ]
-    },
-    {
-      name: 'France',
-      series: [
-        {
-          name: '2010',
-          value: 36
-        },
-        {
-          name: '2000',
-          value: 34
-        },
-        {
-          name: '1990',
-          value: 29
-        }
-      ]
-    },
-    {
-      name: 'UK',
-      series: [
-        {
-          name: '2010',
-          value: 36
-        },
-        {
-          name: '2000',
-          value: 32
-        },
-        {
-          name: '1990',
-          value: 26
-        }
-      ]
-    }];
-
-  range = false;
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = false;
-  showXAxisLabel = true;
-  tooltipDisabled = false;
-  xAxisLabel = 'Risc';
-  showYAxisLabel = true;
-  yAxisLabel = 'Àmbits';
-  showGridLines = true;
-  innerPadding = 0;
-  barPadding = 8;
-  groupPadding = 16;
-  roundDomains = false;
-  maxRadius = 10;
-  minRadius = 3;
-
-  // line Interpolation
-  curve = new curveLinear;
-  colorScheme = { domain: colors };
-  schemeType = 'ordinal';
-  rangeFillOpacity = 0.15;
-
-  // Line, Area
-  autoScale = true;
-  timeline = false;
+  /** AQUI EL CHART CODE */
 
   constructor(private _route: ActivatedRoute,
+              private _router: Router,
               private _service: FilesDetailService,
               private _translateService: TranslateService,
               private modalService: NgbModal) {
 
     this.id = this._route.snapshot.params['id'];
 
+    this.getCurrentModel();
+    this.getProfessionalData(this.idProfessional);
     this.getFile();
     this.getTypePerson();
 
@@ -192,6 +105,25 @@ export class FileDetailComponent {
     this.reloadDataTable(this.id);
   }
 
+  /* Get Current Model */
+  getCurrentModel() {
+    this._service.getCurrentModel().subscribe((data: Model) => {
+      this.model = data;
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  /** GET PROFESSIONAL DATA **/
+  getProfessionalData(id: number) {
+    this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
+      this.professional = data;
+      console.log(this.professional);
+    }, error => {
+      console.log("ERROR al recuperar el datos");
+    });
+  }
+
   /* Get File (Expedient) */
   getFile() {
     this._service.getFileById(this.id).subscribe( (data: Expedient) => {
@@ -232,10 +164,59 @@ export class FileDetailComponent {
 
   /* Create Unity Family Member */
   createMember(persona) {
-    this.expedient.persona = persona;
-    console.log(persona);
-    console.log(this.expedient);
+    this.expedient.persona.push(persona);
+    /** Total Unity Family **/
+    this.getTotalSizeFamily();
+    /** New Reference Person  **/
+    if (persona.referencia === true) {
+      this.newRefPerson(persona);
+    }
     this._service.createPerson(this.expedient).subscribe((result) => {
+      this.reloadDataTable(this.id);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  /* Update Unity Family Member */
+  updateMember(persona) {
+    for (const index in this.expedient.persona) {
+      if (this.expedient.persona[index].id === persona.id) {
+        this.expedient.persona[index] = persona;
+      }
+    }
+    /** Total Unity Family **/
+    this.getTotalSizeFamily();
+    /** New Reference Person  **/
+    if (persona.referencia === true) {
+      this.newRefPerson(persona);
+    }
+    /** Call Service **/
+    this._service.createPerson(this.expedient).subscribe((result) => {
+      this.reloadDataTable(this.id);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  /* Update Observations */
+  updateObservations() {
+    /** Call Service **/
+    this._service.updateObservations(this.expedient).subscribe((result) => {
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  /* Create Diagnosis */
+  createDiagnosis() {
+    this.diagnosis = new Diagnosis();
+    /** Set variables into Diagnosis **/
+    this.diagnosis.professional = this.professional;
+    this.diagnosis.versioModel = this.model;
+    /** Call Service **/
+    this._service.createDiagnosis(this.diagnosis, this.expedient.id, this.model.id).subscribe((result) => {
+      this._router.navigate(['/tabs', {'id': result.id, 'personas': this.expedient.persona}]);
     }, (err) => {
       console.log(err);
     });
@@ -243,6 +224,7 @@ export class FileDetailComponent {
 
   /* Modal */
   open(content) {
+    this.member = new Persona();
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -250,13 +232,36 @@ export class FileDetailComponent {
     });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return  `with: ${reason}`;
+      }
+    }
+
+  /* Total Unity Family */
+  getTotalSizeFamily() {
+    let index = 0;
+    for (const persona of this.expedient.persona) {
+      if (!persona.dataBaixa) {
+        index = index + 1;
+      }
+    }
+    this.expedient.totalFamilia = index;
+  }
+
+  /* New Reference Person */
+  newRefPerson(persona) {
+    for (const index of this.expedient.persona) {
+      /** Set all persons references to false**/
+      index.referencia = false;
+      /** Set new person to true**/
+      if (index.id === persona.id) {
+        index.referencia = true;
+      }
     }
   }
 }

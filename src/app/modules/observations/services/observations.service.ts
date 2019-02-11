@@ -13,6 +13,6 @@ export class ObservationsService extends GlobalService {
 
   /** GET RESULT OBSERVATIONS **/
   getDetailObservations(id: number): Observable<Diagnosis> {
-    return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/valorar/${id}`);
+    return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/${id}`);
   }
 }

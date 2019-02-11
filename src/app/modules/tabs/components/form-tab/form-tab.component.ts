@@ -19,7 +19,6 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   rows: RowsQuest [] = [];
   closeResult: string;
   cleanSelects: string = null;
-  severitySelected: Gravetat = new Gravetat();
   @ViewChild('formTab') formValues;
   @Input() data: Ambits = new Ambits();
   @Input () groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
@@ -65,7 +64,6 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     this.formValues.resetForm();
     if (this.cleanSelects === null) {
       this.cleanSelects = '';
-      console.log(this.cleanSelects);
     } else {
       this.cleanSelects = null;
     }
@@ -83,10 +81,11 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     }
 }
   public getPregunta(id: number ) {
+
     if (this.value.preguntes.length !== 0) {
       for (let i = 0; i < this.value.preguntes.length; i++) {
-        if (this.value.preguntes[i].situacioSocial.id === id) {
-          console.log(this.value.preguntes[i].situacioSocial.id +"//"+ id);
+        console.log(id + "<----------------->"+this.value.preguntes[i].situacioSocial.id);
+        if (this.value.preguntes[i].situacioSocial.id == id) {
           return this.value.preguntes[i];
         }
       }
@@ -94,8 +93,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       return 0;
     }
   }
-  public getFrequencia (gravetat:string, selectorsGravetat: SelectorGravetat[]) {
-  console.log(selectorsGravetat);
+  public getFrequencia (gravetat: string, selectorsGravetat: SelectorGravetat[]) {
     if (gravetat) {
       return selectorsGravetat.find( data => {
         return data.gravetat.descripcio === gravetat;
@@ -104,23 +102,61 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       return [];
     }
   }
-  public riscService( pregunta: string , id: number) {
+  public getValueGravetat( gravetat: Gravetat , id: number) {
+    this.tabsService.getValuesGravetat().subscribe((result: Gravetat[]) => {
+      for (const grave of result) {
+        if (grave.descripcio === gravetat.descripcio) {
+          for (let i = 0; i < this.value.preguntes.length; i++) {
+            if (this.value.preguntes[i].situacioSocial.id === id) {
+              this.value.preguntes[i].gravetat.value = grave.value;
+              this.value.preguntes[i].gravetat.id = grave.id;
+              this.value.preguntes[i].frequencia = new Frequencia();
+              return this.getRisc(id);
+            }
+          }
+        }
+      }
+    }, (err) => {
+      console.log(err);
+    });
 
-    let objectPregunta = new Preguntes(pregunta, id);
-    objectPregunta.gravetat = this.severitySelected;
-    this.tabsService.getRiscOfQuestion(objectPregunta);
-    this.tabsService.getRiscOfQuestion(objectPregunta).subscribe((result) => {
-      console.log(result);
+  }
+  public getValueFrequencia(frequencia: Frequencia , id: number ) {
+
+    this.tabsService.getValuesFrequencia().subscribe((result: Frequencia[]) => {
+      for (const freq of result) {
+        if (freq.descripcio === frequencia.descripcio) {
+          for (let i = 0; i < this.value.preguntes.length; i++) {
+            if (this.value.preguntes[i].situacioSocial.id === id) {
+              this.value.preguntes[i].frequencia.value = freq.value;
+              this.value.preguntes[i].frequencia.id = freq.id;
+              return this.getRisc(id);
+            }
+          }
+        }
+      }
     }, (err) => {
       console.log(err);
     });
   }
-  public getSeveritySelected(id: number) {
-    for (let i = 0 ; i < this.value.preguntes.length ; i++) {
-      if (this.value.preguntes[i].situacioSocial.id === id) {
-        return this.value.preguntes[i].gravetat.descripcio;
-      }
-    }
-  }
 
+  public getRisc( id: number) {
+
+    for (let i = 0; i < this.value.preguntes.length; i++) {
+      if (this.value.preguntes[i].situacioSocial.id === id) {
+        console.log(this.value.preguntes[i]);
+        let pregunta: Preguntes = Object.assign({}, this.value.preguntes[i]);
+        if (!pregunta.frequencia.descripcio ) {
+          console.log("hola");
+          pregunta.frequencia = null;
+        }
+          this.tabsService.getRiscOfQuestion(pregunta).subscribe((result) => {
+            console.log(result);
+            this.value.preguntes[i].factor.descripcio = result.factor.descripcio;
+          }, (err) => {
+            console.log(err);
+          });
+        }
+      }
+  }
 }

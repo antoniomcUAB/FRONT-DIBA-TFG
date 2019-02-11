@@ -1,13 +1,18 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Ambits, ContextRows, EnvironmentRelacional, TabAutonomia} from '../../models/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
+import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {CustomInput} from "../../../../shared";
 
 @Component({
   selector: 'app-ambit-relacional-tab',
   templateUrl: './ambit-relacional-tab.component.html',
-  styleUrls: ['./ambit-relacional-tab.component.scss']
+  styleUrls: ['./ambit-relacional-tab.component.scss'],
+  providers: [
+    {provide: NG_VALUE_ACCESSOR, useExisting: AmbitRelacionalTabComponent, multi: true}
+  ]
 })
-export class AmbitRelacionalTabComponent {
+export class AmbitRelacionalTabComponent extends CustomInput{
 
   ambits: Ambits = new Ambits();
   context: string = 'RELACIONAL';
@@ -16,6 +21,7 @@ export class AmbitRelacionalTabComponent {
   @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
 
   constructor(private _service: TabsFormService) {
+    super();
     this.reloadData();
   }
 

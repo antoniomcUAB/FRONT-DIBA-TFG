@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import {Injectable} from "@angular/core";
 import {Ambits} from '../models/tab-class-form';
-import {Diagnosis, Preguntes} from "../models/diagnostic";
+import {Diagnosis, Frequencia, Gravetat, Preguntes} from "../models/diagnostic";
 
 
 @Injectable()
@@ -16,8 +16,14 @@ export class TabsFormService extends GlobalService {
   getFilesFormModel( ): Observable<Ambits> {
     return this._http.get<Ambits>(`${this.apiURL}/dsdiba/model`);
   }
-  getRiscOfQuestion( pregunta: Preguntes): Observable<Diagnosis> {
-  return this._http.put<Diagnosis>(`${this.apiURL}/dsdiba/pregunta/18111`, pregunta);
+  getValuesFrequencia( ): Observable<Frequencia[]> {
+    return this._http.get<Frequencia[]>(`${this.apiURL}/dsdiba/frequencia/`);
+  }
+  getValuesGravetat( ): Observable<Gravetat[]> {
+    return this._http.get<Gravetat[]>(`${this.apiURL}/dsdiba/gravetat/`);
+  }
+  getRiscOfQuestion( pregunta: Preguntes): Observable<Preguntes> {
+  return this._http.put<Preguntes>(`${this.apiURL}/dsdiba/pregunta/18111`, pregunta);
   }
 
 }

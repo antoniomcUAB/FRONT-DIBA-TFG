@@ -30,7 +30,7 @@ export class AmbitAutonomiaTabComponent extends CustomInput {
 
 
   public activate() {
-    this.active.emit(true);
+  this.active.emit(true);
   }
   reloadData() {
     this._service.getFilesFormModel().subscribe((tab: Ambits ) => {

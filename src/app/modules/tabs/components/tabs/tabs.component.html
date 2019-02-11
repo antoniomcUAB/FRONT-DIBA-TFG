@@ -5,7 +5,7 @@
 <br>
 
 <!--/ Search component -->
-
+{{persons[0].id}}
 {{diagnostico|json}}
 <ngb-tabset [activeId]="index">
 
@@ -28,7 +28,7 @@
       <app-check-form (entornsMaterial)="entornsMaterial = $event;"  *ngIf="!disapear" (stay)="fnStay($event,2)"  [comesFrom]="'l\'ambit material e instrumental'" [access]="true" [ambit]="material" (tabActivated)="tabsActivate.tabAmbitMaterialActivate = false">
       </app-check-form>
 
-      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm(2)" (before)="beforeTab()" [groupMaterial] ="entornsMaterial" >
+      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm(2)" (before)="beforeTab()" [groupMaterial] ="entornsMaterial" [(ngModel)]="diagnostico" >
       </app-ambit-material-tab>
 
     </ng-template>
@@ -40,7 +40,7 @@
       <app-check-form (entornsRelacional)="entornsRelacional = $event;" *ngIf="!disapear"  (stay)="fnStay($event,3)"  [comesFrom]="'l\'ambit relacional '" [access]="true" [ambit]="relacional" (tabActivated)="tabsActivate.tabAmbitRelacionalActivate = false" >
       </app-check-form>
 
-      <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm(3)" (before)="beforeTab()" [groupRelacional] ="entornsRelacional" >
+      <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm(3)" (before)="beforeTab()" [groupRelacional] ="entornsRelacional" [(ngModel)]="diagnostico" >
       </app-ambit-relacional-tab>
     </ng-template>
   </ngb-tab>
@@ -48,7 +48,7 @@
     <ng-template ngbTabTitle > <p > Globalitat del cas</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-globalitat-tab   (endForm)="goBackCheckForm(4)" (before)="beforeTab()" (tabActivated)="tabsActivate.tabGlobalitatCasActivate = false">
+      <app-globalitat-tab   (endForm)="goBackCheckForm(4)" (before)="beforeTab()" (tabActivated)="tabsActivate.tabGlobalitatCasActivate = false" [(ngModel)]="diagnostico">
       </app-globalitat-tab>
     </ng-template>
   </ngb-tab>

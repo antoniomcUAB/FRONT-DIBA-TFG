@@ -112,7 +112,6 @@
 <form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()">
   <div class="card-body ">
     <ng-container *ngFor="let ambit of data.ambits;">
-
       <ng-container *ngFor="let entorn of ambit.entorns;">
         <ng-container *ngIf="(groupRelacional.social && entorn.descripcio === 'Entorn Social' )
       || (groupRelacional.family && entorn.descripcio === 'Entorn Familiar')
@@ -122,7 +121,6 @@
       || (groupMaterial.work && entorn.descripcio === 'Entorn Laboral')
        || (entorn.descripcio==='Autonomia' && !groupRelacional.school && !groupRelacional.family
       && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house) ">
-
           <ng-container *ngFor="let pregunta of entorn.preguntes; let i = index; " >
             <div class="form-group row bg-grey-300 border border-top border-bottom">
               <!-- Situacion social Basica -->
@@ -171,10 +169,11 @@
                         <i class="fa fa-user-plus " > </i>
                       </div>
                     </div>
-
-                    <select class="form-control" id="t2person" [required]="getPregunta(pregunta.id)"
+                    <select class="form-control" id="t2person"
                             [value]="cleanSelects"
-                            [disabled]="!getPregunta(pregunta.id)" >
+                            [disabled]="!getPregunta(pregunta.id)"
+                              name="persona{{i}}">
+
                       <option disabled selected value ></option>
                       <option> 2 </option>
                       <option> 3 </option>
@@ -202,9 +201,9 @@
                           [value]="cleanSelects"
                           [disabled]="!getPregunta(pregunta.id)"
                           [ngModel]="getPregunta(pregunta.id)?.gravetat?.descripcio"
-                          (ngModelChange)="getPregunta(pregunta.id).gravetat.descripcio = $event"
+                          (ngModelChange)="getPregunta(pregunta.id).gravetat.descripcio = $event;"
                           name="severitySelected{{pregunta.id}}"
-                          (change)="riscService(pregunta.social,pregunta.id)">
+                          (change)="getValueGravetat(getPregunta(pregunta.id)?.gravetat,pregunta.id)">
                     <option disabled selected value></option>
                     <option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>
                   </select>
@@ -227,10 +226,10 @@
                           [ngModel]="getPregunta(pregunta.id)?.frequencia?.descripcio"
                           (ngModelChange)="getPregunta(pregunta.id).frequencia.descripcio = $event"
                           name="frequencySelected{{pregunta.id}}"
-                          (change)="riscService(pregunta.social,pregunta.id) ">
+                          (change)="getValueFrequencia(getPregunta(pregunta.id)?.frequencia,pregunta.id) ">
                       <option disabled selected value></option>
                       <option  *ngFor="let frequencia of getFrequencia(getPregunta(pregunta.id)?.gravetat?.descripcio,pregunta.selectors) "
-                               [ngValue]="frequencia.frequencia"> {{frequencia.frequencia.descripcio}}  </option>
+                              > {{frequencia.frequencia.descripcio}}  </option>
                   </select>
                 </div>
               </div>
@@ -238,7 +237,16 @@
               <!-- riskFactors -->
               <div class="form-group col-2">
                 <label for="t1riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
-                <input type="text" class="form-control" id="t1riskFactor"  disabled>
+                <input type="text"
+                       [ngClass]="{
+                       'danger' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'ALT RISC',
+                       'warning' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'RISC',
+                       'danger' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'VULNERABILITAT',
+                       'warning' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'RISC',
+                       'success' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'SENSE RISC'}"
+                       class="form-control" id="t1riskFactor"
+                       disabled
+                       [value]="getPregunta(pregunta.id)?.factor?.descripcio">
               </div>
 
               <!-- Bucle for para cada fila  -->
@@ -309,7 +317,7 @@
                   <!--/ Frequencia -->
                   <!-- riskFactors -->
                   <div class="form-group col-2">
-                    <input type="text" class="form-control" id="t5riskFactor"  disabled>
+                    <input type="text" class="form-control" id="t5riskFactor"   disabled>
                   </div>
                 </ng-container>
               </ng-container>

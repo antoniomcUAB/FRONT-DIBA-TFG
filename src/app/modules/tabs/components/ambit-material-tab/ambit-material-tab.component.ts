@@ -1,13 +1,18 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Ambits, ContextRows, EnvironmentMaterial, EnvironmentRelacional, TabAutonomia} from '../../models/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
+import {CustomInput} from "../../../../shared";
+import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
   selector: 'app-ambit-material-tab',
   templateUrl: './ambit-material-tab.component.html',
-  styleUrls: ['./ambit-material-tab.component.scss']
+  styleUrls: ['./ambit-material-tab.component.scss'],
+  providers: [
+    {provide: NG_VALUE_ACCESSOR, useExisting: AmbitMaterialTabComponent, multi: true}
+  ]
 })
-export class AmbitMaterialTabComponent {
+export class AmbitMaterialTabComponent extends CustomInput {
   ambits: Ambits = new Ambits();
   context: string = 'MATERIAL I INSTRUMENTAL';
   @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
@@ -15,6 +20,7 @@ export class AmbitMaterialTabComponent {
   @Output () before: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private _service: TabsFormService) {
+    super();
     this.reloadData();
   }
 
