@@ -34,9 +34,8 @@ export class ObservationsComponent {
   getObservations(id: number) {
     this._service.getDetailObservations(id).subscribe( (data: Diagnosis) => {
       this.diagnosis = data;
-      this.valoracio = data.valoracio;
     }, error => {
-      console.log("ERROR al recuperar el datos");
+      console.log("ERROR - al recuperar Diagnostico");
     });
   }
 

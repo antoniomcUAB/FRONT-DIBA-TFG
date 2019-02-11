@@ -7,11 +7,15 @@
     </div>
   </div>
   <!-- Ambito -->
-  <div class="row">
+  <div class="row" *ngFor="let ambit of diagnosis.ambit">
     <div class="col-12">
       <div class="card">
-        <div class="card-header bg-warning text-black-50 font-weight-bold">
-          Àmbit d'Autonomia
+        <div class="card-header text-white font-weight-bold"
+             [ngClass]="{'bg-warning text-black-50' : ambit?.descripcio.toUpperCase() === 'AUTONOMIA',
+                         'bg-danger' : ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
+                         'bg-success' : ambit?.descripcio.toUpperCase() === 'RELACIONAL',
+                         'bg-info' : ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'}">
+          {{ ambit?.descripcio.toUpperCase() }}
         </div>
         <div class="card-body">
           <div class="row">
@@ -22,16 +26,16 @@
                   <th class="text-center">Persona</th>
                   <th class="text-center">Risc</th>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td class="text-center">Pare</td>
-                    <td class="text-center warning">Morbi facilisis</td>
-                  </tr>
-                  <tr>
-                    <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                    <td class="text-center">Mare</td>
-                    <td class="text-center danger">Morbi facilisis</td>
+                <tbody *ngFor="let entorn of ambit.entorn">
+                  <tr *ngFor="let pregunta of entorn.pregunta">
+                    <td>{{ pregunta.situacioSocial.social }}</td>
+                    <td class="text-center">{{ pregunta.persona }}</td>
+                    <td class="text-center"
+                        [ngClass]="{'warning' : pregunta.factor?.descripcio.toUpperCase() === 'RISC',
+                                    'danger' : pregunta.factor?.descripcio.toUpperCase() === 'ALT RISC',
+                                    'success' : pregunta.factor?.descripcio.toUpperCase() === 'VULNERABILITAT',
+                                    'info' : pregunta.factor?.descripcio.toUpperCase() === 'SENSE VALORACIÓ' }">
+                      {{ pregunta.factor.descripcio }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -47,20 +51,21 @@
             <div class="col-6">
               <table class="table table-bordered">
                 <thead class="table-active">
-                <th>Factor Contextualizació</th>
-                <th class="text-center">Persona</th>
-                <th class="text-center">Tipus</th>
+                  <th>Factor Contextualizació</th>
+                  <th class="text-center">Persona</th>
+                  <th class="text-center">Tipus</th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td class="text-center">Fill</td>
-                    <td class="text-center danger">Morbi facilisis</td>
-                  </tr>
-                  <tr>
-                    <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                    <td class="text-center">Filla</td>
-                    <td class="text-center danger">Morbi facilisis</td>
+                  <tr *ngFor="let context of ambit.contextualitzacio">
+                    <td>{{ context.factor.descripcio }}</td>
+                    <td class="text-center">{{ context.persona?.tipusPersona.descripcio }}
+                    </td>
+                    <td class="text-center"
+                        [ngClass]="{'warning' : context.factor.descripcio.toUpperCase() === 'RISC',
+                                    'danger' : context.factor.descripcio.toUpperCase() === 'ALT RISC',
+                                    'success' : context.factor.descripcio.toUpperCase() === 'VULNERABILITAT',
+                                    'info' : context.factor.descripcio.toUpperCase() === 'SENSE VALORACIÓ' }">
+                      {{ context.factor.descripcio }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -86,6 +91,8 @@
       </div>
     </div>
   </div>
+
+  <!--
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -101,7 +108,7 @@
                   <th class="text-center">Risc</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let val of valoracio.evaluacions">
+                  <!-- <tr *ngFor="let val of valoracio.evaluacions">
                     <td>{{ val.ambit.descripcio }}</td>
                     <td [ngClass]="{'danger' : val.risc.descripcio.toUpperCase() === 'ALT RISC',
                                     'warning' : val.risc.descripcio.toUpperCase() === 'RISC',
@@ -125,7 +132,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
   <div class="row">
     <div class="col-12 mb-3">
       <button type="button" class="float-right btn btn-primary" (click)="backClicked()"><i class="fa fa-chevron-left"></i> Tornar</button>

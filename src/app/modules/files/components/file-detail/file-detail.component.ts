@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FilesDetailService } from '../../services/file-detail.service';
 import { Diagnosis, Expedient, Model, Persona, TipusPersona } from '../../models/expedient';
 import { TableListOptions, TableListResponse } from '../../../../shared/modules/table-list';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { area, line, curveLinear } from 'd3-shape';
-import {Professional} from "../../../home/models/professional";
+import { Professional } from "../../../home/models/professional";
 
 export const colors = [
   '#5c6bc0', '#66bb6a', '#29b6f6', '#ffee58', '#ef5350', '#868e96'
@@ -111,17 +111,17 @@ export class FileDetailComponent {
   getCurrentModel() {
     this._service.getCurrentModel().subscribe((data: Model) => {
       this.model = data;
-    }, (err) => {
-      console.log(err);
+    }, (error) => {
+      console.log("ERROR - al recuperar el modelo \n " + error);
     });
   }
 
-  /** GET PROFESSIONAL DATA **/
+  /* Get Professional **/
   getProfessionalData(id: number) {
     this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
       this.professional = data;
-    }, error => {
-      console.log("ERROR al recuperar el datos");
+    }, (error) => {
+      console.log("ERROR - al recuperar el profesional \n " + error);
     });
   }
 
@@ -129,8 +129,8 @@ export class FileDetailComponent {
   getFile() {
     this._service.getFileById(this.id).subscribe( (data: Expedient) => {
       this.expedient = data;
-    }, error => {
-      console.log("ERROR al recuperar el dato");
+    }, (error) => {
+      console.log("ERROR - al recuperar el expediente \n " + error);
     });
   }
 
@@ -138,8 +138,8 @@ export class FileDetailComponent {
   getTypePerson() {
     this._service.getTypePerson().subscribe( (data: TipusPersona) => {
       this.personType = data;
-    }, error => {
-      console.log("ERROR al recuperar el dato");
+    }, (error) => {
+      console.log("ERROR - al recuperar tipos de persona \n " + error);
     });
   }
 
@@ -167,7 +167,7 @@ export class FileDetailComponent {
           }
         }
       });
-      this.optionsUF.loading = true;
+      this.optionsUF.loading = false;
     });
   }
 
@@ -180,45 +180,17 @@ export class FileDetailComponent {
     if (persona.referencia === true) {
       this.newRefPerson(persona);
     }
-    this._service.createPerson(this.expedient).subscribe((result) => {
-      this.reloadDataTable(this.id);
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  /* Update Unity Family Member */
-  updateMember(persona: Persona, newRef: Persona) {
-    for (const index in this.expedient.persona) {
-      if (this.expedient.persona[index].id === persona.id) {
-        this.expedient.persona[index] = persona;
-      }
-    }
-    /** Total Unity Family **/
-    this.getTotalSizeFamily();
-    /** New Reference Person  **/
-    if (newRef.referencia === true) {
-      this.newRefPerson(persona);
-    }
     /** Call Service **/
     this._service.createPerson(this.expedient).subscribe((result) => {
       this.reloadDataTable(this.id);
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  /* Update Observations */
-  updateObservations() {
-    /** Call Service **/
-    this._service.updateObservations(this.expedient).subscribe((result) => {
-    }, (err) => {
-      console.log(err);
+    }, (error) => {
+      console.log("ERROR - al crear persona \n " + error);
     });
   }
 
   /* Create Diagnosis */
   createDiagnosis() {
+    /** Create new Diagnosis **/
     this.diagnosis = new Diagnosis();
     /** Set variables into Diagnosis **/
     this.diagnosis.professional = this.professional;
@@ -226,8 +198,40 @@ export class FileDetailComponent {
     /** Call Service **/
     this._service.createDiagnosis(this.diagnosis, this.expedient.id, this.model.id).subscribe((result) => {
       this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id}]);
-    }, (err) => {
-      console.log(err);
+    }, (error) => {
+      console.log("ERROR - al crear diagnostico \n " + error);
+    });
+  }
+
+  /* Update Unity Family Member */
+  updateMember(persona: Persona, newRef: Persona) {
+    /** Update Member(Persona) by ID **/
+    for (const index in this.expedient.persona) {
+      if (this.expedient.persona[index].id === persona.id) {
+        this.expedient.persona[index] = persona;
+      }
+    }
+    newRef.referencia = true;
+    /** Total Unity Family **/
+    this.getTotalSizeFamily();
+    /** New Reference Person  **/
+    if (newRef.referencia === true) {
+      this.newRefPerson(newRef);
+    }
+    /** Call Service **/
+    this._service.createPerson(this.expedient).subscribe((result) => {
+      this.reloadDataTable(this.id);
+    }, (error) => {
+      console.log("ERROR - al actualizar persona \n " + error);
+    });
+  }
+
+  /* Update Observations */
+  updateObservations() {
+    /** Call Service **/
+    this._service.updateObservations(this.expedient).subscribe((result) => {
+    }, (error) => {
+      console.log("ERROR - al actuializar observaciones \n " + error);
     });
   }
 
