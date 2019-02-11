@@ -111,8 +111,8 @@
 <!--/ titulo -->
 <form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()">
   <div class="card-body ">
-
     <ng-container *ngFor="let ambit of data.ambits;">
+
       <ng-container *ngFor="let entorn of ambit.entorns;">
         <ng-container *ngIf="(groupRelacional.social && entorn.descripcio === 'Entorn Social' )
       || (groupRelacional.family && entorn.descripcio === 'Entorn Familiar')
@@ -146,7 +146,11 @@
                   <div class="form-group align-items-center col-12 ">
                     <label > {{ "TABLE.apl" | translate }}</label>
                     <label class="custom-control custom-checkbox  ">
-                      <input type="checkbox" class="custom-control-input position-relative"  [(ngModel)]="pregunta.apl" name="aplica" >
+                      <input type="checkbox"
+                             class="custom-control-input position-relative"
+                             [ngModel]="getPregunta(pregunta.id)"
+                             (click)=" newPregunta(pregunta.social , pregunta.id )"
+                             name="aplica{{pregunta.id}}" >
                       <span class="custom-control-label"></span>
                       <span class="custom-control-description"></span>
                     </label>
@@ -163,12 +167,14 @@
                   <label for="t1person" >{{ "TABLE.person" | translate }} </label>
                   <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
-                      <div *ngIf="pregunta.apl" class="input-group-text " (click)="addRow(i,pregunta.social) ">
+                      <div *ngIf="getPregunta(pregunta.id)" class="input-group-text " (click)="addRow(i,pregunta.social) ">
                         <i class="fa fa-user-plus " > </i>
                       </div>
                     </div>
 
-                    <select class="form-control" id="t2person" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!pregunta.apl" >
+                    <select class="form-control" id="t2person" [required]="getPregunta(pregunta.id)"
+                            [value]="cleanSelects"
+                            [disabled]="!getPregunta(pregunta.id)" >
                       <option disabled selected value ></option>
                       <option> 2 </option>
                       <option> 3 </option>
@@ -187,8 +193,18 @@
               <ng-template #popContentSeverity></ng-template>
               <div class="col-xs-2">
                 <div class="col-12">
-                  <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentSeverity placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
-                  <select class="form-control" id="t2severity" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!pregunta.apl"  >
+                  <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle"
+                                                                                 aria-hidden="true" [ngbPopover]=popContentSeverity
+                                                                                 placement="right"
+                                                                                 triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
+                  <select class="form-control" id="t2severity"
+                          [required]="getPregunta(pregunta.id)"
+                          [value]="cleanSelects"
+                          [disabled]="!getPregunta(pregunta.id)"
+                          [ngModel]="getPregunta(pregunta.id)?.gravetat?.descripcio"
+                          (ngModelChange)="getPregunta(pregunta.id).gravetat.descripcio = $event"
+                          name="severitySelected{{pregunta.id}}"
+                          (change)="riscService(pregunta.social,pregunta.id)">
                     <option disabled selected value></option>
                     <option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>
                   </select>
@@ -199,12 +215,22 @@
               <ng-template #popContentFrequency></ng-template>
               <div class="col-2">
                 <div class="col-12">
-                  <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle" aria-hidden="true" [ngbPopover]=popContentFrequency placement="right" triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
-                  <select class="form-control" id="t2frequency" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!pregunta.apl">
-                    <ng-container *ngFor="let gravedades of pregunta.selectors ">
+                  <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle"
+                                                                                   aria-hidden="true"
+                                                                                   [ngbPopover]=popContentFrequency
+                                                                                   placement="right"
+                                                                                   triggers="mouseenter:mouseleave"
+                                                                                   [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
+                  <select class="form-control" id="t2frequency" [required]="getPregunta(pregunta.id)"
+                          [value]="cleanSelects"
+                          [disabled]="!getPregunta(pregunta.id)"
+                          [ngModel]="getPregunta(pregunta.id)?.frequencia?.descripcio"
+                          (ngModelChange)="getPregunta(pregunta.id).frequencia.descripcio = $event"
+                          name="frequencySelected{{pregunta.id}}"
+                          (change)="riscService(pregunta.social,pregunta.id) ">
                       <option disabled selected value></option>
-                      <option *ngFor="let frequencia of gravedades.frequencia"> {{frequencia.frequencia.descripcio}}  </option>
-                    </ng-container>
+                      <option  *ngFor="let frequencia of getFrequencia(getPregunta(pregunta.id)?.gravetat?.descripcio,pregunta.selectors) "
+                               [ngValue]="frequencia.frequencia"> {{frequencia.frequencia.descripcio}}  </option>
                   </select>
                 </div>
               </div>
@@ -255,7 +281,11 @@
 
                   <div class="col-xs-2">
                     <div class="col-12">
-                      <select class="form-control" id="t1severity" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!pregunta.apl" [(ngModel)]="selectorTest" >
+                      <select class="form-control" id="t1severity"
+                              [required]="pregunta.apl"
+                              [value]="cleanSelects"
+                              [disabled]="!pregunta.apl"
+                              [(ngModel)]="selectorTest" >
                         <option disabled selected value></option>
                         <option *ngFor="let option of pregunta.selectors" > {{option.gravetat.descripcio}} </option>
                       </select>
@@ -266,7 +296,9 @@
                   <div class="col-2">
                     <div class="col-12">
 
-                      <select class="form-control" id="t1frequency" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="">
+                      <select class="form-control" id="t1frequency"
+                              [required]="pregunta.apl"
+                              [value]="cleanSelects" [disabled]="">
                         <ng-container *ngFor="let gravedades of pregunta.selectors">
                           <option disabled selected value></option>
                           <option *ngFor="let frequencia of gravedades.frequencia"> {{frequencia.frequencia.descripcio}}  </option>
@@ -299,11 +331,11 @@
             <!--/ Situacion social Basica -->
 
 
-            <!-- Aplicatiu -->
-            <div class="col-xs-1">
+            <!-- Aplica 1 persona-->
+            <div class="col-1">
               <div class="col-12">
                 <div class="form-group align-items-center col-12 ">
-                  <label > {{ "TABLE.apl" | translate }}</label>
+                  <label style="font-size: x-small"> {{ "TABLE.aplUna" | translate }}</label>
                   <label class="custom-control custom-checkbox  ">
                     <input type="checkbox" class="custom-control-input position-relative" [(ngModel)]="cont.apl" name="aplicaContext" >
                     <span class="custom-control-label"></span>
@@ -312,7 +344,7 @@
                 </div>
               </div>
             </div>
-            <!--/ Aplicatiu -->
+            <!--/ Aplica 1 persona-->
 
             <!-- Persones -->
             <div class="col-2">
@@ -326,17 +358,28 @@
             </div>
 
             <!--/ Persones -->
+            <!--aplica mes de una persona-->
 
+            <div class="col-1">
+              <div class="col-12">
+                <div class="form-group align-items-center col-12 ">
+                  <label style="font-size: x-small">  {{ "TABLE.aplMas" | translate }}</label>
+                  <label class="custom-control custom-checkbox  ">
+                    <input type="checkbox" class="custom-control-input position-relative" name="aplicaContext" >
+                    <span class="custom-control-label"></span>
+                    <span class="custom-control-description"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!--/ aplica mes de una persona-->
             <!-- Severity -->
 
 
             <div class="col-2">
               <div class="col-12">
-                <label for="t1severity">{{ "TABLE.types" | translate }}</label>
-                <select class="form-control" id="t1severity" [required]="cont.apl" [value]="cleanSelects" [disabled]="!cont.apl" >
-                  <option disabled selected value></option>
-                  <!--<option *ngFor="let gravetat of cont. "> {{gravetat.descripcio}} </option>-->
-                </select>
+                  <label for="t1riskFactor" >{{ "TABLE.types" | translate }}</label>
+                  <input type="text" class="form-control" id="t1riskFactor"  disabled>
               </div>
             </div>
             <!--/ Severity -->

@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../models/tab-class-form';
+import {Diagnosis } from '../../models/diagnostic';
 
 const MAX_N_TABS = 5;
 
@@ -8,7 +9,7 @@ const MAX_N_TABS = 5;
   templateUrl: './tabs.component.html'
 })
 
-export class TabsComponent {
+export class TabsComponent implements OnInit {
   @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional();
   @Input() entornsMaterial: EnvironmentMaterial = new  EnvironmentMaterial();
   public tabsActivate: TabsDisabled = new TabsDisabled();
@@ -18,9 +19,8 @@ export class TabsComponent {
   public indexMaxActive: number = 1;
   public material: string = "material";
   public relacional: string = "relacional";
-
-
-  public fnStay(stay: boolean, id: number ){
+  public diagnostico: Diagnosis;
+  public fnStay(stay: boolean, id: number ) {
       this.stay = stay;
       this.disapear = true;
       if (!stay) {
@@ -52,6 +52,10 @@ export class TabsComponent {
     this.stay = false;
     this.disapear = false;
 
+  }
+
+  ngOnInit(): void {
+     this.diagnostico = new Diagnosis();
   }
 
 }

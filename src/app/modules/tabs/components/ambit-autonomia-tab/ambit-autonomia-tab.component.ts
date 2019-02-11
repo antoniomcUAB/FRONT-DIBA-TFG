@@ -1,14 +1,19 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {Ambits, ContextRows, TabAutonomia} from '../../models/tab-class-form';
+import {Ambits} from '../../models/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
+import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {CustomInput} from "../../../../shared";
 
 
 @Component({
   selector: 'app-ambit-autonomia-tab',
   templateUrl: './ambit-autonomia-tab.component.html',
-  styleUrls: ['./ambit-autonomia-tab.component.scss']
+  styleUrls: ['./ambit-autonomia-tab.component.scss'],
+  providers: [
+    {provide: NG_VALUE_ACCESSOR, useExisting: AmbitAutonomiaTabComponent, multi: true}
+  ]
 })
-export class AmbitAutonomiaTabComponent {
+export class AmbitAutonomiaTabComponent extends CustomInput {
   ambits: Ambits = new Ambits();
   context: string = 'Autonomia';
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
@@ -16,6 +21,7 @@ export class AmbitAutonomiaTabComponent {
   @Output () active: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private _service: TabsFormService) {
+    super();
     this.reloadData();
     this.activate();
 

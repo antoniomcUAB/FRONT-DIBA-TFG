@@ -6,7 +6,7 @@
 
 <!--/ Search component -->
 
-
+{{diagnostico|json}}
 <ngb-tabset [activeId]="index">
 
   <ngb-tab id="1" [disabled]="false" >
@@ -16,7 +16,7 @@
       <app-check-form *ngIf="!disapear" (stay)="fnStay($event,1);" [comesFrom] = "'l\'ambit d\'autonomia'" [access]="false" >
       </app-check-form>
 
-      <app-ambit-autonomia-tab *ngIf="stay"  (endForm)="goBackCheckForm(1);" (before)= "beforeTab()" >
+      <app-ambit-autonomia-tab *ngIf="stay"  (endForm)="goBackCheckForm(1);" (before)= "beforeTab()" [(ngModel)]="diagnostico" >
       </app-ambit-autonomia-tab>
 
     </ng-template>

@@ -1,26 +1,23 @@
 import {GlobalService} from "../../../shared";
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {Injectable} from "@angular/core";
-import {Ambits, ContextRows, TabAutonomia} from '../models/tab-class-form';
+import {Ambits} from '../models/tab-class-form';
+import {Diagnosis, Preguntes} from "../models/diagnostic";
 
 
 @Injectable()
-export class TabsFormService extends GlobalService{
+export class TabsFormService extends GlobalService {
 
   constructor(public _http: HttpClient) {
     super();
   }
-
-  getFilesForm( ): Observable<TabAutonomia> {
-    return this._http.get<TabAutonomia>("../../../../assets/api/tabs-Autonomia.json");
-  }
   getFilesFormModel( ): Observable<Ambits> {
     return this._http.get<Ambits>(`${this.apiURL}/dsdiba/model`);
   }
-  getFilesRelacional( ): Observable<ContextRows> {
-    return this._http.get<ContextRows>("../../../../assets/api/factor-de-Contextualitzacio.json");
+  getRiscOfQuestion( pregunta: Preguntes): Observable<Diagnosis> {
+  return this._http.put<Diagnosis>(`${this.apiURL}/dsdiba/pregunta/18111`, pregunta);
   }
 
 }

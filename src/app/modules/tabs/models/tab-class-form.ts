@@ -1,12 +1,12 @@
 export class Ambits {
-  ambits: Ambit [];
+  ambits: Ambit [] = [];
 }
 
 export class Ambit {
   descripcio: string;
   id: string;
-  entorns: Entorns [];
-  factors_context: FactorsContext[];
+  entorns: Entorns [] = [];
+  factors_context: FactorsContext[] = [];
 
 }
 export class AmbitContext {
@@ -24,20 +24,20 @@ export class FactorsContext {
 export class Entorns {
   descripcio: string;
   id: number;
-  preguntes: Pregunta [];
+  preguntes: Pregunta [] = [];
 }
 export class Pregunta {
   social: string;
   definicio: string;
   id: number;
-  selectors: SelectorGravetat [];
+  selectors: SelectorGravetat [] = [];
   apl: boolean;
 }
 export class SelectorGravetat {
   id: number ;
   evidencia: string;
   gravetat: Gravetat;
-  frequencia: SelectorFrequencia [];
+  frequencia: SelectorFrequencia [] = [];
   selected: boolean;
 }
 export class Gravetat {

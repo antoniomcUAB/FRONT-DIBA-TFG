@@ -4,7 +4,6 @@ export let TRANSLATION = {
     'home-h2': 'Llistat d\'expedients per municipi',
     'file-h2': 'Fitxa d\'expedient'
   },
-
   /*  Table */
   'TABLE': {
     'evaluate'             : 'Valoració',
@@ -14,6 +13,8 @@ export let TRANSLATION = {
     'updateDate'           : 'Data última valoració',
     'actions'              : 'Accions',
     'apl'                  : 'Aplica',
+    'aplMas'               : 'Mes d\'una persona UC',
+    'aplUna'               : '1 membre UC/si',
     'person'               : 'Persona',
     'severity'             : 'Gravetat',
     'frequency'            : 'Freqüència',
@@ -31,8 +32,9 @@ export let TRANSLATION = {
     'unsubscribe'          : 'Baixa',
     'toUnsubscribe'        : 'Donar de Baixa',
     'dataUnsubscribe'      : 'Data de baixa',
-    'newMember'            : 'Afegir nou member',
-    'isPersonRef'          : 'És persona de referència'
+    'newMember'            : 'Afegir nou membre',
+    'isPersonRef'          : 'És persona de referència',
+    'newRef'           : 'Nova persona de referència'
   },
   'OBSTABLE': {
     'obs'           : 'Valoracions realitzades'
@@ -69,10 +71,9 @@ export let TRANSLATION = {
     'hestia'        : 'HÈSTIA',
     'otherType'     : 'Un altre tipus',
     'codeFile'      : 'Codi d\'expedient',
-    'newRef'        : 'Quien sera la nueva persona de referencia',
-    'totalFamilia'  : 'Nombre de presones que componen la unitat familiar'
+    'newRef'        : 'Qui serà la nova persona de refèrencia',
+    'totalFamilia'  : 'Nombre de persones que componen la unitat familiar'
   },
-
   /* Search */
   'SEARCH': {
     'search'        : 'Cercar',
@@ -80,9 +81,11 @@ export let TRANSLATION = {
   },
   'ORDER_BY'        : 'Ordenar per',
   'TAGS'            : 'Etiquetes',
-
   /* Resumen */
   'RESUMEN' : {
     'pdf'           : 'Generar PDF'
+  },
+  /* Tabs */
+  'TABS' : {
   }
 };
