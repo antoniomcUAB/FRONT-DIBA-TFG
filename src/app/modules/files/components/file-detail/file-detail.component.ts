@@ -25,9 +25,11 @@ export class FileDetailComponent {
   diagnosis: Diagnosis;
 
   id: number;
-  member;
+  member: Persona;
+  newRefMember: Persona;
   observations: string;
   personType: TipusPersona;
+  toDate = new Date();
 
   /** Tables options **/
   options = new TableListOptions();
@@ -118,7 +120,6 @@ export class FileDetailComponent {
   getProfessionalData(id: number) {
     this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
       this.professional = data;
-      console.log(this.professional);
     }, error => {
       console.log("ERROR al recuperar el datos");
     });
@@ -157,8 +158,16 @@ export class FileDetailComponent {
     this.optionsUF.loading = true;
     this._service.getUnityFamily(id, this.optionsUF).subscribe((res: TableListResponse ) => {
       this.optionsUF = res.options;
-      this.dataUnityFamily = res.data;
-      this.optionsUF.loading = false;
+      this.dataUnityFamily = res.data.sort((a: Persona, b: Persona) => {
+        if (a.referencia) {
+            return -1;
+        } else {
+          if (a.dataBaixa < b.dataBaixa) {
+            return -1;
+          }
+        }
+      });
+      this.optionsUF.loading = true;
     });
   }
 
@@ -179,7 +188,7 @@ export class FileDetailComponent {
   }
 
   /* Update Unity Family Member */
-  updateMember(persona) {
+  updateMember(persona: Persona, newRef: Persona) {
     for (const index in this.expedient.persona) {
       if (this.expedient.persona[index].id === persona.id) {
         this.expedient.persona[index] = persona;
@@ -188,7 +197,7 @@ export class FileDetailComponent {
     /** Total Unity Family **/
     this.getTotalSizeFamily();
     /** New Reference Person  **/
-    if (persona.referencia === true) {
+    if (newRef.referencia === true) {
       this.newRefPerson(persona);
     }
     /** Call Service **/
@@ -216,7 +225,7 @@ export class FileDetailComponent {
     this.diagnosis.versioModel = this.model;
     /** Call Service **/
     this._service.createDiagnosis(this.diagnosis, this.expedient.id, this.model.id).subscribe((result) => {
-      this._router.navigate(['/tabs', {'id': result.id, 'personas': this.expedient.persona}]);
+      this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id}]);
     }, (err) => {
       console.log(err);
     });
