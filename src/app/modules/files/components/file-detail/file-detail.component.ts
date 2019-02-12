@@ -27,7 +27,7 @@ export class FileDetailComponent {
   id: number;
   member: Persona;
   newRefMember: Persona;
-  personActives: Persona[];
+  personActives: Persona[] = [];
   observations: string;
   personType: TipusPersona;
   toDate = new Date();
