@@ -1,8 +1,8 @@
 
 <!-- titulo -->
 
-<div class="form-group col-12 ">
-  <div class="form-group col-12 bg-grey-500" >
+<div class="form-group col-12">
+  <div class="form-group my-3 col-12 bg-grey-500" >
     <label for="ssb" style="color: white;" >{{ "TABTITLE.titleAutonomia" | translate }} </label>
   </div>
 </div>
@@ -110,7 +110,7 @@
 
 <!--/ titulo -->
 <form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()">
-  <div class="card-body ">
+  <div class="card-body">
     <ng-container *ngFor="let ambit of data.ambits;">
       <ng-container *ngFor="let entorn of ambit.entorns;">
         <ng-container *ngIf="(groupRelacional.social && entorn.descripcio === 'Entorn Social' )
@@ -402,12 +402,12 @@
       </ng-container>
     </div>
   </div>
-  <div class="form-group col-12">
+  <div class="form-group row">
     <div class="form-group col-6 float-left">
-      <button type="button" class="btn btn-danger" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Netejar </button>
+      <button type="button" class="btn btn-danger ml-3 mb-1" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Netejar </button>
     </div>
     <div class="form-group col-6 float-right text-right">
-      <button  type="submit"  class="btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>
+      <button  type="submit"  class="mr-3 mb-1 btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>
     </div>
 
   </div>
