@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-12 mb-3">
       <h2 class="text-center mb-4">Resum valoració DSDIBA-{{date | date:'dd/MM/yyyy'}}</h2>
-      <button type="button" class="float-right btn btn-outline-primary"><i class="fa fa-file-pdf-o"></i> {{ "RESUMEN.pdf" | translate }}</button>
+      <button type="button" class="float-right btn btn-outline-primary no-print" (click)="onPrint();"><i class="fa fa-file-pdf-o"></i> {{ "RESUMEN.pdf" | translate }}</button>
     </div>
   </div>
   <!-- Ambito -->
@@ -27,16 +27,24 @@
                   <th class="text-center">Risc</th>
                 </thead>
                 <tbody *ngFor="let entorn of ambit.entorn">
-                  <tr *ngFor="let pregunta of entorn.pregunta">
-                    <td>{{ pregunta.situacioSocial.social }}</td>
-                    <td class="text-center">{{ pregunta.persona }}</td>
-                    <td class="text-center"
-                        [ngClass]="{'warning' : pregunta.factor?.descripcio.toUpperCase() === 'RISC',
-                                    'danger' : pregunta.factor?.descripcio.toUpperCase() === 'ALT RISC',
-                                    'success' : pregunta.factor?.descripcio.toUpperCase() === 'VULNERABILITAT',
-                                    'info' : pregunta.factor?.descripcio.toUpperCase() === 'SENSE VALORACIÓ' }">
-                      {{ pregunta.factor.descripcio }}</td>
-                  </tr>
+                  <ng-container *ngIf="entorn.pregunta.length > 0">
+                    <tr *ngFor="let pregunta of entorn.pregunta">
+                      <td>{{ pregunta.situacioSocial.social }}</td>
+                      <td class="text-center">{{ pregunta.persona?.tipusPersona?.descripcio }}</td>
+                      <td class="text-center"
+                          [ngClass]="{'warning' : pregunta.factor?.descripcio.toUpperCase() === 'RISC',
+                                      'danger' : pregunta.factor?.descripcio.toUpperCase() === 'ALT RISC',
+                                      'success' : pregunta.factor?.descripcio.toUpperCase() === 'VULNERABILITAT',
+                                      'info' : pregunta.factor?.descripcio.toUpperCase() === 'SENSE VALORACIÓ' }">
+                        {{ pregunta.factor.descripcio }}</td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngIf="entorn.pregunta?.length == 0">
+                    <!-- No hay Situación social -->
+                    <tr class="text-center">
+                      <td colspan="3">No hay Situació social para {{ entorn.descripcio }}</td>
+                    </tr>
+                  </ng-container>
                 </tbody>
               </table>
               <table class="table table-borderless">
@@ -56,24 +64,33 @@
                   <th class="text-center">Tipus</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let context of ambit.contextualitzacio">
-                    <td>{{ context.factor.descripcio }}</td>
-                    <td class="text-center">{{ context.persona?.tipusPersona.descripcio }}
-                    </td>
-                    <td class="text-center"
-                        [ngClass]="{'warning' : context.factor.descripcio.toUpperCase() === 'RISC',
-                                    'danger' : context.factor.descripcio.toUpperCase() === 'ALT RISC',
-                                    'success' : context.factor.descripcio.toUpperCase() === 'VULNERABILITAT',
-                                    'info' : context.factor.descripcio.toUpperCase() === 'SENSE VALORACIÓ' }">
-                      {{ context.factor.descripcio }}</td>
-                  </tr>
+                  <ng-container *ngIf="ambit.contextualitzacio?.length > 0" >
+                    <tr *ngFor="let context of ambit.contextualitzacio">
+                      <td>{{ context.factor?.descripcio }}</td>
+                      <td class="text-center">
+                        {{ context.persona?.tipusPersona?.descripcio }}
+                      </td>
+                      <td class="text-center"
+                          [ngClass]="{'warning' : context.factor.gravetat.descripcio.toUpperCase() === 'RISC',
+                                      'danger' : context.factor.gravetat.descripcio.toUpperCase() === 'ALT RISC',
+                                      'success' : context.factor.gravetat.descripcio.toUpperCase() === 'VULNERABILITAT',
+                                      'info' : context.factor.gravetat.descripcio.toUpperCase() === 'SENSE VALORACIÓ' }">
+                        {{ context.factor.gravetat.descripcio }}</td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngIf="ambit.contextualitzacio?.length == 0">
+                    <!-- No hay Factor de contextualización -->
+                    <tr class="text-center">
+                      <td colspan="3">No hay Factor de contextualización</td>
+                    </tr>
+                  </ng-container>
                 </tbody>
               </table>
-              <table class="table table-borderless">
+              <table class="table table-borderless" *ngFor="let evaluacion of diagnosis.valoracio.evaluacions">
                 <tbody>
                   <tr>
                     <td class="text-right">Risc automàtic segon situació</td>
-                    <td class="text-center danger">Morbi facilisis</td>
+                    <td class="text-center danger"></td>
                   </tr>
                 </tbody>
               </table>
@@ -84,7 +101,7 @@
               <label for="fileObservationAutonomy" class="col-form-label">
                 <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
               </label>
-              <textarea class="form-control" type="text" value="" id="fileObservationAutonomy" disabled="disabled"></textarea>
+              <textarea class="form-control" type="text" value="{{ ambit.observacions }}" id="fileObservationAutonomy" disabled="disabled"></textarea>
             </div>
           </div>
         </div>
@@ -135,7 +152,7 @@
   </div>-->
   <div class="row">
     <div class="col-12 mb-3">
-      <button type="button" class="float-right btn btn-primary" (click)="backClicked()"><i class="fa fa-chevron-left"></i> Tornar</button>
+      <button type="button" class="float-right btn btn-primary no-print" (click)="backClicked()"><i class="fa fa-chevron-left"></i> Tornar</button>
     </div>
   </div>
 </section>

@@ -63,6 +63,7 @@ export class Ambit {
   descripcio: string;
   contextualitzacio: Contextualitzacio;
   entorn: Entorn;
+  observacions: string;
   factors_contetxt: FactorsCcontext;
   risc: number;
   valAltrisc: number;
