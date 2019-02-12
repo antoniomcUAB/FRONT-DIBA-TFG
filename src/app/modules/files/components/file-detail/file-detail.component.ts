@@ -27,6 +27,7 @@ export class FileDetailComponent {
   id: number;
   member: Persona;
   newRefMember: Persona;
+  personActives: Persona[] = [];
   observations: string;
   personType: TipusPersona;
   toDate = new Date();
@@ -257,13 +258,12 @@ export class FileDetailComponent {
 
   /* Total Unity Family */
   getTotalSizeFamily() {
-    let index = 0;
     for (const persona of this.expedient.persona) {
       if (!persona.dataBaixa) {
-        index = index + 1;
+        this.personActives.push(persona);
       }
     }
-    this.expedient.totalFamilia = index;
+    this.expedient.totalFamilia = this.personActives.length;
   }
 
   /* New Reference Person */
