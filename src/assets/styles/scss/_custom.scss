@@ -103,3 +103,10 @@ a.navbar-brand.mr-auto {
   border-color: #d1ecf1;
   box-shadow: 0 0 0 0.2rem rgba(209, 236, 241, 0.5);
 }
+
+
+@media print {
+  .no-print, .no-print * {
+    display: none !important;
+  }
+}

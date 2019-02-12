@@ -39,6 +39,10 @@ export class ObservationsComponent {
     });
   }
 
+  onPrint() {
+    window.print();
+  }
+
   backClicked() {
     this._location.back();
   }
