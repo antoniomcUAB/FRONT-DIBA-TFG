@@ -64,7 +64,7 @@ export class Preguntes {
   entorn: Entorn;
   frequencia: Frequencia = new Frequencia();
   gravetat: Gravetat = new Gravetat();
-  persona: Persona ;
+  persona: Persona [] = [];
   risc: Risc;
   factor: Factor = new Factor();
   situacioSocial: SituacionSocial = new SituacionSocial();

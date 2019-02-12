@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../models/tab-class-form';
 import {Diagnosis } from '../../models/diagnostic';
-import {Persona} from "../../../files";
-import {TabsFormService} from "../../services/tabsForm.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Expedient, Persona} from "../../../files";
+import {ActivatedRoute} from "@angular/router";
+import {FilesDetailService} from "../../../files/services/file-detail.service";
 
 const MAX_N_TABS = 5;
 
@@ -12,7 +12,7 @@ const MAX_N_TABS = 5;
   templateUrl: './tabs.component.html'
 })
 
-export class TabsComponent implements OnInit {
+export class TabsComponent {
   @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional();
   @Input() entornsMaterial: EnvironmentMaterial = new  EnvironmentMaterial();
   public tabsActivate: TabsDisabled = new TabsDisabled();
@@ -23,17 +23,27 @@ export class TabsComponent implements OnInit {
   public material: string = "material";
   public relacional: string = "relacional";
   public diagnostico: Diagnosis;
+  public diagnosisID;
+  public expedientID;
+  personActives: Persona[] = [];
+  expedient: Expedient;
 
 
-  idDiagnosis;
-  persons: Persona[];
 
-  constructor(private _router: ActivatedRoute) {
-
-    this.idDiagnosis = this._router.snapshot.params['id'];
-    this.persons = this._router.snapshot.params['personas'];
-    console.log(this.idDiagnosis);
-
+  constructor(private _route: ActivatedRoute,
+  private _service: FilesDetailService) {
+    this.diagnosisID = this._route.snapshot.params['diagnosisID'];
+    this.expedientID = this._route.snapshot.params['expedientID'];
+    this.getFile();
+    this.diagnostico = new Diagnosis();
+  }
+  getFile() {
+    this._service.getFileById(this.expedientID).subscribe( (data: Expedient) => {
+      this.expedient = data;
+      this.getPersonActives();
+    }, (error) => {
+      console.log("ERROR - al recuperar el expediente \n " + error);
+    });
   }
 
   public fnStay(stay: boolean, id: number ) {
@@ -69,10 +79,14 @@ export class TabsComponent implements OnInit {
     this.disapear = false;
 
   }
-
-  ngOnInit(): void {
-     this.diagnostico = new Diagnosis();
+  getPersonActives() {
+    for (const person of this.expedient.persona) {
+      if (!person.dataBaixa) {
+        this.personActives.push(person);
+      }
+    }
   }
+
 
 }
 

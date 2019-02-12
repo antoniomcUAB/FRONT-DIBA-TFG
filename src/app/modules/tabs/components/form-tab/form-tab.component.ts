@@ -5,6 +5,7 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "../../../../shared";
 import {TabsFormService} from '../../services/tabsForm.service';
 import {Frequencia, Gravetat, Preguntes} from "../../models/diagnostic";
+import {Persona} from "../../../files";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Input () contextualitzacio: string;
+  @Input() personsSelector: Persona [] = [];
 
   constructor(private modalService: NgbModal,
               private tabsService: TabsFormService) {
@@ -84,8 +86,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
 
     if (this.value.preguntes.length !== 0) {
       for (let i = 0; i < this.value.preguntes.length; i++) {
-        console.log(id + "<----------------->"+this.value.preguntes[i].situacioSocial.id);
-        if (this.value.preguntes[i].situacioSocial.id == id) {
+        if (this.value.preguntes[i].situacioSocial.id === id) {
           return this.value.preguntes[i];
         }
       }
@@ -144,15 +145,16 @@ export class FormTabComponent extends CustomInput implements OnInit  {
 
     for (let i = 0; i < this.value.preguntes.length; i++) {
       if (this.value.preguntes[i].situacioSocial.id === id) {
-        console.log(this.value.preguntes[i]);
         let pregunta: Preguntes = Object.assign({}, this.value.preguntes[i]);
         if (!pregunta.frequencia.descripcio ) {
-          console.log("hola");
           pregunta.frequencia = null;
         }
-          this.tabsService.getRiscOfQuestion(pregunta).subscribe((result) => {
-            console.log(result);
-            this.value.preguntes[i].factor.descripcio = result.factor.descripcio;
+        if (!pregunta.persona ) {
+          pregunta.persona = null;
+        }
+        this.tabsService.getRiscOfQuestion(pregunta).subscribe((result) => {
+          console.log(result);
+          this.value.preguntes[i].factor.descripcio = result.factor.descripcio;
           }, (err) => {
             console.log(err);
           });
