@@ -17,7 +17,7 @@ export class Persona {
   id: string;                 // ID Persona
   sexe: string;               // Sexo/Género
   dataNaixement: string;      // Fecha de nacimiento
-  tipusPersona: TipusPersona; // Tipo de Persona
+  tipusPersona: TipusPersona = new TipusPersona(); // Tipo de Persona
   dataAlta: number;           // Fecha de Alta
   dataBaixa: number;          // Fecha de Baja
   referencia: boolean;        // Es persona de referencia
@@ -64,7 +64,7 @@ export class Preguntes {
   entorn: Entorn;
   frequencia: Frequencia = new Frequencia();
   gravetat: Gravetat = new Gravetat();
-  persona: Persona [] = [];
+  persona: Persona = new Persona();
   risc: Risc;
   factor: Factor = new Factor();
   situacioSocial: SituacionSocial = new SituacionSocial();

@@ -6,6 +6,7 @@ import {Injectable} from "@angular/core";
 import {Ambits} from '../models/tab-class-form';
 import {Diagnosis, Frequencia, Gravetat, Preguntes} from "../models/diagnostic";
 import {Persona} from "../../files";
+import {map} from "rxjs/operators";
 
 
 @Injectable()
@@ -27,7 +28,13 @@ export class TabsFormService extends GlobalService {
     return this._http.get<Gravetat[]>(`${this.apiURL}/dsdiba/gravetat/`);
   }
   getRiscOfQuestion( pregunta: Preguntes): Observable<Preguntes> {
-  return this._http.put<Preguntes>(`${this.apiURL}/dsdiba/pregunta/18111`, pregunta);
+  return this._http.put<Preguntes>(`${this.apiURL}/dsdiba/pregunta/18111`, pregunta).pipe(
+    map( data => {
+      if (!data.frequencia) { data.frequencia = new Frequencia(); }
+      if(!data.persona) { data.persona = new Persona(); }
+      return data;
+    })
+  );
   }
 
 }

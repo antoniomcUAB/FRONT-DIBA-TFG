@@ -146,19 +146,36 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     for (let i = 0; i < this.value.preguntes.length; i++) {
       if (this.value.preguntes[i].situacioSocial.id === id) {
         let pregunta: Preguntes = Object.assign({}, this.value.preguntes[i]);
+        console.log(pregunta + "ddd" + i);
         if (!pregunta.frequencia.descripcio ) {
           pregunta.frequencia = null;
         }
-        if (!pregunta.persona ) {
+        if (!pregunta.persona.id ) {
           pregunta.persona = null;
         }
         this.tabsService.getRiscOfQuestion(pregunta).subscribe((result) => {
-          console.log(result);
-          this.value.preguntes[i].factor.descripcio = result.factor.descripcio;
+          this.value.preguntes[i] = result;
           }, (err) => {
             console.log(err);
           });
         }
       }
+  }
+  public addPregunta(pregunta:string , id:number) {
+    this.value.preguntes.push(new Preguntes(pregunta,id));
+  }
+  public getPreguntas(){
+      return this.value.preguntes;
+  }
+  setPersona(preguntaID:number, personaSeleccionada) {
+    for (let i = 0; i < this.personsSelector.length; i++) {
+      if (this.personsSelector[i].tipusPersona.descripcio === personaSeleccionada) {
+        console.log(preguntaID);
+        console.log(personaSeleccionada);
+        console.log( this.getPregunta(preguntaID));
+        this.getPregunta(preguntaID).persona.tipusPersona.descripcio = personaSeleccionada;
+        this.getPregunta(preguntaID).persona.id = this.personsSelector[i].id;
+      }
+    }
   }
 }

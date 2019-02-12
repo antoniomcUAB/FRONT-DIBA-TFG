@@ -165,7 +165,7 @@
                   <label for="t1person" >{{ "TABLE.person" | translate }} </label>
                   <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
-                      <div *ngIf="getPregunta(pregunta.id)" class="input-group-text " (click)="addRow(i,pregunta.social) ">
+                      <div *ngIf="getPregunta(pregunta.id)" class="input-group-text " (click)="addPregunta(pregunta.social,pregunta.id) ">
                         <i class="fa fa-user-plus " > </i>
                       </div>
                     </div>
@@ -173,9 +173,8 @@
                             [value]="cleanSelects"
                             [disabled]="!getPregunta(pregunta.id)"
                             [ngModel]="getPregunta(pregunta.id)?.persona?.tipusPersona?.descripcio"
-                            (ngModelChange)="getPregunta(pregunta.id).persona.tipusPersona.descripcio = $event;"
+                            (ngModelChange)="setPersona(pregunta.id,$event)"
                               name="persona{{i}}">
-
                       <option disabled selected value ></option>
                       <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
                     </select>
@@ -226,8 +225,7 @@
                           name="frequencySelected{{pregunta.id}}"
                           (change)="getValueFrequencia(getPregunta(pregunta.id)?.frequencia,pregunta.id) ">
                       <option disabled selected value></option>
-                      <option  *ngFor="let frequencia of getFrequencia(getPregunta(pregunta.id)?.gravetat?.descripcio,pregunta.selectors) "
-                              > {{frequencia.frequencia.descripcio}}  </option>
+                      <option  *ngFor="let frequencia of getFrequencia(getPregunta(pregunta.id)?.gravetat?.descripcio,pregunta.selectors)" > {{frequencia.frequencia.descripcio}}  </option>
                   </select>
                 </div>
               </div>
@@ -236,89 +234,97 @@
               <div class="form-group col-2">
                 <label for="t1riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
                 <input type="text"
-                       [ngClass]="{
-                       'danger' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'ALT RISC',
-                       'warning' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'RISC',
-                       'danger' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'VULNERABILITAT',
-                       'warning' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'RISC',
-                       'success' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'SENSE RISC'}"
+                       [ngClass]="{'warning' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'RISC',
+                                   'danger' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'ALT RISC',
+                                   'success' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'VULNERABILITAT',
+                                   'info' : getPregunta(pregunta.id)?.factor?.descripcio?.toUpperCase() === 'SENSE VALORACIÓ' }"
                        class="form-control" id="t1riskFactor"
                        disabled
                        [value]="getPregunta(pregunta.id)?.factor?.descripcio">
               </div>
 
-              <!-- Bucle for para cada fila  -->
-              <!--<ng-container *ngFor="let method of rows ; let x= index;">-->
-                <!--<ng-container *ngIf="method.id === i">-->
-                  <!--&lt;!&ndash; Situacio Social&ndash;&gt;-->
-                  <!--<div class="form-group col-4">-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;/ Situacio Social&ndash;&gt;-->
+               <!--Bucle for para cada fila  -->
+              <ng-container *ngFor="let method of getPreguntas()  ; let x = index">
+                <ng-container *ngIf="method.situacioSocial.id === pregunta.id && x!= 0 ">
+                  <!-- Situacio Social-->
+                  <div class="form-group col-4">
+                  </div>
+                  <!--/ Situacio Social-->
 
-                  <!--&lt;!&ndash;Aplicatiu &ndash;&gt;-->
-                  <!--<div class="col-xs-1">-->
-                    <!--<div class="col-12">-->
-                      <!--<div class="form-group align-items-center col-12 ">-->
-                        <!--<label class="custom-control custom-checkbox position-relative">-->
+                  <!--Aplicatiu -->
+                  <div class="col-xs-1">
+                    <div class="col-12">
+                      <div class="form-group align-items-center col-12 ">
+                        <label class="custom-control custom-checkbox position-relative">
 
-                        <!--</label>-->
-                      <!--</div>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;/ Aplicatiu &ndash;&gt;-->
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/ Aplicatiu -->
 
-                  <!--&lt;!&ndash; Persones &ndash;&gt;-->
-                  <!--&lt;!&ndash;<div class="col-2">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<div class="col-12">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<div class="input-group mb-2 mr-sm-2">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<select class="form-control" id="t2person-${{x}}" [required]="pregunta.apl" [value]="cleanSelects" [disabled]="!item.apl">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<option disabled selected value></option>&ndash;&gt;-->
-                  <!--&lt;!&ndash;<option *ngFor="let option of item.persona "> {{option.persona}} </option>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</select>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                  <!-- Persones -->
+                  <div class="col-2">
+                  <div class="col-12">
 
-                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <div class="input-group mb-2 mr-sm-2">
+                      <select class="form-control"
+                              [value]="cleanSelects"
+                              [disabled]="!getPregunta(pregunta.id)"
+                              [ngModel]="getPregunta(method.id)?.persona?.tipusPersona?.descripcio"
+                              (ngModelChange)="setPersona(method.situacioSocial.id,$event)"
+                              name="persona{{i}}{{x}}">
+                        <option disabled selected value ></option>
+                        <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
+                      </select>
+                    </div>
 
-                  <!--&lt;!&ndash;/ Persones &ndash;&gt;-->
+                  </div>
+            </div>
 
-                  <!--&lt;!&ndash; Severity &ndash;&gt;-->
+                  <!--/ Persones -->
+
+                  <!-- Severity -->
 
 
-                  <!--<div class="col-xs-2">-->
-                    <!--<div class="col-12">-->
-                      <!--<select class="form-control" id="t1severity"-->
-                              <!--[required]="pregunta.apl"-->
-                              <!--[value]="cleanSelects"-->
-                              <!--[disabled]="!pregunta.apl"-->
-                              <!--[(ngModel)]="selectorTest" >-->
-                        <!--<option disabled selected value></option>-->
-                        <!--<option *ngFor="let option of pregunta.selectors" > {{option.gravetat.descripcio}} </option>-->
-                      <!--</select>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;/ Severity &ndash;&gt;-->
-                  <!--&lt;!&ndash; Frequencia &ndash;&gt;-->
-                  <!--<div class="col-2">-->
-                    <!--<div class="col-12">-->
+                  <ng-template #popContentSeverity></ng-template>
+                  <div class="col-xs-2">
+                    <div class="col-12">
+                      <select class="form-control" id="severity{{x}}{{i}}"
+                              [required]="getPregunta(pregunta.id)"
+                              [value]="cleanSelects"
+                              [disabled]="!getPregunta(pregunta.id)"
+                              [ngModel]="getPregunta(method.situacioSocial.id)?.gravetat?.descripcio"
+                              (ngModelChange)="getPregunta(method.situacioSocial.id).gravetat.descripcio = $event;"
+                              name="severitySelected{{i}}{{x}}"
+                              (change)="getValueGravetat(getPregunta(method.situacioSocial.id)?.gravetat,pregunta.id)">
+                        <option disabled selected value></option>
+                        <option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/ Severity -->
+                  <!-- Frequencia -->
+                  <div class="col-2">
+                    <div class="col-12">
 
-                      <!--<select class="form-control" id="t1frequency"-->
-                              <!--[required]="pregunta.apl"-->
-                              <!--[value]="cleanSelects" [disabled]="">-->
-                        <!--<ng-container *ngFor="let gravedades of pregunta.selectors">-->
-                          <!--<option disabled selected value></option>-->
-                          <!--<option *ngFor="let frequencia of gravedades.frequencia"> {{frequencia.frequencia.descripcio}}  </option>-->
-                        <!--</ng-container>-->
-                      <!--</select>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;/ Frequencia &ndash;&gt;-->
-                  <!--&lt;!&ndash; riskFactors &ndash;&gt;-->
-                  <!--<div class="form-group col-2">-->
-                    <!--<input type="text" class="form-control" id="t5riskFactor"   disabled>-->
-                  <!--</div>-->
-                <!--</ng-container>-->
-              <!--</ng-container>-->
+                      <select class="form-control" id="t1frequency"
+                              [required]="pregunta.apl"
+                              [value]="cleanSelects" [disabled]="">
+                        <ng-container *ngFor="let gravedades of pregunta.selectors">
+                          <option disabled selected value></option>
+                          <option *ngFor="let frequencia of gravedades.frequencia"> {{frequencia.frequencia.descripcio}}  </option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/ Frequencia -->
+                  <!-- riskFactors -->
+                  <div class="form-group col-2">
+                    <input type="text" class="form-control" id="t5riskFactor"   disabled>
+                  </div>
+                </ng-container>
+              </ng-container>
             </div>
           </ng-container>
         </ng-container>
