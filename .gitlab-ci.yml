@@ -44,6 +44,9 @@ build-artifacts:
   - tags
   - master
   - develop
+  cache:
+    paths:
+      - node_modules/
   script:
   - npm install
   - npm run build
