@@ -65,6 +65,7 @@ build-war:
   script:
     - cp -r WEB-INF dist/WEB-INF
     - cd dist
+    - cp index.html index.jsp
     - jar -cvf ds-diba-frontend.war *
   dependencies:
     - build-artifacts
