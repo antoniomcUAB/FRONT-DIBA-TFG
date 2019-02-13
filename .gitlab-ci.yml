@@ -118,6 +118,7 @@ deploy:dev:
     url: http://dsdiba.demo.in2.es
   only:
   - develop
+  when: manual
   variables:
     DOCKER_FILE: 'docker-compose-dev.yml'
     DEPLOYMENT_KEY: $DEPLOYMENT_DEV_KEY
