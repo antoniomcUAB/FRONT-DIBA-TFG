@@ -2,7 +2,7 @@ stages:
 - test
 - review
 - build
-- build-docker
+- packing
 - release
 - deploy
 
@@ -52,8 +52,25 @@ build-artifacts:
     paths:
     - dist/
 
+build-war:
+  stage: packing
+  image: java:openjdk-8-alpine
+  only:
+    - tags
+    - master
+    - develop
+  script:
+    - cp -r WEB-INF dist/WEB-INF
+    - cd dist
+    - jar -cvf ds-diba-frontend.war *
+  dependencies:
+    - build-artifacts
+  artifacts:
+    paths:
+      - dist/ds-diba-frontend.war
+
 build-docker-image:
-  stage: build-docker
+  stage: packing
   image: docker:git
   only:
   - tags
