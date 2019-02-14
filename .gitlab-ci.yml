@@ -163,7 +163,7 @@ deploy-weblogic:dev:
   - ssh-add ~/.ssh/id_rsa
   - ssh-keyscan -H $DEPLOYMENT_SERVER >> ~/.ssh/known_hosts
   script:
-  - scp -r ./${WAR_FILE} ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/
+  - scp -r ./dist/${WAR_FILE} ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/
   - ssh ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} "/home/weblogic/redeployFront.sh"
 
 ## PROD
