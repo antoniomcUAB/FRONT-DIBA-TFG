@@ -154,7 +154,7 @@ deploy-weblogic:dev:
     DEPLOYMENT_USER: $DEPLOYMENT_DEV_USER
     DEPLOYMENT_PATH: $DEPLOYMENT_DEV_PATH
   dependencies:
-    - buid-war
+    - build-war
   before_script:
   - mkdir -p ~/.ssh
   - echo "$DEPLOYMENT_KEY" | tr -d '\r' > ~/.ssh/id_rsa
