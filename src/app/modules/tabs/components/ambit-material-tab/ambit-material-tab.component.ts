@@ -3,6 +3,7 @@ import {Ambits, ContextRows, EnvironmentMaterial, EnvironmentRelacional, TabAuto
 import {TabsFormService} from '../../services/tabsForm.service';
 import {CustomInput} from "../../../../shared";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Persona} from "../../../files";
 
 @Component({
   selector: 'app-ambit-material-tab',
@@ -15,6 +16,7 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
 export class AmbitMaterialTabComponent extends CustomInput {
   ambits: Ambits = new Ambits();
   context: string = 'MATERIAL I INSTRUMENTAL';
+  @Input() personsSelector: Persona [] = [];
   @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();

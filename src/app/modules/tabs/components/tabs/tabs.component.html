@@ -27,7 +27,7 @@
       <app-check-form (entornsMaterial)="entornsMaterial = $event;"  *ngIf="!disapear" (stay)="fnStay($event,2)"  [comesFrom]="'l\'ambit material e instrumental'" [access]="true" [ambit]="material" (tabActivated)="tabsActivate.tabAmbitMaterialActivate = false">
       </app-check-form>
 
-      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm(2)" (before)="beforeTab()" [groupMaterial] ="entornsMaterial" [(ngModel)]="diagnostico" >
+      <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm(2)" (before)="beforeTab()" [groupMaterial] ="entornsMaterial" [(ngModel)]="diagnostico" [personsSelector]="personActives">
       </app-ambit-material-tab>
 
     </ng-template>
@@ -39,7 +39,7 @@
       <app-check-form (entornsRelacional)="entornsRelacional = $event;" *ngIf="!disapear"  (stay)="fnStay($event,3)"  [comesFrom]="'l\'ambit relacional '" [access]="true" [ambit]="relacional" (tabActivated)="tabsActivate.tabAmbitRelacionalActivate = false" >
       </app-check-form>
 
-      <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm(3)" (before)="beforeTab()" [groupRelacional] ="entornsRelacional" [(ngModel)]="diagnostico" >
+      <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm(3)" (before)="beforeTab()" [groupRelacional] ="entornsRelacional" [(ngModel)]="diagnostico" [personsSelector]="personActives">
       </app-ambit-relacional-tab>
     </ng-template>
   </ngb-tab>
@@ -47,7 +47,7 @@
     <ng-template ngbTabTitle > <p > Globalitat del cas</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-globalitat-tab   (endForm)="goBackCheckForm(4)" (before)="beforeTab()" (tabActivated)="tabsActivate.tabGlobalitatCasActivate = false" [(ngModel)]="diagnostico">
+      <app-globalitat-tab   (endForm)="goBackCheckForm(4)" (before)="beforeTab()" (tabActivated)="tabsActivate.tabGlobalitatCasActivate = false" [(ngModel)]="diagnostico" [personsSelector]="personActives">
       </app-globalitat-tab>
     </ng-template>
   </ngb-tab>
@@ -55,8 +55,7 @@
     <ng-template ngbTabTitle > <p > Valoracio del diagnostic</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-valoracio-diagnostic-tab   (endForm)="goBackCheckForm(5)" (before)="beforeTab()" (tabActivated)="tabsActivate.tabValoracioDiagnosticActivate = false">
-      </app-valoracio-diagnostic-tab>
+      <app-valoracio-diagnostic-tab   (endForm)="goBackCheckForm(5)" (before)="beforeTab()" (tabActivated)="tabsActivate.tabValoracioDiagnosticActivate = false" [(ngModel)]="diagnostico"> </app-valoracio-diagnostic-tab>
     </ng-template>
   </ngb-tab>
 

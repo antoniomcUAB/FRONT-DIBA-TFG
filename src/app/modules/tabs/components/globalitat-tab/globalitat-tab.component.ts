@@ -1,8 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Ambits, ContextRows, TabAutonomia} from '../../models/tab-class-form';
 import {TabsFormService} from '../../services/tabsForm.service';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "../../../../shared";
+import {Persona} from "../../../files";
 
 @Component({
   selector: 'app-globalitat-tab',
@@ -15,6 +16,7 @@ import {CustomInput} from "../../../../shared";
 export class GlobalitatTabComponent extends CustomInput implements OnInit {
   ambits: Ambits = new Ambits();
   context: string = 'MATERIAL I INSTRUMENTAL';
+  @Input() personsSelector: Persona [] = [];
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output() tabActivated: EventEmitter <void> = new EventEmitter();

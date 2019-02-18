@@ -15,7 +15,7 @@ import {Persona} from "../../../files";
   ]
 })
 export class AmbitAutonomiaTabComponent extends CustomInput {
-  ambits: Ambits = new Ambits();
+  ambits: Ambits;
   context: string = 'Autonomia';
   @Input() personsSelector: Persona [] = [];
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
@@ -37,6 +37,7 @@ export class AmbitAutonomiaTabComponent extends CustomInput {
   reloadData() {
     this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
       this.ambits = tab;
+      console.log(tab);
     });
   }
   public emitBefore() {
@@ -44,9 +45,5 @@ export class AmbitAutonomiaTabComponent extends CustomInput {
   }
   public emitEnd() {
     this.endForm.emit();
-  }
-  selectorPersons()
-  {
-
   }
 }

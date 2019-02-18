@@ -20,7 +20,7 @@ export const colors = [
 export class FileDetailComponent {
   model: Model;
   professional: Professional;
-  idProfessional = 18109; /* TODO - Petición id Profesional */
+  idProfessional = 18884; /* TODO - Petición id Profesional */
   expedient: Expedient;
   diagnosis: Diagnosis;
 

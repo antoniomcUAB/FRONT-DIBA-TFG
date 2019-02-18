@@ -3,6 +3,7 @@ import {Ambits, ContextRows, EnvironmentRelacional, TabAutonomia} from '../../mo
 import {TabsFormService} from '../../services/tabsForm.service';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "../../../../shared";
+import {Persona} from "../../../files";
 
 @Component({
   selector: 'app-ambit-relacional-tab',
@@ -16,6 +17,7 @@ export class AmbitRelacionalTabComponent extends CustomInput{
 
   ambits: Ambits = new Ambits();
   context: string = 'RELACIONAL';
+  @Input() personsSelector: Persona [] = [];
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();

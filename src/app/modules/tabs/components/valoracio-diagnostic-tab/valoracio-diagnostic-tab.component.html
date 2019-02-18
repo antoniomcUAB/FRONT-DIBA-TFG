@@ -1,31 +1,34 @@
 
-<section>
-  <div class="row">
+<div class="row">
     <div class="col-12 mb-3">
       <h2 class="text-center mb-4">Resum valoració </h2>
       <button type="button" class="float-right btn btn-outline-primary"><i class="fa fa-file-pdf-o"></i> Generar PDF</button>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-12">
-      <!-- Ambito Autonomico -->
-      <div class="card">
-        <div class="card-header bg-warning text-white">
-          Àmbit d'Autonomia
-        </div>
+  <ng-template ngFor [ngForOf]="value.ambits" let-ambit>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header bg-warning text-white">
+            {{ambit.descripcio}}
+          </div>
+    <ng-template ngFor [ngForOf]="ambit.entorn" let-entorn>
+      <div class="card-header bg-info text-white">
+        {{entorn.descripcio}}
+      </div>
         <div class="card-body">
           <div class="row">
             <div class="col-6">
               <table class="table table-bordered">
                 <thead class="table-active">
-                <th>Situació social</th>
+                <th>Situacio Social</th>
                 <th class="text-center">Persona</th>
                 <th class="text-center">Risc</th>
                 </thead>
                 <tbody>
+                <ng-template ngFor [ngForOf]="entorn.pregunta" let-pregunta>
                 <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
+                  <td>{{pregunta.situacioSocial.social}}</td>
                   <td class="text-center">Pare</td>
                   <td class="text-center warning">Morbi facilisis</td>
                 </tr>
@@ -34,6 +37,7 @@
                   <td class="text-center">Mare</td>
                   <td class="text-center danger">Morbi facilisis</td>
                 </tr>
+                </ng-template>
                 </tbody>
               </table>
               <table class="table table-borderless">
@@ -84,215 +88,17 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!--/ Ambito Autonomico -->
 
-    <!-- Ambito Material -->
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header bg-danger text-white">
-          Àmbit Material i instrumental
+
+    </ng-template>
         </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                <th>Situació social</th>
-                <th class="text-center">Persona</th>
-                <th class="text-center">Risc</th>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td class="text-center">Pare</td>
-                  <td class="text-center warning">Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                  <td class="text-center">Mare</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-borderless">
-                <tbody>
-                <tr>
-                  <td class="text-right">Risc automàtic segon situació</td>
-                  <td class="text-center warning">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                <th>Factor Contextualizació</th>
-                <th>Persona</th>
-                <th>Tipus</th>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td class="text-center">Fill</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                  <td class="text-center">Filla</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-borderless">
-                <tbody>
-                <tr>
-                  <td class="text-right">Risc automàtic segon situació</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td class="text-right">Risc Segon profesional <input type="checkbox"></td>
-                  <td class="text-center danger border"><select></select></td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-12 px-3">
-              <label for="fileObservationMaterial" class="col-form-label">
-                <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
-              </label>
-              <textarea class="form-control" type="text" value="" id="fileObservationMaterial"></textarea>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header bg-success text-white">
-          Àmbit Relacional
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                <th>Situació social</th>
-                <th class="text-center">Persona</th>
-                <th class="text-center">Risc</th>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td class="text-center">Pare</td>
-                  <td class="text-center warning">Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                  <td class="text-center">Mare</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-borderless">
-                <tbody>
-                <tr>
-                  <td class="text-right">Risc automàtic segon situació</td>
-                  <td class="text-center warning">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                <th>Factor Contextualizació</th>
-                <th>Persona</th>
-                <th>Tipus</th>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td class="text-center">Fill</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                  <td class="text-center">Filla</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-borderless">
-                <tbody>
-                <tr>
-                  <td class="text-right">Risc automàtic segon situació</td>
-                  <td class="text-center danger">Morbi facilisis</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-12 px-3">
-              <label for="fileObservationRelationship" class="col-form-label">
-                <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
-              </label>
-              <textarea class="form-control" type="text" value="" id="fileObservationRelationship"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header bg-info text-white">
-          Factors de Contextualització Global del Cas
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                <th>Factor Contextualizació</th>
-                <th>Tipus</th>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td>Morbi facilisis</td>
-                </tr>
-                <tr>
-                  <td>Mauris vulputate nulla at ex volutpat, a blandit </td>
-                  <td>Phasellus</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-6">
-              <div class="form-group row">
-                <div class="col-12 px-3">
-                  <label for="fileObservationFactors" class="col-form-label">
-                    <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
-                  </label>
-                  <textarea class="form-control" id="fileObservationFactors">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at est in lorem rutrum aliquet. Mauris vulputate nulla at ex volutpat, a blandit tortor faucibus.
-                  </textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</ng-template>
+    <!--/ Ambito Autonomico -->
   <div class="row">
     <div class="col-12 mb-3">
       <button type="button" class="float-right btn btn-primary"><i class="fa fa-chevron-left"></i> Tornar</button>
     </div>
   </div>
-</section>
+
