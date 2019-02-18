@@ -212,13 +212,18 @@ export class FileDetailComponent {
         this.expedient.persona[index] = persona;
       }
     }
-    newRef.referencia = true;
+    /** Check New Reference **/
+    if (newRef != null) {
+        newRef.referencia = true;
+      /** New Reference Person  **/
+      if (newRef.referencia === true) {
+        this.newRefPerson(newRef);
+      }
+    }
+
     /** Total Unity Family **/
     this.getTotalSizeFamily();
-    /** New Reference Person  **/
-    if (newRef.referencia === true) {
-      this.newRefPerson(newRef);
-    }
+
     /** Call Service **/
     this._service.createPerson(this.expedient).subscribe((result) => {
       this.reloadDataTable(this.id);
@@ -258,6 +263,7 @@ export class FileDetailComponent {
 
   /* Total Unity Family */
   getTotalSizeFamily() {
+    this.personActives = [];
     for (const persona of this.expedient.persona) {
       if (!persona.dataBaixa) {
         this.personActives.push(persona);

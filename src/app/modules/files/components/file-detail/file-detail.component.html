@@ -174,7 +174,14 @@
                         <div class="modal-footer">
                           <button type="submit"
                                   class="btn btn-outline-dark"
+                                  *ngIf="item.referencia === true"
                                   (click)="updateMember(item, newRefMember); modal.close('Save click')">
+                            {{ "FORM.save" | translate }}
+                          </button>
+                          <button type="submit"
+                                  class="btn btn-outline-dark"
+                                  *ngIf="item.referencia === false"
+                                  (click)="updateMember(item, null); modal.close('Save click')">
                             {{ "FORM.save" | translate }}
                           </button>
                           <button type="button"
