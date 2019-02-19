@@ -5,7 +5,7 @@ import { Professional } from "../../home/models/professional";
 export class Diagnosis {
   id: number;                   // ID Diagnostico
   data: number;                 // Fecha de creación
-  ambits: Ambit[] = [];          // Ambit
+  ambit: Ambit[] = [];          // Ambit
   observacions: string;         // Observaciones
   professional: Professional;   // Profesional
 }
@@ -54,7 +54,7 @@ export class Preguntas {
   entorn: Entorn;
   frequencia: Frequencia;
   gravetat: Gravetat;
-  persona: Persona;
+  persona: Persona ;
   risc: Risc;
   factor: Factor;
   situacioSocial: SituacionSocial = new SituacionSocial();

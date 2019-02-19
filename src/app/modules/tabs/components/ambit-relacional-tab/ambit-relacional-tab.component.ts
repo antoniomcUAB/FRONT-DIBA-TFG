@@ -18,6 +18,7 @@ export class AmbitRelacionalTabComponent extends CustomInput{
   ambits: Ambits = new Ambits();
   context: string = 'RELACIONAL';
   @Input() personsSelector: Persona [] = [];
+  @Input() idDiagnostic: number;
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();

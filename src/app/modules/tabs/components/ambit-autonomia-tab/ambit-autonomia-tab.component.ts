@@ -18,6 +18,7 @@ export class AmbitAutonomiaTabComponent extends CustomInput {
   ambits: Ambits;
   context: string = 'Autonomia';
   @Input() personsSelector: Persona [] = [];
+  @Input() idDiagnostic: number;
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output () active: EventEmitter<boolean> = new EventEmitter();

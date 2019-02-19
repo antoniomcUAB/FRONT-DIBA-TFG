@@ -9,7 +9,7 @@ export class Ambit {
   factors_context: FactorsContext[] = [];
 
 }
-export class AmbitContext {
+export class Factor {
   id: number;
   descripcio: string;
 }
@@ -18,7 +18,7 @@ export class FactorsContext {
   infants: boolean;
   gravetat: Gravetat;
   id: number;
-  ambit: AmbitContext;
+  ambit: Factor;
   apl: boolean;
 }
 export class Entorns {

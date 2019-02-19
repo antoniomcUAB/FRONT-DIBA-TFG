@@ -17,6 +17,7 @@ export class GlobalitatTabComponent extends CustomInput implements OnInit {
   ambits: Ambits = new Ambits();
   context: string = 'MATERIAL I INSTRUMENTAL';
   @Input() personsSelector: Persona [] = [];
+  @Input() idDiagnostic: number;
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output() tabActivated: EventEmitter <void> = new EventEmitter();

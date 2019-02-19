@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CustomInput} from "../../../../shared";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
@@ -15,6 +15,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output() tabActivated: EventEmitter <void> = new EventEmitter();
+  @Input() idDiagnostic: number;
   ngOnInit(): void {
     this.tabActivated.emit();
   }

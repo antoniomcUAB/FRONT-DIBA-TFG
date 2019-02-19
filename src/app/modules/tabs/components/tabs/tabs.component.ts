@@ -23,8 +23,8 @@ export class TabsComponent {
   public material: string = "material";
   public relacional: string = "relacional";
   public diagnostico: Diagnosis;
-  public diagnosisID;
-  public expedientID;
+  public diagnosisID: number;
+  public expedientID: number;
   personActives: Persona[] = [];
   expedient: Expedient;
 

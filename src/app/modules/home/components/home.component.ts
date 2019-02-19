@@ -19,7 +19,7 @@ import { alphabetic, digit } from './constants';
 })
 export class HomeComponent {
   /* Variables Professional */
-  idProfessional = 18884; /* TODO - Petición id Profesional */
+  idProfessional = 19567; /* TODO - Petición id Profesional */
   professional: Professional;
   /* Variables Table */
   data: any[] = [];
@@ -76,6 +76,7 @@ export class HomeComponent {
   getProfessionalData(id: number) {
     this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
       this.professional = data;
+      console.log(data);
       /* Reload Table  */
       this.reloadData();
     }, error => {

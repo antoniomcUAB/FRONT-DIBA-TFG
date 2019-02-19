@@ -17,6 +17,7 @@ export class AmbitMaterialTabComponent extends CustomInput {
   ambits: Ambits = new Ambits();
   context: string = 'MATERIAL I INSTRUMENTAL';
   @Input() personsSelector: Persona [] = [];
+  @Input() idDiagnostic: number;
   @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();

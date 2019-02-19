@@ -4,7 +4,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "../../../../shared";
 import {TabsFormService} from '../../services/tabsForm.service';
-import {Contextualitzacio, Frequencia, Gravetat, Preguntas, Ambit, Entorn} from "../../models/diagnostic";
+import {Contextualitzacio, Frequencia, Gravetat, Preguntas, Ambit, Entorn, Diagnosis} from "../../models/diagnostic";
 import {Persona} from "../../../files";
 
 
@@ -23,19 +23,9 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   @ViewChild('formTab') formValues;
   @Input()
   set data(value: Ambits) {
-    if (value) {
-      console.log(value);
+    if (value && this.idDiagnostic) {
       this._innerData = value;
-      for (let i = 0 ; i < this._innerData.ambits.length; i++ ) {
-        this.value.ambits[i] = new Ambit();
-        this.value.ambits[i].id = this._innerData.ambits[i].id;
-        this.value.ambits[i].descripcio = this._innerData.ambits[i].descripcio;
-        for (let x = 0 ; x < this._innerData.ambits[i].entorns.length; x++ ) {
-          this.value.ambits[i].entorn[x] = new Entorn();
-          this.value.ambits[i].entorn[x].descripcio = this._innerData.ambits[i].entorns[x].descripcio;
-          this.value.ambits[i].entorn[x].id = this._innerData.ambits[i].entorns[x].id;
-        }
-      }
+      this.reloadDiagnostico();
     }
   }
   get data(): Ambits {
@@ -43,6 +33,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   }
   @Input () groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
   @Input () groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
+  @Input() idDiagnostic: number;
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Input () contextualitzacio: string;
@@ -71,6 +62,14 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       return  `with: ${reason}`;
     }
   }
+  reloadDiagnostico() {
+    console.log(this.idDiagnostic);
+    this.tabsService.getDiagnostic(this.idDiagnostic).subscribe((result: Diagnosis) => {
+      this.value = result;
+    }, (err) => {
+      console.log(err);
+    });
+  }
   emitBefore() {
     this.before.emit();
   }
@@ -95,26 +94,22 @@ export class FormTabComponent extends CustomInput implements OnInit  {
           console.log(err);
         });
       }
-      for (let i = 0 ; i < this.value.ambits.length; i++ ) {
-        if (this.value.ambits[i].id === ambit.id) {
-          for (let x = 0; x < this.value.ambits[i].entorn.length; x++) {
-            if (this.value.ambits[i].entorn[x].id === entorn.id) {
-              if (this.value.ambits[i].entorn[x].id === entorn.id) {
-                this.value.ambits[i].entorn[x].pregunta.splice(this.value.ambits[i].entorn[x].pregunta, 1);
-              }
+      for (let i = 0 ; i < this.value.ambit.length; i++ ) {
+        if (this.value.ambit[i].id === ambit.id) {
+          for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
+            if (this.value.ambit[i].entorn[x].id === entorn.id) {
+              this.value.ambit[i].entorn[x].pregunta = this.value.ambit[i].entorn[x].pregunta.filter(item => item.situacioSocial.id !== idSocial);
             }
           }
         }
       }
     } else {
-      this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta , idSocial)).subscribe((result) => {
-        for (let i = 0 ; i < this.value.ambits.length; i++ ) {
-          if (this.value.ambits[i].id === ambit.id) {
-            for (let x = 0; x < this.value.ambits[i].entorn.length; x++) {
-              if (this.value.ambits[i].entorn[x].id === entorn.id) {
-                console.log(this.value.ambits[i].entorn);
-                this.value.ambits[i].entorn[x].pregunta.push(result);
-                console.log("OKKKK");
+      this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta , idSocial),this.idDiagnostic).subscribe((result) => {
+        for (let i = 0 ; i < this.value.ambit.length; i++ ) {
+          if (this.value.ambit[i].id === ambit.id) {
+            for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
+              if (this.value.ambit[i].entorn[x].id === entorn.id) {
+                this.value.ambit[i].entorn[x].pregunta.push(result);
               }
             }
           }
@@ -126,7 +121,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
 }
   public getPreguntas(id: number , ambit: Ambit , entorn?: Entorns, contexto?: Contextualitzacio ) {
 
-    const amb = this.value.ambits.find(item => item.id === ambit.id);
+    const amb = this.value.ambit.find(item => item.id === ambit.id);
     if (!amb) {return []}
     if (entorn) {
       const ent = amb.entorn.find(item => item.id === entorn.id);
@@ -142,28 +137,42 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   }
 
   getFirstPregunta(id: number, ambit: Ambit , entorn?: Entorns, contexto?: Contextualitzacio) {
-    const amb = this.value.ambits.find(item => item.id === ambit.id);
-    if (!amb) { return new Preguntas("Error", id) }
+    const amb = this.value.ambit.find(item => item.id === ambit.id);
+
+    if (!amb) {console.log("Error Ambito"); return false; }
     if (entorn) {
       const ent = amb.entorn.find(item => item.id === entorn.id);
-      if(!ent) {
-        return new Preguntas("Error", id);
+      if (!ent) {
+        console.log("Error Entorno Ambito");
+        return false;
       }
-      return ent.pregunta.find( item => {
-        return item.id === id;
-      });
-    } else {
-      const ent = amb.contextualitzacio.find(item => item.id === contexto.id);
-      if(!ent) {
-        return new Preguntas("Error", id);
-      }
-      return ent.find( item => {
-        return item.id === id;
+      return ent.pregunta.find(item => {
+        return item.situacioSocial.id === id;
       });
     }
+    // } else {
+    //   const ent = amb.contextualitzacio.find(item => item.id === contexto.id);
+    //   if(!ent) {
+    //     console.log("Error Entorno Contextualizacion");
+    //     return false;
+    //   }
+    //   return ent.find( item => {
+    //     return item.id === id;
+    //   });
+    // }
   }
 
+  public getPreguntaContextualitzacio (ambit:Ambit , context:Contextualitzacio) {
+    console.log(ambit);
+    console.log(context)
+    for (let i = 0; i < this.value.ambit.length; i++) {
+    for (let z = 0; z < this.value.ambit[i].contextualitzacio; z++) {
+    }
+    }
+  }
   public getFrequencia (gravetat: string, selectorsGravetat: SelectorGravetat[]) {
+    console.log(gravetat);
+    console.log(selectorsGravetat);
     if (gravetat) {
       return selectorsGravetat.find( data => {
         return data.gravetat.descripcio === gravetat;
@@ -172,20 +181,29 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       return [];
     }
   }
-  public getValueGravetat( gravetat: Gravetat , id: number) {
+  public getValueGravetat( pregunta: Preguntas, ambit: Ambit , entorn: Entorn , gravetat:string) {
     this.tabsService.getValuesGravetat().subscribe((result: Gravetat[]) => {
       for (const grave of result) {
-        if (grave.descripcio === gravetat.descripcio) {
-          for (let i = 0; i < this.value.preguntes.length; i++) {
-            if (this.value.preguntes[i].situacioSocial.id === id) {
-              this.value.preguntes[i].gravetat.value = grave.value;
-              this.value.preguntes[i].gravetat.id = grave.id;
-              this.value.preguntes[i].frequencia = new Frequencia();
-              return this.getRisc(id);
+        if (grave.descripcio === gravetat) {
+          for (let i = 0; i < this.value.ambit.length; i++) {
+            for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
+              for (let z = 0; z < this.value.ambit[i].entorn[x].pregunta.length; z++) {
+                if (this.value.ambit[i].entorn[x].pregunta[z].situacioSocial.id === pregunta.situacioSocial.id) {
+                  if(!this.value.ambit[i].entorn[x].pregunta[z].gravetat) {
+                    this.value.ambit[i].entorn[x].pregunta[z].gravetat = new Gravetat();
+                  }
+                  this.value.ambit[i].entorn[x].pregunta[z].gravetat = grave;
+                  this.tabsService.PutQuestionAndGetRisc(pregunta,this.idDiagnostic).subscribe((result) => {
+                  }, (err) => {
+                    console.log(err);
+                  });
+                  this.value.ambit[i].entorn[x].pregunta[z].frequencia = new Frequencia();
+                }
+              }
+          }
             }
           }
         }
-      }
     }, (err) => {
       console.log(err);
     });
@@ -220,7 +238,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
         if (!pregunta.persona.id ) {
           pregunta.persona = null;
         }
-        this.tabsService.PutQuestionAndGetRisc(pregunta).subscribe((result) => {
+        this.tabsService.PutQuestionAndGetRisc(pregunta,this.idDiagnostic).subscribe((result) => {
           this.value.preguntes[i] = result;
           }, (err) => {
             console.log(err);
@@ -231,11 +249,18 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   public addPregunta(pregunta:string , id:number) {
     this.value.preguntes.push(new Preguntas(pregunta, id));
   }
-  // setFirtsPersona(preguntaID:number , persona:string) {
-  //   for (const person of this.personsSelector) {
-  //     if (person.tipusPersona.descripcio === persona) {
-  //       this.getFirstPregunta(preguntaID).persona.tipusPersona.id = person.tipusPersona.id;
-  //     }
-  //   }
-  // }
+  changePersona(pregunta: Preguntas, value) {
+    if (!pregunta.persona) {
+      pregunta.persona = new Persona();
+    }
+    for (const person of this.personsSelector) {
+      if (person.tipusPersona.descripcio === value) {
+        pregunta.persona = person;
+      }
+    }
+    this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
+    }, (err) => {
+      console.log(err);
+    });
+  }
 }
