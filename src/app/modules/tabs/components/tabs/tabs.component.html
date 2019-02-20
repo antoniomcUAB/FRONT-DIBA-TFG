@@ -11,7 +11,7 @@
     <ng-template ngbTabTitle> <p> Autonomia</p> </ng-template>
 
     <ng-template ngbTabContent >
-      <app-check-form *ngIf="!disapear" (stay)="fnStay($event,1);" [comesFrom] = "'l\'ambit d\'autonomia'" [access]="false" >
+      <app-check-form *ngIf="!disapear" (stay)="fnStay($event,1);"  [access]="false" >
       </app-check-form>
 
       <app-ambit-autonomia-tab *ngIf="stay"  [personsSelector]="personActives" (endForm)="goBackCheckForm(1);" (before)= "beforeTab()" [(ngModel)]="diagnostico" [idDiagnostic]="diagnosisID">
@@ -23,7 +23,12 @@
     <ng-template ngbTabTitle > <p > Material e instrumental</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-check-form (entornsMaterial)="entornsMaterial = $event;"  *ngIf="!disapear" (stay)="fnStay($event,2)"  [comesFrom]="'l\'ambit material e instrumental'" [access]="true" [ambit]="material" (tabActivated)="tabsActivate.tabAmbitMaterialActivate = false">
+      <app-check-form (entornsMaterial)="entornsMaterial = $event;"
+                      *ngIf="!disapear"
+                      (stay)="fnStay($event,2)"
+                      [access]="true"
+                      [ambit]="material"
+                      (tabActivated)="tabsActivate.tabAmbitMaterialActivate = false">
       </app-check-form>
 
       <app-ambit-material-tab *ngIf="stay"  (endForm)="goBackCheckForm(2)" (before)="beforeTab()" [groupMaterial] ="entornsMaterial" [(ngModel)]="diagnostico" [personsSelector]="personActives" [idDiagnostic]="diagnosisID">
@@ -35,7 +40,7 @@
     <ng-template ngbTabTitle > <p > Relacional</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-check-form (entornsRelacional)="entornsRelacional = $event;" *ngIf="!disapear"  (stay)="fnStay($event,3)"  [comesFrom]="'l\'ambit relacional '" [access]="true" [ambit]="relacional" (tabActivated)="tabsActivate.tabAmbitRelacionalActivate = false" >
+      <app-check-form (entornsRelacional)="entornsRelacional = $event;" *ngIf="!disapear"  (stay)="fnStay($event,3)"  [access]="true" [ambit]="relacional" (tabActivated)="tabsActivate.tabAmbitRelacionalActivate = false" >
       </app-check-form>
 
       <app-ambit-relacional-tab *ngIf="stay"  (endForm)="goBackCheckForm(3)" (before)="beforeTab()" [groupRelacional] ="entornsRelacional" [(ngModel)]="diagnostico" [personsSelector]="personActives" [idDiagnostic]="diagnosisID">

@@ -68,10 +68,10 @@ export class TabsComponent {
   }
 
   public incIndex(id: number) {
-
     if (id <= MAX_N_TABS) {
       this.index = (id + 1).toString();
     }
+    console.log(this.index);
   }
 
   public beforeTab() {

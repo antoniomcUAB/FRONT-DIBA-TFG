@@ -222,7 +222,7 @@
                           [ngModel]="getFirstPregunta(pregunta.id,ambit, entorn)?.frequencia?.descripcio"
                           (ngModelChange)="getFirstPregunta(pregunta.id,ambit, entorn).frequencia.descripcio = $event"
                           name="frequencySelected{{pregunta.id}}"
-                          (change)="getValueFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.frequencia,pregunta.id) ">
+                          (change)="getValueFrequencia(getFirstPregunta(pregunta.id,ambit, entorn),pregunta.id) ">
                       <option disabled selected value></option>
                       <option  *ngFor="let frequencia of getFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.gravetat?.descripcio,pregunta.selectors)" > {{frequencia.frequencia.descripcio}}  </option>
                   </select>
@@ -233,10 +233,10 @@
               <div class="form-group col-2">
                 <label for="t1riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
                 <input type="text"
-                       [ngClass]="{'warning' : getPreguntas(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'RISC',
-                                   'danger' : getPreguntas(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'ALT RISC',
-                                   'success' : getPreguntas(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'VULNERABILITAT',
-                                   'info' : getPreguntas(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'SENSE VALORACIÓ' }"
+                       [ngClass]="{'warning' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'RISC',
+                                   'danger' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'ALT RISC',
+                                   'success' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'VULNERABILITAT',
+                                   'info' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'SENSE VALORACIÓ' }"
                        class="form-control" id="t1riskFactor"
                        disabled
                        [value]="getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio">
@@ -330,11 +330,10 @@
       </ng-template>
     </ng-template>
     <br>
-    <div class="form-group row bg-grey-300">factors_context
-
+    <div class="form-group row bg-grey-300">
       <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
-      <ng-template ngFor [ngForOf]="ambit.factors_context" let-cont>
-          <ng-template *ngIf="cont.ambit.descripcio === contextualitzacio">
+      <ng-template ngFor [ngForOf]="ambit.factors_context" let-cont let-c="index">
+          <ng-template [ngIf]="cont.ambit.descripcio === contextualitzacio">
             <!-- Situacion social Basica -->
             <div class="form-group col-6">
               <label for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
@@ -349,7 +348,11 @@
                 <div class="form-group align-items-center col-12 ">
                   <label style="font-size: x-small"> {{ "TABLE.aplUna" | translate }}</label>
                   <label class="custom-control custom-checkbox  ">
-                    <input type="checkbox" class="custom-control-input position-relative" [(ngModel)]="cont.apl" name="aplicaContext" >
+                    <input type="checkbox" class="custom-control-input position-relative"
+                            [disabled]="getFirtsContexto(cont.id , ambit , cont )?.mesUc"
+                           [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
+                           (click)="newPreguntaContext(ambit , cont, 'unic')"
+                           name="aplicaContextUn{{c}}">
                     <span class="custom-control-label"></span>
                     <span class="custom-control-description"></span>
                   </label>
@@ -362,13 +365,14 @@
             <div class="col-2">
               <div class="col-12">
                 <label for="t1person">{{ "TABLE.person" | translate }} </label>
-                <select class="form-control" id="t1person"
+                <select class="form-control" id="t1person" name="personas{{c}}"
                         [value]="cleanSelects"
-                        [disabled]="!getPreguntaContextualitzacio(ambit , cont) ">
-                        <!--[ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)?.persona?.tipusPersona?.descripcio"-->
-                        <!--(ngModelChange)="changePersona(getFirstPregunta(pregunta.id , ambit, entorn), $event)">-->
+                        [disabled]="!getFirtsContexto(cont.id , ambit , cont )?.membreUnic || getFirtsContexto(cont.id , ambit , cont )?.mesUc"
+                        [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.persona?.tipusPersona?.descripcio"
+                        (ngModelChange)="changePersonaSelector(getFirtsContexto(cont.id , ambit , cont ), $event)">
+
                   <option disabled selected value></option>
-                  <!--<option *ngFor="let option of ambit "> {{option}} </option>-->
+                  <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
                 </select>
               </div>
             </div>
@@ -381,7 +385,10 @@
                 <div class="form-group align-items-center col-12 ">
                   <label style="font-size: x-small">  {{ "TABLE.aplMas" | translate }}</label>
                   <label class="custom-control custom-checkbox  ">
-                    <input type="checkbox" class="custom-control-input position-relative" name="aplicaContext" >
+                    <input type="checkbox" class="custom-control-input position-relative" name="aplicaContextMesUn{{c}}"
+                           [disabled]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
+                           [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.mesUc"
+                           (click)="newPreguntaContext(ambit , cont, 'mes')">
                     <span class="custom-control-label"></span>
                     <span class="custom-control-description"></span>
                   </label>
@@ -395,7 +402,9 @@
             <div class="col-2">
               <div class="col-12">
                   <label for="t1riskFactor" >{{ "TABLE.types" | translate }}</label>
-                  <input type="text" class="form-control" id="t1riskFactor"  disabled>
+                  <input type="text" class="form-control" id="t1riskFactor"  disabled name="risc{{c}}"
+                  [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio">
+
               </div>
             </div>
             <!--/ Severity -->

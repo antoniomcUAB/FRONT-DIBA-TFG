@@ -8,7 +8,6 @@ import {TabsFormService} from "../../services/tabsForm.service";
   styleUrls: ['./check-form.component.scss']
 })
 export class CheckFormComponent implements OnInit{
-  @Input () comesFrom: string;
   @Input () access: boolean;
   @Input () ambit: string;
   @Input () viewButton: boolean;

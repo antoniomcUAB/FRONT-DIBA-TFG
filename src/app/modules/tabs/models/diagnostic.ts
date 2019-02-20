@@ -32,8 +32,12 @@ export class Entorn {
 
 /* Contextualizacion */
 export class Contextualitzacio {
+  constructor(descripcio: string , id: number) {
+    this.factor.descripcio = descripcio;
+    this.factor.id = id;
+  }
   id: number;                 // ID Contextualización
-  factor: Factor;
+  factor: Factor = new Factor();
   membreUnic: boolean;
   mesUc: boolean;
   persona: Persona;
@@ -42,6 +46,7 @@ export class Contextualitzacio {
 export class Factor {
   id: number;
   descripcio: string;
+  gravetat:Gravetat;
 }
 
 export class Preguntas {
