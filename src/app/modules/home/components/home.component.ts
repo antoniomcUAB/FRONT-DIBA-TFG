@@ -126,7 +126,7 @@ export class HomeComponent {
     console.log(this.newFile);
     /** Subscribe to Create **/
     this._service.createFile(this.newFile).subscribe((result) => {
-      this._router.navigate(['/file-detail', {'id': result.id}]);
+      this._router.navigate(['/file-detail', {'id': result.id, 'idProfessional': this.idProfessional}]);
     }, (err) => {
       console.log(err);
     });

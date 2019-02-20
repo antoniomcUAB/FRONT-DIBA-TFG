@@ -20,7 +20,7 @@ export const colors = [
 export class FileDetailComponent {
   model: Model;
   professional: Professional;
-  idProfessional = 18884; /* TODO - Petición id Profesional */
+  idProfessional: number;
   expedient: Expedient;
   diagnosis: Diagnosis;
 
@@ -49,6 +49,7 @@ export class FileDetailComponent {
               private modalService: NgbModal) {
 
     this.id = this._route.snapshot.params['id'];
+    this.idProfessional = this._route.snapshot.params['idProfessional'];
 
     this.getCurrentModel();
     this.getProfessionalData(this.idProfessional);
@@ -205,7 +206,7 @@ export class FileDetailComponent {
   }
 
   /* Update Unity Family Member */
-  updateMember(persona: Persona, newRef: Persona) {
+  updateMemberRef(persona: Persona, newRef: Persona) {
     /** Update Member(Persona) by ID **/
     for (const index in this.expedient.persona) {
       if (this.expedient.persona[index].id === persona.id) {
@@ -232,6 +233,27 @@ export class FileDetailComponent {
     });
   }
 
+
+  /* Update Unity Family Member */
+  updateMember(persona: Persona) {
+    /** Update Member(Persona) by ID **/
+    for (const index in this.expedient.persona) {
+      if (this.expedient.persona[index].id === persona.id) {
+        this.expedient.persona[index] = persona;
+      }
+    }
+
+    /** Total Unity Family **/
+    this.getTotalSizeFamily();
+
+    /** Call Service **/
+    this._service.createPerson(this.expedient).subscribe((result) => {
+      this.reloadDataTable(this.id);
+    }, (error) => {
+      console.log("ERROR - al actualizar persona \n " + error);
+    });
+  }
+
   /* Update Observations */
   updateObservations() {
     /** Call Service **/
@@ -241,9 +263,14 @@ export class FileDetailComponent {
     });
   }
 
+  /* Open Modal New Member */
+  openModalNewMember(content) {
+    this.member = new Persona();
+    open(content);
+  }
+
   /* Modal */
   open(content) {
-    this.member = new Persona();
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
