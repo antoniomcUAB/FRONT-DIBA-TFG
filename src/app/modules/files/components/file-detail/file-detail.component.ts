@@ -264,9 +264,8 @@ export class FileDetailComponent {
   }
 
   /* Open Modal New Member */
-  openModalNewMember(content) {
+  openModalNewMember() {
     this.member = new Persona();
-    open(content);
   }
 
   /* Modal */
