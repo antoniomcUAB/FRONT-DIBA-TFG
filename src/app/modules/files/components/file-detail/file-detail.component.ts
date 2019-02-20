@@ -184,6 +184,7 @@ export class FileDetailComponent {
     }
     /** Call Service **/
     this._service.createPerson(this.expedient).subscribe((result) => {
+      this.expedient = result;
       this.reloadDataTable(this.id);
     }, (error) => {
       console.log("ERROR - al crear persona \n " + error);
@@ -214,19 +215,15 @@ export class FileDetailComponent {
       }
     }
     /** Check New Reference **/
-    if (newRef != null) {
-        newRef.referencia = true;
-      /** New Reference Person  **/
-      if (newRef.referencia === true) {
-        this.newRefPerson(newRef);
-      }
-    }
-
+    newRef.referencia = true;
+    /** New Reference Person  **/
+    this.newRefPerson(newRef);
     /** Total Unity Family **/
     this.getTotalSizeFamily();
 
     /** Call Service **/
     this._service.createPerson(this.expedient).subscribe((result) => {
+      this.expedient = result;
       this.reloadDataTable(this.id);
     }, (error) => {
       console.log("ERROR - al actualizar persona \n " + error);
@@ -248,6 +245,7 @@ export class FileDetailComponent {
 
     /** Call Service **/
     this._service.createPerson(this.expedient).subscribe((result) => {
+      this.expedient = result;
       this.reloadDataTable(this.id);
     }, (error) => {
       console.log("ERROR - al actualizar persona \n " + error);
@@ -258,14 +256,16 @@ export class FileDetailComponent {
   updateObservations() {
     /** Call Service **/
     this._service.updateObservations(this.expedient).subscribe((result) => {
+      this.expedient = result;
     }, (error) => {
       console.log("ERROR - al actuializar observaciones \n " + error);
     });
   }
 
   /* Open Modal New Member */
-  openModalNewMember() {
+  openModalNewMember(content) {
     this.member = new Persona();
+    this.open(content);
   }
 
   /* Modal */

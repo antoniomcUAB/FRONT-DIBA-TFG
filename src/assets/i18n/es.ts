@@ -72,7 +72,8 @@ export let TRANSLATION = {
     'otherType'     : 'Un altre tipus',
     'codeFile'      : 'Codi d\'expedient',
     'newRef'        : 'Qui serà la nova persona de refèrencia',
-    'totalFamilia'  : 'Nombre de persones que componen la unitat familiar'
+    'totalFamilia'  : 'Nombre de persones que componen la unitat familiar',
+    'expExists'        : 'El codi de l\'expedient ja existeix',
   },
   /* Search */
   'SEARCH': {
@@ -87,5 +88,19 @@ export let TRANSLATION = {
   },
   /* Tabs */
   'TABS' : {
+  },
+  /* Observations */
+  'OBS': {
+    'resum'         : 'Resum valoració DSDIBA-',
+    'ssocial'       : 'Situació social',
+    'person'        : 'Persona',
+    'type'          : 'Tipus',
+    'risc'          : 'Risc',
+    'no-social'     : 'No hi ha Situació social per',
+    'risc-auto'     : 'Risc automàtic segons situació',
+    'risc-pro'      : 'Risc segons professional',
+    'factor'        : 'Factor Contextualització',
+    'no-factor'     : 'No hi ha Factor de contextualització',
+    'goback'        : 'Tornar'
   }
 };

@@ -25,6 +25,7 @@ export class HomeComponent {
   data: any[] = [];
   options = new TableListOptions();
   closeResult: string;
+  checkCode: boolean;
 
   /* Variables Modal */
   newFile: Expedient = new Expedient;
@@ -90,6 +91,7 @@ export class HomeComponent {
     this._service.getFiles(this.options, this.professional.municipi.id).subscribe((res: TableListResponse ) => {
       this.options = res.options;
       this.data = res.data;
+      console.log(this.data);
       this.options.loading = true;
     });
   }
@@ -118,19 +120,32 @@ export class HomeComponent {
     this.codeHestia = event;
   }
 
-  /* Create File (Expedient )*/
-  createExpedient(codi) {
-    /** Set Variables **/
-    this.newFile.codi = codi;
-    this.newFile.professional = this.professional;
-    console.log(this.newFile);
-    /** Subscribe to Create **/
-    this._service.createFile(this.newFile).subscribe((result) => {
-      this._router.navigate(['/file-detail', {'id': result.id, 'idProfessional': this.idProfessional}]);
-    }, (err) => {
-      console.log(err);
-    });
+  /* Check Code */
+  checkCodeExp(codi) {
+    /** Check Code **/
+    this.checkCode = false;
+    for (const expedient of this.data) {
+      if (expedient.codi === codi) {
+        this.checkCode = true;
+      }
+    }
   }
 
-
+  /* Create File (Expedient )*/
+  createExpedient(codi) {
+    this.checkCodeExp(codi);
+    if (!this.checkCode) {
+      /** Set Variables **/
+      this.newFile.codi = codi;
+      this.newFile.professional = this.professional;
+      console.log(this.newFile);
+      /** Subscribe to Create **/
+      this._service.createFile(this.newFile).subscribe((result) => {
+        this._router.navigate(['/file-detail', {'id': result.id, 'idProfessional': this.idProfessional}]);
+      }, (err) => {
+        console.log(err);
+      });
+      this.modalService.dismissAll();
+    }
+  }
 }
