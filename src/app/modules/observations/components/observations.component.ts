@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
 import {ObservationsService} from "../services/observations.service";
-import {Diagnosis, Valoracio} from "../../files";
+import {Diagnosis, Evaluacions, Ambit} from "../../files";
 
 @Component({
   selector: 'app-observations',
@@ -16,7 +16,8 @@ export class ObservationsComponent {
   public date: string;
 
   public diagnosis: Diagnosis;
-  valoracio: Valoracio;
+  public ambits: Ambit;
+  public evaluations: Evaluacions;
 
   constructor(private _route: ActivatedRoute,
               private _location: Location,
@@ -34,6 +35,8 @@ export class ObservationsComponent {
   getObservations(id: number) {
     this._service.getDetailObservations(id).subscribe( (data: Diagnosis) => {
       this.diagnosis = data;
+      this.ambits = data.ambit;
+      this.evaluations = data.valoracio.evaluacions;
     }, error => {
       console.log("ERROR - al recuperar Diagnostico");
     });

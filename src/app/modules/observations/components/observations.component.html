@@ -2,31 +2,32 @@
 <section>
   <div class="row">
     <div class="col-12 mb-3">
-      <h2 class="text-center mb-4">Resum valoració DSDIBA-{{date | date:'dd/MM/yyyy'}}</h2>
+      <h2 class="text-center mb-4">{{ "OBS.resum" | translate }}{{date | date:'dd/MM/yyyy'}}</h2>
       <button type="button" class="float-right btn btn-outline-primary no-print" (click)="onPrint();"><i class="fa fa-file-pdf-o"></i> {{ "RESUMEN.pdf" | translate }}</button>
     </div>
   </div>
   <!-- Ambito -->
-  <div class="row" *ngFor="let ambit of diagnosis.ambit">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header text-white font-weight-bold"
-             [ngClass]="{'bg-warning text-black-50' : ambit?.descripcio.toUpperCase() === 'AUTONOMIA',
+  <div class="row" *ngFor="let ambit of ambits">
+    <ng-container *ngIf="ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header text-white font-weight-bold"
+               [ngClass]="{'bg-warning text-black-50' : ambit?.descripcio.toUpperCase() === 'AUTONOMIA',
                          'bg-danger' : ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
                          'bg-success' : ambit?.descripcio.toUpperCase() === 'RELACIONAL',
                          'bg-info' : ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'}">
-          {{ ambit?.descripcio.toUpperCase() }}
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                  <th>Situació social</th>
-                  <th class="text-center">Persona</th>
-                  <th class="text-center">Risc</th>
-                </thead>
-                <tbody *ngFor="let entorn of ambit.entorn">
+            {{ ambit?.descripcio.toUpperCase() }}
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <table class="table table-bordered">
+                  <thead class="table-active">
+                  <th>{{ "OBS.ssocial" | translate }}</th>
+                  <th class="text-center">{{ "OBS.person" | translate }}</th>
+                  <th class="text-center">{{ "OBS.risc" | translate }}</th>
+                  </thead>
+                  <tbody *ngFor="let entorn of ambit.entorn">
                   <ng-container *ngIf="entorn.pregunta.length > 0">
                     <tr *ngFor="let pregunta of entorn.pregunta">
                       <td>{{ pregunta.situacioSocial.social }}</td>
@@ -35,35 +36,57 @@
                           [ngClass]="{'warning' : pregunta.factor?.descripcio.toUpperCase() === 'RISC',
                                       'danger' : pregunta.factor?.descripcio.toUpperCase() === 'ALT RISC',
                                       'success' : pregunta.factor?.descripcio.toUpperCase() === 'VULNERABILITAT',
-                                      'info' : pregunta.factor?.descripcio.toUpperCase() === 'SENSE VALORACIÓ' }">
+                                      'info' : pregunta.factor?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
                         {{ pregunta.factor.descripcio }}</td>
                     </tr>
                   </ng-container>
                   <ng-container *ngIf="entorn.pregunta?.length == 0">
                     <!-- No hay Situación social -->
                     <tr class="text-center">
-                      <td colspan="3">No hay Situació social para {{ entorn.descripcio }}</td>
+                      <td colspan="3">{{ "OBS.no-social" | translate }} {{ entorn.descripcio }}</td>
                     </tr>
+                    <!--/ No hay Situación social -->
                   </ng-container>
-                </tbody>
-              </table>
-              <table class="table table-borderless">
-                <tbody>
-                  <tr>
-                    <td class="text-right">Risc automàtic segon situació</td>
-                    <td class="text-center warning">Morbi facilisis</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                  <th>Factor Contextualizació</th>
-                  <th class="text-center">Persona</th>
-                  <th class="text-center">Tipus</th>
-                </thead>
-                <tbody>
+                  </tbody>
+                </table>
+                <!-- Result Automatic Evaluations -->
+                <table class="table table-borderless" *ngFor="let evaluacion of evaluations">
+                  <ng-container *ngIf="evaluacion.ambit.id === ambit.id">
+                    <tbody>
+                      <!-- Result Automatic Evaluations -->
+                      <tr>
+                        <td class="text-right">{{ "OBS.risc-auto" | translate }}</td>
+                        <td class="text-center" [ngClass]="{'warning' : evaluacion.risc?.descripcio.toUpperCase() === 'RISC',
+                                                            'danger' : evaluacion.risc?.descripcio.toUpperCase() === 'ALT RISC',
+                                                            'success' : evaluacion.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
+                                                            'info' : evaluacion.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
+                          {{evaluacion.risc.descripcio}}
+                        </td>
+                      </tr>
+                      <!--/ Result Automatic Evaluations -->
+                      <!-- Result Professsional Evaluations -->
+                      <tr *ngIf="evaluacion.riscProfessional">
+                        <td class="text-right">{{ "OBS.risc-pro" | translate }}</td>
+                        <td class="text-center" [ngClass]="{'warning' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'RISC',
+                                                            'danger' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'ALT RISC',
+                                                            'success' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'VULNERABILITAT',
+                                                            'info' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
+                          {{evaluacion.riscProfessional?.descripcio}}
+                        </td>
+                      </tr>
+                      <!--/ Result Professsional Evaluations -->
+                    </tbody>
+                  </ng-container>
+                </table>
+              </div>
+              <div class="col-6">
+                <table class="table table-bordered">
+                  <thead class="table-active">
+                  <th>{{ "OBS.factor" | translate }}</th>
+                  <th class="text-center">{{ "OBS.person" | translate }}</th>
+                  <th class="text-center">{{ "OBS.type" | translate }}</th>
+                  </thead>
+                  <tbody>
                   <ng-container *ngIf="ambit.contextualitzacio?.length > 0" >
                     <tr *ngFor="let context of ambit.contextualitzacio">
                       <td>{{ context.factor?.descripcio }}</td>
@@ -71,88 +94,96 @@
                         {{ context.persona?.tipusPersona?.descripcio }}
                       </td>
                       <td class="text-center"
-                          [ngClass]="{'warning' : context.factor.gravetat.descripcio.toUpperCase() === 'RISC',
-                                      'danger' : context.factor.gravetat.descripcio.toUpperCase() === 'ALT RISC',
-                                      'success' : context.factor.gravetat.descripcio.toUpperCase() === 'VULNERABILITAT',
-                                      'info' : context.factor.gravetat.descripcio.toUpperCase() === 'SENSE VALORACIÓ' }">
-                        {{ context.factor.gravetat.descripcio }}</td>
+                          [ngClass]="{'danger' : context.factor?.gravetat.descripcio.toUpperCase() === 'RISC',
+                                      'success' : context.factor?.gravetat.descripcio.toUpperCase() === 'PROTECCI&#211;' }">
+                        {{ context.factor?.gravetat.descripcio }}</td>
                     </tr>
                   </ng-container>
                   <ng-container *ngIf="ambit.contextualitzacio?.length == 0">
                     <!-- No hay Factor de contextualización -->
                     <tr class="text-center">
-                      <td colspan="3">No hay Factor de contextualización</td>
+                      <td colspan="3">{{ "OBS.no-factor" | translate }}</td>
                     </tr>
+                    <!--/ No hay Factor de contextualización -->
                   </ng-container>
-                </tbody>
-              </table>
-              <table class="table table-borderless" *ngFor="let evaluacion of diagnosis.valoracio.evaluacions">
-                <tbody>
-                  <tr>
-                    <td class="text-right">Risc automàtic segon situació</td>
-                    <td class="text-center danger"></td>
-                  </tr>
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-12 px-3">
-              <label for="fileObservationAutonomy" class="col-form-label">
-                <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
-              </label>
-              <textarea class="form-control" type="text" value="{{ ambit.observacions }}" id="fileObservationAutonomy" disabled="disabled"></textarea>
+            <!-- Observations Ambits -->
+            <div class="form-group row">
+              <div class="col-12 px-3">
+                <label for="fileObservationAutonomy" class="col-form-label">
+                  <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
+                </label>
+                <textarea class="form-control" type="text" value="{{ ambit.observacions }}" id="fileObservationAutonomy" disabled="disabled"></textarea>
+              </div>
             </div>
+            <!--/ Observations Ambits -->
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 
-  <!--
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header bg-info text-white font-weight-bold">
-          Factors de Contextualització Global del Cas
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <table class="table table-bordered">
-                <thead class="table-active">
-                  <th>Factor Contextualizació</th>
-                  <th class="text-center">Risc</th>
-                </thead>
-                <tbody>
-                  <!-- <tr *ngFor="let val of valoracio.evaluacions">
-                    <td>{{ val.ambit.descripcio }}</td>
-                    <td [ngClass]="{'danger' : val.risc.descripcio.toUpperCase() === 'ALT RISC',
-                                    'warning' : val.risc.descripcio.toUpperCase() === 'RISC',
-                                    'success' : val.risc.descripcio.toUpperCase() === 'SENSE RISC'}" class="text-center">{{ val.risc.descripcio }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-6">
-              <div class="form-group row">
-                <div class="col-12 px-3">
-                  <label for="fileObservationFactors" class="col-form-label">
-                    <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
-                  </label>
-                  <textarea class="form-control" id="fileObservationFactors" disabled="disabled">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at est in lorem rutrum aliquet. Mauris vulputate nulla at ex volutpat, a blandit tortor faucibus.
-                  </textarea>
-                </div>
+  <!-- Global -->
+  <div class="row" *ngFor="let global of ambits">
+    <ng-container *ngIf="global?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header text-white font-weight-bold bg-info">
+              {{ global?.descripcio.toUpperCase() }}
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <table class="table table-bordered">
+                  <thead class="table-active">
+                  <th>{{ "OBS.factor" | translate }}</th>
+                  <th class="text-center">{{ "OBS.person" | translate }}</th>
+                  <th class="text-center">{{ "OBS.type" | translate }}</th>
+                  </thead>
+                  <tbody>
+                  <ng-container *ngIf="global.contextualitzacio?.length > 0" >
+                    <tr *ngFor="let context of global.contextualitzacio">
+                      <td>{{ context.factor?.descripcio }}</td>
+                      <td class="text-center">
+                        {{ context.persona?.tipusPersona?.descripcio }}
+                      </td>
+                      <td class="text-center"
+                          [ngClass]="{'danger' : context.factor?.gravetat.descripcio.toUpperCase() === 'RISC',
+                                      'success' : context.factor?.gravetat.descripcio.toUpperCase() === 'PROTECCI&#211;' }">
+                        {{ context.factor?.gravetat.descripcio }}</td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngIf="global.contextualitzacio?.length == 0">
+                    <!-- No hay Factor de contextualización -->
+                    <tr class="text-center">
+                      <td colspan="3">{{ "OBS.no-factor" | translate }}</td>
+                    </tr>
+                  </ng-container>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-6 px-3">
+                <label for="fileObservationAutonomy" class="col-form-label">
+                  <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
+                </label>
+                <textarea class="form-control" type="text" value="{{ global.observacions }}" id="fileObservationGlobal" disabled="disabled"></textarea>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>-->
+    </ng-container>
+  </div>
+  <!-- Global -->
+
+  <!-- Return to Back -->
   <div class="row">
     <div class="col-12 mb-3">
-      <button type="button" class="float-right btn btn-primary no-print" (click)="backClicked()"><i class="fa fa-chevron-left"></i> Tornar</button>
+      <button type="button" class="float-right btn btn-primary no-print" (click)="backClicked()"><i class="fa fa-chevron-left"></i> {{ "FORM.go-back" | translate }}</button>
     </div>
   </div>
+  <!--/ Return to Back -->
 </section>
