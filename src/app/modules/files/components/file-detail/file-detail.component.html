@@ -182,7 +182,7 @@
                           <button type="submit"
                                   class="btn btn-outline-dark"
                                   [disabled]="FormUnsuscription.invalid"
-                                  *ngIf="item.referencia === false"
+                                  *ngIf="!item.referencia"
                                   (click)="updateMember(item); modal.close('Save click')">
                             {{ "FORM.save" | translate }}
                           </button>
@@ -207,7 +207,7 @@
         <div class="col-12 text-center pt-4 pb-3">
           <button type="button"
                   class="btn btn-primary btn-large"
-                  (click)="openModalNewMember(); open(content)">
+                  (click)="openModalNewMember(content)">
             {{ "TABLE.newMember" | translate }}
           </button>
 
@@ -399,7 +399,8 @@
         <div class="col-12 text-center pt-4 pb-3">
           <button type="button"
                   class="btn btn-primary btn-large"
-                  (click)="createDiagnosis()">
+                  (click)="createDiagnosis()"
+                  [disabled]="expedient.persona.length === 0">
             {{ "FORM.newDiagnosis" | translate }}
           </button>
         </div>
