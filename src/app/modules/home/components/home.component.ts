@@ -70,7 +70,7 @@ export class HomeComponent {
       }]);
     this.options.filterable = true;
     this.options.actions = false;
-    this.options.itemsPerPage = 5;
+    this.options.itemsPerPage = 10;
   }
 
   /** GET PROFESSIONAL DATA **/

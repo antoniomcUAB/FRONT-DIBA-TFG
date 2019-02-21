@@ -1,16 +1,11 @@
 
 <!-- titulo -->
-
-<div class="form-group col-12">
-  <div class="form-group my-3 col-12 bg-grey-500" >
-    <label for="ssb" style="color: white;" >{{ "TABTITLE.titleAutonomia" | translate }} </label>
+<div class="form-group">
+  <div class="p-3 mt-1">
+    <h4 class="mt-1">{{ "TABTITLE.titleAutonomia" | translate }}
+      <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
+    </h4>
   </div>
-</div>
-<div class="form-group col-12">
-  <div class="form-group col-12 text-right">
-    <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
-  </div>
-  <br>
 </div>
 
 <ng-template #content let-modal>
@@ -110,7 +105,12 @@
 
 <!--/ titulo -->
 <form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()" *ngIf="data && value">
-  <div class="card-body ">
+  <div class="card-body pt-0">
+    <div class="p-3 bg-grey-500">
+      <h5 class="text-white">Situació social</h5>
+    </div>
+
+    <div class="form-group row bg-grey-300 m-0 mt-3 py-2 mb-0">
     <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
       <ng-template ngFor [ngForOf]="ambit.entorns" let-entorn>
         <ng-template [ngIf]="(groupRelacional.social && entorn.descripcio === 'Entorn Social' )
@@ -122,9 +122,9 @@
        || (entorn.descripcio==='Autonomia' && !groupRelacional.school && !groupRelacional.family
       && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house) ">
           <ng-template ngFor [ngForOf]="entorn.preguntes" let-pregunta let-i="index">
-            <div class="form-group row bg-grey-300 border border-top border-bottom">
+            <div class="form-group row col-12 py-2">
               <!-- Situacion social Basica -->
-              <div class="form-group col-4">
+              <div class="col-5">
                 <label class="col-12" for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class= "fa fa-question-circle" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.definicio"></i></label>
                 <input  *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')" type="text" class="form-control " [value]= "pregunta.social " disabled  >
                 <!-- situacio social De Ingressos insuficients-->
@@ -133,17 +133,15 @@
                   <button type="button" class=" col-3 btn btn-outline-primary" (click)="open(valoration)" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
                 </div>
                 <!--/ situacio social De Ingressos insuficients-->
-
-
               </div>
               <!--/ Situacion social Basica -->
 
               <!-- Aplicatiu -->
-              <div class="col-xs-1">
+              <div class="col-1">
                 <div class="col-12">
-                  <div class="form-group align-items-center col-12 ">
+                  <div class="form-group align-items-center col-12 text-center">
                     <label > {{ "TABLE.apl" | translate }}</label>
-                    <label class="custom-control custom-checkbox  ">
+                    <label class="custom-control custom-checkbox p-0 pl-2 apply">
                       <input type="checkbox"
                              class="custom-control-input position-relative"
                              [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)"
@@ -155,8 +153,6 @@
                   </div>
                 </div>
               </div>
-
-
               <!--/ Aplicatiu -->
 
               <!-- Persones -->
@@ -166,7 +162,7 @@
                   <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
                       <!--<div *ngIf="getFirstPregunta(pregunta.id , ambit, entorn)" class="input-group-text " (click)="addPregunta(pregunta.social,pregunta.id) ">-->
-                        <!--<i class="fa fa-user-plus " > </i>-->
+                      <!--<i class="fa fa-user-plus " > </i>-->
                       <!--</div>-->
                     </div>
                     <select class="form-control" id="t2person"
@@ -179,15 +175,13 @@
                       <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
                     </select>
                   </div>
-
                 </div>
               </div>
-
               <!--/ Persones -->
 
               <!-- Severity -->
               <ng-template #popContentSeverity></ng-template>
-              <div class="col-xs-2">
+              <div class="col-1">
                 <div class="col-12">
                   <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle"
                                                                                  aria-hidden="true" [ngbPopover]=popContentSeverity
@@ -208,7 +202,7 @@
               <!--/ Severity -->
               <!-- Frequencia -->
               <ng-template #popContentFrequency></ng-template>
-              <div class="col-2">
+              <div class="col-1">
                 <div class="col-12">
                   <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle"
                                                                                    aria-hidden="true"
@@ -223,25 +217,25 @@
                           (ngModelChange)="getFirstPregunta(pregunta.id,ambit, entorn).frequencia.descripcio = $event"
                           name="frequencySelected{{pregunta.id}}"
                           (change)="getValueFrequencia(getFirstPregunta(pregunta.id,ambit, entorn),pregunta.id) ">
-                      <option disabled selected value></option>
-                      <option  *ngFor="let frequencia of getFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.gravetat?.descripcio,pregunta.selectors)" > {{frequencia.frequencia.descripcio}}  </option>
+                    <option disabled selected value></option>
+                    <option  *ngFor="let frequencia of getFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.gravetat?.descripcio,pregunta.selectors)" > {{frequencia.frequencia.descripcio}}  </option>
                   </select>
                 </div>
               </div>
               <!--/ Frequencia -->
               <!-- riskFactors -->
-              <div class="form-group col-2">
+              <div class="col-2">
                 <label for="t1riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
                 <input type="text"
                        [ngClass]="{'warning' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'RISC',
                                    'danger' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'ALT RISC',
                                    'success' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'VULNERABILITAT',
                                    'info' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'SENSE VALORACIÓ' }"
-                       class="form-control" id="t1riskFactor"
+                       class="form-control text-center" id="t1riskFactor"
                        disabled
                        [value]="getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio">
               </div>
-
+            </div>
                <!--&lt;!&ndash;Bucle for para cada fila  &ndash;&gt;-->
               <!--<ng-container *ngFor="let method of getPreguntas(pregunta.id , ambit, entorn)  ; let x = index">-->
                 <!--<ng-container *ngIf="method.situacioSocial.id === pregunta.id && x!= 0 ">-->
@@ -324,30 +318,34 @@
                   <!--</div>-->
                 <!--</ng-container>-->
               <!--</ng-container>-->
-            </div>
           </ng-template>
         </ng-template>
       </ng-template>
     </ng-template>
-    <br>
-    <div class="form-group row bg-grey-300">
+    </div>
+    <div class="p-3 bg-grey-500 mt-3">
+      <h5 class="text-white">Contextualització</h5>
+    </div>
+
+    <div class="form-group row bg-grey-300 m-0 mt-3 py-2 mb-0">
       <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
       <ng-template ngFor [ngForOf]="ambit.factors_context" let-cont let-c="index">
           <ng-template [ngIf]="cont.ambit.descripcio === contextualitzacio">
+
+            <div class="form-group row col-12 py-2">
             <!-- Situacion social Basica -->
-            <div class="form-group col-6">
+            <div class="col-5">
               <label for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
               <input type="text" class="form-control" id="ssb" value="{{cont.descripcio}}" disabled>
             </div>
             <!--/ Situacion social Basica -->
 
-
             <!-- Aplica 1 persona-->
             <div class="col-1">
               <div class="col-12">
-                <div class="form-group align-items-center col-12 ">
+                <div class="form-group align-items-center col-12 text-center">
                   <label style="font-size: x-small"> {{ "TABLE.aplUna" | translate }}</label>
-                  <label class="custom-control custom-checkbox  ">
+                  <label class="custom-control custom-checkbox apply">
                     <input type="checkbox" class="custom-control-input position-relative"
                             [disabled]="getFirtsContexto(cont.id , ambit , cont )?.mesUc"
                            [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
@@ -380,11 +378,11 @@
             <!--/ Persones -->
             <!--aplica mes de una persona-->
 
-            <div class="col-1">
+            <div class="col-2">
               <div class="col-12">
-                <div class="form-group align-items-center col-12 ">
+                <div class="form-group align-items-center col-12 text-center">
                   <label style="font-size: x-small">  {{ "TABLE.aplMas" | translate }}</label>
-                  <label class="custom-control custom-checkbox  ">
+                  <label class="custom-control custom-checkbox apply">
                     <input type="checkbox" class="custom-control-input position-relative" name="aplicaContextMesUn{{c}}"
                            [disabled]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
                            [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.mesUc"
@@ -402,7 +400,7 @@
             <div class="col-2">
               <div class="col-12">
                   <label for="t1riskFactor" >{{ "TABLE.types" | translate }}</label>
-                  <input type="text" class="form-control" id="t1riskFactor"  disabled name="risc{{c}}"
+                  <input type="text" class="form-control text-center" id="t1riskFactor"  disabled name="risc{{c}}"
                   [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio">
 
               </div>
@@ -410,6 +408,7 @@
             <!--/ Severity -->
             <!--/ FACTOR DE CONTEXTUALITZACIO -->
             <!--/  riskFactors -->
+            </div>
           </ng-template>
         </ng-template>
       </ng-template>
