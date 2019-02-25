@@ -66,7 +66,12 @@ export class TabsFormService extends GlobalService {
   );
   }
   putValidationDiagnostic( idExpedient: number , diagnostic: Diagnosis): Observable<Diagnosis> {
-  return this._http.put<Diagnosis>(`${this.apiURL}/dsdiba/expedient/${idExpedient}/diagnostic/19230`, diagnostic);
+  return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/valorar/${diagnostic.id}`).pipe(
+    map( data => {
+      console.log(data);
+      return data;
+      })
+  );
   }
 
 }

@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../models/tab-class-form';
 import {Diagnosis } from '../../models/diagnostic';
 import {Expedient, Persona} from "../../../files";
 import {ActivatedRoute} from "@angular/router";
 import {FilesDetailService} from "../../../files/services/file-detail.service";
 import {TabsFormService} from "../../services/tabsForm.service";
+import {NgbTabChangeEvent, NgbTabset} from '@ng-bootstrap/ng-bootstrap';
 
 const MAX_N_TABS = 5;
 
@@ -16,6 +17,7 @@ const MAX_N_TABS = 5;
 export class TabsComponent {
   @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional();
   @Input() entornsMaterial: EnvironmentMaterial = new EnvironmentMaterial();
+  @ViewChild(NgbTabset) tab: NgbTabset;
   public tabsActivate: TabsDisabled = new TabsDisabled();
   public stay = false;
   public disapear = false;
@@ -48,16 +50,66 @@ export class TabsComponent {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
   }
+  public beforeChange($event: NgbTabChangeEvent) {
+    this.disapear = false;
+    this.stay = false;
+    switch ($event.nextId) {
+      case 'tab-preventchange2':
+        if( this.tabsActivate.tabAmbitMaterialActivate) {
+          $event.preventDefault();
+        }
+        break;
+      case 'tab-preventchange3':
+        if( this.tabsActivate.tabAmbitRelacionalActivate) {
+          $event.preventDefault();
+        }
+        break;
+      case 'tab-preventchange4':
+        if( this.tabsActivate.tabGlobalitatCasActivate) {
+          $event.preventDefault();
+        }
+        break;
+        case 'tab-preventchange5':
+        if( this.tabsActivate.tabValoracioDiagnosticActivate) {
+          $event.preventDefault();
+        }
+        break;
+    }
+  }
+  public enableNext(nextTab:string) {
+    switch (nextTab) {
+      case 'tab-preventchange2':
+       this.tabsActivate.tabAmbitMaterialActivate = false;
+       break;
+       case 'tab-preventchange3':
+       this.tabsActivate.tabAmbitRelacionalActivate = false;
+       break;
+       case 'tab-preventchange4':
+       this.tabsActivate.tabGlobalitatCasActivate = false;
+       break;
+       case 'tab-preventchange5':
+       this.tabsActivate.tabValoracioDiagnosticActivate = false;
+       break;
+    }
+    setTimeout(_ => {
+      this.tab.select(nextTab);
+    }, 300);
+  }
 
+  valueStay(stay: boolean,tab:string) {
+    if (stay) {
+    this.disapear = true;
+    this.stay = stay;
+    } else {
+      this.enableNext(tab);
+    }
+  }
   public fnStay(stay: boolean, id: number) {
     this.stay = stay;
     this.disapear = true;
     if (!stay) {
       this.incIndex(id);
       this.disapear = false;
-      if (id < 5) {
-        this.goBackCheckForm(id);
-      }
     }
 
   }
@@ -75,7 +127,7 @@ export class TabsComponent {
     if (id <= MAX_N_TABS) {
       this.index = (id + 1).toString();
     }
-    console.log(this.index);
+    console.log(" este es el index--> " + this.index);
   }
 
   public beforeTab() {
@@ -102,7 +154,6 @@ export class TabsComponent {
 
   checkTab(ambitName: string , idtab: number ) {
     for (const ambit of this.diagnostico.ambit) {
-      console.log(ambit.descripcio)
       if (ambit.descripcio === ambitName) {
         for (const entorn of ambit.entorn) {
          if (entorn.pregunta.length > 0) {

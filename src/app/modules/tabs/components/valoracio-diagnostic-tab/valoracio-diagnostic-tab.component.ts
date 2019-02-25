@@ -34,7 +34,8 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
     this.before.emit();
   }
   public validationDiagnostic() {
-    this.tabsService.putValidationDiagnostic(this.idExpedient,this.value).subscribe(() => {
+    this.tabsService.putValidationDiagnostic(this.idExpedient,this.value).subscribe((result) => {
+      console.log(result);
     }, (err) => {
       console.log(err);
     });

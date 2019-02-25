@@ -1,11 +1,7 @@
-<app-form-tab (before)="emitBefore()" (endForm)="emitEnd()" [contextualitzacio]="context"  [(ngModel)]="value" [personsSelector]="personsSelector" [idDiagnostic]="idDiagnostic">
+<app-form-tab (before)="emitBefore()" (endForm)="emitEnd()" [contextualitzacio]="context" [data]="ambits" [(ngModel)]="value" [personsSelector]="personsSelector" [idDiagnostic]="idDiagnostic">
 
 
 </app-form-tab>
-<div class="form-group col-6 float-right text-right">
-  <button  type="submit"  (click)="emitEnd()" class="mr-3 mb-1 btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>
-</div>
-
 
 
 

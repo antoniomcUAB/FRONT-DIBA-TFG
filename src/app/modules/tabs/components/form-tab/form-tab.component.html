@@ -114,20 +114,20 @@
     </div>
     <div class="form-group row bg-grey-300 m-0 mt-3 py-2 mb-0">
     <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
-      <ng-template ngFor [ngForOf]="ambit.entorns" let-entorn>
+      <ng-template ngFor [ngForOf]="ambit.entorns" let-entorn let-e="index">
         <ng-template [ngIf]="(groupRelacional.social && entorn.descripcio === 'Entorn Social' )
       || (groupRelacional.family && entorn.descripcio === 'Entorn Familiar')
       || (groupRelacional.school && entorn.descripcio === 'Entorn Escolar')
       ||(groupMaterial.house && entorn.descripcio === 'Entorn habitatge' )
       || (groupMaterial.economic && entorn.descripcio === 'Entorn Económic')
       || (groupMaterial.work && entorn.descripcio === 'Entorn Laboral')
-       || (entorn.descripcio==='Autonomia' && !groupRelacional.school && !groupRelacional.family
-      && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house) ">
+       || (entorn.descripcio===contextualitzacio && !groupRelacional.school && !groupRelacional.family
+      && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house)">
           <ng-template ngFor [ngForOf]="entorn.preguntes" let-pregunta let-i="index">
             <div class="form-group row col-12 py-2">
               <!-- Situacion social Basica -->
               <div class="col-5">
-                <label class="col-12" for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class= "fa fa-question-circle" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.definicio"></i></label>
+                <label class="col-12" for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class= "fa fa-question-circle" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.social"></i></label>
                 <input  *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')" type="text" class="form-control " [value]= "pregunta.social " disabled  >
                 <!-- situacio social De Ingressos insuficients-->
                 <div *ngIf="pregunta.social.includes('Ingressos insuficients (E.2)')" class="form-group row col-12">
@@ -148,7 +148,7 @@
                              class="custom-control-input position-relative"
                              [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)"
                              (click)=" newPregunta(pregunta.social , pregunta.id , ambit, entorn);"
-                             name="aplica{{i}}">
+                             name="aplica{{e}}{{i}}">
                       <span class="custom-control-label"></span>
                       <span class="custom-control-description"></span>
                     </label>
@@ -172,7 +172,7 @@
                             [disabled]="!getFirstPregunta(pregunta.id , ambit, entorn) "
                             [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)?.persona?.tipusPersona?.descripcio"
                             (ngModelChange)="changePersona(getFirstPregunta(pregunta.id , ambit, entorn), $event)"
-                            name="persona{{i}}">
+                            name="persona{{e}}{{i}}">
                       <option disabled selected value ></option>
                       <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
                     </select>
@@ -195,7 +195,7 @@
                           [disabled]="!getFirstPregunta(pregunta.id , ambit, entorn)"
                           [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)?.gravetat?.descripcio"
                           (ngModelChange)="getValueGravetat(getFirstPregunta(pregunta.id , ambit, entorn), ambit , entorn , $event)"
-                          name="severitySelected{{pregunta.id}}">
+                          name="severitySelected{{e}}{{i}}">
                     <option disabled selected value></option>
                     <option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>
                   </select>
@@ -217,7 +217,7 @@
                           [disabled]="!getFirstPregunta(pregunta.id,ambit, entorn)"
                           [ngModel]="getFirstPregunta(pregunta.id,ambit, entorn)?.frequencia?.descripcio"
                           (ngModelChange)="getFirstPregunta(pregunta.id,ambit, entorn).frequencia.descripcio = $event"
-                          name="frequencySelected{{pregunta.id}}"
+                          name="frequencySelected{{e}}{{i}}"
                           (change)="getValueFrequencia(getFirstPregunta(pregunta.id,ambit, entorn),pregunta.id) ">
                     <option disabled selected value></option>
                     <option  *ngFor="let frequencia of getFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.gravetat?.descripcio,pregunta.selectors)" > {{frequencia.frequencia.descripcio}}  </option>

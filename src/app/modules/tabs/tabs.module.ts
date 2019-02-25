@@ -21,7 +21,7 @@ import {FilesDetailService} from "../files/services/file-detail.service";
     SharedModule,
     RouterModule.forChild(TabsRoutes),
     NgbModule,
-    CommonModule
+    CommonModule,
   ],
   declarations: [
     TabsComponent,

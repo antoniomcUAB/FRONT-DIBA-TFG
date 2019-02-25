@@ -1,5 +1,5 @@
 
-<section>
+<section *ngIf="value">
   <!-- Ambito -->
   <div class="row" *ngFor="let ambit of value.ambit">
     <ng-container *ngIf="ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
@@ -110,7 +110,8 @@
                 <label for="fileObservationAutonomy" class="col-form-label">
                   <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
                 </label>
-                <textarea class="form-control" type="text" value="{{ ambit.observacions }}" id="fileObservationAutonomy"></textarea>
+                <textarea [ngModel]="ambit?.observacions" class="form-control" type="text"
+                          (ngModelChange)="ambit.observacions = $event" id="fileObservationAutonomy"></textarea>
               </div>
             </div>
             <!--/ Observations Ambits -->
