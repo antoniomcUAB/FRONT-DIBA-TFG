@@ -82,7 +82,7 @@ export class Entorn {
 /* Valoracio */
 export class Valoracio {
   data: string;
-  evaluacions: Evaluacions;
+  evaluacions: Evaluacions = new Evaluacions();
   id: number;
   factors: number;
   total: number;

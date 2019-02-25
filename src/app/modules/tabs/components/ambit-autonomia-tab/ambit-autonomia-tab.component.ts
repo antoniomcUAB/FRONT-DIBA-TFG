@@ -37,8 +37,8 @@ export class AmbitAutonomiaTabComponent extends CustomInput {
   }
   reloadData() {
     this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
-      this.ambits = tab;
       console.log(tab);
+      this.ambits = tab;
     });
   }
   public emitBefore() {

@@ -4,6 +4,7 @@ import {Diagnosis } from '../../models/diagnostic';
 import {Expedient, Persona} from "../../../files";
 import {ActivatedRoute} from "@angular/router";
 import {FilesDetailService} from "../../../files/services/file-detail.service";
+import {TabsFormService} from "../../services/tabsForm.service";
 
 const MAX_N_TABS = 5;
 
@@ -14,7 +15,7 @@ const MAX_N_TABS = 5;
 
 export class TabsComponent {
   @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional();
-  @Input() entornsMaterial: EnvironmentMaterial = new  EnvironmentMaterial();
+  @Input() entornsMaterial: EnvironmentMaterial = new EnvironmentMaterial();
   public tabsActivate: TabsDisabled = new TabsDisabled();
   public stay = false;
   public disapear = false;
@@ -29,16 +30,18 @@ export class TabsComponent {
   expedient: Expedient;
 
 
-
   constructor(private _route: ActivatedRoute,
-  private _service: FilesDetailService) {
+              private _service: FilesDetailService,
+              private tabsService: TabsFormService) {
     this.diagnosisID = this._route.snapshot.params['diagnosisID'];
     this.expedientID = this._route.snapshot.params['expedientID'];
     this.getFile();
     this.diagnostico = new Diagnosis();
+    this.reloadDiagnostico();
   }
+
   getFile() {
-    this._service.getFileById(this.expedientID).subscribe( (data: Expedient) => {
+    this._service.getFileById(this.expedientID).subscribe((data: Expedient) => {
       this.expedient = data;
       this.getPersonActives();
     }, (error) => {
@@ -46,18 +49,19 @@ export class TabsComponent {
     });
   }
 
-  public fnStay(stay: boolean, id: number ) {
-      this.stay = stay;
-      this.disapear = true;
-      if (!stay) {
-        this.incIndex(id);
-        this.disapear = false;
-        if (id < 5) {
-          this.goBackCheckForm(id);
-        }
+  public fnStay(stay: boolean, id: number) {
+    this.stay = stay;
+    this.disapear = true;
+    if (!stay) {
+      this.incIndex(id);
+      this.disapear = false;
+      if (id < 5) {
+        this.goBackCheckForm(id);
       }
+    }
 
   }
+
   public goBackCheckForm(id: number) {
     this.stay = false;
     this.incIndex(id);
@@ -79,6 +83,7 @@ export class TabsComponent {
     this.disapear = false;
 
   }
+
   getPersonActives() {
     for (const person of this.expedient.persona) {
       if (!person.dataBaixa) {
@@ -87,8 +92,40 @@ export class TabsComponent {
     }
   }
 
+  reloadDiagnostico() {
+    this.tabsService.getDiagnostic(this.diagnosisID).subscribe((result: Diagnosis) => {
+      this.diagnostico = result;
+    }, (err) => {
+      console.log(err);
+    });
+  }
 
+  checkTab(ambitName: string , idtab: number ) {
+    for (const ambit of this.diagnostico.ambit) {
+      console.log(ambit.descripcio)
+      if (ambit.descripcio === ambitName) {
+        for (const entorn of ambit.entorn) {
+         if (entorn.pregunta.length > 0) {
+           this.fnStay(true, idtab);
+           return false;
+         }
+        }
+      }
+    }
+    for (const ambit of this.diagnostico.ambit) {
+      if (ambit.descripcio === ambitName) {
+        if (ambit.contextualitzacio.length > 0) {
+          this.fnStay(true, idtab);
+          return false;
+        }
+      }
+      }
+    return true;
+    }
 }
+
+
+
 
 
 

@@ -44,7 +44,8 @@ export let TRANSLATION = {
     'tabAutonomia'  : 'Àmbit d\'autonomia'
   },
   'TABTITLE': {
-    'titleAutonomia': 'Evidències i necessitats en l\'àmbit relacional'
+    'titleAutonomia': 'Evidències i necessitats en l\'àmbit',
+    'titleGloablitat': 'Factors de context en la'
   },
   /* Form */
   'FORM': {
@@ -73,7 +74,8 @@ export let TRANSLATION = {
     'codeFile'      : 'Codi d\'expedient',
     'newRef'        : 'Qui serà la nova persona de refèrencia',
     'totalFamilia'  : 'Nombre de persones que componen la unitat familiar',
-    'expExists'        : 'El codi de l\'expedient ja existeix',
+  'expExists'         : 'El codi de l\'expedient ja existeix',
+    'validation'      : 'validar'
   },
   /* Search */
   'SEARCH': {

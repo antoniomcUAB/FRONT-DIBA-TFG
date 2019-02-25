@@ -2,7 +2,10 @@
 <!-- titulo -->
 <div class="form-group">
   <div class="p-3 mt-1">
-    <h4 class="mt-1">{{ "TABTITLE.titleAutonomia" | translate }}
+    <h4 class="mt-1" *ngIf="this.contextualitzacio !== 'Globalitat del cas'">{{ "TABTITLE.titleAutonomia" | translate }} {{this.contextualitzacio | titlecase}}
+      <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
+    </h4>
+    <h4 class="mt-1" *ngIf="this.contextualitzacio === 'Globalitat del cas'">{{ "TABTITLE.titleGloablitat" | translate }} {{this.contextualitzacio | titlecase}}
       <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
     </h4>
   </div>
@@ -15,10 +18,10 @@
   <form>
     <div class="modal-body">
       <div class="form-group">
-        <label >Es perdran els canvis no guardats <span class="text-primary"></span></label>
+        <label >Es perdran les dades introduides <span class="text-primary"></span></label>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" (click)="emitBefore();modal.dismiss('Cross click')">Tornar pagina anterior</button>
+        <button type="submit" class="btn btn-outline-dark" (click)="clean(true);modal.dismiss('Cross click');">Tornar pagina anterior</button>
         <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
       </div>
     </div>
@@ -109,7 +112,6 @@
     <div class="p-3 bg-grey-500">
       <h5 class="text-white">Situació social</h5>
     </div>
-
     <div class="form-group row bg-grey-300 m-0 mt-3 py-2 mb-0">
     <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
       <ng-template ngFor [ngForOf]="ambit.entorns" let-entorn>
@@ -416,13 +418,29 @@
   </div>
   <div class="form-group row">
     <div class="form-group col-6 float-left">
-      <button type="button" class="btn btn-danger ml-3 mb-1" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Netejar </button>
+      <button type="button" class="btn btn-danger ml-3 mb-1" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Esborrar </button>
     </div>
     <div class="form-group col-6 float-right text-right">
       <button  type="submit"  class="mr-3 mb-1 btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>
     </div>
 
   </div>
+  <ng-template #esborrar let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title"><span class="text-primary">ALERTA</span></h4>
+    </div>
+    <form>
+      <div class="modal-body">
+        <div class="form-group">
+          <label >Es perdran les dades introduides <span class="text-primary"></span></label>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-dark" (click)="clean();modal.dismiss('Cross click')">Esborrar</button>
+          <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
 
 </form>
 

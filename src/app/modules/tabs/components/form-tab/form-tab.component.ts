@@ -1,5 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import { Entorns,Ambits, EnvironmentMaterial, EnvironmentRelacional, SelectorGravetat,FactorsContext} from '../../models/tab-class-form';
+import {
+  Entorns,
+  Ambits,
+  EnvironmentMaterial,
+  EnvironmentRelacional,
+  SelectorGravetat,
+  FactorsContext,
+  Pregunta
+} from '../../models/tab-class-form';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "../../../../shared";
@@ -75,15 +83,33 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   public emitEnd() {
     this.endForm.emit();
   }
-  public clean() {
-    this.formValues.resetForm();
-    if (this.cleanSelects === null) {
-      this.cleanSelects = '';
-    } else {
-      this.cleanSelects = null;
-    }
 
-  }
+  public clean(anterior?:boolean) {
+    for (const ambit of this.value.ambit) {
+      if (ambit.descripcio === this.contextualitzacio) {
+        for (const entorn of ambit.entorn) {
+          for (const pregunta of entorn.pregunta) {
+            this.tabsService.DeletePregunta(pregunta.id).subscribe((result) => {
+              this.reloadDiagnostico();
+            }, (err) => {
+              console.log(err);
+            });
+          }
+        }
+        }
+      }
+   for (const ambit of this.value.ambit) {
+     if (ambit.descripcio === this.contextualitzacio) {
+       for (const context of ambit.contextualitzacio) {
+         this.tabsService.DeletePreguntaContext(context.id).subscribe((result) => {
+           this.reloadDiagnostico();
+         }, (err) => {
+           console.log(err);
+         });
+       }
+     }
+   }
+    }
   public newPreguntaContext( ambit: Ambit , contexto: FactorsContext , membre: string ) {
     const contextoEncontrado = this.getContextos( ambit.id , ambit , contexto );
     if (contextoEncontrado) {
