@@ -19,6 +19,7 @@ export class TabsComponent {
   @Input() entornsMaterial: EnvironmentMaterial = new EnvironmentMaterial();
   @ViewChild(NgbTabset) tab: NgbTabset;
   public tabsActivate: TabsDisabled = new TabsDisabled();
+  public forceApear = false;
   public stay = false;
   public disapear = false;
   public index: string = '1';
@@ -108,6 +109,7 @@ export class TabsComponent {
   public fnStay(stay: boolean, id: number) {
     this.stay = stay;
     this.disapear = true;
+    this.forceApear = false;
     if (!stay) {
       this.incIndex(id);
       this.disapear = false;
@@ -126,6 +128,7 @@ export class TabsComponent {
   public beforeTab() {
     this.stay = false;
     this.disapear = false;
+    this.forceApear = true;
 
   }
 

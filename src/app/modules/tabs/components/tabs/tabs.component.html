@@ -11,7 +11,7 @@
     <ng-template ngbTabTitle> <p> Autonomia</p> </ng-template>
 
     <ng-template ngbTabContent >
-      <app-check-form *ngIf=" checkTab('Autonomia',1) && !disapear"
+      <app-check-form *ngIf=" (checkTab('Autonomia',1) && !disapear) || forceApear"
                       (stay)=" valueStay($event, 'tab-preventchange2')"
                       [access]="false" >
       </app-check-form>

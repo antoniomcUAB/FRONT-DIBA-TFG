@@ -3,10 +3,10 @@
 <div class="form-group">
   <div class="p-3 mt-1">
     <h4 class="mt-1" *ngIf="this.contextualitzacio !== 'Globalitat del cas'">{{ "TABTITLE.titleAutonomia" | translate }} {{this.contextualitzacio | titlecase}}
-      <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
+      <button type="button" class="float-right btn btn-outline-primary" (click)="emitBefore()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
     </h4>
     <h4 class="mt-1" *ngIf="this.contextualitzacio === 'Globalitat del cas'">{{ "TABTITLE.titleGloablitat" | translate }} {{this.contextualitzacio | titlecase}}
-      <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
+      <button type="button" class="float-right btn btn-outline-primary" (click)="emitBefore()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
     </h4>
   </div>
 </div>
@@ -21,7 +21,7 @@
         <label >Es perdran les dades introduides <span class="text-primary"></span></label>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click');">Tornar pagina anterior</button>
+        <button type="submit" class="btn btn-outline-dark" (click)="emitBefore(); modal.dismiss('Cross click');">Tornar pagina anterior</button>
         <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
       </div>
     </div>
