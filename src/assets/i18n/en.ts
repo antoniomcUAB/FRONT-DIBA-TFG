@@ -48,7 +48,8 @@ export let TRANSLATION = {
     'wife'          : 'Esposa',
     'husband'       : 'Esposo',
     'other'         : 'Otros',
-    'submit'        : 'Crear nuevo diagnóstico'
+    'submit'        : 'Crear nuevo diagnóstico',
+    'validation'      : 'validar'
   },
 
   /* Search */

@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CustomInput} from "../../../../shared";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Ambit} from "../../../files";
+import {Diagnosis} from "../../models/diagnostic";
+import {TabsFormService} from "../../services/tabsForm.service";
 
 @Component({
   selector: 'app-valoracio-diagnostic-tab',
@@ -16,15 +19,26 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output() tabActivated: EventEmitter <void> = new EventEmitter();
   @Input() idDiagnostic: number;
+  @Input() idExpedient: number;
+  constructor(private tabsService: TabsFormService){
+   super();
+  }
   ngOnInit(): void {
     this.tabActivated.emit();
   }
 
-  public emitEnd(){
+  public emitEnd() {
     this.endForm.emit();
   }
   public emitBefore() {
     this.before.emit();
+  }
+  public validationDiagnostic() {
+    this.tabsService.putValidationDiagnostic(this.idExpedient,this.value).subscribe((result) => {
+      console.log(result);
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 

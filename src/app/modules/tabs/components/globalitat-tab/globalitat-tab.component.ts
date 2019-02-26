@@ -15,7 +15,7 @@ import {Persona} from "../../../files";
 })
 export class GlobalitatTabComponent extends CustomInput implements OnInit {
   ambits: Ambits = new Ambits();
-  context: string = 'MATERIAL I INSTRUMENTAL';
+  context: string = 'Globalitat del cas';
   @Input() personsSelector: Persona [] = [];
   @Input() idDiagnostic: number;
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();

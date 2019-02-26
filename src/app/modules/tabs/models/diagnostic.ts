@@ -1,5 +1,6 @@
 /* Diagnosis */
 import { Professional } from "../../home/models/professional";
+import {Evaluacions, Valoracio} from "../../files";
 
 /* Diagnosis */
 export class Diagnosis {
@@ -8,6 +9,7 @@ export class Diagnosis {
   ambit: Ambit[] = [];          // Ambit
   observacions: string;         // Observaciones
   professional: Professional;   // Profesional
+  valoracio: Valoracio = new Valoracio();         // Valoración
 }
 
 /* Ambit */
@@ -22,7 +24,6 @@ export class Ambit {
   valVulnerabilitat: number ;
   vulnerabilitat: number;
 }
-
 /* Entorn */
 export class Entorn {
   id: number;

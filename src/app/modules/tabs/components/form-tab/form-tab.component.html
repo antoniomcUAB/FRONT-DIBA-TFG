@@ -2,8 +2,11 @@
 <!-- titulo -->
 <div class="form-group">
   <div class="p-3 mt-1">
-    <h4 class="mt-1">{{ "TABTITLE.titleAutonomia" | translate }}
-      <button type="button" class="float-right btn btn-outline-primary" (click)="open(content)"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
+    <h4 class="mt-1" *ngIf="this.contextualitzacio !== 'Globalitat del cas'">{{ "TABTITLE.titleAutonomia" | translate }} {{this.contextualitzacio | titlecase}}
+      <button type="button" class="float-right btn btn-outline-primary" (click)="emitBefore()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
+    </h4>
+    <h4 class="mt-1" *ngIf="this.contextualitzacio === 'Globalitat del cas'">{{ "TABTITLE.titleGloablitat" | translate }} {{this.contextualitzacio | titlecase}}
+      <button type="button" class="float-right btn btn-outline-primary" (click)="emitBefore()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
     </h4>
   </div>
 </div>
@@ -15,10 +18,10 @@
   <form>
     <div class="modal-body">
       <div class="form-group">
-        <label >Es perdran els canvis no guardats <span class="text-primary"></span></label>
+        <label >Es perdran les dades introduides <span class="text-primary"></span></label>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" (click)="emitBefore();modal.dismiss('Cross click')">Tornar pagina anterior</button>
+        <button type="submit" class="btn btn-outline-dark" (click)="emitBefore(); modal.dismiss('Cross click');">Tornar pagina anterior</button>
         <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
       </div>
     </div>
@@ -109,23 +112,22 @@
     <div class="p-3 bg-grey-500">
       <h5 class="text-white">Situació social</h5>
     </div>
-
     <div class="form-group row bg-grey-300 m-0 mt-3 py-2 mb-0">
     <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
-      <ng-template ngFor [ngForOf]="ambit.entorns" let-entorn>
+      <ng-template ngFor [ngForOf]="ambit.entorns" let-entorn let-e="index">
         <ng-template [ngIf]="(groupRelacional.social && entorn.descripcio === 'Entorn Social' )
       || (groupRelacional.family && entorn.descripcio === 'Entorn Familiar')
       || (groupRelacional.school && entorn.descripcio === 'Entorn Escolar')
       ||(groupMaterial.house && entorn.descripcio === 'Entorn habitatge' )
       || (groupMaterial.economic && entorn.descripcio === 'Entorn Económic')
       || (groupMaterial.work && entorn.descripcio === 'Entorn Laboral')
-       || (entorn.descripcio==='Autonomia' && !groupRelacional.school && !groupRelacional.family
-      && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house) ">
+       || (entorn.descripcio===contextualitzacio && !groupRelacional.school && !groupRelacional.family
+      && !groupRelacional.social && !groupMaterial.economic && !groupMaterial.work && !groupMaterial.house)">
           <ng-template ngFor [ngForOf]="entorn.preguntes" let-pregunta let-i="index">
             <div class="form-group row col-12 py-2">
               <!-- Situacion social Basica -->
               <div class="col-5">
-                <label class="col-12" for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class= "fa fa-question-circle" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.definicio"></i></label>
+                <label class="col-12" for="ssb" >{{ "TABLE.basicSocialSituation" | translate }} <i class= "fa fa-question-circle" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.social"></i></label>
                 <input  *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')" type="text" class="form-control " [value]= "pregunta.social " disabled  >
                 <!-- situacio social De Ingressos insuficients-->
                 <div *ngIf="pregunta.social.includes('Ingressos insuficients (E.2)')" class="form-group row col-12">
@@ -146,7 +148,7 @@
                              class="custom-control-input position-relative"
                              [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)"
                              (click)=" newPregunta(pregunta.social , pregunta.id , ambit, entorn);"
-                             name="aplica{{i}}">
+                             name="aplica{{e}}{{i}}">
                       <span class="custom-control-label"></span>
                       <span class="custom-control-description"></span>
                     </label>
@@ -170,7 +172,7 @@
                             [disabled]="!getFirstPregunta(pregunta.id , ambit, entorn) "
                             [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)?.persona?.tipusPersona?.descripcio"
                             (ngModelChange)="changePersona(getFirstPregunta(pregunta.id , ambit, entorn), $event)"
-                            name="persona{{i}}">
+                            name="persona{{e}}{{i}}">
                       <option disabled selected value ></option>
                       <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
                     </select>
@@ -193,7 +195,7 @@
                           [disabled]="!getFirstPregunta(pregunta.id , ambit, entorn)"
                           [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)?.gravetat?.descripcio"
                           (ngModelChange)="getValueGravetat(getFirstPregunta(pregunta.id , ambit, entorn), ambit , entorn , $event)"
-                          name="severitySelected{{pregunta.id}}">
+                          name="severitySelected{{e}}{{i}}">
                     <option disabled selected value></option>
                     <option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>
                   </select>
@@ -215,7 +217,7 @@
                           [disabled]="!getFirstPregunta(pregunta.id,ambit, entorn)"
                           [ngModel]="getFirstPregunta(pregunta.id,ambit, entorn)?.frequencia?.descripcio"
                           (ngModelChange)="getFirstPregunta(pregunta.id,ambit, entorn).frequencia.descripcio = $event"
-                          name="frequencySelected{{pregunta.id}}"
+                          name="frequencySelected{{e}}{{i}}"
                           (change)="getValueFrequencia(getFirstPregunta(pregunta.id,ambit, entorn),pregunta.id) ">
                     <option disabled selected value></option>
                     <option  *ngFor="let frequencia of getFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.gravetat?.descripcio,pregunta.selectors)" > {{frequencia.frequencia.descripcio}}  </option>
@@ -319,8 +321,39 @@
                 <!--</ng-container>-->
               <!--</ng-container>-->
           </ng-template>
+
+
         </ng-template>
+
+
+
       </ng-template>
+      <div class="form-group row col-12 px-3">
+        <ng-template [ngIf]="(ambit.descripcio === 'MATERIAL I INSTRUMENTAL' ) &&  (groupMaterial.work || groupMaterial.economic || groupMaterial.house)">
+          <ng-template [ngIf]="(!groupMaterial.work)">
+            <button class="btn btn-primary mr-3"(click)="groupMaterial.work = true" > <i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn de treball </button>
+          </ng-template>
+          <ng-template [ngIf]="(!groupMaterial.economic )">
+            <button class="btn btn-primary mr-3" (click)="groupMaterial.economic = true" ><i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn economic </button>
+          </ng-template>
+          <ng-template [ngIf]="(!groupMaterial.house)">
+            <button  class="btn btn-primary mr-3" (click)="groupMaterial.house = true" ><i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn d'habitatge </button>
+          </ng-template>
+        </ng-template>
+      </div>
+      <div class="form-group row col-12 px-3">
+        <ng-template [ngIf]="(ambit.descripcio === 'RELACIONAL') &&  (groupRelacional.school || groupRelacional.family || groupRelacional.social)">
+          <ng-template [ngIf]="(!groupRelacional.social)">
+            <button class="btn btn-primary mr-3"(click)="groupMaterial.work = true" > <i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn social </button>
+          </ng-template>
+          <ng-template [ngIf]="(!groupRelacional.family )">
+            <button class="btn btn-primary mr-3" (click)="groupMaterial.economic = true" ><i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn familiar </button>
+          </ng-template>
+          <ng-template [ngIf]="(!groupRelacional.school)">
+            <button  class="btn btn-primary mr-3" (click)="groupMaterial.house = true" ><i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn escolar </button>
+          </ng-template>
+        </ng-template>
+      </div>
     </ng-template>
     </div>
     <div class="p-3 bg-grey-500 mt-3">
@@ -401,7 +434,9 @@
               <div class="col-12">
                   <label for="t1riskFactor" >{{ "TABLE.types" | translate }}</label>
                   <input type="text" class="form-control text-center" id="t1riskFactor"  disabled name="risc{{c}}"
-                  [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio">
+                         [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio"
+                         [ngClass]="{'danger' : getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio.toUpperCase() === 'RISC',
+                                      'success' : getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio.toUpperCase() === 'PROTECCI&#211;' }">
 
               </div>
             </div>
@@ -416,13 +451,29 @@
   </div>
   <div class="form-group row">
     <div class="form-group col-6 float-left">
-      <button type="button" class="btn btn-danger ml-3 mb-1" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Netejar </button>
+      <button type="button" class="btn btn-danger ml-3 mb-1" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Esborrar </button>
     </div>
     <div class="form-group col-6 float-right text-right">
       <button  type="submit"  class="mr-3 mb-1 btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>
     </div>
 
   </div>
+  <ng-template #esborrar let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title"><span class="text-primary">ALERTA</span></h4>
+    </div>
+    <form>
+      <div class="modal-body">
+        <div class="form-group">
+          <label >Es perdran les dades introduides <span class="text-primary"></span></label>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-dark" (click)="clean();modal.dismiss('Cross click')">Esborrar</button>
+          <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
 
 </form>
 
