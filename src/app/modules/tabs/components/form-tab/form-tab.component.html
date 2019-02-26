@@ -21,7 +21,7 @@
         <label >Es perdran les dades introduides <span class="text-primary"></span></label>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" (click)="clean(true);modal.dismiss('Cross click');">Tornar pagina anterior</button>
+        <button type="submit" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click');">Tornar pagina anterior</button>
         <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
       </div>
     </div>
@@ -321,8 +321,39 @@
                 <!--</ng-container>-->
               <!--</ng-container>-->
           </ng-template>
+
+
         </ng-template>
+
+
+
       </ng-template>
+      <div class="form-group row col-12 px-3">
+        <ng-template [ngIf]="(ambit.descripcio === 'MATERIAL I INSTRUMENTAL' ) &&  (groupMaterial.work || groupMaterial.economic || groupMaterial.house)">
+          <ng-template [ngIf]="(!groupMaterial.work)">
+            <button class="btn btn-primary mr-3"(click)="groupMaterial.work = true" > <i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn de treball </button>
+          </ng-template>
+          <ng-template [ngIf]="(!groupMaterial.economic )">
+            <button class="btn btn-primary mr-3" (click)="groupMaterial.economic = true" ><i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn economic </button>
+          </ng-template>
+          <ng-template [ngIf]="(!groupMaterial.house)">
+            <button  class="btn btn-primary mr-3" (click)="groupMaterial.house = true" ><i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn d'habitatge </button>
+          </ng-template>
+        </ng-template>
+      </div>
+      <div class="form-group row col-12 px-3">
+        <ng-template [ngIf]="(ambit.descripcio === 'RELACIONAL') &&  (groupRelacional.school || groupRelacional.family || groupRelacional.social)">
+          <ng-template [ngIf]="(!groupRelacional.social)">
+            <button class="btn btn-primary mr-3"(click)="groupMaterial.work = true" > <i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn social </button>
+          </ng-template>
+          <ng-template [ngIf]="(!groupRelacional.family )">
+            <button class="btn btn-primary mr-3" (click)="groupMaterial.economic = true" ><i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn familiar </button>
+          </ng-template>
+          <ng-template [ngIf]="(!groupRelacional.school)">
+            <button  class="btn btn-primary mr-3" (click)="groupMaterial.house = true" ><i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn escolar </button>
+          </ng-template>
+        </ng-template>
+      </div>
     </ng-template>
     </div>
     <div class="p-3 bg-grey-500 mt-3">
@@ -403,7 +434,9 @@
               <div class="col-12">
                   <label for="t1riskFactor" >{{ "TABLE.types" | translate }}</label>
                   <input type="text" class="form-control text-center" id="t1riskFactor"  disabled name="risc{{c}}"
-                  [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio">
+                         [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio"
+                         [ngClass]="{'danger' : getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio.toUpperCase() === 'RISC',
+                                      'success' : getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio.toUpperCase() === 'PROTECCI&#211;' }">
 
               </div>
             </div>

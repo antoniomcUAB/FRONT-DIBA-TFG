@@ -57,7 +57,7 @@
     <ng-template ngbTabTitle > <p > Globalitat del cas</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-globalitat-tab   (endForm)="enableNext('tab-preventchange 5')" (before)="beforeTab()" (tabActivated)="tabsActivate.tabGlobalitatCasActivate = false" [(ngModel)]="diagnostico" [personsSelector]="personActives" [idDiagnostic]="diagnosisID">
+      <app-globalitat-tab   (endForm)="enableNext('tab-preventchange5')" (before)="beforeTab()" (tabActivated)="tabsActivate.tabGlobalitatCasActivate = false" [(ngModel)]="diagnostico" [personsSelector]="personActives" [idDiagnostic]="diagnosisID">
       </app-globalitat-tab>
     </ng-template>
   </ngb-tab>
@@ -72,4 +72,3 @@
 
 
 </ngb-tabset>
-<pre>{{diagnostico|json}}</pre>

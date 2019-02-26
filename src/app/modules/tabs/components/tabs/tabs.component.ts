@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../models/tab-class-form';
 import {Diagnosis } from '../../models/diagnostic';
 import {Expedient, Persona} from "../../../files";
@@ -89,6 +89,7 @@ export class TabsComponent {
        break;
        case 'tab-preventchange5':
        this.tabsActivate.tabValoracioDiagnosticActivate = false;
+       console.log("entro en la valoracionDelDiagnosticoActivo");
        break;
     }
     setTimeout(_ => {
@@ -114,14 +115,6 @@ export class TabsComponent {
 
   }
 
-  public goBackCheckForm(id: number) {
-    this.stay = false;
-    this.incIndex(id);
-    this.disapear = false;
-    if (this.indexMaxActive < MAX_N_TABS) {
-      this.indexMaxActive++;
-    }
-  }
 
   public incIndex(id: number) {
     if (id <= MAX_N_TABS) {
@@ -157,6 +150,24 @@ export class TabsComponent {
       if (ambit.descripcio === ambitName) {
         for (const entorn of ambit.entorn) {
          if (entorn.pregunta.length > 0) {
+           if (entorn.descripcio === 'Entorn habitatge') {
+             this.entornsMaterial.house = true;
+           }
+           if (entorn.descripcio === 'Entorn Economic') {
+             this.entornsMaterial.economic = true;
+           }
+           if (entorn.descripcio === 'Entorn Laboral') {
+             this.entornsMaterial.work = true;
+           }
+           if (entorn.descripcio === 'Entorn Escolar') {
+             this.entornsRelacional.school = true;
+           }
+           if (entorn.descripcio === 'Entorn Familiar') {
+             this.entornsRelacional.family = true;
+           }
+           if (entorn.descripcio === 'Entorn Social') {
+             this.entornsRelacional.social = true;
+           }
            this.fnStay(true, idtab);
            return false;
          }
