@@ -51,61 +51,64 @@ export class TabsComponent {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
   }
+
   public beforeChange($event: NgbTabChangeEvent) {
     this.disapear = false;
     this.stay = false;
     switch ($event.nextId) {
       case 'tab-preventchange2':
-        if( this.tabsActivate.tabAmbitMaterialActivate) {
+        if (this.tabsActivate.tabAmbitMaterialActivate) {
           $event.preventDefault();
         }
         break;
       case 'tab-preventchange3':
-        if( this.tabsActivate.tabAmbitRelacionalActivate) {
+        if (this.tabsActivate.tabAmbitRelacionalActivate) {
           $event.preventDefault();
         }
         break;
       case 'tab-preventchange4':
-        if( this.tabsActivate.tabGlobalitatCasActivate) {
+        if (this.tabsActivate.tabGlobalitatCasActivate) {
           $event.preventDefault();
         }
         break;
-        case 'tab-preventchange5':
-        if( this.tabsActivate.tabValoracioDiagnosticActivate) {
+      case 'tab-preventchange5':
+        if (this.tabsActivate.tabValoracioDiagnosticActivate) {
           $event.preventDefault();
         }
         break;
     }
   }
-  public enableNext(nextTab:string) {
+
+  public enableNext(nextTab: string) {
     switch (nextTab) {
       case 'tab-preventchange2':
-       this.tabsActivate.tabAmbitMaterialActivate = false;
-       break;
-       case 'tab-preventchange3':
-       this.tabsActivate.tabAmbitRelacionalActivate = false;
-       break;
-       case 'tab-preventchange4':
-       this.tabsActivate.tabGlobalitatCasActivate = false;
-       break;
-       case 'tab-preventchange5':
-       this.tabsActivate.tabValoracioDiagnosticActivate = false;
-       console.log("entro en la valoracionDelDiagnosticoActivo");
-       break;
+        this.tabsActivate.tabAmbitMaterialActivate = false;
+        break;
+      case 'tab-preventchange3':
+        this.tabsActivate.tabAmbitRelacionalActivate = false;
+        break;
+      case 'tab-preventchange4':
+        this.tabsActivate.tabGlobalitatCasActivate = false;
+        break;
+      case 'tab-preventchange5':
+        this.tabsActivate.tabValoracioDiagnosticActivate = false;
+        console.log("entro en la valoracionDelDiagnosticoActivo");
+        break;
     }
     setTimeout(_ => {
       this.tab.select(nextTab);
     }, 300);
   }
 
-  valueStay(stay: boolean,tab:string) {
+  valueStay(stay: boolean, tab: string) {
     if (stay) {
-    this.disapear = true;
-    this.stay = stay;
+      this.disapear = true;
+      this.stay = stay;
     } else {
       this.enableNext(tab);
     }
   }
+
   public fnStay(stay: boolean, id: number) {
     this.stay = stay;
     this.disapear = true;
@@ -148,45 +151,57 @@ export class TabsComponent {
     });
   }
 
-  checkTab(ambitName: string , idtab: number ) {
+  checkTab(ambitName: string, idtab: number) {
+    let open = false;
     for (const ambit of this.diagnostico.ambit) {
       if (ambit.descripcio === ambitName) {
         for (const entorn of ambit.entorn) {
-         if (entorn.pregunta.length > 0) {
-           if (entorn.descripcio === 'Entorn habitatge') {
-             this.entornsMaterial.house = true;
-           }
-           if (entorn.descripcio === 'Entorn Economic') {
-             this.entornsMaterial.economic = true;
-           }
-           if (entorn.descripcio === 'Entorn Laboral') {
-             this.entornsMaterial.work = true;
-           }
-           if (entorn.descripcio === 'Entorn Escolar') {
-             this.entornsRelacional.school = true;
-           }
-           if (entorn.descripcio === 'Entorn Familiar') {
-             this.entornsRelacional.family = true;
-           }
-           if (entorn.descripcio === 'Entorn Social') {
-             this.entornsRelacional.social = true;
-           }
-           this.fnStay(true, idtab);
-           return false;
-         }
+          if (entorn.pregunta.length > 0) {
+            if (entorn.descripcio === 'Entorn habitatge') {
+              this.entornsMaterial.house = true;
+              open = true;
+            }
+            if (entorn.descripcio === 'Entorn Económic') {
+              this.entornsMaterial.economic = true;
+              open = true;
+            }
+            if (entorn.descripcio === 'Entorn Laboral') {
+              this.entornsMaterial.work = true;
+              open = true;
+            }
+            if (entorn.descripcio === 'Entorn Escolar') {
+              this.entornsRelacional.school = true;
+              open = true;
+            }
+            if (entorn.descripcio === 'Entorn Familiar') {
+              this.entornsRelacional.family = true;
+              open = true;
+            }
+            if (entorn.descripcio === 'Entorn Social') {
+              this.entornsRelacional.social = true;
+              open = true;
+            }
+          }
         }
       }
     }
     for (const ambit of this.diagnostico.ambit) {
       if (ambit.descripcio === ambitName) {
         if (ambit.contextualitzacio.length > 0) {
-          this.fnStay(true, idtab);
-          return false;
+          open = true;
+          console.log(ambit.descripcio + "---"+ ambit.contextualitzacio.length);
         }
       }
-      }
-    return true;
     }
+    console.log(open);
+    if (open) {
+      this.fnStay(open, idtab);
+      return !open;
+    } else {
+      return !open;
+    }
+
+  }
 }
 
 
