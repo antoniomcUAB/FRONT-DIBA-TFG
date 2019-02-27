@@ -63,6 +63,7 @@ export class Ambit {
   descripcio: string;
   contextualitzacio: Contextualitzacio;
   entorn: Entorn;
+  ambit: AmbitObs;
   observacions: string;
   factors_contetxt: FactorsCcontext;
   risc: number;
@@ -70,6 +71,12 @@ export class Ambit {
   valRisc: number;
   valVulnerabilitat: number ;
   vulnerabilitat: number;
+}
+
+/* Ambit */
+export class AmbitObs {
+  id: number;
+  descripcio: string;
 }
 
 /* Entorn */

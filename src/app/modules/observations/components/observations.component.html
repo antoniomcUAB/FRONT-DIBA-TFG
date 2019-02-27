@@ -7,16 +7,16 @@
     </div>
   </div>
   <!-- Ambito -->
-  <div class="row" *ngFor="let ambit of ambits">
-    <ng-container *ngIf="ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
+  <div class="row m-3" *ngFor="let ambit of ambits">
+    <ng-container *ngIf="ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
       <div class="col-12">
         <div class="card">
           <div class="card-header text-white font-weight-bold"
-               [ngClass]="{'bg-warning text-black-50' : ambit?.descripcio.toUpperCase() === 'AUTONOMIA',
-                         'bg-danger' : ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
-                         'bg-success' : ambit?.descripcio.toUpperCase() === 'RELACIONAL',
-                         'bg-info' : ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'}">
-            {{ ambit?.descripcio.toUpperCase() }}
+               [ngClass]="{'bg-warning text-black-50' : ambit?.ambit?.descripcio.toUpperCase() === 'AUTONOMIA',
+                         'bg-danger' : ambit?.ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
+                         'bg-success' : ambit?.ambit?.descripcio.toUpperCase() === 'RELACIONAL',
+                         'bg-info' : ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'}">
+            {{ ambit?.ambit?.descripcio.toUpperCase() }}
           </div>
           <div class="card-body">
             <div class="row">
@@ -127,12 +127,12 @@
   </div>
 
   <!-- Global -->
-  <div class="row" *ngFor="let global of ambits">
-    <ng-container *ngIf="global?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'">
+  <div class="row m-3" *ngFor="let global of ambits">
+    <ng-container *ngIf="global?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'">
       <div class="col-12">
         <div class="card">
           <div class="card-header text-white font-weight-bold bg-info">
-              {{ global?.descripcio.toUpperCase() }}
+              {{ global?.ambit?.descripcio.toUpperCase() }}
           </div>
           <div class="card-body">
             <div class="row">
@@ -180,7 +180,7 @@
   <!-- Global -->
 
   <!-- Return to Back -->
-  <div class="row">
+  <div class="row m-3">
     <div class="col-12 mb-3">
       <button type="button" class="float-right btn btn-primary no-print" (click)="backClicked()"><i class="fa fa-chevron-left"></i> {{ "FORM.go-back" | translate }}</button>
     </div>

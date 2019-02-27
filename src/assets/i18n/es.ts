@@ -74,8 +74,9 @@ export let TRANSLATION = {
     'codeFile'      : 'Codi d\'expedient',
     'newRef'        : 'Qui serà la nova persona de refèrencia',
     'totalFamilia'  : 'Nombre de persones que componen la unitat familiar',
-  'expExists'         : 'El codi de l\'expedient ja existeix',
-    'validation'      : 'validar'
+    'expExists'     : 'El codi de l\'expedient ja existeix',
+    'validation'    : 'validar',
+    'go-back'       : 'Tornar'
   },
   /* Search */
   'SEARCH': {
