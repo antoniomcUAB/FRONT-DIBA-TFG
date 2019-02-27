@@ -18,7 +18,6 @@ export class TabsFormService extends GlobalService {
   getFilesFormModel( ): Observable<Ambits> {
     return this._http.get<Ambits>(`${this.apiURL}/dsdiba/model`).pipe(
       map(data => {
-        console.log(data);
         return data;
       })
     );
@@ -35,6 +34,8 @@ export class TabsFormService extends GlobalService {
   getDiagnostic(idDiagnostico: number ): Observable<Diagnosis> {
     return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/${idDiagnostico}`).pipe(
       map(data => {
+        console.log("este es el diagnostico->");
+        console.log(data);
         if (!data.id) { data = new Diagnosis() }
         if (!data.valoracio) { data.valoracio = new Valoracio()}
         return data;
@@ -46,21 +47,22 @@ export class TabsFormService extends GlobalService {
     return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/pregunta/${id}`);
   }
   DeletePreguntaContext( id: number): Observable<Preguntas> {
-    return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/context/${id}`)
-    ;
+    console.log("deletepreguntaContext");
+    return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/context/${id}`);
   }
   PutQuestionAndGetRisc( pregunta: Preguntas, idDiagnostico: number): Observable<Preguntas> {
   return this._http.put<Preguntas>(`${this.apiURL}/dsdiba/pregunta/${idDiagnostico}`, pregunta).pipe(
     map( data => {
+      console.log(data);
       if (!data.factor) { data.factor = new Factor(); }
       return data;
     })
   );
   }
   putContextQuestion( factorPregunta: Factor, idDiagnostico: number , contextualizacion: Contextualitzacio): Observable<Contextualitzacio> {
+    console.log("PutContextQuestion");
   return this._http.put<Contextualitzacio>(`${this.apiURL}/dsdiba/context/${idDiagnostico}/${factorPregunta.id}`, contextualizacion).pipe(
     map( data => {
-      console.log(data);
       return data;
     })
   );
@@ -68,7 +70,6 @@ export class TabsFormService extends GlobalService {
   putValidationDiagnostic( idExpedient: number , diagnostic: Diagnosis): Observable<Diagnosis> {
   return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/valorar/${diagnostic.id}`).pipe(
     map( data => {
-      console.log(data);
       return data;
       })
   );

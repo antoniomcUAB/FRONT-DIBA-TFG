@@ -1,16 +1,17 @@
 
 <section *ngIf="value">
   <!-- Ambito -->
+  <pre>{{value | json }}</pre>
   <div class="row" *ngFor="let ambit of value.ambit">
-    <ng-container *ngIf="ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
+    <ng-container *ngIf="ambit?.ambit?.descripcio?.toUpperCase() !== 'GLOBALITAT DEL CAS'">
       <div class="col-12">
         <div class="card">
           <div class="card-header text-white font-weight-bold"
-               [ngClass]="{'bg-warning text-black-50' : ambit?.descripcio.toUpperCase() === 'AUTONOMIA',
-                         'bg-danger' : ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
-                         'bg-success' : ambit?.descripcio.toUpperCase() === 'RELACIONAL',
-                         'bg-info' : ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'}">
-            {{ ambit?.descripcio.toUpperCase() }}
+               [ngClass]="{'bg-warning text-black-50' : ambit?.ambit?.descripcio?.toUpperCase() === 'AUTONOMIA',
+                         'bg-danger' : ambit.ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
+                         'bg-success' : ambit.ambit?.descripcio.toUpperCase() === 'RELACIONAL',
+                         'bg-info' : ambit.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'}">
+            {{ ambit.ambit?.descripcio?.toUpperCase() }}
           </div>
           <div class="card-body">
             <div class="row">
@@ -152,11 +153,11 @@
 
   <!-- Global -->
   <div class="row" *ngFor="let global of value.ambit">
-    <ng-container *ngIf="global?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'">
+    <ng-container *ngIf="global.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'">
       <div class="col-12">
         <div class="card">
           <div class="card-header text-white font-weight-bold bg-info">
-            {{ global?.descripcio.toUpperCase() }}
+            {{ global.ambit?.descripcio.toUpperCase() }}
           </div>
           <div class="card-body">
             <div class="row">

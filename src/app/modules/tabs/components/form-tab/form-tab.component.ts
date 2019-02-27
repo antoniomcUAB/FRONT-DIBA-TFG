@@ -119,7 +119,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
           console.log(err);
         });
         for (let i = 0; i < this.value.ambit.length; i++) {
-          if (this.value.ambit[i].id === ambit.id) {
+          if (this.value.ambit[i].ambit.id === ambit.id) {
                 this.value.ambit[i].contextualitzacio = this.value.ambit[i].contextualitzacio
                   .filter(item => item.id !== contextoEncontrado.id);
           }
@@ -138,7 +138,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
         this.idDiagnostic, objContext).subscribe((result) => {
         console.log(contexto.id);
         for (let i = 0; i < this.value.ambit.length; i++) {
-          if (this.value.ambit[i].id === ambit.id) {
+          if (this.value.ambit[i].ambit.id === ambit.id) {
                 this.value.ambit[i].contextualitzacio.push(result);
           }
         }
@@ -159,7 +159,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
           });
       }
       for (let i = 0; i < this.value.ambit.length; i++) {
-        if (this.value.ambit[i].id === ambit.id) {
+        if (this.value.ambit[i].ambit.id === ambit.id) {
           /* Si hay entorno y ya existe eliminala de la parte frontal y el objeto final*/
             for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
               if (this.value.ambit[i].entorn[x].id === entorn.id) {
@@ -172,8 +172,9 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     } else {
         /* Si hay entorno y no existe llama a back , añadelo al objeto*/
         this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta, idSocial), this.idDiagnostic).subscribe((result) => {
+          console.log(result);
           for (let i = 0; i < this.value.ambit.length; i++) {
-            if (this.value.ambit[i].id === ambit.id) {
+            if (this.value.ambit[i].ambit.id === ambit.id) {
               for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
                 if (this.value.ambit[i].entorn[x].id === entorn.id) {
                   console.log(result);
@@ -188,7 +189,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       }
   }
   public getPreguntas(id: number , ambit: Ambit , entorn: Entorns ): Preguntas[] {
-    const amb = this.value.ambit.find(item => item.id === ambit.id);
+    const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
     if (!amb) { return [] }
       const ent = amb.entorn.find(item => item.id === entorn.id);
       return ent.pregunta.filter(item => {
@@ -196,10 +197,11 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       });
   }
   public getContextos(id: number , ambit: Ambit , contexto: FactorsContext ): Contextualitzacio {
-    const amb = this.value.ambit.find(item => item.id === ambit.id);
+    const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
+    console.log("este es el amb->"+amb);
     if (!amb) {return null }
-    console.log(amb.contextualitzacio);
       const context = amb.contextualitzacio.find(item => item.factor.id === contexto.id);
+    console.log("este es el context->"+context);
       if (!context) {
         return null;
       }
@@ -207,7 +209,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   }
 
   getFirstPregunta(id: number, ambit: Ambit , entorn: Entorns) {
-    const amb = this.value.ambit.find(item => item.id === ambit.id);
+    const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
 
     if (!amb) {console.log("Error Ambito"); return false; }
     if (entorn) {
@@ -222,7 +224,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     }
   }
   getFirtsContexto(id: number, ambit: Ambit , contexto: FactorsContext) {
-    const amb = this.value.ambit.find(item => item.id === ambit.id);
+    const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
         if(!amb) {
           console.log("Error Contexto");
           return false;

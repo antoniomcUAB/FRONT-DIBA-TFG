@@ -16,6 +16,7 @@ export class Diagnosis {
 export class Ambit {
   id: number;
   descripcio: string;
+  ambit: DescripcioAmbit;
   contextualitzacio: Contextualitzacio [] = [];
   entorn: Entorn [] = [];
   risc: number;
@@ -23,6 +24,10 @@ export class Ambit {
   valRisc: number;
   valVulnerabilitat: number ;
   vulnerabilitat: number;
+}
+export class DescripcioAmbit {
+  id: number;
+  descripcio: string;
 }
 /* Entorn */
 export class Entorn {
