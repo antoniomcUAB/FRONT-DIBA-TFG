@@ -16,26 +16,26 @@ export class TabsFormService extends GlobalService {
     super();
   }
   getFilesFormModel( ): Observable<Ambits> {
-    return this._http.get<Ambits>(`${this.apiURL}/dsdiba/model`).pipe(
+    return this._http.get<Ambits>(`${this.apiURL}/dsdiba/api/model`).pipe(
       map(data => {
         return data;
       })
     );
   }
   getValuesFrequencia( ): Observable<Frequencia[]> {
-    return this._http.get<Frequencia[]>(`${this.apiURL}/dsdiba/frequencia/`);
+    return this._http.get<Frequencia[]>(`${this.apiURL}/dsdiba/api/frequencia/`);
   }
   getRiscos( ): Observable<Risc[]> {
-    return this._http.get<Risc[]>(`${this.apiURL}/dsdiba/risc/`);
+    return this._http.get<Risc[]>(`${this.apiURL}/dsdiba/api/risc/`);
   }
   getPersonasOfDiagnostic( ): Observable<Persona[]> {
-    return this._http.get<Persona[]>(`${this.apiURL}/dsdiba/frequencia/`);
+    return this._http.get<Persona[]>(`${this.apiURL}/dsdiba/api/frequencia/`);
   }
   getValuesGravetat( ): Observable<Gravetat[]> {
-    return this._http.get<Gravetat[]>(`${this.apiURL}/dsdiba/gravetat/`);
+    return this._http.get<Gravetat[]>(`${this.apiURL}/dsdiba/api/gravetat/`);
   }
   getDiagnostic(idDiagnostico: number ): Observable<Diagnosis> {
-    return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/${idDiagnostico}`).pipe(
+    return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}`).pipe(
       map(data => {
         if (!data.id) { data = new Diagnosis()}
         if (!data.valoracio) { data.valoracio = new Valoracio(); data.valoracio.evaluacions = []}
@@ -45,14 +45,14 @@ export class TabsFormService extends GlobalService {
   }
   DeletePregunta( id: number): Observable<Preguntas> {
     console.log("entro al servicio");
-    return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/pregunta/${id}`);
+    return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${id}`);
   }
   DeletePreguntaContext( id: number): Observable<Preguntas> {
     console.log("deletepreguntaContext");
-    return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/context/${id}`);
+    return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/context/${id}`);
   }
   PutQuestionAndGetRisc( pregunta: Preguntas, idDiagnostico: number): Observable<Preguntas> {
-  return this._http.put<Preguntas>(`${this.apiURL}/dsdiba/pregunta/${idDiagnostico}`, pregunta).pipe(
+  return this._http.put<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${idDiagnostico}`, pregunta).pipe(
     map( data => {
       console.log(data);
       if (!data.factor) { data.factor = new Factor(); }
@@ -62,15 +62,21 @@ export class TabsFormService extends GlobalService {
   }
   putContextQuestion( factorPregunta: Factor, idDiagnostico: number , contextualizacion: Contextualitzacio): Observable<Contextualitzacio> {
     console.log("PutContextQuestion");
-  return this._http.put<Contextualitzacio>(`${this.apiURL}/dsdiba/context/${idDiagnostico}/${factorPregunta.id}`, contextualizacion).pipe(
+  return this._http.put<Contextualitzacio>(`${this.apiURL}/dsdiba/api/context/${idDiagnostico}/${factorPregunta.id}`, contextualizacion).pipe(
     map( data => {
       return data;
     })
   );
   }
   putValidationDiagnostic( idExpedient: number , diagnostic: Diagnosis): Observable<Diagnosis> {
-  return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/valorar/${diagnostic.id}`).pipe(
+  return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/valorar/${diagnostic.id}`).pipe(
     map( data => {
+      if(!data.valoracio.evaluacions) {
+        data.valoracio.evaluacions = [];
+      }
+      if(!data.valoracio.evaluacions) {
+        data.valoracio.evaluacions = [];
+      }
       console.log(data);
       return data;
       })

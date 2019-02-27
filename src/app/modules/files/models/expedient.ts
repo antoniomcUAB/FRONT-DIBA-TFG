@@ -100,7 +100,7 @@ export class Evaluacions {
   ambit: Ambit;
   id: number;
   risc: Risc;
-  riscProfesional: Risc;
+  riscProfesional: Risc = new Risc();
 }
 
 /* Contextualizacion */

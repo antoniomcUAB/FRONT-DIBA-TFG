@@ -16,13 +16,13 @@ export class HomeService extends GlobalService {
 
   /** GET PROFESSIONAL BY ID **/
   getProfessionalByID(idProfessional: number): Observable<Professional> {
-    return this._http.get<Professional>(`${this.apiURL}/dsdiba/professional/${idProfessional}`);
+    return this._http.get<Professional>(`${this.apiURL}/dsdiba/api/professional/${idProfessional}`);
   }
 
   /** GET LIST OF FILES **/
   getFiles(options: TableListOptions, idMunicipal: number): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
-    return this._http.get(`${this.apiURL}/dsdiba/expedient/llista/${idMunicipal}`,
+    return this._http.get(`${this.apiURL}/dsdiba/api/expedient/llista/${idMunicipal}`,
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body;
@@ -36,6 +36,6 @@ export class HomeService extends GlobalService {
 
   /** CREATE FILE **/
   createFile(expedient: Expedient): Observable<Expedient> {
-    return this._http.put<Expedient>(`${this.apiURL}/dsdiba/expedient/`, expedient);
+    return this._http.put<Expedient>(`${this.apiURL}/dsdiba/api/expedient/`, expedient);
   }
 }
