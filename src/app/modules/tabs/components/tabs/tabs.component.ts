@@ -154,7 +154,8 @@ export class TabsComponent {
   checkTab(ambitName: string, idtab: number) {
     let open = false;
     for (const ambit of this.diagnostico.ambit) {
-      if (ambit.descripcio === ambitName) {
+      if (ambit.ambit.descripcio === ambitName) {
+
         for (const entorn of ambit.entorn) {
           if (entorn.pregunta.length > 0) {
             if (entorn.descripcio === 'Entorn habitatge') {
@@ -186,14 +187,12 @@ export class TabsComponent {
       }
     }
     for (const ambit of this.diagnostico.ambit) {
-      if (ambit.descripcio === ambitName) {
+      if (ambit.ambit.descripcio === ambitName) {
         if (ambit.contextualitzacio.length > 0) {
           open = true;
-          console.log(ambit.descripcio + "---"+ ambit.contextualitzacio.length);
         }
       }
     }
-    console.log(open);
     if (open) {
       this.fnStay(open, idtab);
       return !open;

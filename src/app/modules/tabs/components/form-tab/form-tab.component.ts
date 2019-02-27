@@ -197,11 +197,11 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       });
   }
   public getContextos(id: number , ambit: Ambit , contexto: FactorsContext ): Contextualitzacio {
+      console.log(id);
+      console.log(ambit.id);
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
-    console.log("este es el amb->"+amb);
     if (!amb) {return null }
       const context = amb.contextualitzacio.find(item => item.factor.id === contexto.id);
-    console.log("este es el context->"+context);
       if (!context) {
         return null;
       }

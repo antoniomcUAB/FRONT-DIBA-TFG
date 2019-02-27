@@ -1,7 +1,6 @@
 
 <section *ngIf="value">
   <!-- Ambito -->
-  <pre>{{value | json }}</pre>
   <div class="row" *ngFor="let ambit of value.ambit">
     <ng-container *ngIf="ambit?.ambit?.descripcio?.toUpperCase() !== 'GLOBALITAT DEL CAS'">
       <div class="col-12">
