@@ -1,6 +1,6 @@
 /* Diagnosis */
 import { Professional } from "../../home/models/professional";
-import {Evaluacions, Valoracio} from "../../files";
+import {Evaluacions} from "../../files";
 
 /* Diagnosis */
 export class Diagnosis {
@@ -10,6 +10,13 @@ export class Diagnosis {
   observacions: string;         // Observaciones
   professional: Professional;   // Profesional
   valoracio: Valoracio = new Valoracio();         // Valoración
+}
+export class Valoracio {
+  data: string;
+  evaluacions: Evaluacions [] = [];
+  id: number;
+  factors: number;
+  total: number;
 }
 
 /* Ambit */

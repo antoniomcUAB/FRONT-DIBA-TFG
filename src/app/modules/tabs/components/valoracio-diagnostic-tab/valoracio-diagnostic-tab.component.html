@@ -1,7 +1,7 @@
 
 <section *ngIf="value">
   <!-- Ambito -->
-  <div class="row" *ngFor="let ambit of value.ambit">
+  <div class="row m-3" *ngFor="let ambit of value.ambit">
     <ng-container *ngIf="ambit?.ambit?.descripcio?.toUpperCase() !== 'GLOBALITAT DEL CAS'">
       <div class="col-12">
         <div class="card">
@@ -43,35 +43,43 @@
                   </ng-container>
                   </tbody>
                 </table>
-                <!-- Result Automatic Evaluations -->
-                <!--<table class="table table-borderless" *ngFor="let evaluacion of value.valoracio.evaluacions">-->
-                  <!--<ng-container *ngIf="evaluacion.ambit.id === ambit.id">-->
-                    <!--<tbody>-->
-                    <!--&lt;!&ndash; Result Automatic Evaluations &ndash;&gt;-->
-                    <!--<tr>-->
-                      <!--<td class="text-right">{{ "OBS.risc-auto" | translate }}</td>-->
-                      <!--<td class="text-center" [ngClass]="{'warning' : evaluacion.risc?.descripcio.toUpperCase() === 'RISC',-->
-                                                            <!--'danger' : evaluacion.risc?.descripcio.toUpperCase() === 'ALT RISC',-->
-                                                            <!--'success' : evaluacion.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',-->
-                                                            <!--'info' : evaluacion.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">-->
-                        <!--{{evaluacion.risc.descripcio}}-->
-                      <!--</td>-->
-                    <!--</tr>-->
-                    <!--&lt;!&ndash;/ Result Automatic Evaluations &ndash;&gt;-->
-                    <!--&lt;!&ndash; Result Professsional Evaluations &ndash;&gt;-->
-                    <!--<tr *ngIf="evaluacion.riscProfessional">-->
-                      <!--<td class="text-right">{{ "OBS.risc-pro" | translate }}</td>-->
-                      <!--<td class="text-center" [ngClass]="{'warning' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'RISC',-->
-                                                            <!--'danger' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'ALT RISC',-->
-                                                            <!--'success' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'VULNERABILITAT',-->
-                                                            <!--'info' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">-->
-                        <!--{{evaluacion.riscProfessional?.descripcio}}-->
-                      <!--</td>-->
-                    <!--</tr>-->
-                    <!--&lt;!&ndash;/ Result Professsional Evaluations &ndash;&gt;-->
-                    <!--</tbody>-->
-                  <!--</ng-container>-->
-                <!--</table>-->
+                 <!--Result Automatic Evaluations -->
+                <table class="table table-borderless" *ngFor="let evaluacion of value.valoracio.evaluacions; let e = index;">
+                  <ng-container *ngIf="evaluacion && evaluacion.ambit.ambit.id === ambit.ambit.id">
+                    <tbody>
+                    <!--Result Automatic Evaluations -->
+                    <tr class="mr-3">
+                      <td class="text-right">{{ "OBS.risc-auto" | translate }}</td>
+                      <td class="text-center" [ngClass]="{'warning' : evaluacion.risc?.descripcio?.toUpperCase() === 'RISC',
+                                                            'danger' : evaluacion.risc?.descripcio?.toUpperCase() === 'ALT RISC',
+                                                            'success' : evaluacion.risc?.descripcio?.toUpperCase() === 'VULNERABILITAT',
+                                                            'info' : evaluacion.risc?.descripcio?.toUpperCase() === 'SENSE VALORACI&#211;' }">
+                        {{evaluacion?.risc?.descripcio}}
+                      </td>
+                    </tr>
+                    <!--/ Result Automatic Evaluations -->
+                    <!--Result Professsional Evaluations -->
+                    <tr>
+                      <td class="text-right">{{ "OBS.risc-pro" | translate }}</td>
+                      <td class="text-center">
+                        <select class="form-control risc-pro"
+                                id="t2person"
+                                name="persona"
+                                [ngModel]="evaluacion?.riscProfesional?.descripcio"
+                                (ngModelChange)="evaluacion.riscProfesional.descripcio = $event"
+                                [ngClass]="{'warning' : evaluacion?.riscProfesional?.descripcio?.toUpperCase() === 'RISC',
+                                            'danger' : evaluacion?.riscProfesional?.descripcio?.toUpperCase() === 'ALT RISC',
+                                            'success' : evaluacion?.riscProfesional?.descripcio?.toUpperCase() === 'VULNERABILITAT',
+                                            'info' : evaluacion?.riscProfesional?.descripcio?.toUpperCase() === 'SENSE VALORACI&#211;' }">
+                          <option *ngFor="let risc of riscos"> {{risc.descripcio}} </option>
+                        </select>
+
+                      </td>
+                    </tr>
+                    <!--/ Result Professsional Evaluations -->
+                    </tbody>
+                  </ng-container>
+                </table>
               </div>
               <div class="col-6">
                 <table class="table table-bordered">
@@ -119,39 +127,10 @@
         </div>
       </div>
     </ng-container>
-    <!--<table class="table table-borderless" *ngFor="let evaluacion of value.valoracio">-->
-      <!--<ng-container *ngIf="evaluacion && evaluacion.ambit.id === ambit.id">-->
-        <!--<tbody>-->
-        <!--&lt;!&ndash; Result Automatic Evaluations &ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-          <!--&lt;!&ndash;<td class="text-right">{{ "OBS.risc-auto" | translate }}</td>&ndash;&gt;-->
-          <!--&lt;!&ndash;<td class="text-center" [ngClass]="{'warning' : evaluacion.risc?.descripcio.toUpperCase() === 'RISC',&ndash;&gt;-->
-                                                            <!--&lt;!&ndash;'danger' : evaluacion.risc?.descripcio.toUpperCase() === 'ALT RISC',&ndash;&gt;-->
-                                                            <!--&lt;!&ndash;'success' : evaluacion.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',&ndash;&gt;-->
-                                                            <!--&lt;!&ndash;'info' : evaluacion.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">&ndash;&gt;-->
-            <!--&lt;!&ndash;{{evaluacion.risc?.descripcio}}&ndash;&gt;-->
-          <!--&lt;!&ndash;</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;/ Result Automatic Evaluations &ndash;&gt;-->
-        <!--&lt;!&ndash; Result Professsional Evaluations &ndash;&gt;-->
-        <!--&lt;!&ndash;<tr *ngIf="evaluacion.evaluacions.riscProfesional">&ndash;&gt;-->
-          <!--&lt;!&ndash;<td class="text-right">{{ "OBS.risc-pro" | translate }}</td>&ndash;&gt;-->
-          <!--&lt;!&ndash;<td class="text-center" [ngClass]="{'warning' : evaluacion.evaluacions?.riscProfesional?.descripcio.toUpperCase() === 'RISC',&ndash;&gt;-->
-                                                            <!--&lt;!&ndash;'danger' : evaluacion.evaluacions?.riscProfesional?.descripcio.toUpperCase() === 'ALT RISC',&ndash;&gt;-->
-                                                            <!--&lt;!&ndash;'success' : evaluacion.evaluacions?.riscProfesional?.descripcio.toUpperCase() === 'VULNERABILITAT',&ndash;&gt;-->
-                                                            <!--&lt;!&ndash;'info' : evaluacion.evaluacions?.riscProfesional?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">&ndash;&gt;-->
-            <!--&lt;!&ndash;{{evaluacion.evaluacions?.riscProfesional?.descripcio}}&ndash;&gt;-->
-          <!--&lt;!&ndash;</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;/ Result Professsional Evaluations &ndash;&gt;-->
-        <!--</tbody>-->
-      <!--</ng-container>-->
-    <!--</table>-->
   </div>
 
-
   <!-- Global -->
-  <div class="row" *ngFor="let global of value.ambit">
+  <div class="row m-3" *ngFor="let global of value.ambit">
     <ng-container *ngIf="global.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'">
       <div class="col-12">
         <div class="card">
@@ -204,7 +183,7 @@
   <!-- Global -->
 
   <!-- Return to Back -->
-  <div class="row">
+  <div class="row my-3">
     <div class="col-12 mb-3">
       <button type="button" class="float-right btn btn-primary no-print" (click)="validationDiagnostic()" > {{ "FORM.validation" | translate }}</button>
     </div>

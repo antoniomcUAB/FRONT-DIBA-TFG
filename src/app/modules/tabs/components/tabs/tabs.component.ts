@@ -155,10 +155,11 @@ export class TabsComponent {
     let open = false;
     for (const ambit of this.diagnostico.ambit) {
       if (ambit.ambit.descripcio === ambitName) {
-
         for (const entorn of ambit.entorn) {
           if (entorn.pregunta.length > 0) {
-            if (entorn.descripcio === 'Entorn habitatge') {
+            if (entorn.descripcio === 'Autonomia') {
+              open = true;
+            }if (entorn.descripcio === 'Entorn habitatge') {
               this.entornsMaterial.house = true;
               open = true;
             }

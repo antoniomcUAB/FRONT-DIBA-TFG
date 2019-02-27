@@ -4,8 +4,8 @@ import {Observable} from 'rxjs';
 
 import {Injectable} from "@angular/core";
 import {Ambits} from '../models/tab-class-form';
-import {Ambit, Contextualitzacio, Diagnosis, Factor, Frequencia, Gravetat, Preguntas, TipusPersona} from "../models/diagnostic";
-import {Persona, Valoracio} from "../../files";
+import {Ambit, Contextualitzacio, Diagnosis, Factor, Frequencia, Gravetat, Preguntas, Risc, Valoracio} from "../models/diagnostic";
+import {Persona} from "../../files";
 import {map} from "rxjs/operators";
 
 
@@ -25,6 +25,9 @@ export class TabsFormService extends GlobalService {
   getValuesFrequencia( ): Observable<Frequencia[]> {
     return this._http.get<Frequencia[]>(`${this.apiURL}/dsdiba/frequencia/`);
   }
+  getRiscos( ): Observable<Risc[]> {
+    return this._http.get<Risc[]>(`${this.apiURL}/dsdiba/risc/`);
+  }
   getPersonasOfDiagnostic( ): Observable<Persona[]> {
     return this._http.get<Persona[]>(`${this.apiURL}/dsdiba/frequencia/`);
   }
@@ -34,10 +37,8 @@ export class TabsFormService extends GlobalService {
   getDiagnostic(idDiagnostico: number ): Observable<Diagnosis> {
     return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/${idDiagnostico}`).pipe(
       map(data => {
-        console.log("este es el diagnostico->");
-        console.log(data);
-        if (!data.id) { data = new Diagnosis() }
-        if (!data.valoracio) { data.valoracio = new Valoracio()}
+        if (!data.id) { data = new Diagnosis()}
+        if (!data.valoracio) { data.valoracio = new Valoracio(); data.valoracio.evaluacions = []}
         return data;
       })
     );
@@ -70,6 +71,7 @@ export class TabsFormService extends GlobalService {
   putValidationDiagnostic( idExpedient: number , diagnostic: Diagnosis): Observable<Diagnosis> {
   return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/diagnostic/valorar/${diagnostic.id}`).pipe(
     map( data => {
+      console.log(data);
       return data;
       })
   );
