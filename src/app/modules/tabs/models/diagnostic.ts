@@ -13,6 +13,7 @@ export class Diagnosis {
 }
 export class Valoracio {
   data: string;
+  confirmat: boolean;
   evaluacions: Evaluacions [] = [];
   id: number;
   factors: number;

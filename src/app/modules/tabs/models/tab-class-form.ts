@@ -1,5 +1,6 @@
 export class Ambits {
   ambits: Ambit [] = [];
+  factorEconomic: Factor[] = [];
 }
 
 export class Ambit {
@@ -7,8 +8,6 @@ export class Ambit {
   id: string;
   entorns: Entorns [] = [];
   factors_context: FactorsContext[] = [];
-  factorEconomic: Factor[] = [];
-
 }
 export class Factor {
   id: number;

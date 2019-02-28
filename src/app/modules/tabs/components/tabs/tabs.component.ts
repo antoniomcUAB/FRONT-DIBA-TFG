@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {FilesDetailService} from "../../../files/services/file-detail.service";
 import {TabsFormService} from "../../services/tabsForm.service";
 import {NgbTabChangeEvent, NgbTabset} from '@ng-bootstrap/ng-bootstrap';
+import {ValoracioDiagnosticTabComponent} from "../valoracio-diagnostic-tab/valoracio-diagnostic-tab.component";
 
 const MAX_N_TABS = 5;
 
@@ -18,12 +19,12 @@ export class TabsComponent {
   @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional();
   @Input() entornsMaterial: EnvironmentMaterial = new EnvironmentMaterial();
   @ViewChild(NgbTabset) tab: NgbTabset;
+  @ViewChild(ValoracioDiagnosticTabComponent) valorcionCmp: ValoracioDiagnosticTabComponent;
   public tabsActivate: TabsDisabled = new TabsDisabled();
   public forceApear = false;
   public stay = false;
   public disapear = false;
   public index: string = '1';
-  public indexMaxActive: number = 1;
   public material: string = "material";
   public relacional: string = "relacional";
   public diagnostico: Diagnosis;
@@ -92,7 +93,6 @@ export class TabsComponent {
         break;
       case 'tab-preventchange5':
         this.tabsActivate.tabValoracioDiagnosticActivate = false;
-        console.log("entro en la valoracionDelDiagnosticoActivo");
         break;
     }
     setTimeout(_ => {

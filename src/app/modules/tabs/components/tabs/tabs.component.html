@@ -62,14 +62,14 @@
     </ng-template>
   </ngb-tab>
   <ngb-tab id="tab-preventchange5" [disabled]="tabsActivate.tabValoracioDiagnosticActivate" >
-    <ng-template ngbTabTitle > <p > Valoracio del diagnostic</p> </ng-template>
+    <ng-template ngbTabTitle > <p> Valoracio del diagnostic</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-valoracio-diagnostic-tab  [idExpedient]="expedientID" (before)="beforeTab()" (tabActivated)="tabsActivate.tabValoracioDiagnosticActivate = false" [(ngModel)]="diagnostico" [idDiagnostic]="diagnosisID"> </app-valoracio-diagnostic-tab>
+      <app-valoracio-diagnostic-tab  [idExpedient]="expedientID" (before)="beforeTab()" (tabActivated)="tabsActivate.tabValoracioDiagnosticActivate = false" [diagnostico]="diagnostico"  [idDiagnostic]="diagnosisID"> </app-valoracio-diagnostic-tab>
     </ng-template>
   </ngb-tab>
 
 
 
 </ngb-tabset>
-<pre>{{diagnostico | json}}</pre>
+<pre>{{diagnostico | json }}</pre>

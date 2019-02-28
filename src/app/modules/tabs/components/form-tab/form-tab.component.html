@@ -28,6 +28,7 @@
   </form>
 </ng-template>
 
+<!--Factores Economicos-->
 <ng-template #valoration let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id=""><span class="text-primary">La família/unitat conviència té dificultats per:</span></h4>
@@ -36,67 +37,13 @@
   <form>
     <div class="modal-body">
       <div class="form-group">
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description"><b>1.</b> Pagar les factures d'habitatge o serveis públics</span>
-        </label>
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description"><b>2</b>. Mantenir la llar adequadament calenta.</span>
-        </label>
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description"><b>3</b>. Assumir despeses inesperades.</span>
-        </label>
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description"><b>4</b>. Menjar carn o les proteïnes de forma regular.</span>
-        </label>
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description"><b>5</b>. Anar de vacances.</span>
-        </label>
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description"><b>6</b>. Disposar de cotxe.</span>
-        </label>
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description"><b>7</b>. Disposar de rentadora.</span>
-        </label>
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description"><b>8</b>. Disposar de connexió a internet.</span>
-        </label>
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description"><b>9</b>. Disposar de telèfon mòbil</span>
-        </label>
-      </div>
-    </div>
-    <div class="modal-header">
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description">  Existeix una xarxa familiar/relacional disposada a oferir suport econòmic?</span>
-        </label>
-        <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
-          <span class="custom-control-label"></span>
-          <span class="custom-control-description">  Les dificultats en l'àmbit econòmic són contïnuades i sense possiblitat de canvi o millora en el curt termini?</span>
-        </label>
+        <ng-template ngFor [ngForOf]="data.factorEconomic" let-economic let-x="index">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-label"></span>
+            <span class="custom-control-description"><b>{{x+1}}.</b> {{economic.descripcio}}</span>
+          </label>
+        </ng-template>
       </div>
     </div>
     <div class="modal-footer">
@@ -105,6 +52,7 @@
     </div>
   </form>
 </ng-template>
+<!--/ Factores Economicos -->
 
 <!--/ titulo -->
 <form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()" *ngIf="data && value">
