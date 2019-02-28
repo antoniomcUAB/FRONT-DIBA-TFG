@@ -6,7 +6,6 @@ import {
   EnvironmentRelacional,
   SelectorGravetat,
   FactorsContext,
-  Pregunta
 } from '../../models/tab-class-form';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
@@ -86,7 +85,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
 
   public clean(anterior?:boolean) {
     for (const ambit of this.value.ambit) {
-      if (ambit.descripcio === this.contextualitzacio) {
+      if (ambit.ambit.descripcio === this.contextualitzacio) {
         for (const entorn of ambit.entorn) {
           for (const pregunta of entorn.pregunta) {
             this.tabsService.DeletePregunta(pregunta.id).subscribe((result) => {
@@ -99,7 +98,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
         }
       }
    for (const ambit of this.value.ambit) {
-     if (ambit.descripcio === this.contextualitzacio) {
+     if (ambit.ambit.descripcio === this.contextualitzacio) {
        for (const context of ambit.contextualitzacio) {
          this.tabsService.DeletePreguntaContext(context.id).subscribe((result) => {
            this.reloadDiagnostico();

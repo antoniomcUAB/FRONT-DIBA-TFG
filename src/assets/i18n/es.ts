@@ -114,10 +114,10 @@ export let TRANSLATION = {
     'Gravetat':'Són les evidències presents en cada situació social que ens permeten discriminar l’existència o no de risc i, en el seu cas, la seva gravetat, en base a les conseqüències o danys que provoca en la persona o unitat familiar.\n' +
       '\n' +
       'La gravetat es divideix en un màxim de quatre nivells: sense gravetat, gravetat baixa, moderada o alta. Aquest nivells es presenten ordenats de menor a major risc. Per a algunes situacions no es considera la gravetat baixa.',
-   'Freqüència':'Són les evidències presents en cada situació social que ens permeten determinar la periodicitat amb què es donen els indicadors de risc, en termes de freqüència, en base a la seva repetició reiterada i a intervals de la situació.\n' +
+   'Frequencia':'Són les evidències presents en cada situació social que ens permeten determinar la periodicitat amb què es donen els indicadors de risc, en termes de freqüència, en base a la seva repetició reiterada i a intervals de la situació.\n' +
      '\n' +
      'Tenint en compte la periodicitat o el nombre de repeticions amb què es presenta un indicador de risc, la freqüència es divideix en tres nivells: ocasional/puntual, freqüent/reiterada o continua.',
-    'Factors de context':'Són aquelles característiques de l’individu i/o la seva unitat familiar i/o del seu entorn relacionades amb el cas i de la seva consciència, motivació i acceptació del problema/necessitat i de la intervenció, i que poden augmentar, inhibir, reduir o atenuar el risc en l’àmbit i/o en la situació social global. Poden ser, per tant, de risc o protecció. S’han definit un total de 41 factors de context.\n' +
+    'Factorsdecontext':'Són aquelles característiques de l’individu i/o la seva unitat familiar i/o del seu entorn relacionades amb el cas i de la seva consciència, motivació i acceptació del problema/necessitat i de la intervenció, i que poden augmentar, inhibir, reduir o atenuar el risc en l’àmbit i/o en la situació social global. Poden ser, per tant, de risc o protecció. S’han definit un total de 41 factors de context.\n' +
       '\n' +
       'Una part d’ells són ponderats en funció del nombre de membres de la unitat familiar en els quals es dóna cada factor del context.'
 

@@ -186,7 +186,8 @@
               <div class="col-1">
                 <div class="col-12">
                   <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle"
-                                                                                 aria-hidden="true" [ngbPopover]=popContentSeverity
+
+                                                                                 aria-hidden="true" [ngbPopover] =  "'EMERGENTS.Gravetat' | translate "
                                                                                  placement="right"
                                                                                  triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
                   <select class="form-control" id="t2severity"
@@ -203,12 +204,11 @@
               </div>
               <!--/ Severity -->
               <!-- Frequencia -->
-              <ng-template #popContentFrequency></ng-template>
               <div class="col-1">
                 <div class="col-12">
                   <label for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle"
                                                                                    aria-hidden="true"
-                                                                                   [ngbPopover]=popContentFrequency
+                                                                                    [ngbPopover] =  "'EMERGENTS.Frequencia' | translate "
                                                                                    placement="right"
                                                                                    triggers="mouseenter:mouseleave"
                                                                                    [popoverTitle]=" 'TABLE.severity' | translate  "></i></label>
@@ -329,7 +329,7 @@
 
       </ng-template>
       <div class="form-group row col-12 px-3">
-        <ng-template [ngIf]="(ambit.descripcio === 'MATERIAL I INSTRUMENTAL' ) &&  (groupMaterial.work || groupMaterial.economic || groupMaterial.house)">
+        <ng-template [ngIf]="(contextualitzacio === 'MATERIAL I INSTRUMENTAL' && ambit.descripcio === 'MATERIAL I INSTRUMENTAL')">
           <ng-template [ngIf]="(!groupMaterial.work)">
             <button class="btn btn-primary mr-3"(click)="groupMaterial.work = true" > <i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn de treball </button>
           </ng-template>
@@ -342,7 +342,7 @@
         </ng-template>
       </div>
       <div class="form-group row col-12 px-3">
-        <ng-template [ngIf]="(ambit.descripcio === 'RELACIONAL' ) &&  (groupRelacional.school || groupRelacional.family || groupRelacional.social)">
+        <ng-template [ngIf]="(contextualitzacio === 'RELACIONAL' && ambit.descripcio === 'RELACIONAL')">
           <ng-template [ngIf]="(!groupRelacional.social)">
             <button class="btn btn-primary mr-3"(click)="groupRelacional.social = true" > <i class="fa fa-plus" aria-hidden="true"></i> Afegir entorn social </button>
           </ng-template>
@@ -357,7 +357,12 @@
     </ng-template>
     </div>
     <div class="p-3 bg-grey-500 mt-3">
-      <h5 class="text-white">Contextualització</h5>
+      <h5 class="text-white">Contextualització <i class="fa fa-question-circle"
+                                                 aria-hidden="true"
+                                                 [ngbPopover] =  "'EMERGENTS.Factorsdecontext' | translate "
+                                                 placement="right"
+                                                 triggers="mouseenter:mouseleave"
+                                                 popoverTitle=" Contextualització "></i> </h5>
     </div>
 
     <div class="form-group row bg-grey-300 m-0 mt-3 py-2 mb-0">
