@@ -83,11 +83,12 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     this.endForm.emit();
   }
 
-  public clean(anterior?:boolean) {
+  public clean() {
     for (const ambit of this.value.ambit) {
       if (ambit.ambit.descripcio === this.contextualitzacio) {
         for (const entorn of ambit.entorn) {
           for (const pregunta of entorn.pregunta) {
+            console.log("sdsdsdsd");
             this.tabsService.DeletePregunta(pregunta.id).subscribe((result) => {
               this.reloadDiagnostico();
             }, (err) => {
