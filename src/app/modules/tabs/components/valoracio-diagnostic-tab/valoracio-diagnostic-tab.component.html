@@ -76,6 +76,13 @@
 
                       </td>
                     </tr>
+                    <tr *ngIf=" evaluacion?.riscProfesional?.descripcio && evaluacion?.riscProfesional?.descripcio !== 'Sense Valoració'">
+                      <td class="text-right">Justificació risc professional</td>
+                      <td class="text-center">
+                        <textarea class="form-control" type="text" id="fileRiscProfesionalObservation" ></textarea>
+
+                      </td>
+                    </tr>
                     <!--/ Result Professsional Evaluations -->
                     </tbody>
                   </ng-container>
