@@ -3,6 +3,7 @@ import {CustomInput} from "../../../../shared";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Diagnosis, Risc} from "../../models/diagnostic";
 import {TabsFormService} from "../../services/tabsForm.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-valoracio-diagnostic-tab',
@@ -30,7 +31,8 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
 
   @Input() idExpedient: number;
   public riscos: Risc [] = [];
-  constructor(private tabsService: TabsFormService){
+  constructor(private tabsService: TabsFormService,
+              private _router: Router,){
    super();
 
   }
@@ -58,6 +60,8 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
     }, (err) => {
       console.log(err);
     });
+    this._router.navigate(['/observations', {'id': this.idDiagnostic, 'date': this.value.data }]);
+
   }
   public getRiscos() {
     this.tabsService.getRiscos().subscribe((result) => {
