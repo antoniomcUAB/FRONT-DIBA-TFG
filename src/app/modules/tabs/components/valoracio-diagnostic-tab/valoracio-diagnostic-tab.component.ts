@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CustomInput} from "../../../../shared";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
-import {Diagnosis, Risc} from "../../models/diagnostic";
+import {Ambit, Diagnosis, Risc} from "../../models/diagnostic";
 import {TabsFormService} from "../../services/tabsForm.service";
 import {Router} from "@angular/router";
+import {Ambits} from "../../models/tab-class-form";
+import {Evaluacions} from "../../../files";
 
 @Component({
   selector: 'app-valoracio-diagnostic-tab',
@@ -53,6 +55,27 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
     }, (err) => {
       console.log(err);
     });
+  }
+  public getRisc(descripcioRisc:string , evaluacio:Evaluacions) {
+    this.tabsService.getRiscos().subscribe((result) => {
+      for (const risc of result) {
+        console.log(risc)
+        if (risc.descripcio === descripcioRisc) {
+          evaluacio.riscProfessional = risc;
+        }
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
+  public setRisc(risc: Risc , ambit: Ambit , descripcio: string) {
+
+    for (const evaluacio of this.value.valoracio.evaluacions) {
+      if (evaluacio.ambit.ambit.id === ambit.ambit.id) {
+        evaluacio.riscProfessional = new Risc();
+        this.getRisc(descripcio , evaluacio);
+      }
+    }
   }
   public finishDiagnostic() {
     this.value.valoracio.confirmat = true;

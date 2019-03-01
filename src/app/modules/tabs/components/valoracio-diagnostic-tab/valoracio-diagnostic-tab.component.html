@@ -65,18 +65,18 @@
                         <select class="form-control risc-pro"
                                 id="t2person"
                                 name="persona"
-                                [ngModel]="evaluacion?.riscProfesional?.descripcio"
-                                (ngModelChange)="evaluacion.riscProfesional.descripcio = $event"
-                                [ngClass]="{'warning' : evaluacion?.riscProfesional?.descripcio?.toUpperCase() === 'RISC',
-                                            'danger' : evaluacion?.riscProfesional?.descripcio?.toUpperCase() === 'ALT RISC',
-                                            'success' : evaluacion?.riscProfesional?.descripcio?.toUpperCase() === 'VULNERABILITAT',
-                                            'info' : evaluacion?.riscProfesional?.descripcio?.toUpperCase() === 'SENSE VALORACI&#211;' }">
+                                [ngModel]="evaluacion?.riscProfessional?.descripcio"
+                                (ngModelChange)="setRisc(evaluacion.riscProfessional, ambit , $event)"
+                                [ngClass]="{'warning' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'RISC',
+                                            'danger' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'ALT RISC',
+                                            'success' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'VULNERABILITAT',
+                                            'info' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'SENSE VALORACI&#211;' }">
                           <option *ngFor="let risc of riscos"> {{risc.descripcio}} </option>
                         </select>
 
                       </td>
                     </tr>
-                    <tr *ngIf=" evaluacion?.riscProfesional?.descripcio && evaluacion?.riscProfesional?.descripcio !== 'Sense Valoració'">
+                    <tr *ngIf=" evaluacion?.riscProfessional?.descripcio && evaluacion?.riscProfessional?.descripcio !== 'Sense Valoració'">
                       <td class="text-right">Justificació risc professional</td>
                       <td class="text-center">
                         <textarea class="form-control" type="text" id="fileRiscProfesionalObservation" ></textarea>

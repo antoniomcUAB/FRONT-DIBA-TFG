@@ -6,7 +6,7 @@ import {Injectable} from "@angular/core";
 import {Ambits} from '../models/tab-class-form';
 import { Contextualitzacio, Diagnosis, Factor, Frequencia, Gravetat, Preguntas, Risc, Valoracio} from "../models/diagnostic";
 import {Persona} from "../../files";
-import {map} from "rxjs/operators";
+import { map} from "rxjs/operators";
 
 
 @Injectable()
@@ -62,7 +62,6 @@ export class TabsFormService extends GlobalService {
   );
   }
   putContextQuestion( factorPregunta: Factor, idDiagnostico: number , contextualizacion: Contextualitzacio): Observable<Contextualitzacio> {
-    console.log("PutContextQuestion");
   return this._http.put<Contextualitzacio>(`${this.apiURL}/dsdiba/api/context/${idDiagnostico}/${factorPregunta.id}`, contextualizacion).pipe(
     map( data => {
       return data;
@@ -81,11 +80,6 @@ export class TabsFormService extends GlobalService {
     map( data => {
       if (!data.valoracio.evaluacions) {
         data.valoracio.evaluacions = [];
-      }
-      for (const val of data.valoracio.evaluacions) {
-        if(!val.riscProfesional) {
-          val.riscProfesional = new Risc();
-        }
       }
       return data;
       })

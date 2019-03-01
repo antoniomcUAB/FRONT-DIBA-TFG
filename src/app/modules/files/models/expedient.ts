@@ -101,7 +101,7 @@ export class Evaluacions {
   id: number;
   justificacion: string;
   risc: Risc;
-  riscProfesional: Risc = new Risc();
+  riscProfessional: Risc = new Risc();
 }
 
 /* Contextualizacion */
