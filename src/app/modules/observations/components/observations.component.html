@@ -75,6 +75,14 @@
                         </td>
                       </tr>
                       <!--/ Result Professsional Evaluations -->
+                      <!-- Result Professsional Justification -->
+                      <tr *ngIf="evaluacion.justificacion">
+                        <td class="text-right">{{ "OBS.risc-pro-justify" | translate }}</td>
+                        <td>
+                          <textarea class="form-control" type="text" value="{{ evaluacion.justificacion }}" id="fileObservation" disabled="disabled"></textarea>
+                        </td>
+                      </tr>
+                      <!--/ Result Professsional Justification -->
                     </tbody>
                   </ng-container>
                 </table>
@@ -172,6 +180,45 @@
                 <textarea class="form-control" type="text" value="{{ global.observacions }}" id="fileObservationGlobal" disabled="disabled"></textarea>
               </div>
             </div>
+            <div class="row">
+              <!-- Result Automatic Evaluations -->
+              <table class="table table-borderless" *ngFor="let evaluacion of evaluations">
+                <ng-container *ngIf="evaluacion.ambit.id === global.id">
+                  <tbody>
+                  <!-- Result Automatic Evaluations -->
+                  <tr>
+                    <td class="text-right">{{ "OBS.risc-auto" | translate }}</td>
+                    <td class="text-center" [ngClass]="{'warning' : evaluacion.risc?.descripcio.toUpperCase() === 'RISC',
+                                                            'danger' : evaluacion.risc?.descripcio.toUpperCase() === 'ALT RISC',
+                                                            'success' : evaluacion.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
+                                                            'info' : evaluacion.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
+                      {{evaluacion.risc.descripcio}}
+                    </td>
+                  </tr>
+                  <!--/ Result Automatic Evaluations -->
+                  <!-- Result Professsional Evaluations -->
+                  <tr *ngIf="evaluacion.riscProfessional">
+                    <td class="text-right">{{ "OBS.risc-pro" | translate }}</td>
+                    <td class="text-center" [ngClass]="{'warning' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'RISC',
+                                                            'danger' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'ALT RISC',
+                                                            'success' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'VULNERABILITAT',
+                                                            'info' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
+                      {{evaluacion.riscProfessional?.descripcio}}
+                    </td>
+                  </tr>
+                  <!--/ Result Professsional Evaluations -->
+                  <!-- Result Professsional Justification -->
+                  <tr *ngIf="evaluacion.justificacion">
+                    <td class="text-right">{{ "OBS.risc-pro-justify" | translate }}</td>
+                    <td>
+                      <textarea class="form-control" type="text" value="{{ evaluacion.justificacion }}" id="fileObservationGlobal" disabled="disabled"></textarea>
+                    </td>
+                  </tr>
+                  <!--/ Result Professsional Justification -->
+                  </tbody>
+                </ng-container>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -182,7 +229,7 @@
   <!-- Return to Back -->
   <div class="row m-3">
     <div class="col-12 mb-3">
-      <button type="button" class="float-right btn btn-primary no-print" (click)="backClicked()"><i class="fa fa-chevron-left"></i> {{ "FORM.go-back" | translate }}</button>
+      <button type="button" class="float-right btn btn-primary no-print" [routerLink]="['/home']"><i class="fa fa-chevron-left"></i> {{ "FORM.go-back" | translate }}</button>
     </div>
   </div>
   <!--/ Return to Back -->

@@ -99,6 +99,7 @@ export class Valoracio {
 export class Evaluacions {
   ambit: Ambit;
   id: number;
+  justificacion: string;
   risc: Risc;
   riscProfesional: Risc = new Risc();
 }

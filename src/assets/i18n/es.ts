@@ -104,7 +104,8 @@ export let TRANSLATION = {
     'risc-pro'      : 'Risc segons professional',
     'factor'        : 'Factor Contextualització',
     'no-factor'     : 'No hi ha Factor de contextualització',
-    'goback'        : 'Tornar'
+    'goback'        : 'Tornar',
+    'risc-pro-justify' : 'Justificació risc professional'
   },
 
   'EMERGENTS':{
