@@ -96,6 +96,32 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
       console.log(err);
     });
   }
+  public riscProfesionalWithoutValidation() {
+    let desactivated = false;
+    for (const evaluacio of this.value.valoracio.evaluacions) {
+      if (!evaluacio.riscProfessional && this.noRiegoSiPreguntas(evaluacio)) {
+        desactivated = true;
+      }
+      if (evaluacio.riscProfessional) {
+        if (evaluacio.riscProfessional.descripcio !== 'Sense Valoració' && !evaluacio.justificacio) {
+          desactivated = true;
+        }
+      }
+    }
+    return desactivated;
+  }
+  public noRiegoSiPreguntas(evaluacio: Evaluacions) {
+    for (const ambit of this.value.ambit) {
+      if (ambit.ambit.id === evaluacio.ambit.ambit.id) {
+        for (const entorn of ambit.entorn) {
+          if (entorn.pregunta.length > 0) {
+            return true;
+            }
+          }
+        }
+      }
+    return false;
+    }
 
 
 }
