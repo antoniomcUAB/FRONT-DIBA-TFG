@@ -196,7 +196,6 @@
                       </form>
                     </ng-template>
                     <!--/ Modal -->
-
                   </td>
               </ng-template>
             </app-table-list>
@@ -207,12 +206,12 @@
         <div class="col-12 text-center pt-4 pb-3">
           <button type="button"
                   class="btn btn-primary btn-large"
-                  (click)="openModalNewMember(content)">
+                  (click)="openModalNewMember(newMember)">
             {{ "TABLE.newMember" | translate }}
           </button>
 
           <!-- Modal New Member -->
-          <ng-template #content let-modal>
+          <ng-template #newMember let-modal>
             <div class="modal-header">
               <h4 class="modal-title"
                   id="modal-register">
@@ -308,7 +307,15 @@
                 <button type="submit"
                         class="btn btn-outline-dark"
                         [disabled]="FormCreateMember.invalid"
+                        *ngIf="!member.referencia"
                         (click)="createMember(member); modal.close('Save click')">
+                  {{ "FORM.save" | translate }}
+                </button>
+                <button type="submit"
+                        class="btn btn-outline-dark"
+                        [disabled]="FormCreateMember.invalid"
+                        *ngIf="member.referencia"
+                        (click)="open(unsuscription); modal.close('Save click')">
                   {{ "FORM.save" | translate }}
                 </button>
                 <button type="button"
@@ -321,6 +328,40 @@
             </form>
           </ng-template>
           <!--/ Modal -->
+          <!-- Modal Confirmation Unsuscription Member Ref -->
+          <ng-template #unsuscription let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title"
+                  id="modal-unsuscription">
+                          <span class="text-primary">
+                            {{ "TABLE.unsuscription" | translate }}
+                          </span>
+              </h4>
+              <button type="button"
+                      class="close bg-primary text-white"
+                      aria-label="Close"
+                      (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+              <p class="mt-3">{{ "TABLE.doYouWantUnsuscription" | translate }}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button"
+                      class="btn btn-outline-primary btn-large"
+                      (click)="createMember(member); modal.close('Save click')" >
+                {{ "TABLE.yes" | translate }}
+              </button>
+              <button type="button"
+                      class="btn btn-primary btn-large"
+                      aria-label="Close"
+                      (click)="modal.dismiss('Cross click')">
+                {{ "TABLE.no" | translate }}
+              </button>
+            </div>
+          </ng-template>
+          <!--/ Modal Confirmation Unsuscription Member Ref -->
 
         </div>
       </div>
@@ -393,18 +434,53 @@
           </div>
         </div>
       </div>
-
       <!--/ Table Files Valoraciones -->
-      <div class="form-group row">
+
+      <!-- Create Diagnosis -->
+      <div class="form-group row mt-4">
         <div class="col-12 text-center pt-4 pb-3">
           <button type="button"
                   class="btn btn-primary btn-large"
-                  (click)="createDiagnosis()"
+                  (click)="open(confirmNewDiagnosis)"
                   [disabled]="expedient.persona.length === 0">
             {{ "FORM.newDiagnosis" | translate }}
           </button>
         </div>
       </div>
+        <!-- Modal Confirmation New Diagnosis -->
+        <ng-template #confirmNewDiagnosis let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title"
+                id="modal-diagnosis">
+              <span class="text-primary">
+                {{ "TABLE.createDiagnosis" | translate }}
+              </span>
+            </h4>
+            <button type="button"
+                    class="close bg-primary text-white"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <p class="mt-3">{{ "TABLE.doYouWantCreateDiagnosis" | translate }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button"
+                    class="btn btn-outline-primary btn-large"
+                    (click)="createDiagnosis(); modal.dismiss('Cross click')" >
+              {{ "TABLE.yes" | translate }}
+            </button>
+            <button type="button"
+                    class="btn btn-primary btn-large"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')">
+              {{ "TABLE.no" | translate }}
+          </button>
+          </div>
+        </ng-template>
+        <!--/ Modal Confirmation New Diagnosis -->
     </div>
   </div>
 </section>
