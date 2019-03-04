@@ -66,6 +66,7 @@
                         <select class="form-control risc-pro"
                                 id="t2person"
                                 name="persona{{i}}"
+                                required="true"
                                 [ngModel]="evaluacion?.riscProfessional?.descripcio"
                                 (ngModelChange)="setRisc(evaluacion.riscProfessional, ambit , $event)"
                                 [ngClass]="{'warning' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'RISC',
