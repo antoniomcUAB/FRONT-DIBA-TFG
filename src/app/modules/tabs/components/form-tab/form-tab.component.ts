@@ -18,7 +18,7 @@ import {Persona} from "../../../files";
 @Component({
   selector: 'app-form-tab',
   templateUrl: './form-tab.component.html',
-  styleUrls: ['./form-tab.component.scss'],
+  styleUrls: ['./form-tab.component.css'],
   providers: [
     {provide: NG_VALUE_ACCESSOR, useExisting: FormTabComponent, multi: true}
   ]
@@ -177,7 +177,6 @@ export class FormTabComponent extends CustomInput implements OnInit  {
             if (this.value.ambit[i].ambit.id === ambit.id) {
               for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
                 if (this.value.ambit[i].entorn[x].id === entorn.id) {
-                  console.log(result);
                   this.value.ambit[i].entorn[x].pregunta.push(result);
                 }
               }

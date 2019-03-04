@@ -1,7 +1,8 @@
 
 <section *ngIf="value">
+  <form #formTab="ngForm" ngNativeValidate (submit)="finishDiagnostic()">
   <!-- Ambito -->
-  <div class="row m-3" *ngFor="let ambit of value.ambit">
+  <div class="row m-3" *ngFor="let ambit of value.ambit;let i = index">
     <ng-container *ngIf="ambit?.ambit?.descripcio?.toUpperCase() !== 'GLOBALITAT DEL CAS'">
       <div class="col-12">
         <div class="card">
@@ -64,7 +65,7 @@
                       <td class="text-center">
                         <select class="form-control risc-pro"
                                 id="t2person"
-                                name="persona"
+                                name="persona{{i}}"
                                 [ngModel]="evaluacion?.riscProfessional?.descripcio"
                                 (ngModelChange)="setRisc(evaluacion.riscProfessional, ambit , $event)"
                                 [ngClass]="{'warning' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'RISC',
@@ -79,7 +80,7 @@
                     <tr *ngIf=" evaluacion?.riscProfessional?.descripcio && evaluacion?.riscProfessional?.descripcio !== 'Sense Valoració'">
                       <td class="text-right">Justificació risc professional</td>
                       <td class="text-center">
-                        <textarea class="form-control" type="text" id="fileRiscProfesionalObservation"
+                        <textarea required="true" class="form-control" type="text" id="fileRiscProfesionalObservation" name="b{{i}}"
                                   [ngModel]="evaluacion?.justificacio"
                                   (ngModelChange)="evaluacion.justificacio = $event">
 
@@ -129,7 +130,7 @@
                 <label for="fileObservationAutonomy" class="col-form-label">
                   <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
                 </label>
-                <textarea [ngModel]="ambit?.observacions" class="form-control" type="text"
+                <textarea [ngModel]="ambit?.observacions" class="form-control" type="text" name="ob{{i}}"
                           (ngModelChange)="ambit.observacions = $event" id="fileObservationAutonomy"></textarea>
               </div>
             </div>
@@ -196,10 +197,10 @@
   <!-- Return to Back -->
   <div class="row my-3">
     <div class="col-12 mb-3 text-center">
-
-      <button  class="align-middle btn btn-outline-primary no-print btn-lg" [disabled]="riscProfesionalWithoutValidation()" type="button" style="width: 20%;"  (click)="finishDiagnostic()" > {{ "FORM.validation" | translate }}</button>
-
+      <button  class="align-middle btn btn-outline-primary no-print btn-lg" type="button" style="width: 20%;"  type="submit"> {{ "FORM.validation" | translate }}</button>
     </div>
   </div>
+
+  </form>
   <!--/ Return to Back -->
 </section>

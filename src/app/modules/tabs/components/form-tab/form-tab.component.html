@@ -3,30 +3,11 @@
 <div class="form-group">
   <div class="p-3 mt-1">
     <h4 class="mt-1" *ngIf="this.contextualitzacio !== 'Globalitat del cas'">{{ "TABTITLE.titleAutonomia" | translate }} {{this.contextualitzacio | titlecase}}
-      <button type="button" class="float-right btn btn-outline-primary" (click)="emitBefore()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
     </h4>
     <h4 class="mt-1" *ngIf="this.contextualitzacio === 'Globalitat del cas'">{{ "TABTITLE.titleGloablitat" | translate }} {{this.contextualitzacio | titlecase}}
-      <button type="button" class="float-right btn btn-outline-primary" (click)="emitBefore()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Tornar pagina anterior</button>
     </h4>
   </div>
 </div>
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-unsubscribe"><span class="text-primary">ALERTA</span></h4>
-  </div>
-  <form>
-    <div class="modal-body">
-      <div class="form-group">
-        <label >Es perdran les dades introduides <span class="text-primary"></span></label>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" (click)="emitBefore(); modal.dismiss('Cross click');">Tornar pagina anterior</button>
-        <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
-      </div>
-    </div>
-  </form>
-</ng-template>
 
 <!--Factores Economicos-->
 <ng-template #valoration let-modal>
@@ -58,8 +39,8 @@
 <form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()" *ngIf="data && value">
   <div class="card-body pt-0">
     <ng-template [ngIf]="contextualitzacio.toLocaleUpperCase() !== 'GLOBALITAT DEL CAS'">
-    <div class="p-3 bg-grey-500">
-      <h5 class="text-white">Situació social</h5>
+    <div class="p-3 bg-primary border border-dark">
+      <h5 class="text-white ">Situació social</h5>
     </div>
     <div class="form-group row bg-grey-300 m-0 mt-3 py-2 mb-0">
     <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
@@ -112,7 +93,7 @@
                   <label for="t1person" >{{ "TABLE.person" | translate }} </label>
                   <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
-                      <!--<div *ngIf="getFirstPregunta(pregunta.id , ambit, entorn)" class="input-group-text " (click)="addPregunta(pregunta.social,pregunta.id) ">-->
+                      <!--<div *ngIf="getFirstPregunta(pregunta.id , ambit, entorn)" class="input-group-text " (click)="newPregunta(pregunta.social,pregunta.id) ">-->
                       <!--<i class="fa fa-user-plus " > </i>-->
                       <!--</div>-->
                     </div>
@@ -306,7 +287,7 @@
     </ng-template>
     </div>
     </ng-template>
-    <div class="p-3 bg-grey-500 mt-3">
+    <div class="p-3 bg-secondary mt-3 border border-dark">
       <h5 class="text-white">Contextualització <i class="fa fa-question-circle"
                                                  aria-hidden="true"
                                                  [ngbPopover] =  "'EMERGENTS.Factorsdecontext' | translate "
@@ -314,7 +295,7 @@
                                                  triggers="mouseenter:mouseleave"
                                                  popoverTitle=" Contextualització "></i> </h5>
     </div>
-    <div class="form-group row bg-grey-300 m-0 mt-3 py-2 mb-0">
+    <div class="form-group row bg-grey-300 border m-0 mt-3 py-2 mb-0">
       <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
       <ng-template ngFor [ngForOf]="ambit.factors_context" let-cont let-c="index">
           <ng-template [ngIf]="cont.ambit.descripcio === contextualitzacio">
@@ -351,6 +332,7 @@
               <div class="col-12">
                 <label for="t1person">{{ "TABLE.person" | translate }} </label>
                 <select class="form-control" id="t1person" name="personas{{c}}"
+                        [required]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
                         [value]="cleanSelects"
                         [disabled]="!getFirtsContexto(cont.id , ambit , cont )?.membreUnic || getFirtsContexto(cont.id , ambit , cont )?.mesUc"
                         [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.persona?.tipusPersona?.descripcio"
