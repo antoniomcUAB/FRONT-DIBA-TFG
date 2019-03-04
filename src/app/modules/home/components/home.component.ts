@@ -10,7 +10,7 @@ import { Expedient } from "../../files";
 /* Service */
 import { HomeService } from '../services/home.service';
 /* Constants */
-import { alphabetic, digit } from './constants';
+import {digit } from './constants';
 
 @Component({
   selector: 'app-home',

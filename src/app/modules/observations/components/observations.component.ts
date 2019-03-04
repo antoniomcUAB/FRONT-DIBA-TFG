@@ -12,8 +12,8 @@ import {Diagnosis, Evaluacions, Ambit} from "../../files";
 })
 export class ObservationsComponent {
 
-  public id: number;
-  public date: string;
+  public id: number; /* Id del Diagnostico*/
+  public date: string; /*Date del Diagnostico */
 
   public diagnosis: Diagnosis;
   public ambits: Ambit;
@@ -24,14 +24,13 @@ export class ObservationsComponent {
               private _service: ObservationsService,
               private _translateService: TranslateService) {
 
-    this.id = this._route.snapshot.params['id'];
-    this.date = this._route.snapshot.params['date'];
+    this.id = this._route.snapshot.params['id']; /*Obtenemos el id del diagnostico*/
+    this.date = this._route.snapshot.params['date']; /*Obtenemos la fecha del diagnostico*/
 
     /* Get Last version Model */
     this.getObservations(this.id);
   }
 
-  /** GET PROFESSIONAL DATA **/
   getObservations(id: number) {
     this._service.getDetailObservations(id).subscribe( (data: Diagnosis) => {
       this.diagnosis = data;

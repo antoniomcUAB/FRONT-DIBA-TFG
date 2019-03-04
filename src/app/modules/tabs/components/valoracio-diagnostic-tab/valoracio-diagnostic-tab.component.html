@@ -79,7 +79,11 @@
                     <tr *ngIf=" evaluacion?.riscProfessional?.descripcio && evaluacion?.riscProfessional?.descripcio !== 'Sense Valoració'">
                       <td class="text-right">Justificació risc professional</td>
                       <td class="text-center">
-                        <textarea class="form-control" type="text" id="fileRiscProfesionalObservation" ></textarea>
+                        <textarea class="form-control" type="text" id="fileRiscProfesionalObservation"
+                                  [ngModel]="evaluacion?.justificacio"
+                                  (ngModelChange)="evaluacion.justificacio = $event">
+
+                        </textarea>
 
                       </td>
                     </tr>

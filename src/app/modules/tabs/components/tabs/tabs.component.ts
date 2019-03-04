@@ -16,24 +16,24 @@ const MAX_N_TABS = 5;
 })
 
 export class TabsComponent {
-  @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional();
-  @Input() entornsMaterial: EnvironmentMaterial = new EnvironmentMaterial();
-  @ViewChild(NgbTabset) tab: NgbTabset;
-  @ViewChild(ValoracioDiagnosticTabComponent) valorcionCmp: ValoracioDiagnosticTabComponent;
-  public tabsActivate: TabsDisabled = new TabsDisabled();
-  public forceApear = false;
-  public stay = false;
-  public disapear = false;
-  public index: string = '1';
-  public material: string = "material";
-  public relacional: string = "relacional";
-  public diagnostico: Diagnosis;
-  public diagnosisID: number;
-  public expedientID: number;
-  personActives: Persona[] = [];
-  expedient: Expedient;
+  @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional(); /*Entornos marcados del ralacional*/
+  @Input() entornsMaterial: EnvironmentMaterial = new EnvironmentMaterial(); /*Entornos marcados del Material*/
+  @ViewChild(NgbTabset) tab: NgbTabset; /*Componente NbgTabset*/
+  @ViewChild(ValoracioDiagnosticTabComponent) valorcionCmp: ValoracioDiagnosticTabComponent; /*Diagnostic Component*/
+  public tabsActivate: TabsDisabled = new TabsDisabled(); /*Tabs Activadas*/
+  public forceApear = false; /*Variable para forzar la aparicion del CheckForm*/
+  public stay = false;  /*Variable para decidir si mostramos o no el Formulario */
+  public disapear = false; /*Variable para decidir si mostramos o no el Formulario */
+  public index: string = '1'; /*Indice de desplazamiento de las tabs*/
+  public material: string = "material"; /* Variables Para check Form*/
+  public relacional: string = "relacional"; /* Variables Para check Form*/
+  public diagnostico: Diagnosis; /*Objecto del Diagnostico Completo*/
+  public diagnosisID: number; /*idDiagnostico*/
+  public expedientID: number; /*idExpediente*/
+  public personActives: Persona[] = []; /*Personas activas para este diagnostico*/
+  public expedient: Expedient;  /*Expediente al que pertenece este diagnostico*/
 
-
+/*Recogemos el id del Diagnostico e Expediente , recargamos el Diagnostico*/
   constructor(private _route: ActivatedRoute,
               private _service: FilesDetailService,
               private tabsService: TabsFormService) {
@@ -43,7 +43,7 @@ export class TabsComponent {
     this.diagnostico = new Diagnosis();
     this.reloadDiagnostico();
   }
-
+  /*Recuperamos el Expediente*/
   getFile() {
     this._service.getFileById(this.expedientID).subscribe((data: Expedient) => {
       this.expedient = data;
@@ -52,7 +52,7 @@ export class TabsComponent {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
   }
-
+  /*Controla el cambio del tab para que no se produzca antes de lo esperado*/
   public beforeChange($event: NgbTabChangeEvent) {
     this.disapear = false;
     this.stay = false;
@@ -79,7 +79,7 @@ export class TabsComponent {
         break;
     }
   }
-
+  /*Activa el cambio de tab en caso de que este desactivado*/
   public enableNext(nextTab: string) {
     switch (nextTab) {
       case 'tab-preventchange2':
@@ -99,7 +99,6 @@ export class TabsComponent {
       this.tab.select(nextTab);
     }, 300);
   }
-
   valueStay(stay: boolean, tab: string) {
     if (stay) {
       this.disapear = true;
@@ -108,7 +107,7 @@ export class TabsComponent {
       this.enableNext(tab);
     }
   }
-
+  /*Cambio de la variable de aparicion*/
   public fnStay(stay: boolean, id: number) {
     this.stay = stay;
     this.disapear = true;
@@ -120,21 +119,21 @@ export class TabsComponent {
 
   }
 
-
+  /*Incrementamos el indice*/
   public incIndex(id: number) {
     if (id <= MAX_N_TABS) {
       this.index = (id + 1).toString();
     }
     console.log(" este es el index--> " + this.index);
   }
-
+  /*Volver atras*/
   public beforeTab() {
     this.stay = false;
     this.disapear = false;
     this.forceApear = true;
 
   }
-
+  /*Obtener la personas activas*/
   getPersonActives() {
     for (const person of this.expedient.persona) {
       if (!person.dataBaixa) {
@@ -142,7 +141,7 @@ export class TabsComponent {
       }
     }
   }
-
+  /*Recargamos el diagnostico*/
   reloadDiagnostico() {
     this.tabsService.getDiagnostic(this.diagnosisID).subscribe((result: Diagnosis) => {
       this.diagnostico = result;
@@ -150,7 +149,8 @@ export class TabsComponent {
       console.log(err);
     });
   }
-
+  /*Consultamos si tienen alguna pregunta ya contestada en algun ambito o entorno
+  * y en caso de aqui sea , dejamos el ambito ya cargado con esa o essas preguntas*/
   checkTab(ambitName: string, idtab: number) {
     let open = false;
     for (const ambit of this.diagnostico.ambit) {

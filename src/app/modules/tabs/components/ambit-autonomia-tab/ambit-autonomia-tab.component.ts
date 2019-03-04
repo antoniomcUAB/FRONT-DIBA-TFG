@@ -15,14 +15,15 @@ import {Persona} from "../../../files";
   ]
 })
 export class AmbitAutonomiaTabComponent extends CustomInput {
-  ambits: Ambits;
-  context: string = 'Autonomia';
-  @Input() personsSelector: Persona [] = [];
-  @Input() idDiagnostic: number;
-  @Output () endForm: EventEmitter<boolean> = new EventEmitter();
-  @Output () before: EventEmitter<boolean> = new EventEmitter();
-  @Output () active: EventEmitter<boolean> = new EventEmitter();
+  ambits: Ambits; /*Ambitos del modelo*/
+  context: string = 'Autonomia'; /*Contexto en el que estamos actualmente*/
+  @Input() personsSelector: Persona [] = []; /*Selector de Personas para ese Ambito*/
+  @Input() idDiagnostic: number; /* El id del diagnostico*/
+  @Output () endForm: EventEmitter<boolean> = new EventEmitter(); /*Emitimos ccuando quieran pasar a la siguiente pestaña*/
+  @Output () before: EventEmitter<boolean> = new EventEmitter(); /*Emitimos ccuando quieran volver a la pestaña anterior*/
+  @Output () active: EventEmitter<boolean> = new EventEmitter(); /*Emitimos cuando se active el tab*/
 
+  /*Emitimos el activado , y recargamos el modelo*/
   constructor(private _service: TabsFormService) {
     super();
     this.reloadData();
@@ -31,19 +32,22 @@ export class AmbitAutonomiaTabComponent extends CustomInput {
   }
 
 
-
+  /*Emitimos el activado*/
   public activate() {
   this.active.emit(true);
   }
+  /*Recargamos el modelo*/
   reloadData() {
     this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
       console.log(tab);
       this.ambits = tab;
     });
   }
+  /*Emitimos el before*/
   public emitBefore() {
   this.before.emit();
   }
+  /*Emitimos el finalizado*/
   public emitEnd() {
     this.endForm.emit();
   }
