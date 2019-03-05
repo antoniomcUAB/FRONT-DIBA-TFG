@@ -49,14 +49,12 @@ export class TabsFormService extends GlobalService {
     return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${id}`);
   }
   DeletePreguntaContext( id: number): Observable<Preguntas> {
-    console.log(id);
     return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/context/${id}`);
   }
   PutQuestionAndGetRisc( pregunta: Preguntas, idDiagnostico: number): Observable<Preguntas> {
   return this._http.put<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${idDiagnostico}`, pregunta).pipe(
     map( data => {
       if (!data.factor) { data.factor = new Factor(); }
-      console.log(data.id);
       return data;
     })
   );

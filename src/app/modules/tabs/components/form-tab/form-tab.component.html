@@ -93,9 +93,9 @@
                   <label for="t1person" >{{ "TABLE.person" | translate }} </label>
                   <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
-                      <!--<div *ngIf="getFirstPregunta(pregunta.id , ambit, entorn)" class="input-group-text " (click)="newPregunta(pregunta.social,pregunta.id) ">-->
-                      <!--<i class="fa fa-user-plus " > </i>-->
-                      <!--</div>-->
+                      <div *ngIf="getFirstPregunta(pregunta.id , ambit, entorn)" class="input-group-text " (click)="addPreguntaRepeat(pregunta.social , pregunta.id , ambit, entorn) ">
+                      <i class="fa fa-user-plus " > </i>
+                      </div>
                     </div>
                     <select class="form-control" id="t2person"
                             [value]="cleanSelects"

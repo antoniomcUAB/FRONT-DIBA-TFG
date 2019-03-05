@@ -88,7 +88,6 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       if (ambit.ambit.descripcio === this.contextualitzacio) {
         for (const entorn of ambit.entorn) {
           for (const pregunta of entorn.pregunta) {
-            console.log("sdsdsdsd");
             this.tabsService.DeletePregunta(pregunta.id).subscribe((result) => {
               this.reloadDiagnostico();
             }, (err) => {
@@ -172,7 +171,6 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     } else {
         /* Si hay entorno y no existe llama a back , añadelo al objeto*/
         this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta, idSocial), this.idDiagnostic).subscribe((result) => {
-          console.log(result);
           for (let i = 0; i < this.value.ambit.length; i++) {
             if (this.value.ambit[i].ambit.id === ambit.id) {
               for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
@@ -186,6 +184,19 @@ export class FormTabComponent extends CustomInput implements OnInit  {
           console.log(err);
         });
       }
+  }
+  public addPreguntaRepeat(pregunta: string , idSocial: number, ambit: Ambit , entorn: Entorns) {
+    this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta, idSocial), this.idDiagnostic).subscribe((result) => {
+      for (let i = 0; i < this.value.ambit.length; i++) {
+        if (this.value.ambit[i].ambit.id === ambit.id) {
+          for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
+            if (this.value.ambit[i].entorn[x].id === entorn.id) {
+              this.value.ambit[i].entorn[x].pregunta.push(result);
+            }
+          }
+        }
+      }
+    });
   }
   public getPreguntas(id: number , ambit: Ambit , entorn: Entorns ): Preguntas[] {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
