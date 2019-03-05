@@ -312,4 +312,24 @@ export class FileDetailComponent {
       }
     }
   }
+
+  /* Check Create Diagnosis */
+  checkCreateDiagnosis(): boolean {
+    let checkRef = true;
+    let checkBaixa = true;
+    /** Check Ref exist & Unsuscription **/
+    if (this.expedient.persona.length > 0) {
+      for (const persona of this.expedient.persona) {
+        if (persona.referencia) {
+          checkRef = false;
+        }
+        if (!persona.dataBaixa) {
+          checkBaixa = false;
+        }
+      }
+      return checkBaixa || checkRef;
+    } else {
+      return true;
+    }
+  }
 }
