@@ -321,7 +321,11 @@ export class FileDetailComponent {
     if (this.expedient.persona.length > 0) {
       for (const persona of this.expedient.persona) {
         if (persona.referencia) {
-          checkRef = false;
+          if (!persona.dataBaixa) {
+            checkRef = false;
+          } else {
+            checkRef = true;
+          }
         }
         if (!persona.dataBaixa) {
           checkBaixa = false;
