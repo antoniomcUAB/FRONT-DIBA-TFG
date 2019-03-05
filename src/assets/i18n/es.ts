@@ -34,7 +34,13 @@ export let TRANSLATION = {
     'dataUnsubscribe'      : 'Data de baixa',
     'newMember'            : 'Afegir nou membre',
     'isPersonRef'          : 'És persona de referència',
-    'newRef'           : 'Nova persona de referència'
+    'newRef'               : 'Nova persona de referència',
+    'createDiagnosis'      : 'Afegir un nou diagnòstic',
+    'doYouWantCreateDiagnosis' : 'Vols crear un nou diagnòstic?',
+    'yes'                  : 'Si',
+    'no'                   : 'No',
+    'unsuscription'        : 'Afegir persona de referència',
+    'doYouWantUnsuscription' : 'És aquesta la persona de referència? '
   },
   'OBSTABLE': {
     'obs'           : 'Valoracions realitzades'

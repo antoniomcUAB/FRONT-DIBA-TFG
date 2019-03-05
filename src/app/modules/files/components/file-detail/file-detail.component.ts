@@ -31,6 +31,7 @@ export class FileDetailComponent {
   observations: string;
   personType: TipusPersona;
   toDate = new Date();
+  dateUnsuscription: number;
 
   /** Tables options **/
   options = new TableListOptions();
@@ -212,6 +213,7 @@ export class FileDetailComponent {
     for (const index in this.expedient.persona) {
       if (this.expedient.persona[index].id === persona.id) {
         this.expedient.persona[index] = persona;
+        this.expedient.persona[index].dataBaixa = this.dateUnsuscription;
       }
     }
     /** Check New Reference **/
@@ -237,6 +239,7 @@ export class FileDetailComponent {
     for (const index in this.expedient.persona) {
       if (this.expedient.persona[index].id === persona.id) {
         this.expedient.persona[index] = persona;
+        this.expedient.persona[index].dataBaixa = this.dateUnsuscription;
       }
     }
 
