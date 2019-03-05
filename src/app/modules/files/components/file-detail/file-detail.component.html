@@ -442,7 +442,7 @@
           <button type="button"
                   class="btn btn-primary btn-large"
                   (click)="open(confirmNewDiagnosis)"
-                  [disabled]="expedient.persona.length === 0">
+                  [disabled]="checkCreateDiagnosis()">
             {{ "FORM.newDiagnosis" | translate }}
           </button>
         </div>
