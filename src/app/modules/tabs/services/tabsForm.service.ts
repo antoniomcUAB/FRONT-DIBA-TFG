@@ -18,7 +18,6 @@ export class TabsFormService extends GlobalService {
   getFilesFormModel( ): Observable<Ambits> {
     return this._http.get<Ambits>(`${this.apiURL}/dsdiba/api/model`).pipe(
       map(data => {
-        console.log(data);
         return data;
       })
     );
@@ -45,7 +44,6 @@ export class TabsFormService extends GlobalService {
     );
   }
   DeletePregunta( id: number): Observable<Preguntas> {
-    console.log(id);
     return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${id}`);
   }
   DeletePreguntaContext( id: number): Observable<Preguntas> {
@@ -67,7 +65,6 @@ export class TabsFormService extends GlobalService {
   );
   }
   finishDiagnostic( diagnosis:Diagnosis, idExpedient: number ): Observable<Diagnosis> {
-    console.log(diagnosis);
   return this._http.put<Diagnosis>(`${this.apiURL}/dsdiba/api/expedient/${idExpedient}/avaluar/diagnostic`, diagnosis).pipe(
     map( data => {
       return data;
@@ -80,6 +77,7 @@ export class TabsFormService extends GlobalService {
       if (!data.valoracio.evaluacions) {
         data.valoracio.evaluacions = [];
       }
+      console.log(data);
       return data;
       })
   );
