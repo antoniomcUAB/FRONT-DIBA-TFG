@@ -151,15 +151,15 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     const preguntas = this.getPreguntas( idSocial , ambit , entorn );
     if (preguntas && preguntas.length >= 1 ) {
       for (const pr in preguntas) {
-        /* Si hay entorno y ya existe eliminala*/
-          this.tabsService.DeletePregunta(preguntas[pr].id).subscribe((result) => {
+        /* Si hay entorno y ya existe eliminala */
+          this.tabsService.DeletePregunta(preguntas[pr].id).subscribe(() => {
           }, (err) => {
             console.log(err);
           });
       }
       for (let i = 0; i < this.value.ambit.length; i++) {
         if (this.value.ambit[i].ambit.id === ambit.id) {
-          /* Si hay entorno y ya existe eliminala de la parte frontal y el objeto final*/
+          /* Si hay entorno y ya existe eliminala de la parte frontal y el objeto final */
             for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
               if (this.value.ambit[i].entorn[x].id === entorn.id) {
                 this.value.ambit[i].entorn[x].pregunta = this.value.ambit[i].entorn[x].pregunta
@@ -198,6 +198,21 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       }
     });
   }
+  public getPreguntaRepeat(id: number, ambit: Ambit, entorn: Entorn) {
+    for (let i = 0; i < this.value.ambit.length; i++) {
+      if (this.value.ambit[i].ambit.id === ambit.id) {
+        for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
+          if (this.value.ambit[i].entorn[x].id === entorn.id) {
+            for (let z = 0; z < this.value.ambit[i].entorn[x].pregunta.length; z++) {
+              if (this.value.ambit[i].entorn[x].pregunta[z].id === id) {
+                return this.value.ambit[i].entorn[x].pregunta[z];
+              }
+              }
+            }
+          }
+        }
+      }
+    }
   public getPreguntas(id: number , ambit: Ambit , entorn: Entorns ): Preguntas[] {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
     if (!amb) { return [] }
@@ -207,8 +222,6 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       });
   }
   public getContextos(id: number , ambit: Ambit , contexto: FactorsContext ): Contextualitzacio {
-      console.log(id);
-      console.log(ambit.id);
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
     if (!amb) {return null }
       const context = amb.contextualitzacio.find(item => item.factor.id === contexto.id);
@@ -258,7 +271,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
           for (let i = 0; i < this.value.ambit.length; i++) {
             for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
               for (let z = 0; z < this.value.ambit[i].entorn[x].pregunta.length; z++) {
-                if (this.value.ambit[i].entorn[x].pregunta[z].situacioSocial.id === pregunta.situacioSocial.id) {
+                if (this.value.ambit[i].entorn[x].pregunta[z].id === pregunta.id) {
                   if(!this.value.ambit[i].entorn[x].pregunta[z].gravetat) {
                     this.value.ambit[i].entorn[x].pregunta[z].gravetat = new Gravetat();
                   }
@@ -330,5 +343,60 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     }, (err) => {
       console.log(err);
     });
+  }
+  public getValueSeverity(pregunta: Preguntas, value) {
+    this.tabsService.getValuesGravetat().subscribe((result: Gravetat[]) => {
+      for (const grave of result) {
+        if (grave.descripcio === value) {
+          for (let i = 0; i < this.value.ambit.length; i++) {
+            for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
+              for (let z = 0; z < this.value.ambit[i].entorn[x].pregunta.length; z++) {
+                if (this.value.ambit[i].entorn[x].pregunta[z].id === pregunta.id) {
+                  if (!this.value.ambit[i].entorn[x].pregunta[z].gravetat) {
+                    this.value.ambit[i].entorn[x].pregunta[z].gravetat = new Gravetat();
+                  }
+                  this.value.ambit[i].entorn[x].pregunta[z].gravetat = grave;
+                  this.tabsService.PutQuestionAndGetRisc(pregunta,this.idDiagnostic).subscribe((result) => {
+                    this.value.ambit[i].entorn[x].pregunta[z] = result;
+                    this.value.ambit[i].entorn[x].pregunta[z].frequencia = new Frequencia();
+                  }, (err) => {
+                    console.log(err);
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
+  public getFrequenciRepeat(pregunta: Preguntas , value ) {
+
+    this.tabsService.getValuesFrequencia().subscribe((resultFreq: Frequencia[]) => {
+      if (!pregunta.frequencia) {
+        pregunta.frequencia = new Frequencia();
+      }
+      for (const freq of resultFreq) {
+        if (freq.descripcio === value) {
+          pregunta.frequencia = freq;
+          this.tabsService.PutQuestionAndGetRisc(pregunta , this.idDiagnostic).subscribe((result) => {
+            pregunta.factor = result.factor;
+          }, (err) => {
+            console.log(err);
+          });
+        }
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
+  public deleteRepeat(pregunta:Preguntas) {
+      this.tabsService.DeletePregunta(pregunta.id).subscribe((result) => {
+        this.reloadDiagnostico();
+      }, (err) => {
+        console.log(err);
+      });
   }
 }

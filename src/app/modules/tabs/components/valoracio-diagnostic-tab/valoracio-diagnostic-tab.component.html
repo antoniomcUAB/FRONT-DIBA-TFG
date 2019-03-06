@@ -34,7 +34,7 @@
                                       'danger' :Riscos.risc?.descripcio.toUpperCase() === 'ALT RISC',
                                       'success' :Riscos.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
                                       'info' : Riscos.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;'}">
-                            {{Riscos.risc.descripcio}}</th>
+                            {{Riscos?.risc?.descripcio}}</th>
                         </ng-template>
                       </ng-template>
                     </tr>
@@ -60,11 +60,12 @@
                       <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio>
                         <ng-template [ngIf]="evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS' ">
                           <th class="bg-grey-200 border-dark  border-left border-bottom border-right-0 border-top-0" >RISC</th>
-                          <th class="border-dark border-right border-bottom border-top-0 border-left-0" [ngClass]="{'warning' : evaluacio.risc?.descripcio.toUpperCase() === 'RISC',
+                          <th class="border-dark border-right border-bottom border-top-0 border-left-0"
+                              [ngClass]="{'warning' : evaluacio.risc?.descripcio.toUpperCase() === 'RISC',
                                       'danger' : evaluacio.risc?.descripcio.toUpperCase() === 'ALT RISC',
                                       'success' : evaluacio.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
                                       'info' : evaluacio.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
-                            {{evaluacio.risc.descripcio}}
+                            {{evaluacio?.risc?.descripcio}}
                           </th>
                         </ng-template>
                       </ng-template>
@@ -80,7 +81,7 @@
     </ng-container>
   </div>
 
-  <form #formTab="ngForm" ngNativeValidate (submit)="finishDiagnostic()">
+  <form ngNativeValidate (submit)="finishDiagnostic()">
   <!-- Ambito -->
   <div class="row m-3" *ngFor="let ambit of value.ambit;let i = index">
     <ng-container *ngIf="ambit?.ambit?.descripcio?.toUpperCase() !== 'GLOBALITAT DEL CAS'">
@@ -112,7 +113,7 @@
                                       'danger' : pregunta.factor?.descripcio.toUpperCase() === 'ALT RISC',
                                       'success' : pregunta.factor?.descripcio.toUpperCase() === 'VULNERABILITAT',
                                       'info' : pregunta.factor?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
-                        {{ pregunta.factor.descripcio }}</td>
+                        {{ pregunta?.factor?.descripcio }}</td>
                     </tr>
                   </ng-container>
                   <ng-container *ngIf="entorn.pregunta?.length == 0">
@@ -146,14 +147,13 @@
                         <select class="form-control risc-pro"
                                 id="t2person"
                                 name="persona{{i}}"
-                                required="true"
                                 [ngModel]="evaluacion?.riscProfessional?.descripcio"
                                 (ngModelChange)="setRisc(evaluacion.riscProfessional, ambit , $event)"
                                 [ngClass]="{'warning' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'RISC',
                                             'danger' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'ALT RISC',
                                             'success' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'VULNERABILITAT',
                                             'info' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'SENSE VALORACI&#211;' }">
-                          <option *ngFor="let risc of riscos"> {{risc.descripcio}} </option>
+                          <option *ngFor="let risc of getFilterRiscos(evaluacion)"> {{risc.descripcio}} </option>
                         </select>
 
                       </td>
@@ -223,7 +223,7 @@
   </div>
 
   <!-- Global -->
-  <div class="row m-3" *ngFor="let global of value.ambit">
+  <div class="row m-3" *ngFor="let global of value.ambit;let i = index">
     <ng-container *ngIf="global.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'">
       <div class="col-12">
         <div class="card">
@@ -261,7 +261,9 @@
                 <label for="fileObservationAutonomy" class="col-form-label">
                   <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
                 </label>
-                <textarea class="form-control" type="text" value="{{ global.observacions }}" id="fileObservationGlobal" disabled="disabled"></textarea>
+                <textarea class="form-control" type="text" value="{{ global.observacions }}" name="observationsss{{i}}"
+                          [ngModel]="global?.observacions"
+                            (ngModelChange)="global.observacions = $event" id="fileObservationGlobal"></textarea>
               </div>
             </div>
           </div>
@@ -274,10 +276,40 @@
   <!-- Return to Back -->
   <div class="row my-3">
     <div class="col-12 mb-3 text-center">
-      <button  class="align-middle btn btn-outline-primary no-print btn-lg" type="button" style="width: 20%;"  type="submit"> {{ "FORM.validation" | translate }}</button>
+      <button  class="align-middle btn btn-outline-primary no-print btn-lg" type="button" style="width: 20%;" (click)="open(validation)" > {{ "FORM.validation" | translate }}</button>
     </div>
   </div>
-
+    <ng-template #validation let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">
+                          <span class="text-primary">
+                           Confirmar Validacio
+                          </span>
+        </h4>
+        <button type="button"
+                class="close bg-primary text-white"
+                aria-label="Close"
+                (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="mt-3">Vols validar aquest diagnostic?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit"
+                class="btn btn-outline-primary btn-large"
+                (click)="modal.dismiss('Cross click')" >
+          {{ "TABLE.yes" | translate }}
+        </button>
+        <button type="button"
+                class="btn btn-primary btn-large"
+                aria-label="Close"
+                (click)="modal.dismiss('Cross click')">
+          {{ "TABLE.no" | translate }}
+        </button>
+      </div>
+    </ng-template>
   </form>
   <!--/ Return to Back -->
 </section>

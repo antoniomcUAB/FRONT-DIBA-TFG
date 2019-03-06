@@ -93,9 +93,9 @@
                   <label for="t1person" >{{ "TABLE.person" | translate }} </label>
                   <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
-                      <!--<div *ngIf="getFirstPregunta(pregunta.id , ambit, entorn)" class="input-group-text " (click)="addPreguntaRepeat(pregunta.social , pregunta.id , ambit, entorn) ">-->
-                      <!--<i class="fa fa-user-plus " > </i>-->
-                      <!--</div>-->
+                      <div *ngIf="getFirstPregunta(pregunta.id , ambit, entorn)" class="input-group-text " (click)="addPreguntaRepeat(pregunta.social , pregunta.id , ambit, entorn) ">
+                      <i class="fa fa-user-plus " > </i>
+                      </div>
                     </div>
                     <select class="form-control" id="t2person"
                             [value]="cleanSelects"
@@ -168,88 +168,89 @@
                        [value]="getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio">
               </div>
             </div>
-               <!--&lt;!&ndash;Bucle for para cada fila  &ndash;&gt;-->
-              <!--<ng-container *ngFor="let method of getPreguntas(pregunta.id , ambit, entorn)  ; let x = index">-->
-                <!--<ng-container *ngIf="method.situacioSocial.id === pregunta.id && x!= 0 ">-->
-                  <!--&lt;!&ndash; Situacio Social&ndash;&gt;-->
-                  <!--<div class="form-group col-4">-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;/ Situacio Social&ndash;&gt;-->
+               <!--Bucle for para cada fila  -->
+              <ng-container *ngFor="let method of getPreguntas(pregunta.id , ambit, entorn)  ; let x = index">
+                <ng-container *ngIf="method.situacioSocial.id === pregunta.id && x!= 0 ">
+                  <!-- Situacio Social-->
+                  <div class="col-5">
+                    <label class="col-12" for="ssb" ></label>
+                  </div>
+                  <!--/ Situacio Social-->
 
-                  <!--&lt;!&ndash;Aplicatiu &ndash;&gt;-->
-                  <!--<div class="col-xs-1">-->
-                    <!--<div class="col-12">-->
-                      <!--<div class="form-group align-items-center col-12 ">-->
-                        <!--<label class="custom-control custom-checkbox position-relative">-->
+                  <!--Aplicatiu -->
+                  <div class="col-1">
+                    <div class="col-12">
+                      <div class="form-group align-items-center col-12 text-center" (click)="deleteRepeat(method)">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/ Aplicatiu -->
 
-                        <!--</label>-->
-                      <!--</div>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;/ Aplicatiu &ndash;&gt;-->
+                  <!-- Persones -->
+                  <div class="col-2">
+                  <div class="col-12">
 
-                  <!--&lt;!&ndash; Persones &ndash;&gt;-->
-                  <!--<div class="col-2">-->
-                  <!--<div class="col-12">-->
+                    <div class="input-group mb-2 mr-sm-2">
+                      <select class="form-control"
+                              [value]="cleanSelects"
+                              [ngModel]="getPreguntaRepeat(method.id,ambit,entorn)?.persona?.tipusPersona?.descripcio"
+                              (ngModelChange)="changePersona(getPreguntaRepeat(method.id,ambit,entorn), $event)"
+                              name="personasdfc{{i}}{{x}}">
+                        <option disabled selected value ></option>
+                        <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
+                      </select>
+                    </div>
 
-                    <!--<div class="input-group mb-2 mr-sm-2">-->
-                      <!--<select class="form-control"-->
-                              <!--[value]="cleanSelects"-->
-                              <!--[disabled]="!getPreguntas(method.id , ambit , entorn)"-->
-                              <!--[ngModel]="getPreguntas(method.id, ambit , entorn)?.persona?.tipusPersona?.descripcio"-->
-                              <!--(ngModelChange)="setPersona(method.situacioSocial.id,$event)"-->
-                              <!--name="persona{{i}}{{x}}">-->
-                        <!--<option disabled selected value ></option>-->
-                        <!--<option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>-->
-                      <!--</select>-->
-                    <!--</div>-->
+                  </div>
+            </div>
 
-                  <!--</div>-->
-            <!--</div>-->
+                  <!--/ Persones -->
 
-                  <!--&lt;!&ndash;/ Persones &ndash;&gt;-->
+                  <!-- Severity -->
 
-                  <!--&lt;!&ndash; Severity &ndash;&gt;-->
-
-
-                  <!--<ng-template #popContentSeverity></ng-template>-->
-                  <!--<div class="col-xs-2">-->
-                    <!--<div class="col-12">-->
-                      <!--<select class="form-control" id="severity{{x}}{{i}}"-->
-                              <!--[required]="getPreguntas(method.id)"-->
-                              <!--[value]="cleanSelects"-->
-                              <!--[disabled]="!getPreguntas(method.id)"-->
-                              <!--[ngModel]="getPreguntas(method.situacioSocial.id)?.gravetat?.descripcio"-->
-                              <!--(ngModelChange)="getPreguntas(method.situacioSocial.id).gravetat.descripcio = $event;"-->
-                              <!--name="severitySelected{{i}}{{x}}"-->
-                              <!--(change)="getValueGravetat(getPreguntas(method.situacioSocial.id)?.gravetat,pregunta.id)">-->
-                        <!--<option disabled selected value></option>-->
-                        <!--<option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>-->
-                      <!--</select>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;/ Severity &ndash;&gt;-->
-                  <!--&lt;!&ndash; Frequencia &ndash;&gt;-->
-                  <!--<div class="col-2">-->
-                    <!--<div class="col-12">-->
-
-                      <!--<select class="form-control" id="t1frequency"-->
-                              <!--[required]="pregunta.apl"-->
-                              <!--[value]="cleanSelects" [disabled]="">-->
-                        <!--<ng-container *ngFor="let gravedades of pregunta.selectors">-->
-                          <!--<option disabled selected value></option>-->
-                          <!--<option *ngFor="let frequencia of gravedades.frequencia"> {{frequencia.frequencia.descripcio}}  </option>-->
-                        <!--</ng-container>-->
-                      <!--</select>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;/ Frequencia &ndash;&gt;-->
-                  <!--&lt;!&ndash; riskFactors &ndash;&gt;-->
-                  <!--<div class="form-group col-2">-->
-                    <!--<input type="text" class="form-control" id="t5riskFactor"   disabled>-->
-                  <!--</div>-->
-                <!--</ng-container>-->
-              <!--</ng-container>-->
+                  <div class="col-xs-2">
+                    <div class="col-12">
+                      <select class="form-control"
+                              [value]="cleanSelects"
+                              [ngModel]="getPreguntaRepeat(method.id,ambit,entorn)?.gravetat?.descripcio"
+                              (ngModelChange)="getValueSeverity(getPreguntaRepeat(method.id,ambit,entorn), $event)"
+                              id="severiyt2{{x}}{{i}}"
+                              name="severity2{{i}}{{x}}">
+                        <option disabled selected value></option>
+                        <option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/ Severity -->
+                  <!-- Frequencia -->
+                  <div class="col-xs-2">
+                    <div class="col-12">
+                      <select class="form-control" id="t1frequency"
+                              [required]="pregunta.apl"
+                              [value]="cleanSelects"
+                              [ngModel]="getPreguntaRepeat(method.id,ambit,entorn)?.frequencia?.descripcio"
+                              (ngModelChange)="getFrequenciRepeat(getPreguntaRepeat(method.id,ambit,entorn), $event)"
+                      name="frequensdci{{x}}{{i}}">
+                          <option disabled selected value></option>
+                          <option *ngFor="let frequencia of getFrequencia(getPreguntaRepeat(method.id,ambit,entorn)?.gravetat?.descripcio,pregunta.selectors)"> {{frequencia.frequencia.descripcio}}  </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/ Frequencia -->
+                  <!-- riskFactors -->
+                  <div class="form-group col-2">
+                    <input type="text"
+                           [ngClass]="{'warning' : getPreguntaRepeat(method.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'RISC',
+                                   'danger' : getPreguntaRepeat(method.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'ALT RISC',
+                                   'success' : getPreguntaRepeat(method.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'VULNERABILITAT',
+                                   'info' : getPreguntaRepeat(method.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'SENSE VALORACIÓ' }"
+                           class="form-control text-center" id="t5RiskFactor"
+                           disabled
+                           [value]="getPreguntaRepeat(method.id,ambit, entorn)?.factor?.descripcio">
+                  </div>
+                </ng-container>
+              </ng-container>
           </ng-template>
 
 

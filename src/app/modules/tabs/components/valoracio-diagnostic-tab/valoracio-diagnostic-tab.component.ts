@@ -6,6 +6,7 @@ import {TabsFormService} from "../../services/tabsForm.service";
 import {Router} from "@angular/router";
 import {Ambits} from "../../models/tab-class-form";
 import {Evaluacions} from "../../../files";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-valoracio-diagnostic-tab',
@@ -30,11 +31,12 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
     this.validationDiagnostic();
   }
   @Output() guardaValoracion: EventEmitter<any> = new EventEmitter<any>();
-
+ public closeResult: string;
   @Input() idExpedient: number;
   public riscos: Risc [] = [];
   constructor(private tabsService: TabsFormService,
-              private _router: Router,){
+              private _router: Router,
+              private modalService: NgbModal){
    super();
 
   }
@@ -46,9 +48,24 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   public emitEnd() {
     this.endForm.emit();
   }
-  public emitBefore() {
-    this.before.emit();
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
   public validationDiagnostic() {
     this.tabsService.putValidationDiagnostic(this.idExpedient,this.value).subscribe((result) => {
       this.value.valoracio = result.valoracio;
@@ -96,32 +113,11 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
       console.log(err);
     });
   }
-  public riscProfesionalWithoutValidation() {
-    let desactivated = false;
-    for (const evaluacio of this.value.valoracio.evaluacions) {
-      if (!evaluacio.riscProfessional && this.noRiegoSiPreguntas(evaluacio)) {
-        desactivated = true;
-      }
-      if (evaluacio.riscProfessional) {
-        if (evaluacio.riscProfessional.descripcio !== 'Sense Valoració' && !evaluacio.justificacio) {
-          desactivated = true;
-        }
-      }
-    }
-    return desactivated;
+  public getFilterRiscos(evaluacion:Evaluacions) {
+    return this.riscos.filter(data => {
+     return data.id !== evaluacion.risc.id;
+    });
   }
-  public noRiegoSiPreguntas(evaluacio: Evaluacions) {
-    for (const ambit of this.value.ambit) {
-      if (ambit.ambit.id === evaluacio.ambit.ambit.id) {
-        for (const entorn of ambit.entorn) {
-          if (entorn.pregunta.length > 0) {
-            return true;
-            }
-          }
-        }
-      }
-    return false;
-    }
 
 
 }

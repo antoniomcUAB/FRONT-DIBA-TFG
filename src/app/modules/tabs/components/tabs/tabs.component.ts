@@ -42,6 +42,9 @@ export class TabsComponent {
     this.getFile();
     this.diagnostico = new Diagnosis();
     this.reloadDiagnostico();
+    setTimeout(_ => {
+      this.activateTabs();
+    }, 300);
   }
   /*Recuperamos el Expediente*/
   getFile() {
@@ -117,6 +120,25 @@ export class TabsComponent {
       this.disapear = false;
     }
 
+  }
+  public activateTabs() {
+    console.log(this.someContains());
+    if (this.someContains()) {
+      this.tabsActivate.tabAmbitMaterialActivate = false;
+      this.tabsActivate.tabValoracioDiagnosticActivate = false;
+      this.tabsActivate.tabGlobalitatCasActivate = false;
+      this.tabsActivate.tabAmbitRelacionalActivate = false;
+    }
+  }
+  public someContains() {
+    for (const ambit of this.diagnostico.ambit) {
+      for (const entorn of ambit.entorn) {
+        for (const pregunta of entorn.pregunta) {
+            return true;
+        }
+      }
+    }
+    return false;
   }
 
   /*Incrementamos el indice*/
