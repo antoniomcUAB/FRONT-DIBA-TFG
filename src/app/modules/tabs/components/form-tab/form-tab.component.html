@@ -340,7 +340,8 @@
                         [value]="cleanSelects"
                         [disabled]="!getFirtsContexto(cont.id , ambit , cont )?.membreUnic || getFirtsContexto(cont.id , ambit , cont )?.mesUc"
                         [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.persona"
-                        (ngModelChange)="changePersonaSelector(getFirtsContexto(cont.id , ambit , cont ), $event)">
+                        (ngModelChange)="changePersonaSelector(getFirtsContexto(cont.id , ambit , cont ), $event)"
+                        [compareWith]="compare">
 
                   <option disabled selected value></option>
                   <option *ngFor="let person of personsSelector" [ngValue]="person"> {{person.tipusPersona.descripcio}}</option>
