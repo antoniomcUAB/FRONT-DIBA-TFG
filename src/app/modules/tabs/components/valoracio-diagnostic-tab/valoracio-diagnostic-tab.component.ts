@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {CustomInput} from "../../../../shared";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Ambit, Diagnosis, Risc} from "../../models/diagnostic";
@@ -34,6 +34,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
  public closeResult: string;
   @Input() idExpedient: number;
   public riscos: Risc [] = [];
+
   constructor(private tabsService: TabsFormService,
               private _router: Router,
               private modalService: NgbModal){
@@ -48,7 +49,6 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   public emitEnd() {
     this.endForm.emit();
   }
-
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

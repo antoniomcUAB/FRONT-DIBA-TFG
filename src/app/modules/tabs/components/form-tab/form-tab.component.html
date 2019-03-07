@@ -100,11 +100,12 @@
                     <select class="form-control" id="t2person"
                             [value]="cleanSelects"
                             [disabled]="!getFirstPregunta(pregunta.id , ambit, entorn) "
-                            [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)?.persona?.tipusPersona?.descripcio"
+                            [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)?.persona"
                             (ngModelChange)="changePersona(getFirstPregunta(pregunta.id , ambit, entorn), $event)"
+                            [compareWith]="compare"
                             name="persona{{e}}{{i}}">
                       <option disabled selected value ></option>
-                      <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
+                      <option *ngFor="let person of getFilterPersonas(pregunta.id)" [ngValue]="person"> {{person.tipusPersona.descripcio}}</option>
                     </select>
                   </div>
                 </div>
@@ -112,10 +113,9 @@
               <!--/ Persones -->
 
               <!-- Severity -->
-              <ng-template #popContentSeverity></ng-template>
               <div class="col-1">
                 <div class="col-12">
-                  <label for="t1severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle"
+                  <label for="t9severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle"
 
                                                                                  aria-hidden="true" [ngbPopover] =  "'EMERGENTS.Gravetat' | translate "
                                                                                  placement="right"
@@ -157,13 +157,13 @@
               <!--/ Frequencia -->
               <!-- riskFactors -->
               <div class="col-2">
-                <label for="t1riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
+                <label for="t3riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
                 <input type="text"
                        [ngClass]="{'warning' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'RISC',
                                    'danger' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'ALT RISC',
                                    'success' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'VULNERABILITAT',
                                    'info' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'SENSE VALORACIÓ' }"
-                       class="form-control text-center" id="t1riskFactor"
+                       class="form-control text-center" id="t3riskFactor"
                        disabled
                        [value]="getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio">
               </div>
@@ -172,6 +172,7 @@
               <ng-container *ngFor="let method of getPreguntas(pregunta.id , ambit, entorn)  ; let x = index">
                 <ng-container *ngIf="method.situacioSocial.id === pregunta.id && x!= 0 ">
                   <!-- Situacio Social-->
+                  <div class="form-group row col-12 py-2">
                   <div class="col-5">
                     <label class="col-12" for="ssb" ></label>
                   </div>
@@ -181,7 +182,8 @@
                   <div class="col-1">
                     <div class="col-12">
                       <div class="form-group align-items-center col-12 text-center" (click)="deleteRepeat(method)">
-                          <i class="fa fa-times" aria-hidden="true"></i>
+                          <i class="fa
+                           fa-times" style="font-size: x-large" aria-hidden="true"></i>
                       </div>
                     </div>
                   </div>
@@ -190,26 +192,25 @@
                   <!-- Persones -->
                   <div class="col-2">
                   <div class="col-12">
-
                     <div class="input-group mb-2 mr-sm-2">
+
                       <select class="form-control"
-                              [value]="cleanSelects"
-                              [ngModel]="getPreguntaRepeat(method.id,ambit,entorn)?.persona?.tipusPersona?.descripcio"
+                              [ngModel]="getPreguntaRepeat(method.id,ambit,entorn)?.persona"
                               (ngModelChange)="changePersona(getPreguntaRepeat(method.id,ambit,entorn), $event)"
-                              name="personasdfc{{i}}{{x}}">
+                              name="personasdfc{{i}}{{x}}"
+                              [compareWith]="compare">
                         <option disabled selected value ></option>
-                        <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
+                        <option *ngFor="let persona of personsSelector" [ngValue]="persona"> {{persona.tipusPersona.descripcio}}</option>
                       </select>
                     </div>
-
                   </div>
-            </div>
+                </div>
 
                   <!--/ Persones -->
 
                   <!-- Severity -->
 
-                  <div class="col-xs-2">
+                  <div class="col-1">
                     <div class="col-12">
                       <select class="form-control"
                               [value]="cleanSelects"
@@ -224,7 +225,7 @@
                   </div>
                   <!--/ Severity -->
                   <!-- Frequencia -->
-                  <div class="col-xs-2">
+                  <div class="col-1">
                     <div class="col-12">
                       <select class="form-control" id="t1frequency"
                               [required]="pregunta.apl"
@@ -249,6 +250,7 @@
                            disabled
                            [value]="getPreguntaRepeat(method.id,ambit, entorn)?.factor?.descripcio">
                   </div>
+                </div>
                 </ng-container>
               </ng-container>
           </ng-template>
@@ -337,11 +339,11 @@
                         [required]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
                         [value]="cleanSelects"
                         [disabled]="!getFirtsContexto(cont.id , ambit , cont )?.membreUnic || getFirtsContexto(cont.id , ambit , cont )?.mesUc"
-                        [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.persona?.tipusPersona?.descripcio"
+                        [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.persona"
                         (ngModelChange)="changePersonaSelector(getFirtsContexto(cont.id , ambit , cont ), $event)">
 
                   <option disabled selected value></option>
-                  <option *ngFor="let person of personsSelector"> {{person.tipusPersona.descripcio}}</option>
+                  <option *ngFor="let person of personsSelector" [ngValue]="person"> {{person.tipusPersona.descripcio}}</option>
                 </select>
               </div>
             </div>
@@ -389,7 +391,7 @@
   </div>
   <div class="form-group row">
     <div class="form-group col-6 float-left">
-      <button type="button" class="btn btn-danger ml-3 mb-1" (click)="clean();"><i class="fa fa-times" aria-hidden="true"></i> Esborrar </button>
+      <button type="button" class="btn btn-danger ml-3 mb-1" (click)="open(esborrar);"><i class="fa fa-times" aria-hidden="true"></i> Esborrar </button>
     </div>
     <div class="form-group col-6 float-right text-right">
       <button  type="submit"  class="mr-3 mb-1 btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>

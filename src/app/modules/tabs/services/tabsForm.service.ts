@@ -34,14 +34,14 @@ export class TabsFormService extends GlobalService {
   getValuesGravetat( ): Observable<Gravetat[]> {
     return this._http.get<Gravetat[]>(`${this.apiURL}/dsdiba/api/gravetat/`);
   }
+  cleanAmbit(idDiagnostico: number , idAmbit: number ): Observable<Diagnosis> {
+    return this._http.delete<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}/ambit/${idAmbit}`);
+  }
+  cleanPreguntes(idDiagnostico: number , idSituacioSocial: number ): Observable<Diagnosis> {
+    return this._http.delete<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}/situacio/${idSituacioSocial}`);
+  }
   getDiagnostic(idDiagnostico: number ): Observable<Diagnosis> {
-    return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}`).pipe(
-      map(data => {
-        if (!data.id) { data = new Diagnosis() }
-        if (!data.valoracio) { data.valoracio = new Valoracio(); data.valoracio.evaluacions = [] }
-        return data;
-      })
-    );
+    return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}`);
   }
   DeletePregunta( id: number): Observable<Preguntas> {
     return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${id}`);

@@ -81,7 +81,7 @@
     </ng-container>
   </div>
 
-  <form ngNativeValidate (submit)="finishDiagnostic()">
+  <form #formTab="ngForm" ngNativeValidate (submit)="open(validation)">
   <!-- Ambito -->
   <div class="row m-3" *ngFor="let ambit of value.ambit;let i = index">
     <ng-container *ngIf="ambit?.ambit?.descripcio?.toUpperCase() !== 'GLOBALITAT DEL CAS'">
@@ -276,15 +276,15 @@
   <!-- Return to Back -->
   <div class="row my-3">
     <div class="col-12 mb-3 text-center">
-      <button  class="align-middle btn btn-outline-primary no-print btn-lg" type="button" style="width: 20%;" (click)="open(validation)" > {{ "FORM.validation" | translate }}</button>
+      <button  class="align-middle btn btn-outline-primary no-print btn-lg" type="submit" style="width: 20%;" > {{ "FORM.validation" | translate }}</button>
     </div>
   </div>
     <ng-template #validation let-modal>
       <div class="modal-header">
         <h4 class="modal-title">
-                          <span class="text-primary">
-                           Confirmar Validacio
-                          </span>
+          <span class="text-primary">
+            Confirmar Validacio
+          </span>
         </h4>
         <button type="button"
                 class="close bg-primary text-white"
@@ -299,7 +299,7 @@
       <div class="modal-footer">
         <button type="submit"
                 class="btn btn-outline-primary btn-large"
-                (click)="modal.dismiss('Cross click')" >
+                (click)="modal.dismiss('Cross click'); finishDiagnostic()">
           {{ "TABLE.yes" | translate }}
         </button>
         <button type="button"
