@@ -56,6 +56,7 @@ export let TRANSLATION = {
   /* Form */
   'FORM': {
     'fileId'        : 'Nº expedient',
+    'diagnosisId'   : 'Codi diagnòstic',
     'fileName'      : 'Nom expedient',
     'fileOwner'     : 'Nom professional',
     'fileDate'      : 'Data',
@@ -100,7 +101,8 @@ export let TRANSLATION = {
   },
   /* Observations */
   'OBS': {
-    'resum'         : 'Resum valoració DSDIBA-',
+    'resum'         : 'Resum valoració',
+    'dsdiba'        : 'DSDIBA-',
     'ssocial'       : 'Situació social',
     'person'        : 'Persona',
     'type'          : 'Tipus',

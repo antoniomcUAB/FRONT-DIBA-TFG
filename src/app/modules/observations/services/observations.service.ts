@@ -3,7 +3,7 @@ import {GlobalService} from "../../../shared";
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from "@angular/core";
-import {Diagnosis} from "../../files";
+import {Diagnosis, Expedient} from "../../files";
 
 @Injectable()
 export class ObservationsService extends GlobalService {
@@ -14,5 +14,10 @@ export class ObservationsService extends GlobalService {
   /** GET RESULT OBSERVATIONS **/
   getDetailObservations(id: number): Observable<Diagnosis> {
     return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${id}`);
+  }
+
+  /** GET FILES BY ID **/
+  getFileById(id: number): Observable<Expedient> {
+    return this._http.get<Expedient>(`${this.apiURL}/dsdiba/api/expedient/${id}`);
   }
 }

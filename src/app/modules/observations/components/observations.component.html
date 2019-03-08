@@ -1,61 +1,122 @@
+<!-- Print Component -->
+<section id="print" class="row">
+  <div class="col-12">
+    <button type="button" class="float-right btn btn-outline-primary no-print" (click)="onPrint();"><i class="fa fa-file-pdf-o"></i> {{ "RESUMEN.pdf" | translate }}</button>
+  </div>
+</section>
+<!--/ Print Component -->
 
 <section>
-  <div class="row">
-    <div class="col-12 mb-3">
-      <h2 class="text-center mb-4">{{ "OBS.resum" | translate }}{{date | date:'dd/MM/yyyy'}}</h2>
-      <button type="button" class="float-right btn btn-outline-primary no-print" (click)="onPrint();"><i class="fa fa-file-pdf-o"></i> {{ "RESUMEN.pdf" | translate }}</button>
+  <h2 class="text-center mb-4">{{ "OBS.resum" | translate }}</h2>
+  <div class="card shadow-none">
+    <div class="card-body">
+      <div class="form-group row">
+        <!-- File ID -->
+        <div class="col-6">
+          <div class="col-12">
+            <label for="fileId"
+                   class="col-form-label">
+              {{ "FORM.fileId" | translate }}
+            </label>
+            <input class="form-control"
+                   type="text"
+                   value="{{ expedientID }}"
+                   id="fileId"
+                   disabled="disabled">
+          </div>
+        </div>
+        <!--/ File ID -->
+        <!-- File ID -->
+        <div class="col-6">
+          <div class="col-12">
+            <label for="fileId"
+                   class="col-form-label">
+              {{ "FORM.diagnosisId" | translate }}
+            </label>
+            <input class="form-control"
+                   type="text"
+                   value="{{ 'OBS.dsdiba' | translate }}{{date | date:'dd/MM/yyyy'}}"
+                   id="diagnosisId"
+                   disabled="disabled">
+          </div>
+        </div>
+        <!--/ File ID -->
+      </div>
+      <div class="form-group row">
+        <!-- File Owner -->
+        <div class="col-6">
+          <div class="col-12">
+            <label for="owner"
+                   class="col-form-label">
+              {{ "FORM.fileOwner" | translate }}
+            </label>
+            <input class="form-control"
+                   type="text"
+                   value="{{diagnosis?.professional?.nom}} {{diagnosis?.professional?.cognom1}} {{diagnosis?.professional?.cognom2}}"
+                   id="owner"
+                   disabled="disabled">
+          </div>
+        </div>
+        <!-- File Owner -->
+        <!-- File Date -->
+        <div class="col-6">
+          <div class="col-12">
+            <label for="fileDate"
+                   class="col-form-label">
+              {{ "FORM.fileDate" | translate }}
+            </label>
+            <input class="form-control"
+                   type="text"
+                   value="{{date | date:'dd/MM/yyyy'}}"
+                   id="fileDate"
+                   disabled="disabled">
+          </div>
+        </div>
+        <!--/ File Date -->
+      </div>
     </div>
   </div>
+
   <div class="row m-3" >
     <ng-container>
       <div class="col-12">
         <div class="card ">
           <div class="card-header text-white font-weight-bold bg-grey-400">
-            RESUM VALORACIO
+            RESUM VALORACIÓ
           </div>
-          <div class="card-body bg-grey-200">
+          <div class="card-body">
             <div class="row">
-              <div class="col-9">
+              <div class="col-6">
                 <table class="table table-bordered">
-                  <thead class="table-active bg-info">
-                  <tr>
-                    <ng-template ngFor [ngForOf]="evaluations" let-evaluacio>
-                      <ng-template [ngIf]="evaluacio && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
-                        <th class="border-dark border-top border-right border-left border-bottom-0" colspan="2" [ngClass]="{'bg-warning text-black-50' : evaluacio?.ambit?.ambit?.descripcio?.toUpperCase() === 'AUTONOMIA',
-                         'bg-danger' : evaluacio.ambit?.ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
-                         'bg-success' : evaluacio.ambit?.ambit?.descripcio.toUpperCase() === 'RELACIONAL',
-                         'bg-info' : evaluacio.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'}">
-                          {{evaluacio?.ambit?.ambit?.descripcio}}</th>
-                      </ng-template>
-                    </ng-template>
-                  </tr>
-                  </thead>
-                  <tbody >
-                  <ng-container>
-                    <tr>
-                      <ng-template ngFor [ngForOf]="evaluations" let-Riscos>
-                        <ng-template [ngIf]="Riscos && Riscos?.ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
-                          <th class="bg-grey-200 border-dark  border-left border-bottom border-right-0 border-top-0">RISC</th>
-                          <th class="border-dark border-right border-bottom border-top-0 border-left-0 " [ngClass]="{'warning' : Riscos.risc?.descripcio.toUpperCase() === 'RISC',
-                                      'danger' :Riscos.risc?.descripcio.toUpperCase() === 'ALT RISC',
-                                      'success' :Riscos.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
-                                      'info' : Riscos.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;'}">
-                            {{Riscos?.risc?.descripcio}}</th>
+                  <tbody>
+                      <ng-template ngFor [ngForOf]="evaluations" let-evaluacio>
+                        <ng-template [ngIf]="evaluacio && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
+                          <tr>
+                            <th class="text-white"
+                                [ngClass]="{'bg-warning text-black-50' : evaluacio?.ambit?.ambit?.descripcio?.toUpperCase() === 'AUTONOMIA',
+                                            'bg-danger' : evaluacio.ambit?.ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
+                                            'bg-success' : evaluacio.ambit?.ambit?.descripcio.toUpperCase() === 'RELACIONAL',
+                                            'bg-info' : evaluacio.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'}">
+                              RISC {{evaluacio?.ambit?.ambit?.descripcio.toUpperCase()}}</th>
+
+                            <th class="text-center" [ngClass]="{'warning' : evaluacio?.risc?.descripcio.toUpperCase() === 'RISC',
+                                            'danger' : evaluacio?.risc?.descripcio.toUpperCase() === 'ALT RISC',
+                                            'success' : evaluacio?.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
+                                            'info' : evaluacio?.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;'}">
+                              {{evaluacio?.risc.descripcio.toUpperCase()}}</th>
+                          </tr>
                         </ng-template>
                       </ng-template>
-                    </tr>
-                  </ng-container>
                   </tbody>
                 </table>
               </div>
-
-              <div class="col-3">
+              <div class="col-6">
                 <table class="table table-bordered">
                   <thead class="table-active bg-info">
                   <tr>
                     <ng-template ngFor [ngForOf]="evaluations" let-evaluacio>
                       <ng-template [ngIf]="evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS' ">
-                        <th class="border-dark border-top border-right border-left border-bottom-0" colspan="2">{{evaluacio.ambit.ambit.descripcio}}</th>
+                        <th colspan="2" class="text-white">{{evaluacio.ambit.ambit.descripcio.toUpperCase()}}</th>
                       </ng-template>
                     </ng-template>
                   </tr>
@@ -65,13 +126,12 @@
                     <tr>
                       <ng-template ngFor [ngForOf]="evaluations" let-evaluacio>
                         <ng-template [ngIf]="evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS' ">
-                          <th class="bg-grey-200 border-dark  border-left border-bottom border-right-0 border-top-0" >RISC</th>
-                          <th class="border-dark border-right border-bottom border-top-0 border-left-0"
+                          <th
                               [ngClass]="{'warning' : evaluacio.risc?.descripcio.toUpperCase() === 'RISC',
                                       'danger' : evaluacio.risc?.descripcio.toUpperCase() === 'ALT RISC',
                                       'success' : evaluacio.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
                                       'info' : evaluacio.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
-                            {{evaluacio?.risc?.descripcio}}
+                            {{evaluacio?.risc?.descripcio.toUpperCase()}}
                           </th>
                         </ng-template>
                       </ng-template>
@@ -159,7 +219,7 @@
                       <!-- Result Professsional Justification -->
                       <tr *ngIf="evaluacion.justificacio">
                         <td class="text-right">{{ "OBS.risc-pro-justify" | translate }}</td>
-                        <td>
+                        <td class="p-0 rounded-0">
                           <textarea class="form-control" type="text" value="{{ evaluacion.justificacio }}" id="fileObservation" disabled="disabled"></textarea>
                         </td>
                       </tr>
@@ -221,7 +281,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header text-white font-weight-bold bg-info">
-              {{ global?.ambit?.descripcio.toUpperCase() }}
+            FACTORS DE CONTEXTUALITZACIÓ GLOBALS DEL CAS
           </div>
           <div class="card-body">
             <div class="row">
@@ -256,45 +316,6 @@
                 </label>
                 <textarea class="form-control" type="text" value="{{ global.observacions }}" id="fileObservationGlobal" disabled="disabled"></textarea>
               </div>
-            </div>
-            <div class="row">
-              <!-- Result Automatic Evaluations -->
-              <table class="table table-borderless" *ngFor="let evaluacion of evaluations">
-                <ng-container *ngIf="evaluacion.ambit.id === global.id">
-                  <tbody>
-                  <!-- Result Automatic Evaluations -->
-                  <tr>
-                    <td class="text-right">{{ "OBS.risc-auto" | translate }}</td>
-                    <td class="text-center" [ngClass]="{'warning' : evaluacion.risc?.descripcio.toUpperCase() === 'RISC',
-                                                            'danger' : evaluacion.risc?.descripcio.toUpperCase() === 'ALT RISC',
-                                                            'success' : evaluacion.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
-                                                            'info' : evaluacion.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
-                      {{evaluacion.risc.descripcio}}
-                    </td>
-                  </tr>
-                  <!--/ Result Automatic Evaluations -->
-                  <!-- Result Professsional Evaluations -->
-                  <tr *ngIf="evaluacion.riscProfessional">
-                    <td class="text-right">{{ "OBS.risc-pro" | translate }}</td>
-                    <td class="text-center" [ngClass]="{'warning' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'RISC',
-                                                            'danger' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'ALT RISC',
-                                                            'success' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'VULNERABILITAT',
-                                                            'info' : evaluacion.riscProfessional?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
-                      {{evaluacion.riscProfessional?.descripcio}}
-                    </td>
-                  </tr>
-                  <!--/ Result Professsional Evaluations -->
-                  <!-- Result Professsional Justification -->
-                  <tr *ngIf="evaluacion.justificacio">
-                    <td class="text-right">{{ "OBS.risc-pro-justify" | translate }}</td>
-                    <td>
-                      <textarea class="form-control" type="text" value="{{ evaluacion.justificacio }}" id="fileObservationGlobal" disabled="disabled"></textarea>
-                    </td>
-                  </tr>
-                  <!--/ Result Professsional Justification -->
-                  </tbody>
-                </ng-container>
-              </table>
             </div>
           </div>
         </div>

@@ -143,7 +143,7 @@
                                      class="form-control"
                                      placeholder="dd-mm-yyyy"
                                      type="date"
-                                     min="{{ toDate | date:'dd/MM/yyyy' }}"
+                                     max="{{ toDate | date:'yyyy-MM-dd' }}"
                                      [(ngModel)]="dateUnsuscription"
                                      [required]="true">
                             </div>
@@ -252,6 +252,7 @@
                            class="form-control"
                            placeholder="dd-mm-yyyy"
                            type="date"
+                           max="{{ toDate | date:'yyyy-MM-dd' }}"
                            [(ngModel)]="member.dataAlta"
                            [required]="true">
                   </div>
@@ -298,6 +299,7 @@
                            class="form-control"
                            placeholder="dd-mm-yyyy"
                            type="date"
+                           max="{{ toDate | date:'yyyy-MM-dd' }}"
                            [(ngModel)]="member.dataNaixement"
                            [required]="true">
                   </div>
@@ -400,7 +402,7 @@
       <div class="row">
         <div class="col-12">
           <div [ngClass]="{'col-12' : obsData?.length <= 1, 'col-6' : obsData?.length > 1}"
-               class="text-center">
+               class="text-center float-left">
             <!-- Table List Diagnosis -->
             <app-table-list [tableData]="obsData"
                             [options]="options"
@@ -415,7 +417,7 @@
                 </td>
                 <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
                   <a *ngIf="item.estat.descripcio === 'VALIDAT'"
-                     [routerLink]="['/observations', {'id': item.id,'date': item.data}]" > <i class="fa fa-eye"></i>
+                     [routerLink]="['/observations', {'id': item.id,'date': item.data,'exp': expedient.id}]" > <i class="fa fa-eye"></i>
                   </a>
                   <span class="px-2" *ngIf="item.estat.descripcio ==='BORRADOR'"> </span>
                   <a *ngIf="item.estat.descripcio === 'BORRADOR'"
@@ -427,9 +429,160 @@
             </app-table-list>
             <!--/ Table List Diagnosis -->
           </div>
-          <div class="col-6">
+          <div class="col-6 float-left" *ngIf="obsData?.length > 1">
             <!-- Chart -->
-
+            <div class="card shadow-none">
+              <label class="px-4 m-0"><i class="fa fa-bar-chart"></i> Gràfics estadístics</label>
+              <div class="card-body pt-0">
+                <ngb-tabset>
+                  <ngb-tab title="Autonomia">
+                    <ng-template ngbTabContent>
+                      <div class="p-5 h-100 d-table m-auto">
+                        <div>
+                          <ngx-charts-bar-vertical
+                            class="chart-container"
+                            [scheme]="colorScheme"
+                            [customColors]="colorAutonomia"
+                            [schemeType]="schemeType"
+                            [results]="chartsAutonomiaValue"
+                            [gradient]="gradient"
+                            [xAxis]="showXAxis"
+                            [yAxis]="showYAxis"
+                            [legend]="showLegend"
+                            [showXAxisLabel]="showXAxisLabel"
+                            [showYAxisLabel]="showYAxisLabel"
+                            [tooltipDisabled]="tooltipDisabled"
+                            [xAxisLabel]="xAxisLabel"
+                            [yAxisLabel]="yAxisLabel"
+                            [showGridLines]="showGridLines"
+                            [barPadding]="barPadding"
+                            [roundDomains]="roundDomains"
+                            (select)="select($event)"
+                            (legendLabelClick)="onLegendLabelClick($event)">
+                          </ngx-charts-bar-vertical>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                  <ngb-tab title="Material i instrumental">
+                    <ng-template ngbTabContent>
+                      <div class="p-5 h-100 d-table m-auto">
+                        <div>
+                          <ngx-charts-bar-vertical
+                            class="chart-container"
+                            [scheme]="colorScheme"
+                            [customColors]="colorMaterial"
+                            [schemeType]="schemeType"
+                            [results]="chartsMaterialValue"
+                            [gradient]="gradient"
+                            [xAxis]="showXAxis"
+                            [yAxis]="showYAxis"
+                            [legend]="showLegend"
+                            [showXAxisLabel]="showXAxisLabel"
+                            [showYAxisLabel]="showYAxisLabel"
+                            [tooltipDisabled]="tooltipDisabled"
+                            [xAxisLabel]="xAxisLabel"
+                            [yAxisLabel]="yAxisLabel"
+                            [showGridLines]="showGridLines"
+                            [barPadding]="barPadding"
+                            [roundDomains]="roundDomains"
+                            (select)="select($event)"
+                            (legendLabelClick)="onLegendLabelClick($event)">
+                          </ngx-charts-bar-vertical>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                  <ngb-tab title="Relacional">
+                    <ng-template ngbTabContent>
+                      <div class="p-5 h-100 d-table m-auto">
+                        <div>
+                          <ngx-charts-bar-vertical
+                            class="chart-container"
+                            [scheme]="colorScheme"
+                            [customColors]="colorRelacional"
+                            [schemeType]="schemeType"
+                            [results]="chartsRelacionalValue"
+                            [gradient]="gradient"
+                            [xAxis]="showXAxis"
+                            [yAxis]="showYAxis"
+                            [legend]="showLegend"
+                            [showXAxisLabel]="showXAxisLabel"
+                            [showYAxisLabel]="showYAxisLabel"
+                            [tooltipDisabled]="tooltipDisabled"
+                            [xAxisLabel]="xAxisLabel"
+                            [yAxisLabel]="yAxisLabel"
+                            [showGridLines]="showGridLines"
+                            [barPadding]="barPadding"
+                            [roundDomains]="roundDomains"
+                            (select)="select($event)"
+                            (legendLabelClick)="onLegendLabelClick($event)">
+                          </ngx-charts-bar-vertical>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                  <ngb-tab title="Generalitat del cas">
+                    <ng-template ngbTabContent>
+                      <div class="p-5 h-100 d-table m-auto">
+                        <div>
+                          <ngx-charts-bar-vertical
+                            class="chart-container"
+                            [scheme]="colorScheme"
+                            [customColors]="colorGlobal"
+                            [schemeType]="schemeType"
+                            [results]="chartsGlobalValue"
+                            [gradient]="gradient"
+                            [xAxis]="showXAxis"
+                            [yAxis]="showYAxis"
+                            [legend]="showLegend"
+                            [showXAxisLabel]="showXAxisLabel"
+                            [showYAxisLabel]="showYAxisLabel"
+                            [tooltipDisabled]="tooltipDisabled"
+                            [xAxisLabel]="xAxisLabel"
+                            [yAxisLabel]="yAxisLabel"
+                            [showGridLines]="showGridLines"
+                            [barPadding]="barPadding"
+                            [roundDomains]="roundDomains"
+                            (select)="select($event)"
+                            (legendLabelClick)="onLegendLabelClick($event)">
+                          </ngx-charts-bar-vertical>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                  <ngb-tab title="General" tabindex="active">
+                    <ng-template ngbTabContent>
+                      <div class="p-5 h-100 d-table m-auto">
+                        <div>
+                          <ngx-charts-bar-vertical
+                            class="chart-container"
+                            [scheme]="colorScheme"
+                            [customColors]="colorGeneral"
+                            [schemeType]="schemeType"
+                            [results]="chartsGroupValue"
+                            [gradient]="gradient"
+                            [xAxis]="showXAxis"
+                            [yAxis]="showYAxis"
+                            [legend]="showLegend"
+                            [showXAxisLabel]="showXAxisLabel"
+                            [showYAxisLabel]="showYAxisLabel"
+                            [tooltipDisabled]="tooltipDisabled"
+                            [xAxisLabel]="xAxisLabel"
+                            [yAxisLabel]="yAxisLabel"
+                            [showGridLines]="showGridLines"
+                            [barPadding]="barPadding"
+                            [roundDomains]="roundDomains"
+                            (select)="select($event)"
+                            (legendLabelClick)="onLegendLabelClick($event)">
+                          </ngx-charts-bar-vertical>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                </ngb-tabset>
+              </div>
+            </div>
             <!--/ Chart -->
           </div>
         </div>
