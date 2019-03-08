@@ -65,7 +65,7 @@ export class Ambit {
   entorn: Entorn;
   ambit: AmbitObs;
   observacions: string;
-  factors_contetxt: FactorsCcontext;
+  factors_context: FactorsContext;
   risc: number;
   valAltrisc: number;
   valRisc: number;
@@ -150,7 +150,7 @@ export class SelectorFrequencia {
 }
 
 /* Factors de Context */
-export class FactorsCcontext {
+export class FactorsContext {
   descripcio: string;
   fc1m: number;
   fctots: number;
@@ -178,4 +178,17 @@ export class Risc {
   id: number;                 // ID TipusPersona
   descripcio: string;         // Descripción
   value: number;              // Valor
+}
+
+
+/*Chart by Group */
+export class ChartGroup {
+  name: string;
+  series: ChartAmbit[];
+}
+
+/* Chart by Ambit */
+export class ChartAmbit {
+  name: string;
+  value: number;
 }

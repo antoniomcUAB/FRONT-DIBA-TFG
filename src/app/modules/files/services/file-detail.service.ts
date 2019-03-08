@@ -44,6 +44,11 @@ export class FilesDetailService extends GlobalService {
       }), );
   }
 
+  /** GET RESULT OBSERVATIONS **/
+  getDetailObservations(id: number): Observable<Expedient> {
+    return this._http.get<Expedient>(`${this.apiURL}/dsdiba/api/expedient/${id}`);
+  }
+
   /** GET UNITY FAMILY **/
   getUnityFamily(id: number, options: TableListOptions): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);

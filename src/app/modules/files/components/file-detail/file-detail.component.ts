@@ -1,13 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilesDetailService } from '../../services/file-detail.service';
-import { Diagnosis, Expedient, Model, Persona, TipusPersona } from '../../models/expedient';
+import {ChartAmbit, ChartGroup, Diagnosis, Evaluacions, Expedient, Model, Persona, TipusPersona} from '../../models/expedient';
 import { TableListOptions, TableListResponse } from '../../../../shared/modules/table-list';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { area, line, curveLinear } from 'd3-shape';
 import { Professional } from "../../../home/models/professional";
 
+export const colorVulnerabilitat = '#66bb6a';
+export const colorRisc = '#ffee58';
+export const colorAltRisc = '#ef5350';
+export const colorSense = '#29b6f6';
 export const colors = [
   '#5c6bc0', '#66bb6a', '#29b6f6', '#ffee58', '#ef5350', '#868e96'
 ];
@@ -23,6 +27,14 @@ export class FileDetailComponent {
   idProfessional: number;
   expedient: Expedient;
   diagnosis: Diagnosis;
+  /* Chart variables */
+  arrayDiagnosis: Diagnosis[];
+  diagnosisValidated: Diagnosis[];
+  chartsGroupValue: ChartGroup[];
+  chartsAutonomiaValue: ChartAmbit[];
+  chartsMaterialValue: ChartAmbit[];
+  chartsRelacionalValue: ChartAmbit[];
+  chartsGlobalValue: ChartAmbit[];
 
   id: number;
   member: Persona;
@@ -41,7 +53,26 @@ export class FileDetailComponent {
   closeResult: string;
 
   /* Charts */
-  /** AQUI EL CHART CODE */
+  /** options **/
+  showXAxis = true;
+  showYAxis = true;
+  gradient = true;
+  showLegend = false;
+  showXAxisLabel = true;
+  tooltipDisabled = false;
+  xAxisLabel = 'Evaluacions';
+  showYAxisLabel = true;
+  yAxisLabel = 'Risc';
+  showGridLines = true;
+  barPadding = 16;
+  roundDomains = true;
+  colorScheme = {domain: colors};
+  schemeType = 'ordinal';
+  colorGeneral;
+  colorAutonomia;
+  colorMaterial;
+  colorRelacional;
+  colorGlobal;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -108,6 +139,187 @@ export class FileDetailComponent {
     this.optionsUF.pagination = false;
     this.optionsUF.footer = false;
     this.reloadDataTable(this.id);
+
+    this.getDataChart();
+
+    /* Chart */
+    /** Autonomia **/
+    this.chartsAutonomiaValue = [
+      {
+        name: 'DSDIBA-05/03/2019',
+        value: 1
+      },
+      {
+        name: 'DSDIBA-05/04/2019',
+        value: 5
+      },
+      {
+        name: 'DSDIBA-05/05/2019',
+        value: 0
+      }
+    ];
+    this.colorAutonomia = [
+      {
+        name: 'DSDIBA-05/03/2019',
+        value: colorVulnerabilitat
+      },
+      {
+        name: 'DSDIBA-05/04/2019',
+        value: colorRisc
+      },
+      {
+        name: 'DSDIBA-05/05/2019',
+        value: colorSense
+      }
+    ];
+
+    /** Material **/
+    this.chartsMaterialValue = [
+      {
+        name: 'DSDIBA-05/03/2019',
+        value: 5
+      },
+      {
+        name: 'DSDIBA-05/04/2019',
+        value: 5
+      },
+      {
+        name: 'DSDIBA-05/05/2019',
+        value: 5
+      }
+    ];
+    this.colorMaterial = [
+      {
+        name: 'DSDIBA-05/03/2019',
+        value: colorRisc
+      },
+      {
+        name: 'DSDIBA-05/04/2019',
+        value: colorRisc
+      },
+      {
+        name: 'DSDIBA-05/05/2019',
+        value: colorRisc
+      }
+    ];
+    this.chartsRelacionalValue = [
+      {
+        name: 'DSDIBA-05/03/2019',
+        value: 3
+      },
+      {
+        name: 'DSDIBA-05/04/2019',
+        value: 5
+      },
+      {
+        name: 'DSDIBA-05/05/2019',
+        value: 10
+      }
+    ];
+    this.colorRelacional = [
+      {
+        name: 'DSDIBA-05/03/2019',
+        value: colorVulnerabilitat
+      },
+      {
+        name: 'DSDIBA-05/04/2019',
+        value: colorRisc
+      },
+      {
+        name: 'DSDIBA-05/05/2019',
+        value: colorAltRisc
+      }
+    ];
+    this.chartsGlobalValue = [
+      {
+        name: 'DSDIBA-05/03/2019',
+        value: 3
+      },
+      {
+        name: 'DSDIBA-05/04/2019',
+        value: 4
+      },
+      {
+        name: 'DSDIBA-05/05/2019',
+        value: 6
+      }
+    ];
+    this.colorGlobal = [
+      {
+        name: 'DSDIBA-05/03/2019',
+        value: colorVulnerabilitat
+      },
+      {
+        name: 'DSDIBA-05/04/2019',
+        value: colorRisc
+      },
+      {
+        name: 'DSDIBA-05/05/2019',
+        value: colorRisc
+      }
+    ];
+    this.chartsGroupValue = [
+      {
+        name: "Autonomia",
+        series: [
+          {
+          name: 'DSDIBA-05/03/2019',
+          value: 1
+          },
+          {
+            name: 'DSDIBA-05/03/2019',
+            value: 5
+          },
+          {
+            name: 'DSDIBA-05/03/2019',
+            value: 10
+          }
+        ]
+      }
+    ];
+    this.colorGeneral = [
+      {
+        name: 'DSDIBA-05/03/2019',
+        value: 1
+      },
+      {
+        name: 'DSDIBA-05/04/2019',
+        value: 5
+      },
+      {
+        name: 'DSDIBA-05/05/2019',
+        value: 10
+      }
+    ];
+  }
+
+  /* Charts */
+  getDataChart() {
+    this.diagnosisValidated = [];
+    this.arrayDiagnosis = [];
+    this.chartsAutonomiaValue = [];
+    /** Get services **/
+    this._service.getDetailObservations(this.id).subscribe((data: Expedient ) => {
+      this.arrayDiagnosis = data.diagnostic;
+      for (const diagnostic of this.arrayDiagnosis) {
+        if (diagnostic.estat.descripcio.toUpperCase() === "VALIDAT") {
+          this.diagnosisValidated.push(diagnostic);
+        }
+      }
+      for (const validated of this.diagnosisValidated) {
+          this.chartsAutonomiaValue[0].name = validated.valoracio.evaluacions.ambit.descripcio;
+          this.chartsAutonomiaValue[0].value = validated.valoracio.evaluacions.ambit.valRisc;
+          console.log(this.chartsAutonomiaValue);
+      }
+    });
+  }
+
+  select(data) {
+    console.log('Item clicked', data);
+  }
+
+  onLegendLabelClick(entry) {
+    console.log('Legend clicked', entry);
   }
 
   /* Get Current Model */
