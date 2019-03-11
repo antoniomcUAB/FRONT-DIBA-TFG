@@ -340,7 +340,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
                     this.value.ambit[i].entorn[x].pregunta[z].gravetat = new Gravetat();
                   }
                   this.value.ambit[i].entorn[x].pregunta[z].gravetat = grave;
-                  this.tabsService.PutQuestionAndGetRisc(pregunta,this.idDiagnostic).subscribe((result) => {
+                  this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
                     this.value.ambit[i].entorn[x].pregunta[z] = result;
                     this.value.ambit[i].entorn[x].pregunta[z].frequencia = new Frequencia();
                   }, (err) => {
@@ -383,9 +383,10 @@ export class FormTabComponent extends CustomInput implements OnInit  {
         console.log(err);
       });
   }
-  public getFilterPersonas(idSocial: number) {
-    return this.personsSelector;
+
+  public getFilterPersonas(idSocial: number , personaSelec:Persona ) {
     let personas: string [] = [];
+    let ffpp: Persona [] = [];
     for ( const ambits of this.value.ambit ) {
       for ( const entorns of ambits.entorn ) {
         for ( const pregunta of entorns.pregunta ) {
@@ -397,9 +398,14 @@ export class FormTabComponent extends CustomInput implements OnInit  {
         }
       }
     }
-    return this.personsSelector.filter(data => {
+    console.log(personaSelec);
+    ffpp = this.personsSelector.filter(data => {
       return !personas.find(item => item === data.id);
     });
+    if ( personaSelec) {
+      ffpp.push(personaSelec);
+    }
+    return ffpp;
   }
 
 }

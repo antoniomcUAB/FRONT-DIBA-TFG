@@ -99,19 +99,18 @@
                     </div>
                     <select class="form-control" id="t2person"
                             [value]="cleanSelects"
-                            [disabled]="!getFirstPregunta(pregunta.id , ambit, entorn) "
-                            [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)?.persona"
-                            (ngModelChange)="changePersona(getFirstPregunta(pregunta.id , ambit, entorn), $event)"
+                            [disabled]="!getFirstPregunta(pregunta.id , ambit, entorn ) "
+                            [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn )?.persona"
+                            (ngModelChange)="changePersona( getFirstPregunta( pregunta.id , ambit, entorn ), $event)"
                             [compareWith]="compare"
                             name="persona{{e}}{{i}}">
                       <option disabled selected value ></option>
-                      <option *ngFor="let person of getFilterPersonas(pregunta.id)" [ngValue]="person"> {{person.tipusPersona.descripcio}}</option>
+                      <option *ngFor="let person of getFilterPersonas(pregunta.id,getFirstPregunta(pregunta.id,ambit,entorn)?.persona)" [ngValue]="person"> {{person.tipusPersona.descripcio}}</option>
                     </select>
                   </div>
                 </div>
               </div>
               <!--/ Persones -->
-
               <!-- Severity -->
               <div class="col-1">
                 <div class="col-12">
@@ -200,7 +199,7 @@
                               name="personasdfc{{i}}{{x}}"
                               [compareWith]="compare">
                         <option disabled selected value ></option>
-                        <option *ngFor="let persona of personsSelector" [ngValue]="persona"> {{persona.tipusPersona.descripcio}}</option>
+                        <option *ngFor="let persona of getFilterPersonas(method.situacioSocial.id,getPreguntaRepeat(method.id,ambit,entorn)?.persona)" [ngValue]="persona"> {{persona.tipusPersona.descripcio}}</option>
                       </select>
                     </div>
                   </div>
