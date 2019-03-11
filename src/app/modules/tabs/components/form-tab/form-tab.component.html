@@ -34,7 +34,6 @@
   </form>
 </ng-template>
 <!--/ Factores Economicos -->
-
 <!--/ titulo -->
 <form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()" *ngIf="data && value">
   <div class="card-body pt-0">
@@ -105,7 +104,7 @@
                             [compareWith]="compare"
                             name="persona{{e}}{{i}}">
                       <option disabled selected value ></option>
-                      <option *ngFor="let person of getFilterPersonas(pregunta.id,getFirstPregunta(pregunta.id,ambit,entorn)?.persona)" [ngValue]="person"> {{person.tipusPersona.descripcio}}</option>
+                      <option *ngFor="let person of getFilterPersonas(pregunta.id,getFirstPregunta(pregunta.id,ambit,entorn)?.persona)" [ngValue]="person"> {{person.tipusPersona.descripcio}} </option>
                     </select>
                   </div>
                 </div>
@@ -314,8 +313,8 @@
             <div class="col-1">
               <div class="col-12">
                 <div class="form-group align-items-center col-12 text-center">
-                  <label style="font-size: x-small" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS'"> {{ "TABLE.aplUna" | translate }}</label>
-                  <label style="font-size: x-small" *ngIf="contextualitzacio.toUpperCase() === 'GLOBALITAT DEL CAS'"> {{ "TABLE.apl" | translate }}</label>
+                  <label style="font-size: x-small" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots "> {{ "TABLE.aplUna" | translate }}</label>
+                  <label style="font-size: x-small" *ngIf="contextualitzacio.toUpperCase() === 'GLOBALITAT DEL CAS' || cont.fctots === null"> {{ "TABLE.apl" | translate }}</label>
                   <label class="custom-control custom-checkbox apply">
                     <input type="checkbox" class="custom-control-input position-relative"
                             [disabled]="getFirtsContexto(cont.id , ambit , cont )?.mesUc"
@@ -331,7 +330,7 @@
             <!--/ Aplica 1 persona-->
 
             <!-- Persones -->
-            <div class="col-2"  *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS'" >
+            <div class="col-2"  *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots" >
               <div class="col-12">
                 <label for="t1person">{{ "TABLE.person" | translate }} </label>
                 <select class="form-control" id="t1person" name="personas{{c}}"
@@ -350,8 +349,7 @@
 
             <!--/ Persones -->
             <!--aplica mes de una persona-->
-
-            <div class="col-2" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
+            <div class="col-2" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots">
               <div class="col-12">
                 <div class="form-group align-items-center col-12 text-center">
                   <label style="font-size: x-small">  {{ "TABLE.aplMas" | translate }}</label>

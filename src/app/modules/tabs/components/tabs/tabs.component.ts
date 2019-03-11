@@ -162,6 +162,7 @@ export class TabsComponent {
         this.personActives.push(person);
       }
     }
+    console.log(this.personActives);
   }
   /*Recargamos el diagnostico*/
   reloadDiagnostico() {

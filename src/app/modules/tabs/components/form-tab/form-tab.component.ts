@@ -77,6 +77,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   reloadDiagnostico() {
     this.tabsService.getDiagnostic(this.idDiagnostic).subscribe((result: Diagnosis) => {
       this.value = result;
+      console.log(this.value);
     }, (err) => {
       console.log(err);
     });
@@ -99,6 +100,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       console.log(err);
     });
     }
+
   public newPreguntaContext( ambit: Ambit , contexto: FactorsContext , membre: string ) {
     const contextoEncontrado = this.getContextos( ambit.id , ambit , contexto );
     if (contextoEncontrado) {
@@ -114,7 +116,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
           }
         }
 
-    }else{
+    } else {
       /* Si hay contexto y no existe llama a back , añadelo al objeto*/
       const objContext = new Contextualitzacio(contexto.descripcio, contexto.id);
       if (membre === 'unic') {

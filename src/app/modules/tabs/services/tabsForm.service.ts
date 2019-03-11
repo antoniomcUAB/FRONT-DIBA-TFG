@@ -18,6 +18,13 @@ export class TabsFormService extends GlobalService {
   getFilesFormModel( ): Observable<Ambits> {
     return this._http.get<Ambits>(`${this.apiURL}/dsdiba/api/model`).pipe(
       map(data => {
+        for (let cont of data.ambits) {
+          for (let context of cont.factors_context) {
+            if (!context.fctots) {
+              context.fctots = null;
+            }
+          }
+        }
         return data;
       })
     );
@@ -27,9 +34,6 @@ export class TabsFormService extends GlobalService {
   }
   getRiscos( ): Observable<Risc[]> {
     return this._http.get<Risc[]>(`${this.apiURL}/dsdiba/api/risc/`);
-  }
-  getPersonasOfDiagnostic( ): Observable<Persona[]> {
-    return this._http.get<Persona[]>(`${this.apiURL}/dsdiba/api/frequencia/`);
   }
   getValuesGravetat( ): Observable<Gravetat[]> {
     return this._http.get<Gravetat[]>(`${this.apiURL}/dsdiba/api/gravetat/`);
@@ -41,7 +45,12 @@ export class TabsFormService extends GlobalService {
     return this._http.delete<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}/situacio/${idSituacioSocial}`);
   }
   getDiagnostic(idDiagnostico: number ): Observable<Diagnosis> {
-    return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}`);
+    return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}`).pipe(
+      map( data => {
+        console.log(data);
+        return data;
+      })
+    );
   }
   DeletePregunta( id: number): Observable<Preguntas> {
     return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${id}`);

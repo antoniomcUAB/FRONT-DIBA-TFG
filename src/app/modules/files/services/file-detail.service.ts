@@ -71,6 +71,7 @@ export class FilesDetailService extends GlobalService {
 
   /** CREATE PERSON UNITY FAMILY **/
   createPerson(expedient: Expedient): Observable<Expedient> {
+    console.log(expedient);
     return this._http.put<Expedient>(`${this.apiURL}/dsdiba/api/expedient/`, expedient);
   }
 
