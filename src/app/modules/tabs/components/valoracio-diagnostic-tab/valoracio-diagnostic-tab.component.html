@@ -12,7 +12,7 @@
               <div class="col-6">
                 <table class="table table-bordered">
                   <tbody>
-                  <ng-template ngFor [ngForOf]="value.valoracio.evaluacions" let-evaluacio>
+                  <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio>
                     <ng-template [ngIf]="evaluacio && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
                       <tr>
                         <th class="text-white"
@@ -37,7 +37,7 @@
                 <table class="table table-bordered">
                   <thead class="table-active bg-info">
                   <tr>
-                    <ng-template ngFor [ngForOf]="value.valoracio.evaluacions" let-evaluacio>
+                    <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio>
                       <ng-template [ngIf]="evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS' ">
                         <th colspan="2" class="text-white">{{evaluacio.ambit.ambit.descripcio.toUpperCase()}}</th>
                       </ng-template>
@@ -47,7 +47,7 @@
                   <tbody >
                   <ng-container>
                     <tr>
-                      <ng-template ngFor [ngForOf]="value.valoracio.evaluacions" let-evaluacio>
+                      <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio>
                         <ng-template [ngIf]="evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS' ">
                           <th
                             [ngClass]="{'warning' : evaluacio.risc?.descripcio.toUpperCase() === 'RISC',
@@ -115,7 +115,7 @@
                   </tbody>
                 </table>
                  <!--Result Automatic Evaluations -->
-                <table class="table table-borderless" *ngFor="let evaluacion of value.valoracio.evaluacions; let e = index;">
+                <table class="table table-borderless" *ngFor="let evaluacion of value.valoracio?.evaluacions; let e = index;">
                   <ng-container *ngIf="evaluacion && evaluacion.ambit.ambit.id === ambit.ambit.id">
                     <tbody>
                     <!--Result Automatic Evaluations -->

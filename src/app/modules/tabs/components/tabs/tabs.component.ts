@@ -2,7 +2,7 @@ import {Component, Input, ViewChild} from '@angular/core';
 import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../models/tab-class-form';
 import {Diagnosis } from '../../models/diagnostic';
 import {Expedient, Persona} from "../../../files";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FilesDetailService} from "../../../files/services/file-detail.service";
 import {TabsFormService} from "../../services/tabsForm.service";
 import {NgbTabChangeEvent, NgbTabset} from '@ng-bootstrap/ng-bootstrap';
@@ -30,15 +30,19 @@ export class TabsComponent {
   public diagnostico: Diagnosis; /*Objecto del Diagnostico Completo*/
   public diagnosisID: number; /*idDiagnostico*/
   public expedientID: number; /*idExpediente*/
+  public idProfesional: number; /*idExpediente*/
   public personActives: Persona[] = []; /*Personas activas para este diagnostico*/
   public expedient: Expedient;  /*Expediente al que pertenece este diagnostico*/
 
 /*Recogemos el id del Diagnostico e Expediente , recargamos el Diagnostico*/
   constructor(private _route: ActivatedRoute,
               private _service: FilesDetailService,
-              private tabsService: TabsFormService) {
+              private tabsService: TabsFormService,
+              private _router: Router) {
     this.diagnosisID = this._route.snapshot.params['diagnosisID'];
     this.expedientID = this._route.snapshot.params['expedientID'];
+    this.idProfesional = this._route.snapshot.params['professionalID'];
+    console.log(this.idProfesional);
     this.getFile();
     this.diagnostico = new Diagnosis();
     this.reloadDiagnostico();
@@ -54,6 +58,10 @@ export class TabsComponent {
     }, (error) => {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
+  }
+  public routeToExpedient() {
+    console.log("uqer");
+    this._router.navigate(['/file-detail', {'id': this.expedientID, 'idProfessional': this.idProfesional}]);
   }
   /*Controla el cambio del tab para que no se produzca antes de lo esperado*/
   public beforeChange($event: NgbTabChangeEvent) {

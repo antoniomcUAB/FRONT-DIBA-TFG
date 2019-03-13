@@ -413,7 +413,7 @@ export class FileDetailComponent {
     this.diagnosis.versioModel = this.model;
     /** Call Service **/
     this._service.createDiagnosis(this.diagnosis, this.expedient.id, this.model.id).subscribe((result) => {
-      this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id}]);
+      this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id, 'ID': this.id , 'professionalID': this.idProfessional}]);
     }, (error) => {
       console.log("ERROR - al crear diagnostico \n " + error);
     });

@@ -76,7 +76,6 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   public getRisc(descripcioRisc:string , evaluacio:Evaluacions) {
     this.tabsService.getRiscos().subscribe((result) => {
       for (const risc of result) {
-        console.log(risc)
         if (risc.descripcio === descripcioRisc) {
           evaluacio.riscProfessional = risc;
         }
@@ -107,7 +106,6 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   }
   public getRiscos() {
     this.tabsService.getRiscos().subscribe((result) => {
-      console.log(result);
      this.riscos = result;
     }, (err) => {
       console.log(err);

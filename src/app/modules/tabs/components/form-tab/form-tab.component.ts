@@ -13,6 +13,7 @@ import {CustomInput} from "../../../../shared";
 import {TabsFormService} from '../../services/tabsForm.service';
 import {Contextualitzacio, Frequencia, Gravetat, Preguntas, Ambit, Entorn, Diagnosis} from "../../models/diagnostic";
 import {Persona} from "../../../files";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -47,7 +48,8 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   @Input() personsSelector: Persona [] = [];
 
   constructor(private modalService: NgbModal,
-              private tabsService: TabsFormService) {
+              private tabsService: TabsFormService,
+              private _router: Router) {
     super();
   }
 
@@ -138,7 +140,6 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       });
     }
   }
-
   public newPregunta(pregunta: string , idSocial: number, ambit: Ambit , entorn: Entorns ) {
     const preguntas = this.getPreguntas( idSocial , ambit , entorn );
     if (preguntas && preguntas.length >= 1 ) {
@@ -400,7 +401,6 @@ export class FormTabComponent extends CustomInput implements OnInit  {
         }
       }
     }
-    console.log(personaSelec);
     ffpp = this.personsSelector.filter(data => {
       return !personas.find(item => item === data.id);
     });

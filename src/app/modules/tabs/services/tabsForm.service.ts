@@ -47,7 +47,6 @@ export class TabsFormService extends GlobalService {
   getDiagnostic(idDiagnostico: number ): Observable<Diagnosis> {
     return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}`).pipe(
       map( data => {
-        console.log(data);
         return data;
       })
     );
@@ -62,6 +61,7 @@ export class TabsFormService extends GlobalService {
   return this._http.put<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${idDiagnostico}`, pregunta).pipe(
     map( data => {
       if (!data.factor) { data.factor = new Factor(); }
+      console.log(data);
       return data;
     })
   );
@@ -86,7 +86,6 @@ export class TabsFormService extends GlobalService {
       if (!data.valoracio.evaluacions) {
         data.valoracio.evaluacions = [];
       }
-      console.log(data);
       return data;
       })
   );

@@ -421,7 +421,7 @@
                   </a>
                   <span class="px-2" *ngIf="item.estat.descripcio ==='BORRADOR'"> </span>
                   <a *ngIf="item.estat.descripcio === 'BORRADOR'"
-                     [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id}]" >
+                     [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id,'professionalID':idProfessional}]" >
                     <i class="fa fa-pencil-square-o"> </i>
                   </a>
                 </td>
