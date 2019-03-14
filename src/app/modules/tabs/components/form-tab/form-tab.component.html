@@ -15,7 +15,7 @@
     <h4 class="modal-title" id=""><span class="text-primary">La família/unitat conviència té dificultats per:</span></h4>
   </div>
 
-  <form>
+  <form *ngIf="preguntaEconomica">
     <div class="modal-body">
       <div class="form-group">
         <ng-template ngFor [ngForOf]="data?.factorEconomic" let-economic let-x="index">

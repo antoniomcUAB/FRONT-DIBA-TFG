@@ -14,6 +14,7 @@ import {TabsFormService} from '../../services/tabsForm.service';
 import {Contextualitzacio, Frequencia, Gravetat, Preguntas, Ambit, Entorn, Diagnosis, FactorEconomic} from "../../models/diagnostic";
 import {Persona} from "../../../files";
 import {Router} from "@angular/router";
+import {Observable, Subject} from "rxjs";
 
 
 @Component({
@@ -66,7 +67,9 @@ export class FormTabComponent extends CustomInput implements OnInit {
 
   open(content , preguntaSocial: string , preguntaid: number , ambit: Ambit , entorn: Entorns) {
     if ( !this.getFirstPregunta(preguntaid , ambit, entorn)) {
-      this.newPregunta(preguntaSocial, preguntaid, ambit, entorn);
+      this.newPregunta(preguntaSocial, preguntaid, ambit, entorn).subscribe( pregunta => {
+        this.preguntaEconomica = pregunta;
+      });
     } else {
      this.preguntaEconomica = this.getFirstPregunta(preguntaid , ambit, entorn);
     }
@@ -95,13 +98,21 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
   }
   public getRiscEconomic(){
-    this.tabsService.putEconomicQuestion(this.idDiagnostic, this.preguntaEconomica.factorEconomic).subscribe((result: Preguntas) => {
-      this.preguntaEconomica = result;
-      this.reloadDiagnostico();
-      console.log(this.value);
-    }, (err) => {
-      console.log(err);
-    });
+    if (this.preguntaEconomica.factorEconomic.length > 0) {
+      this.tabsService.putEconomicQuestion(this.idDiagnostic, this.preguntaEconomica.factorEconomic).subscribe((result: Preguntas) => {
+        this.preguntaEconomica = result;
+        this.reloadDiagnostico();
+        console.log(this.value);
+      }, (err) => {
+        console.log(err);
+      });
+    } else {
+      this.tabsService.DeletePregunta(this.preguntaEconomica.id).subscribe(() => {
+        this.reloadDiagnostico();
+      }, (err) => {
+        console.log(err);
+      });
+    }
   }
 
 
@@ -181,13 +192,16 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
   }
 
-  public newPregunta(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns) {
+  public newPregunta(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns): Observable<Preguntas> {
+    const subject = new Subject<Preguntas>();
     const preguntas = this.getPreguntas(idSocial, ambit, entorn);
     if (preguntas && preguntas.length >= 1) {
       /* Si hay entorno y ya existe eliminala */
       this.tabsService.cleanPreguntes(this.idDiagnostic, idSocial).subscribe(() => {
         this.reloadDiagnostico();
+        subject.complete();
       }, (err) => {
+        subject.complete();
         console.log(err);
       });
     } else {
@@ -202,10 +216,14 @@ export class FormTabComponent extends CustomInput implements OnInit {
             }
           }
         }
+        subject.next(result);
+        subject.complete();
       }, (err) => {
         console.log(err);
+        subject.complete();
       });
     }
+    return subject;
   }
 
   public maxPreguntasRepetitivas(idSocial: number, ambit: Ambit , entorn: Entorns) {

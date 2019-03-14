@@ -63,7 +63,6 @@ export class TabsFormService extends GlobalService {
     );
   }
   DeletePregunta( id: number): Observable<Preguntas> {
-    console.log("eliminos");
     return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${id}`);
   }
   DeletePreguntaContext( id: number): Observable<Preguntas> {
