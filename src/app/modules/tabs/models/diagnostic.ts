@@ -69,7 +69,7 @@ export class Preguntas {
     this.situacioSocial.id = id;
   }
   id: number; // ID Preguntas
-  factorEconomic: FactorEconomic;
+  factorEconomic: FactorEconomic [] = [];
   entorn: Entorn;
   frequencia: Frequencia;
   gravetat: Gravetat;

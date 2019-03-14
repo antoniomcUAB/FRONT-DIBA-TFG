@@ -11,7 +11,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "../../../../shared";
 import {TabsFormService} from '../../services/tabsForm.service';
-import {Contextualitzacio, Frequencia, Gravetat, Preguntas, Ambit, Entorn, Diagnosis} from "../../models/diagnostic";
+import {Contextualitzacio, Frequencia, Gravetat, Preguntas, Ambit, Entorn, Diagnosis, FactorEconomic} from "../../models/diagnostic";
 import {Persona} from "../../../files";
 import {Router} from "@angular/router";
 
@@ -24,11 +24,13 @@ import {Router} from "@angular/router";
     {provide: NG_VALUE_ACCESSOR, useExisting: FormTabComponent, multi: true}
   ]
 })
-export class FormTabComponent extends CustomInput implements OnInit  {
+export class FormTabComponent extends CustomInput implements OnInit {
   private _innerData: Ambits;
   closeResult: string;
   cleanSelects: string = null;
+  preguntaEconomica: Preguntas;
   @ViewChild('formTab') formValues;
+
   @Input()
   set data(value: Ambits) {
     if (value && this.idDiagnostic) {
@@ -36,15 +38,17 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       this.reloadDiagnostico();
     }
   }
+
   get data(): Ambits {
     return this._innerData;
   }
-  @Input () groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
-  @Input () groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
+
+  @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
+  @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
   @Input() idDiagnostic: number;
-  @Output () before: EventEmitter<boolean> = new EventEmitter();
-  @Output () endForm: EventEmitter<boolean> = new EventEmitter();
-  @Input () contextualitzacio: string;
+  @Output() before: EventEmitter<boolean> = new EventEmitter();
+  @Output() endForm: EventEmitter<boolean> = new EventEmitter();
+  @Input() contextualitzacio: string;
   @Input() personsSelector: Persona [] = [];
 
   constructor(private modalService: NgbModal,
@@ -60,22 +64,57 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     return el1 && el2 ? el1.id === el2.id : el1 === el2;
   }
 
-  open(content) {
+  open(content , preguntaSocial: string , preguntaid: number , ambit: Ambit , entorn: Entorns) {
+    if ( !this.getFirstPregunta(preguntaid , ambit, entorn)) {
+      this.newPregunta(preguntaSocial, preguntaid, ambit, entorn);
+    } else {
+     this.preguntaEconomica = this.getFirstPregunta(preguntaid , ambit, entorn);
+    }
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+  public addPreguntaEconomica(factorEconomic: FactorEconomic , value) {
+    if (value) {
+      this.preguntaEconomica.factorEconomic.push(factorEconomic);
+    } else {
+      for (let i = 0; i< this.preguntaEconomica.factorEconomic.length; i++) {
+        if (this.preguntaEconomica.factorEconomic[i].id === factorEconomic.id) {
+          this.preguntaEconomica.factorEconomic.splice(i,1);
+        }
+      }
+    }
+  }
+  public getPreguntaEconomica(factorEconomic: FactorEconomic) {
+    for ( const eco of this.preguntaEconomica.factorEconomic ) {
+        if (eco.id && eco.id === factorEconomic.id) {
+          return eco;
+        }
+    }
+  }
+  public getRiscEconomic(){
+    this.tabsService.putEconomicQuestion(this.idDiagnostic, this.preguntaEconomica.factorEconomic).subscribe((result: Preguntas) => {
+      this.preguntaEconomica = result;
+      this.reloadDiagnostico();
+      console.log(this.value);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
+
   reloadDiagnostico() {
     this.tabsService.getDiagnostic(this.idDiagnostic).subscribe((result: Diagnosis) => {
       this.value = result;
@@ -84,6 +123,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       console.log(err);
     });
   }
+
   public emitEnd() {
     this.endForm.emit();
   }
@@ -91,7 +131,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
   public clean() {
     let ambitID: number;
 
-    for ( const ambits of this.value.ambit ) {
+    for (const ambits of this.value.ambit) {
       if (ambits.ambit.descripcio === this.contextualitzacio) {
         ambitID = ambits.ambit.id;
       }
@@ -101,22 +141,22 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     }, (err) => {
       console.log(err);
     });
-    }
+  }
 
-  public newPreguntaContext( ambit: Ambit , contexto: FactorsContext , membre: string ) {
-    const contextoEncontrado = this.getContextos( ambit.id , ambit , contexto );
+  public newPreguntaContext(ambit: Ambit, contexto: FactorsContext, membre: string) {
+    const contextoEncontrado = this.getContextos(ambit.id, ambit, contexto);
     if (contextoEncontrado) {
-        /* Si hay entorno y ya existe eliminala*/
-        this.tabsService.DeletePreguntaContext(contextoEncontrado.id).subscribe((result) => {
-        }, (err) => {
-          console.log(err);
-        });
-        for (let i = 0; i < this.value.ambit.length; i++) {
-          if (this.value.ambit[i].ambit.id === ambit.id) {
-                this.value.ambit[i].contextualitzacio = this.value.ambit[i].contextualitzacio
-                  .filter(item => item.id !== contextoEncontrado.id);
-          }
+      /* Si hay entorno y ya existe eliminala*/
+      this.tabsService.DeletePreguntaContext(contextoEncontrado.id).subscribe((result) => {
+      }, (err) => {
+        console.log(err);
+      });
+      for (let i = 0; i < this.value.ambit.length; i++) {
+        if (this.value.ambit[i].ambit.id === ambit.id) {
+          this.value.ambit[i].contextualitzacio = this.value.ambit[i].contextualitzacio
+            .filter(item => item.id !== contextoEncontrado.id);
         }
+      }
 
     } else {
       /* Si hay contexto y no existe llama a back , añadelo al objeto*/
@@ -132,7 +172,7 @@ export class FormTabComponent extends CustomInput implements OnInit  {
         console.log(contexto.id);
         for (let i = 0; i < this.value.ambit.length; i++) {
           if (this.value.ambit[i].ambit.id === ambit.id) {
-                this.value.ambit[i].contextualitzacio.push(result);
+            this.value.ambit[i].contextualitzacio.push(result);
           }
         }
       }, (err) => {
@@ -140,32 +180,34 @@ export class FormTabComponent extends CustomInput implements OnInit  {
       });
     }
   }
-  public newPregunta(pregunta: string , idSocial: number, ambit: Ambit , entorn: Entorns ) {
-    const preguntas = this.getPreguntas( idSocial , ambit , entorn );
-    if (preguntas && preguntas.length >= 1 ) {
-        /* Si hay entorno y ya existe eliminala */
-          this.tabsService.cleanPreguntes(this.idDiagnostic, idSocial).subscribe(() => {
-            this.reloadDiagnostico();
-          }, (err) => {
-            console.log(err);
-          });
+
+  public newPregunta(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns) {
+    const preguntas = this.getPreguntas(idSocial, ambit, entorn);
+    if (preguntas && preguntas.length >= 1) {
+      /* Si hay entorno y ya existe eliminala */
+      this.tabsService.cleanPreguntes(this.idDiagnostic, idSocial).subscribe(() => {
+        this.reloadDiagnostico();
+      }, (err) => {
+        console.log(err);
+      });
     } else {
-        /* Si hay entorno y no existe llama a back , añadelo al objeto*/
-        this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta, idSocial), this.idDiagnostic).subscribe((result) => {
-          for (let i = 0; i < this.value.ambit.length; i++) {
-            if (this.value.ambit[i].ambit.id === ambit.id) {
-              for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
-                if (this.value.ambit[i].entorn[x].id === entorn.id) {
-                  this.value.ambit[i].entorn[x].pregunta.push(result);
-                }
+      /* Si hay entorno y no existe llama a back , añadelo al objeto*/
+      this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta, idSocial), this.idDiagnostic).subscribe((result) => {
+        for (let i = 0; i < this.value.ambit.length; i++) {
+          if (this.value.ambit[i].ambit.id === ambit.id) {
+            for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
+              if (this.value.ambit[i].entorn[x].id === entorn.id) {
+                this.value.ambit[i].entorn[x].pregunta.push(result);
               }
             }
           }
-        }, (err) => {
-          console.log(err);
-        });
-      }
+        }
+      }, (err) => {
+        console.log(err);
+      });
+    }
   }
+
   public maxPreguntasRepetitivas(idSocial: number, ambit: Ambit , entorn: Entorns) {
     let maximum = 0;
     for ( const ambits of this.value.ambit ) {
@@ -315,12 +357,21 @@ export class FormTabComponent extends CustomInput implements OnInit  {
     });
   }
   changePersona(pregunta: Preguntas, value) {
-   pregunta.persona = value;
+    pregunta.persona = value;
+    if (!value) {
+      this.tabsService.cleanPreguntes(this.idDiagnostic, pregunta.situacioSocial.id).subscribe(() => {
+      }, (err) => {
+        console.log(err);
+      });
+    }
+    setTimeout(_ => {
     this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
       pregunta = result;
+      this.reloadDiagnostico();
     }, (err) => {
       console.log(err);
     });
+    }, 100);
   }
   changePersonaSelector(context: Contextualitzacio, value) {
     context.persona = value;

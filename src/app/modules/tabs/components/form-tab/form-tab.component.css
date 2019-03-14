@@ -1,4 +1,12 @@
-ngb-popover-window{
-  width: 100%;
-  background-color: #0d47a1;
+.top-right{
+  top: 0.6em;
+  right: 1em;
 }
+.top-right-double{
+  top: 0.6em;
+  right: 14em;
+}
+.opaco{
+  background: rgba(137, 21, 54, 0.5)!important;
+}
+

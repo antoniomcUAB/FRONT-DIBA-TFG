@@ -4,7 +4,18 @@ import {Observable} from 'rxjs';
 
 import {Injectable} from "@angular/core";
 import {Ambits} from '../models/tab-class-form';
-import { Contextualitzacio, Diagnosis, Factor, Frequencia, Gravetat, Preguntas, Risc, Valoracio} from "../models/diagnostic";
+import {
+  Contextualitzacio,
+  Diagnosis,
+  Factor,
+  FactorEconomic,
+  Frequencia,
+  Gravetat,
+  Preguntas,
+  Risc,
+  TipusPersona,
+  Valoracio
+} from "../models/diagnostic";
 import {Persona} from "../../files";
 import { map} from "rxjs/operators";
 
@@ -52,22 +63,30 @@ export class TabsFormService extends GlobalService {
     );
   }
   DeletePregunta( id: number): Observable<Preguntas> {
+    console.log("eliminos");
     return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${id}`);
   }
   DeletePreguntaContext( id: number): Observable<Preguntas> {
     return this._http.delete<Preguntas>(`${this.apiURL}/dsdiba/api/context/${id}`);
   }
   PutQuestionAndGetRisc( pregunta: Preguntas, idDiagnostico: number): Observable<Preguntas> {
+    console.log("añado diagnostico");
   return this._http.put<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/${idDiagnostico}`, pregunta).pipe(
     map( data => {
       if (!data.factor) { data.factor = new Factor(); }
-      console.log(data);
       return data;
     })
   );
   }
   putContextQuestion( factorPregunta: Factor, idDiagnostico: number , contextualizacion: Contextualitzacio): Observable<Contextualitzacio> {
   return this._http.put<Contextualitzacio>(`${this.apiURL}/dsdiba/api/context/${idDiagnostico}/${factorPregunta.id}`, contextualizacion).pipe(
+    map( data => {
+      return data;
+    })
+  );
+  }
+  putEconomicQuestion(idDiagnostico: number , factorEconomic: FactorEconomic[]): Observable<Preguntas> {
+  return this._http.put<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/economia/${idDiagnostico}`, factorEconomic).pipe(
     map( data => {
       return data;
     })
