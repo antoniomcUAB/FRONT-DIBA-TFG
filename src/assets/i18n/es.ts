@@ -2,7 +2,8 @@ export let TRANSLATION = {
   /* Title */
   'TITLE': {
     'home-h2': 'Llistat d\'expedients per municipi',
-    'file-h2': 'Fitxa d\'expedient'
+    'file-h2': 'Fitxa d\'expedient',
+    'model-h2': 'Model Escala de valoració DSDIBA'
   },
   /*  Table */
   'TABLE': {
@@ -130,8 +131,6 @@ export let TRANSLATION = {
     'Factorsdecontext':'Són aquelles característiques de l’individu i/o la seva unitat familiar i/o del seu entorn relacionades amb el cas i de la seva consciència, motivació i acceptació del problema/necessitat i de la intervenció, i que poden augmentar, inhibir, reduir o atenuar el risc en l’àmbit i/o en la situació social global. Poden ser, per tant, de risc o protecció. S’han definit un total de 41 factors de context.\n' +
       '\n' +
       'Una part d’ells són ponderats en funció del nombre de membres de la unitat familiar en els quals es dóna cada factor del context.'
-
-
   }
 
 };

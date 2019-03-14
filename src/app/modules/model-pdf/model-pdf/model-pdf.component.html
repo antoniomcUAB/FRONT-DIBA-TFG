@@ -1,0 +1,173 @@
+<!-- Print Component -->
+<section id="print" class="row">
+  <div class="col-12">
+    <button type="button" class="float-right btn btn-outline-primary no-print" (click)="onPrint();"><i class="fa fa-file-pdf-o"></i> {{ "RESUMEN.pdf" | translate }}</button>
+  </div>
+</section>
+<!--/ Print Component -->
+
+<section>
+  <h2 class="text-center mb-4">{{ "TITLE.model-h2" | translate }}</h2>
+
+  <div class="card shadow-none tabs-primary">
+    <div class="card-body pt-0">
+      <ngb-tabset>
+        <ngb-tab title="Situació social">
+          <ng-template ngbTabContent>
+            <div class="p-5 h-100 d-table m-auto">
+
+              <!-- Model PDF -->
+              <section id="model-pdf">
+                <div class="">
+                  <div class="bg-primary container-fluid">
+                    <div class="row">
+                      <div class="p-3 col-2 text-white text-center font-weight-bold border d-flex justify-content-center flex-column">
+                        Àmbit
+                      </div>
+                      <div class="col-10">
+                        <div class="row">
+                          <div class="p-3 col-2 text-white text-center font-weight-bold border border-left-0 d-flex justify-content-center flex-column">Situació Social</div>
+                          <div class="p-3 col-2 text-white text-center font-weight-bold border border-left-0 d-flex justify-content-center flex-column">Definició</div>
+                          <div class="col-8">
+                            <div class="row">
+                              <div class="p-3 col-2 text-white text-center font-weight-bold border border-left-0 d-flex justify-content-center flex-column">Gravetat</div>
+                              <div class="p-3 col-2 text-white text-center font-weight-bold border border-left-0 d-flex justify-content-center flex-column">Evidències Gravetat</div>
+                              <div class="col-8">
+                                <div class="row">
+                                  <div class="p-3 col-4 text-white text-center font-weight-bold border border-left-0 d-flex justify-content-center flex-column">Freqüencia</div>
+                                  <div class="p-3 col-4 text-white text-center font-weight-bold border border-left-0 d-flex justify-content-center flex-column">Evidències Freqüència</div>
+                                  <div class="p-3 col-4 text-white text-center font-weight-bold border border-left-0 d-flex justify-content-center flex-column">Risc/impacte per àmbit de necessitat</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container-fluid">
+
+                    <ng-template ngFor
+                                 [ngForOf]="tableSituation"
+                                 let-ambit>
+                      <div class="row" *ngIf="ambit.ambits.toUpperCase() !== 'GLOBALITAT DEL CAS'">
+
+                        <div class="col-2 text-white text-center d-flex justify-content-center flex-column border"
+                             [ngClass]="{'bg-warning text-black-50' : ambit.ambits.toUpperCase() === 'AUTONOMIA',
+                                          'bg-danger' : ambit.ambits.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
+                                          'bg-success' : ambit.ambits.toUpperCase() === 'RELACIONAL'}">
+                          {{ ambit.ambits.toUpperCase() }}
+                        </div>
+
+                        <div class="col-10">
+                          <ng-template ngFor
+                                       [ngForOf]="ambit.situacionSocial"
+                                       let-situacionSocial>
+
+                            <div class="row">
+
+                              <div class="col-2 d-flex justify-content-center flex-column border border-left-0">{{ situacionSocial.descripcio }}</div>
+                              <div class="col-2 d-flex justify-content-center flex-column border border-left-0">{{ situacionSocial.definicio }}</div>
+
+                              <div class="col-8">
+                                <ng-template ngFor
+                                             [ngForOf]="situacionSocial.gravetat"
+                                             let-gravetat>
+                                  <div class="row">
+
+                                    <div class="col-2 text-center d-flex justify-content-center flex-column border-bottom"
+                                         [ngClass]="{'warning' : gravetat.descripcio.toUpperCase() === 'MODERADA',
+                                                       'danger' : gravetat.descripcio.toUpperCase() === 'ALTA',
+                                                       'success' : gravetat.descripcio.toUpperCase() === 'BAIXA',
+                                                       'info' : gravetat.descripcio.toUpperCase() === 'SENSE VALORACI&#211;'}">
+                                      {{ gravetat.descripcio }}
+                                    </div>
+
+                                    <div class="col-2 d-flex justify-content-center flex-column border-bottom p-1">{{ gravetat.evidencia }}</div>
+
+                                    <div class="col-8">
+                                      <ng-template ngFor
+                                                   [ngForOf]="gravetat.frequencia"
+                                                   let-frequencia>
+                                        <div class="row" [ngClass]="{'h-100' : gravetat.frequencia.length === 1}">
+
+                                          <div class="col-4 text-center d-flex justify-content-center flex-column border-bottom p-5"
+                                               [ngClass]="{'warning' : frequencia.descripcio.toUpperCase() === 'FREQÜENT',
+                                                             'danger' : frequencia.descripcio.toUpperCase() === 'CONTINUA',
+                                                             'success' : frequencia.descripcio.toUpperCase() === 'OCASIONAL',
+                                                             'puntual' : frequencia.descripcio.toUpperCase() === 'PUNTUAL',
+                                                             'info' : frequencia.descripcio.toUpperCase() === 'SENSE VALORACI&#211;'}">
+                                            {{ frequencia.descripcio }}
+                                          </div>
+
+                                          <div class="col-4 d-flex justify-content-center flex-column border-bottom p-3">{{ frequencia.evidencia }}</div>
+
+                                          <div class="col-4 text-center d-flex justify-content-center flex-column border-bottom p-5"
+                                               [ngClass]="{'warning' : frequencia.risc.toUpperCase() === 'RISC',
+                                                             'danger' : frequencia.risc.toUpperCase() === 'ALT RISC',
+                                                             'success' : frequencia.risc.toUpperCase() === 'VULNERABILITAT',
+                                                             'info' : frequencia.risc.toUpperCase() === 'SENSE VALORACI&#211;'}">
+                                            {{ frequencia.risc }}
+                                          </div>
+
+                                        </div>
+
+                                      </ng-template>
+                                    </div>
+
+                                  </div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </ng-template>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Contextualització">
+          <ng-template ngbTabContent>
+            <div class="p-5 h-100 d-table m-auto">
+              <!-- Model PDF -->
+              <section id="model-pdf-context">
+                <table class="table table-striped table-bordered">
+                  <thead class="bg-primary">
+                  <tr>
+                    <th class="text-center">Àmbit</th>
+                    <th class="text-center">Factors de Context (de risc o de protecció)</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let ambit of tableContext">
+                    <td class="text-center text-white"
+                        [ngClass]="{'bg-warning text-black-50' : ambit.ambits.toUpperCase() === 'AUTONOMIA',
+                                       'bg-danger' : ambit.ambits.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
+                                       'bg-success' : ambit.ambits.toUpperCase() === 'RELACIONAL',
+                                       'bg-info' : ambit.ambits.toUpperCase() === 'GLOBALITAT DEL CAS'}">
+                      {{ ambit.ambits.toUpperCase() }}
+                    </td>
+                    <td class="p-0">
+                      <ng-template ngFor
+                                   [ngForOf]="ambit.context"
+                                   let-context>
+                        <div class="p-3" [ngClass]="{'danger' : context.risc.toUpperCase() === 'RISC',
+                                                    'success' : context.risc.toUpperCase() === 'PROTECCI&#211;' }">{{ context.descripcio }}</div>
+                      </ng-template>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </section>
+              <!--/ Model PDF -->
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</section>
+
