@@ -6,12 +6,17 @@ import {map} from 'rxjs/operators';
 import {TableListOptions, TableListResponse} from "../../../shared/modules/table-list";
 import {Injectable} from "@angular/core";
 import {Professional} from "../models/professional";
-import {Expedient, Model} from "../../files";
+import {Model, Expedient} from "../../files";
 
 @Injectable()
 export class HomeService extends GlobalService {
   constructor(public _http: HttpClient) {
     super();
+  }
+
+  /** GET PROFESSIONAL BY ID **/
+  getModel(): Observable<any> {
+    return this._http.get<any>(`${this.apiURL}/dsdiba/api/model`);
   }
 
   /** GET PROFESSIONAL BY ID **/

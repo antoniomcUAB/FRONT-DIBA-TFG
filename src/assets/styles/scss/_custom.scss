@@ -54,6 +54,12 @@ a {
   border-color: #bee5eb;
 }
 
+.puntual {
+  color: #004085;
+  background-color: #cce5ff !important;
+  border-color: #b8daff;
+}
+
 nav.navbar.custom-navbar.main-brand {
   background: #fff;
   height: 77px;
@@ -182,6 +188,18 @@ a.navbar-brand.mr-auto {
 .custom-checkbox.apply .custom-control-input:checked ~ .custom-control-label::after {
   font-size: 2.5em ;
   line-height: 28px;
+}
+
+#regio-cos .tabs-primary ul.nav.nav-tabs li.nav-item * {
+  color: #A41E34 !important;
+  background-color: #bdbdbd !important;
+  border-color:     #bdbdbd !important;
+}
+
+#regio-cos .tabs-primary ul.nav.nav-tabs li.nav-item > .active {
+  color: #fff !important;
+  background-color: #A41E34 !important;
+  border-color: #A41E34 !important;
 }
 
 @media print {

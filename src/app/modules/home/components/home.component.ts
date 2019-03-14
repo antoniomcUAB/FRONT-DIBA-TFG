@@ -6,11 +6,11 @@ import { Router } from "@angular/router";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 /* Models */
 import { Professional } from "../models/professional";
-import { Expedient } from "../../files";
+import {Expedient, AmbitContext, ModelQueryContext, ModelQuerySituation, SituacionSocial, Gravedad, Frecuencia} from "../../files";
 /* Service */
 import { HomeService } from '../services/home.service';
 /* Constants */
-import {digit } from './constants';
+import { digit } from './constants';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +21,8 @@ export class HomeComponent {
   /* Variables Professional */
   idProfessional = 19669; /* TODO - Petición id Profesional */
   professional: Professional;
+  model;
+
   /* Variables Table */
   data: any[] = [];
   options = new TableListOptions();
@@ -39,6 +41,8 @@ export class HomeComponent {
               private modalService: NgbModal) {
     /* Get Professional Data */
     this.getProfessionalData(this.idProfessional);
+    /* Get Current Model */
+    this.getModel();
     /* Set Options Table List of Files */
     this.options.setColumns([{
         name: 'codi',
@@ -73,11 +77,20 @@ export class HomeComponent {
     this.options.itemsPerPage = 10;
   }
 
+  /** GET MODEL **/
+  getModel() {
+    this._service.getModel().subscribe( (data) => {
+      this.model = data;
+      console.log(this.model);
+    }, error => {
+      console.log("ERROR al recuperar el datos");
+    });
+  }
+
   /** GET PROFESSIONAL DATA **/
   getProfessionalData(id: number) {
     this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
       this.professional = data;
-      console.log(data);
       /* Reload Table  */
       this.reloadData();
     }, error => {
@@ -91,7 +104,6 @@ export class HomeComponent {
     this._service.getFiles(this.options, this.professional.municipi.id).subscribe((res: TableListResponse ) => {
       this.options = res.options;
       this.data = res.data;
-      console.log(this.data);
       this.options.loading = true;
     });
   }
@@ -138,7 +150,6 @@ export class HomeComponent {
       /** Set Variables **/
       this.newFile.codi = codi;
       this.newFile.professional = this.professional;
-      console.log(this.newFile);
       /** Subscribe to Create **/
       this._service.createFile(this.newFile).subscribe((result) => {
         this._router.navigate(['/file-detail', {'id': result.id, 'idProfessional': this.idProfessional}]);

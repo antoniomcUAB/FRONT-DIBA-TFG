@@ -344,6 +344,7 @@ export class FileDetailComponent {
   getFile() {
     this._service.getFileById(this.id).subscribe( (data: Expedient) => {
       this.expedient = data;
+      console.log(this.expedient);
     }, (error) => {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
@@ -447,6 +448,7 @@ export class FileDetailComponent {
 
   /* Update Unity Family Member */
   updateMember(persona: Persona) {
+    console.log(this.expedient);
     /** Update Member(Persona) by ID **/
     for (const index in this.expedient.persona) {
       if (this.expedient.persona[index].id === persona.id) {
@@ -469,6 +471,7 @@ export class FileDetailComponent {
 
   /* Update Observations */
   updateObservations() {
+console.log(this.expedient)
     /** Call Service **/
     this._service.updateObservations(this.expedient).subscribe((result) => {
       this.expedient = result;

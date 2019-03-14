@@ -26,6 +26,9 @@ export const AppRoutes: Routes = [
       }, {
         path: 'tabs',
         loadChildren: './modules/tabs#TabsModule'
+      }, {
+        path: 'model-pdf',
+        loadChildren: './modules/model-pdf/model-pdf.module#ModelPDFModule'
       },
       {
         path: '',
