@@ -192,3 +192,38 @@ export class ChartAmbit {
   name: string;
   value: number;
 }
+
+/* Model Query Situation */
+export class ModelQuerySituation {
+  ambits: string;
+  situacionSocial: SituacionSocial[] = [];
+}
+
+export class SituacionSocial {
+  descripcio: string;
+  definicio: string;
+  gravetat: Gravedad [] = [];
+}
+
+export class Gravedad {
+  descripcio: string;
+  evidencia: string;
+  frequencia: Frecuencia [] = [];
+}
+
+export class Frecuencia {
+  descripcio: string;
+  evidencia: string;
+  risc: string;
+}
+
+/* Model Query Context */
+export class ModelQueryContext {
+  ambits: string;
+  context: AmbitContext [] = [];
+}
+
+export class AmbitContext {
+  descripcio: string;
+  risc: string;
+}
