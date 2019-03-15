@@ -62,18 +62,23 @@
 
             <div class="form-group row col-12 py-2">
               <!-- Situacion social Basica -->
-              <div class="col-5">
+              <div class="col-5" *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')">
                 <label *ngIf="i === 0" class="col-12" for="ssb00" >{{ "TABLE.basicSocialSituation" | translate }} </label>
                 <div *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')" class="position-relative">
                   <input type="text" class="form-control " [value]= "pregunta.social " disabled  >
                   <i class= "fa fa-question-circle position-absolute top-right" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.social" container="body"></i>
                 </div>
+              </div>
+              <div class="col-5 pr-0" *ngIf="pregunta.social.includes('Ingressos insuficients (E.2)')" >
                 <!-- situacio social De Ingressos insuficients-->
-                <div *ngIf="pregunta.social.includes('Ingressos insuficients (E.2)')" class="position-relative">
-                <div class="form-group row col-12">
-                    <input  type="text" class="form-control col-9  "[value]= "pregunta.social " disabled >
+                <div class="form-group row col-12 pr-0 mr-0">
+                <div class="position-relative col-9 pl-0">
+
+                    <input  type="text" class="form-control col-12  "[value]= "pregunta.social " disabled >
                   <i class= "fa fa-question-circle position-absolute top-right-double" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.social" container="body"></i>
-                     <button type="button" class=" col-3 btn btn-outline-primary" (click)="open(valoration , pregunta.social , pregunta.id , ambit, entorn );" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
+                </div>
+                  <div class="position-relative col-3 p-0">
+                     <button type="button" class=" col-12 btn btn-outline-primary" (click)="open(valoration , pregunta.social , pregunta.id , ambit, entorn );" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
                 </div>
                 </div>
                 <!--/ situacio social De Ingressos insuficients-->
@@ -88,6 +93,7 @@
                     <label class="custom-control custom-checkbox p-0 pl-2 apply">
                       <input type="checkbox"
                              class="custom-control-input position-relative"
+                             [disabled]="getPreguntaDisabled(pregunta.id)"
                              [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)"
                              (click)=" newPregunta(pregunta.social , pregunta.id , ambit, entorn);"
                              name="aplica{{e}}{{i}}">
@@ -226,7 +232,7 @@
                               (ngModelChange)="changePersona(getPreguntaRepeat(method.id,ambit,entorn), $event)"
                               name="personasdfc{{i}}{{x}}"
                               [compareWith]="compare">
-                        <option disabled selected value="1" ></option>
+                        <option disabled selected [ngValue]="null" ></option>
                         <option *ngFor="let persona of getFilterPersonas(method.situacioSocial.id,getPreguntaRepeat(method.id,ambit,entorn)?.persona)" [ngValue]="persona"> {{persona.tipusPersona.descripcio}}</option>
                       </select>
                     </div>
@@ -314,17 +320,23 @@
     </div>
     </ng-template>
     <div class="p-3 bg-secondary mt-3 border border-dark">
-      <h5 class="text-white">Contextualització <i class="fa fa-question-circle"
+      <h5 class="text-white">Factors de Contextualització <i class="fa fa-question-circle"
                                                  aria-hidden="true"
                                                  [ngbPopover] =  "'EMERGENTS.Factorsdecontext' | translate "
                                                  placement="right"
                                                  triggers="mouseenter:mouseleave"
                                                  popoverTitle=" Contextualització "></i> </h5>
     </div>
-    <div class="form-group row bg-grey-300 border m-0 mt-3 py-2 mb-0">
+    <div class="form-group row bg-grey-300 border m-0 mt-3 mb-0">
       <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
       <ng-template ngFor [ngForOf]="ambit.factors_context" let-cont let-c="index">
           <ng-template [ngIf]="cont.ambit.descripcio === contextualitzacio">
+            <div *ngIf="c===0" class="opaco p-2 col-12 mb-3">
+              <h6 class="text-white ">{{cont.gravetat.descripcio}}</h6>
+            </div>
+            <!--<div *ngIf="c!==0 && cont.gravetat.descripcio === 'Risc'" class="opaco p-2 col-12 mb-3">-->
+              <!--<h6 class="text-white ">{{cont.gravetat.descripcio}}</h6>-->
+            <!--</div>-->
 
             <div class="form-group row col-12 py-2">
             <!-- Situacion social Basica -->
@@ -355,8 +367,8 @@
             <!--/ Aplica 1 persona-->
 
             <!-- Persones -->
-            <div class="col-2"  *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots" >
-              <div class="col-12">
+            <div class="col-2" >
+              <div class="col-12" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots">
                 <label for="t1person" *ngIf="c===0">{{ "TABLE.person" | translate }} </label>
                 <select class="form-control" id="t1person" name="personas{{c}}"
                         [required]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
@@ -374,8 +386,8 @@
 
             <!--/ Persones -->
             <!--aplica mes de una persona-->
-            <div class="col-2" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots">
-              <div class="col-12">
+            <div class="col-2">
+              <div class="col-12" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots">
                 <div class="form-group align-items-center col-12 text-center">
                   <label style="font-size: x-small" *ngIf="c===0">  {{ "TABLE.aplMas" | translate }}</label>
                   <label class="custom-control custom-checkbox apply">

@@ -122,6 +122,18 @@ export class Context {
   tipo: string[] = [];
   apl: boolean = false;
 }
+export class DisabledHabitatge {
+  h1: boolean = false;
+  h2: boolean = false;
+  h3: boolean = false;
+  h4: boolean = false;
+  h5: boolean = false;
+}
+export class DisabledEconomia {
+  e1: boolean = false;
+  e2: boolean = false;
+  e3: boolean = false;
+}
 
 
 
