@@ -5,7 +5,7 @@ import {
   EnvironmentMaterial,
   EnvironmentRelacional,
   SelectorGravetat,
-  FactorsContext,
+  FactorsContext, DisabledEconomia, DisabledHabitatge,
 } from '../../models/tab-class-form';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
@@ -27,10 +27,14 @@ import {Observable, Subject} from "rxjs";
 })
 export class FormTabComponent extends CustomInput implements OnInit {
   private _innerData: Ambits;
+  public disabledEconomia: DisabledEconomia = new DisabledEconomia();
+  public disabledHabitatge: DisabledHabitatge = new DisabledHabitatge();
+
   closeResult: string;
   cleanSelects: string = null;
   preguntaEconomica: Preguntas;
   @ViewChild('formTab') formValues;
+  public tittleRisc:boolean = false;
 
   @Input()
   set data(value: Ambits) {
@@ -59,6 +63,36 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
 
   ngOnInit() {
+  }
+  public getPreguntaDisabled( id: number) {
+      switch (id) {
+        case 28299:
+          return this.disabledHabitatge.h1;
+          break;
+        case 28306:
+          return this.disabledHabitatge.h2;
+          break;
+        case 28312:
+         return this.disabledHabitatge.h3;
+          break;
+        case 28323:
+          return this.disabledHabitatge.h4;
+          break;
+        case 28333:
+          return this.disabledHabitatge.h5;
+          break;
+        case 28345:
+          return this.disabledEconomia.e1;
+          break;
+        case 28351:
+          return this.disabledEconomia.e2;
+          break;
+        case 28359:
+          return this.disabledEconomia.e3;
+          break;
+        default:
+          return false;
+      }
   }
 
   compare(el1, el2) {
@@ -125,11 +159,9 @@ export class FormTabComponent extends CustomInput implements OnInit {
       return `with: ${reason}`;
     }
   }
-
   reloadDiagnostico() {
     this.tabsService.getDiagnostic(this.idDiagnostic).subscribe((result: Diagnosis) => {
       this.value = result;
-      console.log(this.value);
     }, (err) => {
       console.log(err);
     });
@@ -191,8 +223,8 @@ export class FormTabComponent extends CustomInput implements OnInit {
       });
     }
   }
-
   public newPregunta(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns): Observable<Preguntas> {
+
     const subject = new Subject<Preguntas>();
     const preguntas = this.getPreguntas(idSocial, ambit, entorn);
     if (preguntas && preguntas.length >= 1) {
@@ -293,6 +325,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
 
   getFirstPregunta(id: number, ambit: Ambit , entorn: Entorns) {
+
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
 
     if (!amb) {console.log("Error Ambito"); return false; }
@@ -374,22 +407,26 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+  public putQuestionAndGetRisc(pregunta:Preguntas) {
+    this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
+      this.reloadDiagnostico();
+      pregunta = result;
+    }, (err) => {
+      console.log(err);
+    });
+  }
   changePersona(pregunta: Preguntas, value) {
     pregunta.persona = value;
     if (!value) {
       this.tabsService.cleanPreguntes(this.idDiagnostic, pregunta.situacioSocial.id).subscribe(() => {
+        this.putQuestionAndGetRisc(pregunta);
       }, (err) => {
         console.log(err);
       });
     }
-    setTimeout(_ => {
-    this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
-      pregunta = result;
-      this.reloadDiagnostico();
-    }, (err) => {
-      console.log(err);
-    });
-    }, 100);
+    else {
+      this.putQuestionAndGetRisc(pregunta);
+    }
   }
   changePersonaSelector(context: Contextualitzacio, value) {
     context.persona = value;

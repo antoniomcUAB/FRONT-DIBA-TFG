@@ -119,7 +119,7 @@ export let TRANSLATION = {
   },
 
   'EMERGENTS':{
-    'Ambitautonomia': 'Estat permanent en el que es troben les persones què per raons derivades de: l’edat, la malaltia o la discapacitat; i vinculades a la manca d’autonomia física, mental, intel·lectual o sensorial; requereixen de l’atenció d’altres persones o d’ajudes importants per a realitzar les activitats bàsiques de la vida diària o d’altres recursos instrumentals per a mantenir la seva autonomia personal',
+    'AmbitAutonomia': 'Estat permanent en el que es troben les persones què per raons derivades de: l’edat, la malaltia o la discapacitat; i vinculades a la manca d’autonomia física, mental, intel·lectual o sensorial; requereixen de l’atenció d’altres persones o d’ajudes importants per a realitzar les activitats bàsiques de la vida diària o d’altres recursos instrumentals per a mantenir la seva autonomia personal',
     'Àmbit material i instrumental': 'Situacions de necessitat què tenen una expressió de tipus material, vinculades amb la subsistència i la capacitat de les persones per assolir-la de forma autònoma.',
     'Àmbit Relacional':'Situacions de necessitat derivades dels vincles socials, tant en l’entorn familiar com en el comunitari. En aquesta categoria s’hi inclouen totes les situacions de necessitat en les que el dèficit de relacions socials, la manca de relacions i/o l’existència d’unes relacions disfuncionals suposa un risc per al desenvolupament psicosocial de la persona',
     'Gravetat':'Són les evidències presents en cada situació social que ens permeten discriminar l’existència o no de risc i, en el seu cas, la seva gravetat, en base a les conseqüències o danys que provoca en la persona o unitat familiar.\n' +
