@@ -3,11 +3,18 @@
 <!--/ Search Component -->
 
 <!-- Home Component -->
-  <section id="home">
+  <section id="home" class="tabs-primary">
     <h1 class="text-center mt-5">{{ professional?.municipi?.descripcio }}</h1>
     <h2 class="text-center mb-4">{{ "TITLE.home-h2" | translate }}</h2>
 
-    <div class="card font-weight-bold">
+    <ngb-tabset (tabChange)="beforeChange($event)">
+      <ngb-tab id="my-files" title="Els meus expedients">
+      </ngb-tab>
+      <ngb-tab id="all-files" title="Expedients del municipi">
+      </ngb-tab>
+    </ngb-tabset>
+
+    <div class="card font-weight-bold p-3">
       <!-- Table -->
       <app-table-list [tableData]="data"
                       [options]="options"

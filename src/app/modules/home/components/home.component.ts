@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FilterType, TableListOptions, TableListResponse } from '../../../shared/modules/table-list';
 import { TranslateService } from "@ngx-translate/core";
 import { Router } from "@angular/router";
-import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import {ModalDismissReasons, NgbModal, NgbTabChangeEvent} from "@ng-bootstrap/ng-bootstrap";
 /* Models */
 import { Professional } from "../models/professional";
 import {Expedient, AmbitContext, ModelQueryContext, ModelQuerySituation, SituacionSocial, Gravedad, Frecuencia} from "../../files";
@@ -44,6 +44,18 @@ export class HomeComponent {
     this.getProfessionalData(this.idProfessional);
     /* Get Current Model */
     this.getModel();
+  }
+
+  /* Tab Change */
+  beforeChange ($event: NgbTabChangeEvent) {
+    switch ($event.activeId) {
+      case 'all-files':
+        this.filterProfessional();
+        break;
+      case 'my-files':
+        this.filterAllFiles();
+        break;
+    }
   }
 
   filterProfessional() {
