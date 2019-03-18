@@ -9,8 +9,9 @@
 .opaco{
   background: rgba(137, 21, 54, 0.5)!important;
 }
-ngb-popover-window{
-  background-color: #00e5ff;
+
+ngb-popover-window h3.popover-header {
+  background: azure;
 }
 .bg-primary-20 {
   background-color: rgba(137,21,54,0.2);
