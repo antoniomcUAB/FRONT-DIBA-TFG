@@ -30,8 +30,9 @@ export class HomeService extends GlobalService {
     return this._http.get(`${this.apiURL}/dsdiba/api/expedient/llista/${idMunicipal}`,
       {params: pageParams, observe: 'response'})
       .pipe(map((response: HttpResponse<any>) => {
-        const data = response.body;
-            options.getPagesInfo(response.body); // TODO - Añadir para función de paginación
+        const data = response.body.content;
+            options.getPagesInfo(response.body);
+            console.log(response.body);
         return {
           data: data,
           options: options
