@@ -21,6 +21,7 @@ export class HomeComponent {
   /* Variables Professional */
   idProfessional = 19669; /* TODO - Petición id Profesional */
   professional: Professional;
+  professionalNomComplet: string;
   model;
 
   /* Variables Table */
@@ -43,38 +44,82 @@ export class HomeComponent {
     this.getProfessionalData(this.idProfessional);
     /* Get Current Model */
     this.getModel();
+  }
+
+  filterProfessional() {
     /* Set Options Table List of Files */
     this.options.setColumns([{
-        name: 'codi',
-        title: this._translateService.instant('TABLE.files'),
-        sortable: true,
-        filterable: true
-      }, {
-        name: 'dataCreacio',
-        title: this._translateService.instant('TABLE.createDate'),
-        sortable: true,
-        filterable: true,
-        filterType: FilterType.date
-      }, {
-        name: 'professional',
-        title: this._translateService.instant('TABLE.owner'),
-        sortable: true,
-        filterable: true
-      }, {
-        name: 'dataValidacio',
-        title: this._translateService.instant('TABLE.updateDate'),
-        sortable: true,
-        filterable: true,
-        filterType: FilterType.date
-      }, {
-        name: 'estat',
-        title: this._translateService.instant('TABLE.expedient'),
-        sortable: true,
-        filterable: true
-      }]);
+      name: 'codi',
+      title: this._translateService.instant('TABLE.files'),
+      sortable: true,
+      filterable: true
+    }, {
+      name: 'dataCreacio',
+      title: this._translateService.instant('TABLE.createDate'),
+      sortable: true,
+      filterable: true,
+      filterType: FilterType.date
+    }, {
+      name: 'professional',
+      title: this._translateService.instant('TABLE.owner'),
+      sortable: true,
+      filter: this.professionalNomComplet,
+      filterable: true
+    }, {
+      name: 'dataValidacio',
+      title: this._translateService.instant('TABLE.updateDate'),
+      sortable: true,
+      filterable: true,
+      filterType: FilterType.date
+    }, {
+      name: 'estat',
+      title: this._translateService.instant('TABLE.expedient'),
+      sortable: true,
+      filterable: true
+    }]);
+    this.options.filterable = true;
+    this.options.sort = 'professional';
+    this.options.actions = false;
+    this.options.itemsPerPage = 10;
+    /* Reload Table */
+    this.reloadData();
+  }
+
+  filterAllFiles(){
+    /* Set Options Table List of Files */
+    this.options.setColumns([{
+      name: 'codi',
+      title: this._translateService.instant('TABLE.files'),
+      sortable: true,
+      filterable: true
+    }, {
+      name: 'dataCreacio',
+      title: this._translateService.instant('TABLE.createDate'),
+      sortable: true,
+      filterable: true,
+      filterType: FilterType.date
+    }, {
+      name: 'professional',
+      title: this._translateService.instant('TABLE.owner'),
+      sortable: true,
+      filterable: true
+    }, {
+      name: 'dataValidacio',
+      title: this._translateService.instant('TABLE.updateDate'),
+      sortable: true,
+      filterable: true,
+      filterType: FilterType.date
+    }, {
+      name: 'estat',
+      title: this._translateService.instant('TABLE.expedient'),
+      sortable: true,
+      filterable: true
+    }]);
     this.options.filterable = true;
     this.options.actions = false;
     this.options.itemsPerPage = 10;
+    /* Reload Table */
+    this.reloadData();
   }
 
   /** GET MODEL **/
@@ -91,8 +136,10 @@ export class HomeComponent {
   getProfessionalData(id: number) {
     this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
       this.professional = data;
+      this.professionalNomComplet = this.professional.nom + " " + this.professional.cognom1 + " " + this.professional.cognom2;
+      console.log(this.professionalNomComplet);
       /* Reload Table  */
-      this.reloadData();
+      this.filterProfessional();
     }, error => {
       console.log("ERROR al recuperar el datos");
     });
