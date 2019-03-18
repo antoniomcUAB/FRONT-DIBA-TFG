@@ -160,7 +160,7 @@
                                                                                     [ngbPopover] =  "'EMERGENTS.Frequencia' | translate "
                                                                                    placement="right"
                                                                                    triggers="mouseenter:mouseleave"
-                                                                                   [popoverTitle]=" 'TABLE.severity' | translate  "
+                                                                                   [popoverTitle]=" 'TABLE.frequency' | translate  "
                                                                                    container="body"></i></label>
                   <select class="form-control" id="t1frequency" [required]="getFirstPregunta(pregunta.id,ambit, entorn)"
                           [value]="cleanSelects"
@@ -331,7 +331,7 @@
       <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
       <ng-template ngFor [ngForOf]="ambit.factors_context" let-cont let-c="index">
           <ng-template [ngIf]="cont.ambit.descripcio === contextualitzacio">
-            <div *ngIf="c===0" class="opaco p-2 col-12 mb-3">
+            <div *ngIf="c===0 || cont.primera" class="opaco p-2 col-12 mb-3">
               <h6 class="text-white ">{{cont.gravetat.descripcio}}</h6>
             </div>
             <!--<div *ngIf="c!==0 && cont.gravetat.descripcio === 'Risc'" class="opaco p-2 col-12 mb-3">-->
@@ -341,7 +341,7 @@
             <div class="form-group row col-12 py-2">
             <!-- Situacion social Basica -->
             <div class="col-5">
-              <label *ngIf="c===0" for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
+              <label *ngIf="c===0 || cont.primera" for="ssb">{{ "TABLE.contextFactor" | translate }}</label>
               <input type="text" class="form-control" id="ssb19" value="{{cont.descripcio}}" disabled>
             </div>
             <!--/ Situacion social Basica -->
@@ -350,8 +350,8 @@
             <div class="col-1">
               <div class="col-12">
                 <div class="form-group align-items-center col-12 text-center">
-                  <label style="font-size: x-small" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots && c===0"> {{ "TABLE.aplUna" | translate }}</label>
-                  <label style="font-size: x-small" *ngIf="contextualitzacio.toUpperCase() === 'GLOBALITAT DEL CAS' || cont.fctots === null && c===0"> {{ "TABLE.apl" | translate }}</label>
+                  <label style="font-size: x-small" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots && (c===0 || cont.primera)"> {{ "TABLE.aplUna" | translate }}</label>
+                  <label style="font-size: x-small" *ngIf="contextualitzacio.toUpperCase() === 'GLOBALITAT DEL CAS' && cont.fctots === null && (c===0 || cont.primera)"> {{ "TABLE.apl" | translate }}</label>
                   <label class="custom-control custom-checkbox apply">
                     <input type="checkbox" class="custom-control-input position-relative"
                             [disabled]="getFirtsContexto(cont.id , ambit , cont )?.mesUc"
@@ -369,7 +369,7 @@
             <!-- Persones -->
             <div class="col-2" >
               <div class="col-12" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots">
-                <label for="t1person" *ngIf="c===0">{{ "TABLE.person" | translate }} </label>
+                <label for="t1person" *ngIf="c===0 || cont.primera">{{ "TABLE.person" | translate }} </label>
                 <select class="form-control" id="t1person" name="personas{{c}}"
                         [required]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
                         [value]="cleanSelects"
@@ -389,7 +389,7 @@
             <div class="col-2">
               <div class="col-12" *ngIf="contextualitzacio.toUpperCase() !== 'GLOBALITAT DEL CAS' && cont.fctots">
                 <div class="form-group align-items-center col-12 text-center">
-                  <label style="font-size: x-small" *ngIf="c===0">  {{ "TABLE.aplMas" | translate }}</label>
+                  <label style="font-size: x-small" *ngIf="c===0 || cont.primera">  {{ "TABLE.aplMas" | translate }}</label>
                   <label class="custom-control custom-checkbox apply">
                     <input type="checkbox" class="custom-control-input position-relative" name="aplicaContextMesUn{{c}}"
                            [disabled]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
@@ -407,7 +407,7 @@
 
             <div class="col-2">
               <div class="col-12">
-                  <label for="t1riskFactor" *ngIf="c===0" >{{ "TABLE.types" | translate }}</label>
+                  <label for="t1riskFactor" *ngIf="c===0 || cont.primera" >{{ "TABLE.types" | translate }}</label>
                   <input type="text" class="form-control text-center" id="t1riskFactor"  disabled name="risc{{c}}"
                          [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio"
                          [ngClass]="{'danger' : getFirtsContexto(cont.id , ambit , cont )?.factor?.gravetat?.descripcio.toUpperCase() === 'RISC',

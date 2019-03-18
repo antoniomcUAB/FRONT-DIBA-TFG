@@ -14,6 +14,7 @@ export class Factor {
   descripcio: string;
 }
 export class FactorsContext {
+  primera:string;
   descripcio: string;
   fctots: string;
   infants: boolean;

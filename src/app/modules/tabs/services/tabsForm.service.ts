@@ -30,9 +30,14 @@ export class TabsFormService extends GlobalService {
     return this._http.get<Ambits>(`${this.apiURL}/dsdiba/api/model`).pipe(
       map(data => {
         for (let cont of data.ambits) {
+          let exit = false;
           for (let context of cont.factors_context) {
             if (!context.fctots) {
               context.fctots = null;
+            }
+            if (context.gravetat.descripcio !== 'Protecció' && !exit) {
+              context.primera = 'Si';
+              exit = true;
             }
           }
         }
@@ -58,8 +63,6 @@ export class TabsFormService extends GlobalService {
   getDiagnostic(idDiagnostico: number ): Observable<Diagnosis> {
     return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${idDiagnostico}`).pipe(
       map( data => {
-        console.log(data);
-
         return data;
       })
     );

@@ -94,6 +94,54 @@ export class FormTabComponent extends CustomInput implements OnInit {
           return false;
       }
   }
+  public set (id:number) {
+    switch (id) {
+      case 28299:
+        this.disabledHabitatge.h2 = true;
+        this.disabledHabitatge.h3 = true;
+        this.disabledHabitatge.h4 = true;
+        this.disabledHabitatge.h5 = true;
+        break;
+      case 28306:
+        this.disabledHabitatge.h1 = true;
+        break;
+      case 28312:
+        this.disabledHabitatge.h1 = true;
+        break;
+      case 28323:
+        this.disabledHabitatge.h1 = true;
+        break;
+      case 28333:
+        this.disabledHabitatge.h1 = true;
+        break;
+      default:
+        break;
+    }
+  }
+  public unSet (id:number) {
+    switch (id) {
+      case 28299:
+        this.disabledHabitatge.h2 = false;
+        this.disabledHabitatge.h3 = false;
+        this.disabledHabitatge.h4 = false;
+        this.disabledHabitatge.h5 = false;
+        break;
+      case 28306:
+        this.disabledHabitatge.h1 = false;
+        break;
+      case 28312:
+        this.disabledHabitatge.h1 = false;
+        break;
+      case 28323:
+        this.disabledHabitatge.h1 = false;
+        break;
+      case 28333:
+        this.disabledHabitatge.h1 = false;
+        break;
+      default:
+        break;
+    }
+  }
 
   compare(el1, el2) {
     return el1 && el2 ? el1.id === el2.id : el1 === el2;
@@ -159,9 +207,30 @@ export class FormTabComponent extends CustomInput implements OnInit {
       return `with: ${reason}`;
     }
   }
+  public comprobar() {
+    if (this.value.ambit) {
+    for (const ambit of this.value.ambit) {
+      if (ambit.ambit.id === 28297) {
+        for (const entorn of ambit.entorn) {
+          if (entorn.id === 28298) {
+            for (const pregunta of entorn.pregunta) {
+              if (pregunta.situacioSocial.id === 28299) {
+                this.set(pregunta.situacioSocial.id);
+              }
+              if (pregunta.situacioSocial.id === 28306 || pregunta.situacioSocial.id === 28312 || pregunta.situacioSocial.id === 28323 || pregunta.situacioSocial.id === 28333) {
+                this.set(pregunta.situacioSocial.id);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  }
   reloadDiagnostico() {
     this.tabsService.getDiagnostic(this.idDiagnostic).subscribe((result: Diagnosis) => {
       this.value = result;
+      this.comprobar();
     }, (err) => {
       console.log(err);
     });
@@ -228,6 +297,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     const subject = new Subject<Preguntas>();
     const preguntas = this.getPreguntas(idSocial, ambit, entorn);
     if (preguntas && preguntas.length >= 1) {
+      this.unSet(idSocial);
       /* Si hay entorno y ya existe eliminala */
       this.tabsService.cleanPreguntes(this.idDiagnostic, idSocial).subscribe(() => {
         this.reloadDiagnostico();
@@ -237,6 +307,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         console.log(err);
       });
     } else {
+      this.set(idSocial);
       /* Si hay entorno y no existe llama a back , añadelo al objeto*/
       this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta, idSocial), this.idDiagnostic).subscribe((result) => {
         for (let i = 0; i < this.value.ambit.length; i++) {

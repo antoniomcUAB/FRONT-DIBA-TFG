@@ -11,7 +11,7 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: 'app-valoracio-diagnostic-tab',
   templateUrl: './valoracio-diagnostic-tab.component.html',
-  styleUrls: ['./valoracio-diagnostic-tab.component.scss'],
+  styleUrls: ['./valoracio-diagnostic-tab.component.css'],
   providers: [
     {provide: NG_VALUE_ACCESSOR, useExisting: ValoracioDiagnosticTabComponent, multi: true}
   ]

@@ -12,21 +12,19 @@
               <div class="col-6">
                 <table class="table table-bordered">
                   <tbody>
-                  <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio>
+                  <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio let-v="index">
                     <ng-template [ngIf]="evaluacio && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
                       <tr>
-                        <th class="text-white"
-                            [ngClass]="{'bg-warning text-black-50' : evaluacio?.ambit?.ambit?.descripcio?.toUpperCase() === 'AUTONOMIA',
-                                            'bg-danger' : evaluacio.ambit?.ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL',
-                                            'bg-success' : evaluacio.ambit?.ambit?.descripcio.toUpperCase() === 'RELACIONAL',
-                                            'bg-info' : evaluacio.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'}">
-                          RISC {{evaluacio?.ambit?.ambit?.descripcio.toUpperCase()}}</th>
+                        <th class="bg-primary text-white" *ngIf="v===0"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
+                        <th class="bg-primary-80 text-white" *ngIf="v===1"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
+                        <th class="bg-primary-60 text-white" *ngIf="v===2"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
+                        <th class="bg-primary-40 text-white" *ngIf="v===3"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
 
                         <th class="text-center" [ngClass]="{'warning' : evaluacio?.risc?.descripcio.toUpperCase() === 'RISC',
                                             'danger' : evaluacio?.risc?.descripcio.toUpperCase() === 'ALT RISC',
                                             'success' : evaluacio?.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
                                             'info' : evaluacio?.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;'}">
-                          {{evaluacio?.risc.descripcio.toUpperCase()}}</th>
+                          {{evaluacio?.risc.descripcio}}</th>
                       </tr>
                     </ng-template>
                   </ng-template>
@@ -39,7 +37,7 @@
                   <tr>
                     <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio>
                       <ng-template [ngIf]="evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS' ">
-                        <th colspan="2" class="text-white">{{evaluacio.ambit.ambit.descripcio.toUpperCase()}}</th>
+                        <th colspan="2" class="text-white bg-primary">{{evaluacio.ambit.ambit.descripcio.toLocaleLowerCase()}}</th>
                       </ng-template>
                     </ng-template>
                   </tr>
@@ -96,7 +94,9 @@
                   <ng-container *ngIf="entorn.pregunta.length > 0">
                     <tr *ngFor="let pregunta of entorn.pregunta">
                       <td>{{ pregunta.situacioSocial.social }}</td>
-                      <td class="text-center">{{ pregunta.persona?.tipusPersona?.descripcio }}</td>
+
+                      <td class="text-center" *ngIf="pregunta.persona">{{ pregunta.persona?.tipusPersona?.descripcio }}</td>
+                      <td class="text-center" *ngIf="!pregunta.persona" >Unitat de Convivencia</td>
                       <td class="text-center"
                           [ngClass]="{'warning' : pregunta.factor?.descripcio.toUpperCase() === 'RISC',
                                       'danger' : pregunta.factor?.descripcio.toUpperCase() === 'ALT RISC',
@@ -174,9 +174,8 @@
                   <ng-container *ngIf="ambit.contextualitzacio?.length > 0" >
                     <tr *ngFor="let context of ambit.contextualitzacio">
                       <td>{{ context.factor?.descripcio }}</td>
-                      <td class="text-center">
-                        {{ context.persona?.tipusPersona?.descripcio }}
-                      </td>
+                      <td class="text-center" *ngIf="context.persona">{{ context.persona?.tipusPersona?.descripcio }}</td>
+                      <td class="text-center" *ngIf="!context.persona" >Unitat de Convivencia</td>
                       <td class="text-center"
                           [ngClass]="{'danger' : context.factor?.gravetat.descripcio.toUpperCase() === 'RISC',
                                       'success' : context.factor?.gravetat.descripcio.toUpperCase() === 'PROTECCI&#211;' }">
