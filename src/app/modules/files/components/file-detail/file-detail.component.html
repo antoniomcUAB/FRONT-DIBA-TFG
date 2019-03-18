@@ -522,35 +522,6 @@
                       </div>
                     </ng-template>
                   </ngb-tab>
-                  <ngb-tab title="Generalitat del cas">
-                    <ng-template ngbTabContent>
-                      <div class="p-5 h-100 d-table m-auto">
-                        <div>
-                          <ngx-charts-bar-vertical
-                            class="chart-container"
-                            [scheme]="colorScheme"
-                            [customColors]="colorGlobal"
-                            [schemeType]="schemeType"
-                            [results]="chartsGlobalValue"
-                            [gradient]="gradient"
-                            [xAxis]="showXAxis"
-                            [yAxis]="showYAxis"
-                            [legend]="showLegend"
-                            [showXAxisLabel]="showXAxisLabel"
-                            [showYAxisLabel]="showYAxisLabel"
-                            [tooltipDisabled]="tooltipDisabled"
-                            [xAxisLabel]="xAxisLabel"
-                            [yAxisLabel]="yAxisLabel"
-                            [showGridLines]="showGridLines"
-                            [barPadding]="barPadding"
-                            [roundDomains]="roundDomains"
-                            (select)="select($event)"
-                            (legendLabelClick)="onLegendLabelClick($event)">
-                          </ngx-charts-bar-vertical>
-                        </div>
-                      </div>
-                    </ng-template>
-                  </ngb-tab>
                   <ngb-tab title="General" tabindex="active">
                     <ng-template ngbTabContent>
                       <div class="p-5 h-100 d-table m-auto">
