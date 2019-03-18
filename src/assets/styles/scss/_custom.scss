@@ -201,6 +201,15 @@ a.navbar-brand.mr-auto {
   background-color: #A41E34 !important;
   border-color: #A41E34 !important;
 }
+h3.popover-header {
+  margin-top: 0px;
+  background:  rgb(137,21,54);
+  color:white;
+}
+.popover-body {
+  background: #EDEDED;
+  color:black;
+}
 
 @media print {
   .no-print, .no-print * {
