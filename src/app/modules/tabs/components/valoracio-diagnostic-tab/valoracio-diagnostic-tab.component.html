@@ -37,7 +37,7 @@
                   <tr>
                     <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio>
                       <ng-template [ngIf]="evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS' ">
-                        <th colspan="2" class="text-white bg-primary">{{evaluacio.ambit.ambit.descripcio.toLocaleLowerCase()}}</th>
+                        <th colspan="2" class="text-white bg-primary">Globalitat del Cas</th>
                       </ng-template>
                     </ng-template>
                   </tr>
@@ -52,7 +52,7 @@
                                       'danger' : evaluacio.risc?.descripcio.toUpperCase() === 'ALT RISC',
                                       'success' : evaluacio.risc?.descripcio.toUpperCase() === 'VULNERABILITAT',
                                       'info' : evaluacio.risc?.descripcio.toUpperCase() === 'SENSE VALORACI&#211;' }">
-                            {{evaluacio?.risc?.descripcio.toUpperCase()}}
+                            {{evaluacio?.risc?.descripcio}}
                           </th>
                         </ng-template>
                       </ng-template>

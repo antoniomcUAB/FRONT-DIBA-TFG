@@ -114,11 +114,22 @@ export class FormTabComponent extends CustomInput implements OnInit {
       case 28333:
         this.disabledHabitatge.h1 = true;
         break;
+      case 28345:
+        this.disabledEconomia.e2 = true;
+        this.disabledEconomia.e3 = true;
+        break;
+      case 28351:
+        this.disabledEconomia.e1 = true;
+        break;
+      case 28359:
+        this.disabledEconomia.e1 = true;
+        break;
       default:
         break;
     }
   }
   public unSet (id:number) {
+    console.log(id);
     switch (id) {
       case 28299:
         this.disabledHabitatge.h2 = false;
@@ -137,6 +148,16 @@ export class FormTabComponent extends CustomInput implements OnInit {
         break;
       case 28333:
         this.disabledHabitatge.h1 = false;
+        break;
+      case 28345:
+        this.disabledEconomia.e2 = false;
+        this.disabledEconomia.e3 = false;
+        break;
+      case 28351:
+        this.disabledEconomia.e1 = false;
+        break;
+      case 28359:
+        this.disabledEconomia.e1 = false;
         break;
       default:
         break;
@@ -189,6 +210,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         console.log(err);
       });
     } else {
+      this.unSet(this.preguntaEconomica.situacioSocial.id);
       this.tabsService.DeletePregunta(this.preguntaEconomica.id).subscribe(() => {
         this.reloadDiagnostico();
       }, (err) => {
@@ -218,6 +240,16 @@ export class FormTabComponent extends CustomInput implements OnInit {
                 this.set(pregunta.situacioSocial.id);
               }
               if (pregunta.situacioSocial.id === 28306 || pregunta.situacioSocial.id === 28312 || pregunta.situacioSocial.id === 28323 || pregunta.situacioSocial.id === 28333) {
+                this.set(pregunta.situacioSocial.id);
+              }
+            }
+          }
+          if(entorn.id === 28344) {
+            for (const pregunta of entorn.pregunta) {
+              if (pregunta.situacioSocial.id === 28345) {
+                this.set(pregunta.situacioSocial.id);
+              }
+              if (pregunta.situacioSocial.id === 28351 || pregunta.situacioSocial.id === 28359) {
                 this.set(pregunta.situacioSocial.id);
               }
             }

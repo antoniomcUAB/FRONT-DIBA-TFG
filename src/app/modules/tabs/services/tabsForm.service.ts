@@ -41,6 +41,7 @@ export class TabsFormService extends GlobalService {
             }
           }
         }
+        console.log(data);
         return data;
       })
     );

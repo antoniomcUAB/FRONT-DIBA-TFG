@@ -78,7 +78,7 @@
                   <i class= "fa fa-question-circle position-absolute top-right-double" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.social" container="body"></i>
                 </div>
                   <div class="position-relative col-3 p-0">
-                     <button type="button" class=" col-12 btn btn-outline-primary" (click)="open(valoration , pregunta.social , pregunta.id , ambit, entorn );" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
+                     <button type="button" class=" col-12 btn btn-outline-primary" [disabled]="getPreguntaDisabled(pregunta.id)" (click)="open(valoration , pregunta.social , pregunta.id , ambit, entorn );" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
                 </div>
                 </div>
                 <!--/ situacio social De Ingressos insuficients-->
