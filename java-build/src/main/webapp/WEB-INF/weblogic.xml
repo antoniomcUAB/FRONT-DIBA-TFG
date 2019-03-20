@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app>
+    <context-root>/dsdiba/ </context-root>
+    <container-descriptor>
+        <show-archived-real-path-enabled>true</show-archived-real-path-enabled>
+    </container-descriptor>
+    <session-descriptor>
+             <cookie-name>JDSDIBAID</cookie-name>
+       </session-descriptor>
+</weblogic-web-app>

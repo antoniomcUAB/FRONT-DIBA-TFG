@@ -58,86 +58,86 @@ build-artifacts:
 
 build-war:
   stage: packing
-  image: java:openjdk-8-alpine
+  image: maven:latest
   only:
     - tags
     - master
     - develop
   script:
-    - cp -r WEB-INF dist/WEB-INF
-    - cd dist
-    - cp index.html index.jsp
-    - jar -cvf ds-diba-frontend.war *
+    - cp dist/index.html dist/index.jsp
+    - cp dist/* java-build/src/main/webapp/
+    - cd java-build
+    - maven clean package
   dependencies:
     - build-artifacts
   artifacts:
     paths:
-      - dist/ds-diba-frontend.war
+      - java-build/target/*.war
 
-build-docker-image:
-  stage: packing
-  image: docker:git
-  only:
-  - tags
-  - master
-  - develop
-  services:
-  - docker:dind
-  tags:
-  - docker
-  dependencies:
-  - build-artifacts
-  before_script:
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-  script:
-  - docker build -t $CONTAINER_TEST_IMAGE .
-  - docker push $CONTAINER_TEST_IMAGE
-
-release-image:
-  stage: release
-  image: docker:git
-  only:
-  - tags
-  - master
-  services:
-  - docker:dind
-  tags:
-  - docker
-  dependencies:
-  before_script:
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-  script:
-  - docker pull $CONTAINER_TEST_IMAGE
-  - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
-  - docker push $CONTAINER_RELEASE_IMAGE
+#build-docker-image:
+#  stage: packing
+#  image: docker:git
+#  only:
+#  - tags
+#  - master
+#  - develop
+#  services:
+#  - docker:dind
+#  tags:
+#  - docker
+#  dependencies:
+#  - build-artifacts
+#  before_script:
+#  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+#  script:
+#  - docker build -t $CONTAINER_TEST_IMAGE .
+#  - docker push $CONTAINER_TEST_IMAGE
+#
+#release-image:
+#  stage: release
+#  image: docker:git
+#  only:
+#  - tags
+#  - master
+#  services:
+#  - docker:dind
+#  tags:
+#  - docker
+#  dependencies:
+#  before_script:
+#  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+#  script:
+#  - docker pull $CONTAINER_TEST_IMAGE
+#  - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+#  - docker push $CONTAINER_RELEASE_IMAGE
 
 ## DEV
-deploy-docker:dev:
-  stage: deploy
-  image: kinogmt/centos-ssh
-  environment:
-    name: develop
-    url: http://dsdiba.demo.in2.es
-  only:
-  - develop
-  when: manual
-  variables:
-    DOCKER_FILE: 'docker-compose-dev.yml'
-    DEPLOYMENT_KEY: $DEPLOYMENT_DEV_KEY
-    DEPLOYMENT_SERVER: $DEPLOYMENT_DEV_SERVER
-    DEPLOYMENT_USER: $DEPLOYMENT_DEV_USER
-    DEPLOYMENT_PATH: $DEPLOYMENT_DEV_PATH
-  dependencies:
-  before_script:
-  - mkdir -p ~/.ssh
-  - echo "$DEPLOYMENT_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-  - chmod 600 ~/.ssh/id_rsa
-  - eval "$(ssh-agent -s)"
-  - ssh-add ~/.ssh/id_rsa
-  - ssh-keyscan -H $DEPLOYMENT_SERVER >> ~/.ssh/known_hosts
-  script:
-  - scp -r ./${DOCKER_FILE} ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/
-  - ssh ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} "cd ${DEPLOYMENT_PATH}; docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}; docker-compose -f ${DOCKER_FILE} stop; docker-compose -f ${DOCKER_FILE} rm app --force; docker-compose -f ${DOCKER_FILE} pull; docker-compose -f ${DOCKER_FILE} up -d"
+#deploy-docker:dev:
+#  stage: deploy
+#  image: kinogmt/centos-ssh
+#  environment:
+#    name: develop
+#    url: http://dsdiba.demo.in2.es
+#  only:
+#  - develop
+#  when: manual
+#  variables:
+#    DOCKER_FILE: 'docker-compose-dev.yml'
+#    DEPLOYMENT_KEY: $DEPLOYMENT_DEV_KEY
+#    DEPLOYMENT_SERVER: $DEPLOYMENT_DEV_SERVER
+#    DEPLOYMENT_USER: $DEPLOYMENT_DEV_USER
+#    DEPLOYMENT_PATH: $DEPLOYMENT_DEV_PATH
+#  dependencies:
+#  before_script:
+#  - mkdir -p ~/.ssh
+#  - echo "$DEPLOYMENT_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+#  - chmod 600 ~/.ssh/id_rsa
+#  - eval "$(ssh-agent -s)"
+#  - ssh-add ~/.ssh/id_rsa
+#  - ssh-keyscan -H $DEPLOYMENT_SERVER >> ~/.ssh/known_hosts
+#  script:
+#  - scp -r ./${DOCKER_FILE} ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/
+#  - ssh ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} "cd ${DEPLOYMENT_PATH}; docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}; docker-compose -f ${DOCKER_FILE} stop; docker-compose -f ${DOCKER_FILE} rm app --force; docker-compose -f ${DOCKER_FILE} pull; docker-compose -f ${DOCKER_FILE} up -d"
 
 deploy-weblogic:dev:
   stage: deploy
@@ -148,7 +148,6 @@ deploy-weblogic:dev:
   only:
   - develop
   variables:
-    WAR_FILE: 'ds-diba-frontend.war'
     WAR_FOLDER: '/home/weblogic/war'
     DEPLOYMENT_KEY: $DEPLOYMENT_DEV_KEY
     DEPLOYMENT_SERVER: $DEPLOYMENT_DEV_SERVER
@@ -164,7 +163,7 @@ deploy-weblogic:dev:
   - ssh-add ~/.ssh/id_rsa
   - ssh-keyscan -H $DEPLOYMENT_SERVER >> ~/.ssh/known_hosts
   script:
-  - scp -r ./dist/${WAR_FILE} ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${WAR_FOLDER}/
+  - scp -r ./java-build/target/*.war ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${WAR_FOLDER}/
   - ssh ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} "/home/weblogic/redeployFront.sh"
 
 ## PROD
