@@ -11,6 +11,8 @@ import {Expedient, AmbitContext, ModelQueryContext, ModelQuerySituation, Situaci
 import { HomeService } from '../services/home.service';
 /* Constants */
 import { digit } from './constants';
+import {User} from "../../auth/resources/data/user";
+import {AuthService, TokenService} from "../../auth";
 
 @Component({
   selector: 'app-home',
@@ -19,7 +21,9 @@ import { digit } from './constants';
 })
 export class HomeComponent {
   /* Variables Professional */
-  idProfessional = 19669; /* TODO - Petición id Profesional */
+  idProfessional = 19669;
+  user = new User();
+
   professional: Professional;
   professionalNomComplet: string;
   model;
@@ -40,8 +44,11 @@ export class HomeComponent {
               private _router: Router,
               private _translateService: TranslateService,
               private modalService: NgbModal) {
+    this.user.username = "PROFESSIONAL";
+    this.user.password = "PROFESSIONAL";
     /* Get Professional Data */
-    this.getProfessionalData(this.idProfessional);
+    this.getProfessional(this.user.username);
+    // this.getProfessionalData(this.idProfessional);
     /* Get Current Model */
     this.getModel();
   }
@@ -72,7 +79,7 @@ export class HomeComponent {
       filterable: true,
       filterType: FilterType.date
     }, {
-      name: 'professional',
+      name: 'nomComplet',
       title: this._translateService.instant('TABLE.owner'),
       sortable: true,
       filter: this.professionalNomComplet,
@@ -90,14 +97,13 @@ export class HomeComponent {
       filterable: true
     }]);
     this.options.filterable = true;
-    this.options.sort = 'professional';
     this.options.actions = false;
     this.options.itemsPerPage = 10;
     /* Reload Table */
     this.reloadData();
   }
 
-  filterAllFiles(){
+  filterAllFiles() {
     /* Set Options Table List of Files */
     this.options.setColumns([{
       name: 'codi',
@@ -111,7 +117,7 @@ export class HomeComponent {
       filterable: true,
       filterType: FilterType.date
     }, {
-      name: 'professional',
+      name: 'nomComplet',
       title: this._translateService.instant('TABLE.owner'),
       sortable: true,
       filterable: true
@@ -145,10 +151,23 @@ export class HomeComponent {
   }
 
   /** GET PROFESSIONAL DATA **/
+  getProfessional(username: string) {
+    this._service.getProfessionalByUsername(username).subscribe( (data: Professional) => {
+      this.professional = data;
+      this.professionalNomComplet = this.professional.nomComplet;
+      console.log(this.professionalNomComplet);
+      /* Reload Table  */
+      this.filterProfessional();
+    }, error => {
+      console.log("ERROR al recuperar el datos");
+    });
+  }
+
+  /** GET PROFESSIONAL DATA **/
   getProfessionalData(id: number) {
     this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
       this.professional = data;
-      this.professionalNomComplet = this.professional.nom + " " + this.professional.cognom1 + " " + this.professional.cognom2;
+      this.professionalNomComplet = this.professional.nomComplet;
       console.log(this.professionalNomComplet);
       /* Reload Table  */
       this.filterProfessional();
