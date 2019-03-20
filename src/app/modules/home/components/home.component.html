@@ -29,7 +29,7 @@
             <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.dataCreacio | date:'dd/MM/yyyy'}}</a>
           </td>
           <td>
-            <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}</a>
+            <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.professional.nomComplet}}</a>
           </td>
           <td class="text-center">
             <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.dataValidacio | date:'dd/MM/yyyy' }}</a>

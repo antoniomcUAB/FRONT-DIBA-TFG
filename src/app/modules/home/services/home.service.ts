@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators';
 import {TableListOptions, TableListResponse} from "../../../shared/modules/table-list";
 import {Injectable} from "@angular/core";
 import {Professional} from "../models/professional";
-import {Model, Expedient} from "../../files";
+import {Expedient} from "../../files";
 
 @Injectable()
 export class HomeService extends GlobalService {
@@ -22,6 +22,11 @@ export class HomeService extends GlobalService {
   /** GET PROFESSIONAL BY ID **/
   getProfessionalByID(idProfessional: number): Observable<Professional> {
     return this._http.get<Professional>(`${this.apiURL}/dsdiba/api/professional/${idProfessional}`);
+  }
+
+  /** GET PROFESSIONAL BY USERNAME **/
+  getProfessionalByUsername(username: string): Observable<Professional> {
+    return this._http.get<Professional>(`${this.apiURL}/dsdiba/api/professional/username/${username}`);
   }
 
   /** GET LIST OF FILES **/
