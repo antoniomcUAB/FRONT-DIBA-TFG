@@ -65,7 +65,7 @@ build-war:
     - develop
   script:
     - cp dist/index.html dist/index.jsp
-    - cp dist/* java-build/src/main/webapp/
+    - cp -r dist/* java-build/src/main/webapp/
     - cd java-build
     - maven clean package
   dependencies:
