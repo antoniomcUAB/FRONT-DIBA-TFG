@@ -1,7 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilesDetailService } from '../../services/file-detail.service';
-import {ChartAmbit, ChartGroup, Diagnosis, Evaluacions, Expedient, Model, Persona, TipusPersona} from '../../models/expedient';
+import {
+  ChartAmbit,
+  ChartGroup,
+  Diagnosis,
+  Evaluacions,
+  Expedient,
+  Model,
+  ModelQuerySituation,
+  Persona,
+  TipusPersona
+} from '../../models/expedient';
 import { TableListOptions, TableListResponse } from '../../../../shared/modules/table-list';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -27,6 +37,7 @@ export class FileDetailComponent {
   idProfessional: number;
   expedient: Expedient;
   diagnosis: Diagnosis;
+
   /* Chart variables */
   arrayDiagnosis: Diagnosis[];
   diagnosisValidated: Diagnosis[];
@@ -34,7 +45,6 @@ export class FileDetailComponent {
   chartsAutonomiaValue: ChartAmbit[];
   chartsMaterialValue: ChartAmbit[];
   chartsRelacionalValue: ChartAmbit[];
-  chartsGlobalValue: ChartAmbit[];
 
   id: number;
   member: Persona;
@@ -230,34 +240,6 @@ export class FileDetailComponent {
         value: colorAltRisc
       }
     ];
-    this.chartsGlobalValue = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: 3
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: 4
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: 6
-      }
-    ];
-    this.colorGlobal = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: colorVulnerabilitat
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: colorRisc
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: colorRisc
-      }
-    ];
     this.chartsGroupValue = [
       {
         name: "Autonomia",
@@ -267,15 +249,49 @@ export class FileDetailComponent {
           value: 1
           },
           {
-            name: 'DSDIBA-05/03/2019',
+            name: 'DSDIBA-05/04/2019',
             value: 5
           },
           {
-            name: 'DSDIBA-05/03/2019',
+            name: 'DSDIBA-05/05/2019',
             value: 10
           }
         ]
-      }
+      },
+      {
+        name: 'Material',
+        series: [
+          {
+            name: 'DSDIBA-05/03/2019',
+            value: 1
+          },
+          {
+            name: 'DSDIBA-05/04/2019',
+            value: 5
+          },
+          {
+            name: 'DSDIBA-05/05/2019',
+            value: 10
+          }
+        ]
+      },
+      {
+        name: 'Relacional',
+        series: [
+          {
+            name: 'DSDIBA-05/03/2019',
+            value: 1
+          },
+          {
+            name: 'DSDIBA-05/04/2019',
+            value: 5
+          },
+          {
+            name: 'DSDIBA-05/05/2019',
+            value: 10
+          }
+        ]
+      },
     ];
     this.colorGeneral = [
       {
@@ -305,11 +321,6 @@ export class FileDetailComponent {
         if (diagnostic.estat.descripcio.toUpperCase() === "VALIDAT") {
           this.diagnosisValidated.push(diagnostic);
         }
-      }
-      for (const validated of this.diagnosisValidated) {
-          this.chartsAutonomiaValue[0].name = validated.valoracio.evaluacions.ambit.descripcio;
-          this.chartsAutonomiaValue[0].value = validated.valoracio.evaluacions.ambit.valRisc;
-          console.log(this.chartsAutonomiaValue);
       }
     });
   }
@@ -344,7 +355,6 @@ export class FileDetailComponent {
   getFile() {
     this._service.getFileById(this.id).subscribe( (data: Expedient) => {
       this.expedient = data;
-      console.log(this.expedient);
     }, (error) => {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
@@ -413,11 +423,12 @@ export class FileDetailComponent {
     this.diagnosis.professional = this.professional;
     this.diagnosis.versioModel = this.model;
     /** Call Service **/
-    this._service.createDiagnosis(this.diagnosis, this.expedient.id, this.model.id).subscribe((result) => {
-      this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id, 'ID': this.id , 'professionalID': this.idProfessional}]);
-    }, (error) => {
-      console.log("ERROR - al crear diagnostico \n " + error);
-    });
+    this._service.createDiagnosis(this.diagnosis, this.expedient.id, this.model.id)
+      .subscribe((result) => {
+        this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id, 'ID': this.id , 'professionalID': this.idProfessional}]);
+      }, (error) => {
+        console.log("ERROR - al crear diagnostico \n " + error);
+      });
   }
 
   /* Update Unity Family Member */
@@ -448,7 +459,6 @@ export class FileDetailComponent {
 
   /* Update Unity Family Member */
   updateMember(persona: Persona) {
-    console.log(this.expedient);
     /** Update Member(Persona) by ID **/
     for (const index in this.expedient.persona) {
       if (this.expedient.persona[index].id === persona.id) {
@@ -471,7 +481,6 @@ export class FileDetailComponent {
 
   /* Update Observations */
   updateObservations() {
-console.log(this.expedient)
     /** Call Service **/
     this._service.updateObservations(this.expedient).subscribe((result) => {
       this.expedient = result;

@@ -2,5 +2,8 @@ declare const env: any;
 
 export const environment = {
   production: true,
-  serverURL: env.serverURL
+  serverURL: env.serverURL,
+  apiURL: env.apiURL,
+  whitelistedDomains: env.whitelistedDomains,
+  blacklistedDomains: env.blacklistedDomains
 };
