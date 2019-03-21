@@ -37,7 +37,6 @@ export class HomeService extends GlobalService {
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body.content;
             options.getPagesInfo(response.body);
-            console.log(response.body);
         return {
           data: data,
           options: options

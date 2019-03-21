@@ -22,6 +22,8 @@ import {GlobalService} from "../../../shared";
 })
 export class HomeComponent implements OnInit{
   /* Variables Professional */
+  // idProfessional = 30151;
+  // idProfessional = 30152;
   idProfessional = 19669;
   user = new User();
 
@@ -47,10 +49,8 @@ export class HomeComponent implements OnInit{
               private modalService: NgbModal,
               private global: GlobalService) {
     /* Get Professional Data */
-  this.user.username = "PROFESSIONAL";
-  this.user.password = "PROFESSIONAL";
-    this.getProfessional(this.user.username);
-    // this.getProfessionalData(this.idProfessional);
+    // this.getProfessional(this.user.username);
+    this.getProfessionalData(this.idProfessional);
     /* Get Current Model */
     this.getModel();
   }
