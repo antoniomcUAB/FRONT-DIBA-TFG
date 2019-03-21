@@ -67,7 +67,7 @@ build-war:
     - cp dist/index.html dist/index.jsp
     - cp -r dist/* java-build/src/main/webapp/
     - cd java-build
-    - maven clean package
+    - mvn clean package
   dependencies:
     - build-artifacts
   artifacts:
