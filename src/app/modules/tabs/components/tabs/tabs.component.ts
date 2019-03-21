@@ -1,5 +1,5 @@
 import {Component, Input, ViewChild} from '@angular/core';
-import {EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../models/tab-class-form';
+import {BreadCrums, EnvironmentMaterial, EnvironmentRelacional, TabsDisabled} from '../../models/tab-class-form';
 import {Diagnosis } from '../../models/diagnostic';
 import {Expedient, Persona} from "../../../files";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -7,6 +7,7 @@ import {FilesDetailService} from "../../../files/services/file-detail.service";
 import {TabsFormService} from "../../services/tabsForm.service";
 import {NgbTabChangeEvent, NgbTabset} from '@ng-bootstrap/ng-bootstrap';
 import {ValoracioDiagnosticTabComponent} from "../valoracio-diagnostic-tab/valoracio-diagnostic-tab.component";
+import {GlobalService} from "../../../../shared";
 
 const MAX_N_TABS = 5;
 
@@ -16,6 +17,7 @@ const MAX_N_TABS = 5;
 })
 
 export class TabsComponent {
+  public breadcrum: BreadCrums [] = []
   @Input() entornsRelacional: EnvironmentRelacional = new EnvironmentRelacional(); /*Entornos marcados del ralacional*/
   @Input() entornsMaterial: EnvironmentMaterial = new EnvironmentMaterial(); /*Entornos marcados del Material*/
   @ViewChild(NgbTabset) tab: NgbTabset; /*Componente NbgTabset*/
@@ -31,6 +33,7 @@ export class TabsComponent {
   public diagnosisID: number; /*idDiagnostico*/
   public expedientID: number; /*idExpediente*/
   public idProfesional: number; /*idExpediente*/
+  public nombreValoracio: string; /*nombreExpedient*/
   public personActives: Persona[] = []; /*Personas activas para este diagnostico*/
   public expedient: Expedient;  /*Expediente al que pertenece este diagnostico*/
 
@@ -38,12 +41,14 @@ export class TabsComponent {
   constructor(private _route: ActivatedRoute,
               private _service: FilesDetailService,
               private tabsService: TabsFormService,
+              private global: GlobalService,
               private _router: Router) {
     this.diagnosisID = this._route.snapshot.params['diagnosisID'];
     this.expedientID = this._route.snapshot.params['expedientID'];
     this.idProfesional = this._route.snapshot.params['professionalID'];
-    console.log(this.idProfesional);
+    this.nombreValoracio = this._route.snapshot.params['ValoracioName'];
     this.getFile();
+
     this.diagnostico = new Diagnosis();
     this.reloadDiagnostico();
     setTimeout(_ => {
@@ -54,13 +59,13 @@ export class TabsComponent {
   getFile() {
     this._service.getFileById(this.expedientID).subscribe((data: Expedient) => {
       this.expedient = data;
+      this.setCrum()
       this.getPersonActives();
     }, (error) => {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
   }
   public routeToExpedient() {
-    console.log("uqer");
     this._router.navigate(['/file-detail', {'id': this.expedientID, 'idProfessional': this.idProfesional}]);
   }
   /*Controla el cambio del tab para que no se produzca antes de lo esperado*/
@@ -176,6 +181,7 @@ export class TabsComponent {
   reloadDiagnostico() {
     this.tabsService.getDiagnostic(this.diagnosisID).subscribe((result: Diagnosis) => {
       this.diagnostico = result;
+      this.setCrum();
     }, (err) => {
       console.log(err);
     });
@@ -232,6 +238,12 @@ export class TabsComponent {
       return !open;
     }
 
+  }
+  public setCrum() {
+    if ( this.expedient) {
+      this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient ' + this.expedient.codi.toString(), name: ''} , {url: this.nombreValoracio, name: ''}];
+    this.global.setBreadCrum(this.breadcrum);
+  }
   }
 }
 

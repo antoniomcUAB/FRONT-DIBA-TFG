@@ -1,12 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {
-  Entorns,
-  Ambits,
-  EnvironmentMaterial,
-  EnvironmentRelacional,
-  SelectorGravetat,
-  FactorsContext, DisabledEconomia, DisabledHabitatge,
-} from '../../models/tab-class-form';
+import {Entorns, Ambits, EnvironmentMaterial, EnvironmentRelacional, SelectorGravetat, FactorsContext, DisabledEconomia, DisabledHabitatge,} from '../../models/tab-class-form';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "../../../../shared";
@@ -16,7 +9,6 @@ import {Persona} from "../../../files";
 import {Router} from "@angular/router";
 import {Observable, Subject} from "rxjs";
 
-
 @Component({
   selector: 'app-form-tab',
   templateUrl: './form-tab.component.html',
@@ -25,17 +17,24 @@ import {Observable, Subject} from "rxjs";
     {provide: NG_VALUE_ACCESSOR, useExisting: FormTabComponent, multi: true}
   ]
 })
+
 export class FormTabComponent extends CustomInput implements OnInit {
-  private _innerData: Ambits;
-  public disabledEconomia: DisabledEconomia = new DisabledEconomia();
-  public disabledHabitatge: DisabledHabitatge = new DisabledHabitatge();
-
+  private _innerData: Ambits; /* Data del diagnostico con toda la informacio */
+  public disabledEconomia: DisabledEconomia = new DisabledEconomia(); /* Parametro especifico para desbloquear las preguntas economicas*/
+  public disabledHabitatge: DisabledHabitatge = new DisabledHabitatge(); /* Parametro especifico para desbloquear las preguntas habitatge*/
   closeResult: string;
-  cleanSelects: string = null;
-  preguntaEconomica: Preguntas;
-  @ViewChild('formTab') formValues;
-  public tittleRisc:boolean = false;
+  cleanSelects: string = null; /* Variable per netejar Formulari*/
+  preguntaEconomica: Preguntas; /* Variable para guardar la pregunta economica*/
+  @ViewChild('formTab') formValues; /*Variable para Guardar el valor del formulario*/
+  @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional(); /*Filtro de entornos , antes de cargar las preguntas*/
+  @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial(); /*Filtro de entornos , antes de cargar las preguntas*/
+  @Input() idDiagnostic: number; /*IdDiagnosico */
+  @Output() before: EventEmitter<boolean> = new EventEmitter(); /*Parametro Para volver Atras*/
+  @Output() endForm: EventEmitter<boolean> = new EventEmitter(); /*Parametro Para finalizar el form*/
+  @Input() contextualitzacio: string; /*Parametro para filtrar las preguntas de contextualizacion*/
+  @Input() personsSelector: Persona [] = []; /* Array con el selector de personas */
 
+  /*Esperamos a que llegue el valor del diagnostico*/
   @Input()
   set data(value: Ambits) {
     if (value && this.idDiagnostic) {
@@ -43,28 +42,19 @@ export class FormTabComponent extends CustomInput implements OnInit {
       this.reloadDiagnostico();
     }
   }
-
+  /*Devolvemos el valor del diagnostico*/
   get data(): Ambits {
     return this._innerData;
   }
-
-  @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional();
-  @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial();
-  @Input() idDiagnostic: number;
-  @Output() before: EventEmitter<boolean> = new EventEmitter();
-  @Output() endForm: EventEmitter<boolean> = new EventEmitter();
-  @Input() contextualitzacio: string;
-  @Input() personsSelector: Persona [] = [];
-
   constructor(private modalService: NgbModal,
               private tabsService: TabsFormService,
               private _router: Router) {
     super();
   }
-
   ngOnInit() {
   }
-  public getPreguntaDisabled( id: number) {
+  /*Funcion para determinar sobre las preguntas de Economia y Habitatge , si deben estar desactivas */
+  public getPreguntaDisabled(id: number) {
       switch (id) {
         case 28299:
           return this.disabledHabitatge.h1;
@@ -94,6 +84,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
           return false;
       }
   }
+  /*Funcion para setear las preguntas de Economia y Habitatge a desactivas */
   public set (id:number) {
     switch (id) {
       case 28299:
@@ -128,8 +119,8 @@ export class FormTabComponent extends CustomInput implements OnInit {
         break;
     }
   }
+  /*Funcion para setear las preguntas de Economia y Habitatge a activadas */
   public unSet (id:number) {
-    console.log(id);
     switch (id) {
       case 28299:
         this.disabledHabitatge.h2 = false;
@@ -163,11 +154,11 @@ export class FormTabComponent extends CustomInput implements OnInit {
         break;
     }
   }
-
+  /*Funcion para comparar 2 instancias de objetos */
   compare(el1, el2) {
     return el1 && el2 ? el1.id === el2.id : el1 === el2;
   }
-
+  /*Funcion para abrir el content y crear la pregunta economica */
   open(content , preguntaSocial: string , preguntaid: number , ambit: Ambit , entorn: Entorns) {
     if ( !this.getFirstPregunta(preguntaid , ambit, entorn)) {
       this.newPregunta(preguntaSocial, preguntaid, ambit, entorn).subscribe( pregunta => {
@@ -182,6 +173,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+  /*Funcion para añadir pregunta Economica al diagnostico */
   public addPreguntaEconomica(factorEconomic: FactorEconomic , value) {
     if (value) {
       this.preguntaEconomica.factorEconomic.push(factorEconomic);
@@ -193,6 +185,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       }
     }
   }
+  /*Funcion para recoger pregunta Economica del diagnostico */
   public getPreguntaEconomica(factorEconomic: FactorEconomic) {
     for ( const eco of this.preguntaEconomica.factorEconomic ) {
         if (eco.id && eco.id === factorEconomic.id) {
@@ -200,6 +193,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         }
     }
   }
+  /*Funcion para recoger el riesgo de pregunta Economica */
   public getRiscEconomic(){
     if (this.preguntaEconomica.factorEconomic.length > 0) {
       this.tabsService.putEconomicQuestion(this.idDiagnostic, this.preguntaEconomica.factorEconomic).subscribe((result: Preguntas) => {
@@ -219,7 +213,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
   }
 
-
+  /*Funcion para cerrar el content */
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -229,6 +223,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       return `with: ${reason}`;
     }
   }
+  /*Funcion comprobar si alguna pregunta de habitat o economia debe de estar desactivada*/
   public comprobar() {
     if (this.value.ambit) {
     for (const ambit of this.value.ambit) {
@@ -259,6 +254,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
   }
   }
+  /*Funcion para recargar el diagnostico*/
   reloadDiagnostico() {
     this.tabsService.getDiagnostic(this.idDiagnostic).subscribe((result: Diagnosis) => {
       this.value = result;
@@ -267,11 +263,11 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
-
+  /*Funcion para emitir que hemos terminado*/
   public emitEnd() {
     this.endForm.emit();
   }
-
+  /*Funcion para limpiar el diagnostico*/
   public clean() {
     let ambitID: number;
 
@@ -286,7 +282,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
-
+  /*Funcion para añadir una nueva pregunta al contexto*/
   public newPreguntaContext(ambit: Ambit, contexto: FactorsContext, membre: string) {
     const contextoEncontrado = this.getContextos(ambit.id, ambit, contexto);
     if (contextoEncontrado) {
@@ -324,6 +320,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       });
     }
   }
+  /*Funcion para añadir pregunta al diagnostico */
   public newPregunta(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns): Observable<Preguntas> {
 
     const subject = new Subject<Preguntas>();
@@ -360,7 +357,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
     return subject;
   }
-
+  /*Funcion para limitar el despliegue de situaciones repetitivas */
   public maxPreguntasRepetitivas(idSocial: number, ambit: Ambit , entorn: Entorns) {
     let maximum = 0;
     for ( const ambits of this.value.ambit ) {
@@ -378,6 +375,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
     return true;
   }
+  /*Funcion para añadir una pregunta socialo repetida dentro del mismo array de pregunta , ya que pertenecen a la misma pregunta con el mismo id de situacion social */
   public addPreguntaRepeat(pregunta: string , idSocial: number, ambit: Ambit , entorn: Entorns) {
     if (this.maxPreguntasRepetitivas(idSocial, ambit, entorn)) {
       this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta, idSocial), this.idDiagnostic).subscribe((result) => {
@@ -393,6 +391,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       });
     }
   }
+  /*Funcion recoger una pregunta repetida dentro de el bloque de preguntas */
   public getPreguntaRepeat(id: number, ambit: Ambit, entorn: Entorn) {
 
     for (let i = 0; i < this.value.ambit.length; i++) {
@@ -409,6 +408,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         }
       }
     }
+  /*Funcion para determinar si existen preguntas en eso ambito  */
   public getPreguntas(id: number , ambit: Ambit , entorn: Entorns ): Preguntas[] {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
     if (!amb) { return [] }
@@ -417,6 +417,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         return item.situacioSocial.id === id;
       });
   }
+  /*Funcion recoger las preguntas del contexto */
   public getContextos(id: number , ambit: Ambit , contexto: FactorsContext ): Contextualitzacio {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
     if (!amb) {return null }
@@ -426,7 +427,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       }
       return context;
   }
-
+  /*Funcion recoger la primera pregunta de cada bloque  */
   getFirstPregunta(id: number, ambit: Ambit , entorn: Entorns) {
 
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
@@ -443,6 +444,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       });
     }
   }
+  /*Funcion recoger la primera pregunta del contexto de cada bloque  */
   getFirtsContexto(id: number, ambit: Ambit , contexto: FactorsContext) {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
         if(!amb) {
@@ -451,7 +453,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         }
       return amb.contextualitzacio.find(item => item.factor.id === contexto.id);
     }
-
+  /*Funcion recoger la frequencia para cada selector  */
   public getFrequencia (gravetat: string, selectorsGravetat: SelectorGravetat[]) {
     if (gravetat) {
       return selectorsGravetat.find( data => {
@@ -461,6 +463,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       return [];
     }
   }
+  /*Funcion recoger la gravetat para cada selector  */
   public getValueGravetat( pregunta: Preguntas, ambit: Ambit , entorn: Entorn , gravetat: string) {
     this.tabsService.getValuesGravetat().subscribe((result: Gravetat[]) => {
       for (const grave of result) {
@@ -490,6 +493,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     });
 
   }
+  /*Funcion setear de la frequencia escojida , el valor de ella,  al objeto  */
   public getValueFrequencia(pregunta: Preguntas , id: number ) {
 
     this.tabsService.getValuesFrequencia().subscribe((resultFreq: Frequencia[]) => {
@@ -510,6 +514,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+  /*Funcion para enviar la question que te devuelve el riesgo  */
   public putQuestionAndGetRisc(pregunta:Preguntas) {
     this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
       this.reloadDiagnostico();
@@ -518,6 +523,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+  /*Funcion seleccionar la persona y asignarle el valor */
   changePersona(pregunta: Preguntas, value) {
     pregunta.persona = value;
     if (!value) {
@@ -531,6 +537,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       this.putQuestionAndGetRisc(pregunta);
     }
   }
+  /*Funcion seleccionar la persona y asignarle el valor */
   changePersonaSelector(context: Contextualitzacio, value) {
     context.persona = value;
     this.tabsService.putContextQuestion(context.factor,
@@ -540,6 +547,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+  /*Funcion setear de la gravedad escojida , el valor de ella,  al objeto  */
   public getValueSeverity(pregunta: Preguntas, value) {
     this.tabsService.getValuesGravetat().subscribe((result: Gravetat[]) => {
       for (const grave of result) {
@@ -568,6 +576,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+  /*Funcion que te deuvlve la frequencia para cada una de las preguntas repetidas */
   public getFrequenciRepeat(pregunta: Preguntas , value ) {
 
     this.tabsService.getValuesFrequencia().subscribe((resultFreq: Frequencia[]) => {
@@ -588,6 +597,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+  /*Funcion que elimina cada una de las preguntas repetidas*/
   public deleteRepeat(pregunta:Preguntas) {
       this.tabsService.DeletePregunta(pregunta.id).subscribe((result) => {
         this.reloadDiagnostico();
@@ -595,7 +605,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         console.log(err);
       });
   }
-
+  /*Funcion que filtra las personas repetidas*/
   public getFilterPersonas(idSocial: number , personaSelec:Persona ) {
     let personas: string [] = [];
     let ffpp: Persona [] = [];

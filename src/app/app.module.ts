@@ -20,6 +20,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
+import {HomeService} from "./modules/home/services/home.service";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import {BrowserModule} from '@angular/platform-browser';
     }),
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [],
+  providers: [HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

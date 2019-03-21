@@ -4,17 +4,21 @@ import {Location} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
 import {ObservationsService} from "../services/observations.service";
 import {Diagnosis, Evaluacions, Ambit, Expedient} from "../../files";
+import {BreadCrums} from "../../tabs/models/tab-class-form";
+import {HomeService} from "../../home/services/home.service";
+import {GlobalService} from "../../../shared";
 
 @Component({
   selector: 'app-observations',
   templateUrl: './observations.component.html',
   styleUrls: ['./observations.component.scss']
 })
-export class ObservationsComponent {
-
+export class ObservationsComponent implements OnInit{
+  public breadcrum: BreadCrums [] = [];
   public id: number; /* Id del Diagnostico*/
   public exp: number; /* Id del Expediente*/
   public date: string; /*Date del Diagnostico */
+  public codi: string; /*Date del Diagnostico */
 
   public diagnosis: Diagnosis;
   public ambits: Ambit;
@@ -24,15 +28,26 @@ export class ObservationsComponent {
   constructor(private _route: ActivatedRoute,
               private _location: Location,
               private _service: ObservationsService,
+              private global: GlobalService,
               private _translateService: TranslateService) {
 
     this.id = this._route.snapshot.params['id']; /*Obtenemos el id del diagnostico*/
     this.date = this._route.snapshot.params['date']; /*Obtenemos la fecha del diagnostico*/
     this.exp = this._route.snapshot.params['exp']; /*Obtenemos el id del expediente*/
+    this.codi = this._route.snapshot.params['codi']; /*Obtenemos el id del expediente*/
 
     /* Get Last version Model */
     this.getObservations(this.id);
     this.getFile();
+  }
+  public setCrum() {
+    if(this.exp && this.date) {
+      this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient '+ this.codi.toString(), name: ''}, {url: this.date, name: ''}, {
+        url: 'Ambit Autonomia',
+        name: ''
+      }];
+      this.global.setBreadCrum(this.breadcrum);
+    }
   }
 
   getObservations(id: number) {
@@ -57,5 +72,8 @@ export class ObservationsComponent {
 
   onPrint() {
     window.print();
+  }
+  ngOnInit(): void {
+    this.setCrum();
   }
 }

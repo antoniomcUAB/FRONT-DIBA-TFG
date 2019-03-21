@@ -5,6 +5,10 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
+import {HomeService} from "../../modules/home/services/home.service";
+import {ArrayBreadCrums, BreadCrums} from "../../modules/tabs/models/tab-class-form";
+import {BreadcrumInterface} from "../resources/breadcrum-interface";
+import {GlobalService} from "../../shared";
 
 const SMALL_WIDTH_BREAKPOINT = 991;
 
@@ -18,8 +22,8 @@ export interface Options {
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss']
 })
-export class AdminLayoutComponent implements OnInit, OnDestroy {
-
+export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterface {
+  public breadcrum: BreadCrums [] = [];
   private _router: Subscription;
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
@@ -45,10 +49,12 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public translate: TranslateService,
     private titleService: Title,
+    private global: GlobalService,
     zone: NgZone) {
     this.mediaMatcher.addListener(mql => zone.run(() => {
       this.mediaMatcher = mql;
     }));
+    this.global.registerLayout(this);
   }
 
   ngOnInit(): void {
@@ -65,10 +71,10 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 
     this.runOnRouteChange();
   }
-
   ngOnDestroy() {
     this._router.unsubscribe();
   }
+
 
   runOnRouteChange(): void {
     this.route.children.forEach((route: ActivatedRoute) => {
@@ -107,5 +113,10 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
     } else if (elem.msRequestFullScreen) {
       elem.msRequestFullScreen();
     }
+  }
+
+  setBreadCrum(breadCrum: BreadCrums[]) {
+    console.log(breadCrum);
+    this.breadcrum = breadCrum;
   }
 }
