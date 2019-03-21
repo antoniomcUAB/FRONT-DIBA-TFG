@@ -419,8 +419,7 @@
                   <a *ngIf="item.estat.descripcio === 'VALIDAT'"
                      [routerLink]="['/observations', {'id': item.id,'date': item.data,'exp': expedient.id}]" > <i class="fa fa-eye"></i>
                   </a>
-                  <span class="px-2" *ngIf="item.estat.descripcio ==='BORRADOR'"> </span>
-                  <a *ngIf="item.estat.descripcio === 'BORRADOR'"
+                  <a *ngIf="item.estat.descripcio === 'BORRADOR' && idProfessional == item.professional.id"
                      [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id,'professionalID':idProfessional}]" >
                     <i class="fa fa-pencil-square-o"> </i>
                   </a>
@@ -439,7 +438,7 @@
                     <ng-template ngbTabContent>
                       <div class="p-5 h-100 d-table m-auto">
                         <div>
-                          <ngx-charts-bar-vertical
+                         <!-- <ngx-charts-bar-vertical
                             class="chart-container"
                             [scheme]="colorScheme"
                             [customColors]="colorAutonomia"
@@ -453,13 +452,13 @@
                             [showYAxisLabel]="showYAxisLabel"
                             [tooltipDisabled]="tooltipDisabled"
                             [xAxisLabel]="xAxisLabel"
-                            [yAxisLabel]="yAxisLabel"
+                            [yAxisLabel]="yAxisLabelAutonomia"
                             [showGridLines]="showGridLines"
                             [barPadding]="barPadding"
                             [roundDomains]="roundDomains"
                             (select)="select($event)"
                             (legendLabelClick)="onLegendLabelClick($event)">
-                          </ngx-charts-bar-vertical>
+                          </ngx-charts-bar-vertical> -->
                         </div>
                       </div>
                     </ng-template>
@@ -468,7 +467,7 @@
                     <ng-template ngbTabContent>
                       <div class="p-5 h-100 d-table m-auto">
                         <div>
-                          <ngx-charts-bar-vertical
+                          <!-- <ngx-charts-bar-vertical
                             class="chart-container"
                             [scheme]="colorScheme"
                             [customColors]="colorMaterial"
@@ -482,13 +481,13 @@
                             [showYAxisLabel]="showYAxisLabel"
                             [tooltipDisabled]="tooltipDisabled"
                             [xAxisLabel]="xAxisLabel"
-                            [yAxisLabel]="yAxisLabel"
+                            [yAxisLabel]="yAxisLabelMaterial"
                             [showGridLines]="showGridLines"
                             [barPadding]="barPadding"
                             [roundDomains]="roundDomains"
                             (select)="select($event)"
                             (legendLabelClick)="onLegendLabelClick($event)">
-                          </ngx-charts-bar-vertical>
+                          </ngx-charts-bar-vertical> -->
                         </div>
                       </div>
                     </ng-template>
@@ -497,7 +496,7 @@
                     <ng-template ngbTabContent>
                       <div class="p-5 h-100 d-table m-auto">
                         <div>
-                          <ngx-charts-bar-vertical
+                         <!-- <ngx-charts-bar-vertical
                             class="chart-container"
                             [scheme]="colorScheme"
                             [customColors]="colorRelacional"
@@ -511,13 +510,13 @@
                             [showYAxisLabel]="showYAxisLabel"
                             [tooltipDisabled]="tooltipDisabled"
                             [xAxisLabel]="xAxisLabel"
-                            [yAxisLabel]="yAxisLabel"
+                            [yAxisLabel]="yAxisLabelRelacional"
                             [showGridLines]="showGridLines"
                             [barPadding]="barPadding"
                             [roundDomains]="roundDomains"
                             (select)="select($event)"
                             (legendLabelClick)="onLegendLabelClick($event)">
-                          </ngx-charts-bar-vertical>
+                          </ngx-charts-bar-vertical> -->
                         </div>
                       </div>
                     </ng-template>
@@ -526,27 +525,30 @@
                     <ng-template ngbTabContent>
                       <div class="p-5 h-100 d-table m-auto">
                         <div>
-                          <ngx-charts-bar-vertical
+                          <ngx-charts-line-chart
                             class="chart-container"
                             [scheme]="colorScheme"
                             [customColors]="colorGeneral"
                             [schemeType]="schemeType"
                             [results]="chartsGroupValue"
-                            [gradient]="gradient"
+                            [legend]="showLegend"
+                            (legendLabelClick)="onLegendLabelClick($event)"
+                            [gradient]="gradientLine"
                             [xAxis]="showXAxis"
                             [yAxis]="showYAxis"
-                            [legend]="showLegend"
                             [showXAxisLabel]="showXAxisLabel"
                             [showYAxisLabel]="showYAxisLabel"
-                            [tooltipDisabled]="tooltipDisabled"
                             [xAxisLabel]="xAxisLabel"
                             [yAxisLabel]="yAxisLabel"
+                            [autoScale]="autoScale"
+                            [timeline]="timeline"
                             [showGridLines]="showGridLines"
-                            [barPadding]="barPadding"
-                            [roundDomains]="roundDomains"
-                            (select)="select($event)"
-                            (legendLabelClick)="onLegendLabelClick($event)">
-                          </ngx-charts-bar-vertical>
+                            [curve]="curve"
+                            [rangeFillOpacity]="rangeFillOpacity"
+                            [roundDomains]="roundDomainsLine"
+                            [tooltipDisabled]="true"
+                            (select)="select($event)">
+                          </ngx-charts-line-chart>
                         </div>
                       </div>
                     </ng-template>

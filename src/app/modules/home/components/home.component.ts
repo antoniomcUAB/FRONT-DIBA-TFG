@@ -21,6 +21,8 @@ import {AuthService, TokenService} from "../../auth";
 })
 export class HomeComponent {
   /* Variables Professional */
+  // idProfessional = 30151;
+  // idProfessional = 30152;
   idProfessional = 19669;
   user = new User();
 
@@ -47,7 +49,8 @@ export class HomeComponent {
     this.user.username = "PROFESSIONAL";
     this.user.password = "PROFESSIONAL";
     /* Get Professional Data */
-    this.getProfessional(this.user.username);
+    // this.getProfessional(this.user.username);
+    this.getProfessionalData(this.idProfessional);
     // this.getProfessionalData(this.idProfessional);
     /* Get Current Model */
     this.getModel();
@@ -144,7 +147,6 @@ export class HomeComponent {
   getModel() {
     this._service.getModel().subscribe( (data) => {
       this.model = data;
-      console.log(this.model);
     }, error => {
       console.log("ERROR al recuperar el datos");
     });
@@ -155,7 +157,6 @@ export class HomeComponent {
     this._service.getProfessionalByUsername(username).subscribe( (data: Professional) => {
       this.professional = data;
       this.professionalNomComplet = this.professional.nomComplet;
-      console.log(this.professionalNomComplet);
       /* Reload Table  */
       this.filterProfessional();
     }, error => {
@@ -168,7 +169,6 @@ export class HomeComponent {
     this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
       this.professional = data;
       this.professionalNomComplet = this.professional.nomComplet;
-      console.log(this.professionalNomComplet);
       /* Reload Table  */
       this.filterProfessional();
     }, error => {

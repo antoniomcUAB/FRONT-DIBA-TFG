@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+// import { DateTime } from 'luxon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilesDetailService } from '../../services/file-detail.service';
 import {
@@ -8,10 +9,10 @@ import {
   Evaluacions,
   Expedient,
   Model,
-  ModelQuerySituation,
   Persona,
   TipusPersona
 } from '../../models/expedient';
+import * as shape from 'd3-shape';
 import { TableListOptions, TableListResponse } from '../../../../shared/modules/table-list';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -39,7 +40,6 @@ export class FileDetailComponent {
   diagnosis: Diagnosis;
 
   /* Chart variables */
-  arrayDiagnosis: Diagnosis[];
   diagnosisValidated: Diagnosis[];
   chartsGroupValue: ChartGroup[];
   chartsAutonomiaValue: ChartAmbit[];
@@ -63,26 +63,37 @@ export class FileDetailComponent {
   closeResult: string;
 
   /* Charts */
-  /** options **/
+  /** Bar options **/
+  curve = shape.curveBasis;
+  autoScale = true;
+  timeline = false;
   showXAxis = true;
   showYAxis = true;
   gradient = true;
   showLegend = false;
   showXAxisLabel = true;
-  tooltipDisabled = false;
+  tooltipDisabled = true;
   xAxisLabel = 'Evaluacions';
   showYAxisLabel = true;
   yAxisLabel = 'Risc';
+  yAxisLabelAutonomia = 'Risc Ambit Autonomia';
+  yAxisLabelMaterial = 'Risc Ambit Material i instrumental';
+  yAxisLabelRelacional = 'Risc Ambit Relacional';
   showGridLines = true;
-  barPadding = 16;
+  barPadding = 8;
   roundDomains = true;
   colorScheme = {domain: colors};
   schemeType = 'ordinal';
+
+  /** Line options **/
+  gradientLine = false;
+  roundDomainsLine = false;
+  rangeFillOpacity = 0.15;
+
   colorGeneral;
   colorAutonomia;
   colorMaterial;
   colorRelacional;
-  colorGlobal;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -149,180 +160,59 @@ export class FileDetailComponent {
     this.optionsUF.pagination = false;
     this.optionsUF.footer = false;
     this.reloadDataTable(this.id);
-
-    this.getDataChart();
-
-    /* Chart */
-    /** Autonomia **/
-    this.chartsAutonomiaValue = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: 1
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: 5
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: 0
-      }
-    ];
-    this.colorAutonomia = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: colorVulnerabilitat
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: colorRisc
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: colorSense
-      }
-    ];
-
-    /** Material **/
-    this.chartsMaterialValue = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: 5
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: 5
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: 5
-      }
-    ];
-    this.colorMaterial = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: colorRisc
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: colorRisc
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: colorRisc
-      }
-    ];
-    this.chartsRelacionalValue = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: 3
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: 5
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: 10
-      }
-    ];
-    this.colorRelacional = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: colorVulnerabilitat
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: colorRisc
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: colorAltRisc
-      }
-    ];
-    this.chartsGroupValue = [
-      {
-        name: "Autonomia",
-        series: [
-          {
-          name: 'DSDIBA-05/03/2019',
-          value: 1
-          },
-          {
-            name: 'DSDIBA-05/04/2019',
-            value: 5
-          },
-          {
-            name: 'DSDIBA-05/05/2019',
-            value: 10
-          }
-        ]
-      },
-      {
-        name: 'Material',
-        series: [
-          {
-            name: 'DSDIBA-05/03/2019',
-            value: 1
-          },
-          {
-            name: 'DSDIBA-05/04/2019',
-            value: 5
-          },
-          {
-            name: 'DSDIBA-05/05/2019',
-            value: 10
-          }
-        ]
-      },
-      {
-        name: 'Relacional',
-        series: [
-          {
-            name: 'DSDIBA-05/03/2019',
-            value: 1
-          },
-          {
-            name: 'DSDIBA-05/04/2019',
-            value: 5
-          },
-          {
-            name: 'DSDIBA-05/05/2019',
-            value: 10
-          }
-        ]
-      },
-    ];
-    this.colorGeneral = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: 1
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: 5
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: 10
-      }
-    ];
   }
 
   /* Charts */
-  getDataChart() {
-    this.diagnosisValidated = [];
-    this.arrayDiagnosis = [];
+  getDataChart(diagnosisValidated) {
+    let ambit: ChartAmbit;
+    let colorChart: ChartAmbit;
     this.chartsAutonomiaValue = [];
-    /** Get services **/
-    this._service.getDetailObservations(this.id).subscribe((data: Expedient ) => {
-      this.arrayDiagnosis = data.diagnostic;
-      for (const diagnostic of this.arrayDiagnosis) {
-        if (diagnostic.estat.descripcio.toUpperCase() === "VALIDAT") {
-          this.diagnosisValidated.push(diagnostic);
+    this.chartsMaterialValue = [];
+    this.chartsRelacionalValue = [];
+    for (const diagnostic of diagnosisValidated) {
+      for (const evaluacion of diagnostic.valoracio.evaluacions) {
+        if (evaluacion.ambit.ambit.descripcio.toUpperCase() === "AUTONOMIA") {
+          ambit = new ChartAmbit();
+          colorChart = new ChartAmbit();
+          ambit.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          ambit.value = evaluacion.risc.value;
+          colorChart.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          if (evaluacion.risc.value === 1) {
+            colorChart.name = colorVulnerabilitat;
+          } else if (evaluacion.risc.value === 2) {
+            colorChart.name = colorRisc;
+          } else {
+            colorChart.name = colorAltRisc;
+          }
+          this.chartsAutonomiaValue.push(ambit);
+          this.colorAutonomia.push(colorChart);
+        } else if (evaluacion.ambit.ambit.descripcio.toUpperCase() === "MATERIAL I INSTRUMENTAL") {
+          ambit = new ChartAmbit();
+          ambit.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          ambit.value = evaluacion.risc.value;
+          this.chartsMaterialValue.push(ambit);
+        } else if (evaluacion.ambit.ambit.descripcio.toUpperCase() === "RELACIONAL") {
+          ambit = new ChartAmbit();
+          ambit.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          ambit.value = evaluacion.risc.value;
+          this.chartsRelacionalValue.push(ambit);
         }
       }
-    });
+    }
+    this.chartsGroupValue = [
+      {
+        name: 'Autonomia',
+        series: this.chartsAutonomiaValue
+      },
+      {
+        name: 'Material',
+        series: this.chartsMaterialValue
+      },
+      {
+        name: 'Relacional',
+        series: this.chartsRelacionalValue
+      }
+    ];
   }
 
   select(data) {
@@ -355,6 +245,13 @@ export class FileDetailComponent {
   getFile() {
     this._service.getFileById(this.id).subscribe( (data: Expedient) => {
       this.expedient = data;
+      this.diagnosisValidated = [];
+      for (const diagnostic of this.expedient.diagnostic) {
+        if (diagnostic.estat.descripcio.toUpperCase() === "VALIDAT") {
+          this.diagnosisValidated.push(diagnostic);
+        }
+      }
+      this.getDataChart(this.diagnosisValidated);
     }, (error) => {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
