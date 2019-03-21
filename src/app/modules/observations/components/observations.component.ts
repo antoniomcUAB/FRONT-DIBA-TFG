@@ -43,7 +43,7 @@ export class ObservationsComponent implements OnInit{
   public setCrum() {
     if(this.exp && this.date) {
       this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient '+ this.codi.toString(), name: ''}, {url: this.date, name: ''}, {
-        url: 'Ambit Autonomia',
+        url: 'Resum valoració',
         name: ''
       }];
       this.global.setBreadCrum(this.breadcrum);
