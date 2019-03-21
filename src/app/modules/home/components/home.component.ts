@@ -1,25 +1,26 @@
 /* Core */
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FilterType, TableListOptions, TableListResponse } from '../../../shared/modules/table-list';
 import { TranslateService } from "@ngx-translate/core";
 import { Router } from "@angular/router";
 import {ModalDismissReasons, NgbModal, NgbTabChangeEvent} from "@ng-bootstrap/ng-bootstrap";
 /* Models */
 import { Professional } from "../models/professional";
-import {Expedient, AmbitContext, ModelQueryContext, ModelQuerySituation, SituacionSocial, Gravedad, Frecuencia} from "../../files";
+import {Expedient} from "../../files";
 /* Service */
 import { HomeService } from '../services/home.service';
 /* Constants */
 import { digit } from './constants';
 import {User} from "../../auth/resources/data/user";
-import {AuthService, TokenService} from "../../auth";
+import {BreadCrums} from "../../tabs/models/tab-class-form";
+import {GlobalService} from "../../../shared";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   /* Variables Professional */
   idProfessional = 19669;
   user = new User();
@@ -27,7 +28,7 @@ export class HomeComponent {
   professional: Professional;
   professionalNomComplet: string;
   model;
-
+  breadcrum: BreadCrums [] = [{url: 'Inici', name: ''}];
   /* Variables Table */
   data: any[] = [];
   options = new TableListOptions();
@@ -43,14 +44,18 @@ export class HomeComponent {
   constructor(private _service: HomeService,
               private _router: Router,
               private _translateService: TranslateService,
-              private modalService: NgbModal) {
-    this.user.username = "PROFESSIONAL";
-    this.user.password = "PROFESSIONAL";
+              private modalService: NgbModal,
+              private global: GlobalService) {
     /* Get Professional Data */
+  this.user.username = "PROFESSIONAL";
+  this.user.password = "PROFESSIONAL";
     this.getProfessional(this.user.username);
     // this.getProfessionalData(this.idProfessional);
     /* Get Current Model */
     this.getModel();
+  }
+  public ngOnInit(): void {
+    this.global.setBreadCrum(this.breadcrum);
   }
 
   /* Tab Change */

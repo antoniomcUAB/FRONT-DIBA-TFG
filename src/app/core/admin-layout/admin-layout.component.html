@@ -91,6 +91,20 @@
       </div>
     </div>
   </header>
+  <nav class="navbar navbar-default" style="border-bottom: white">
+    <div class="container-fluid">
+      <div class="navbar-collapse collapse">
+          <ng-template [ngIf]="breadcrum">
+            <ng-template ngFor [ngForOf]="breadcrum" let-bread let-c="index">
+              <li class="float-left list-unstyled m-2"   *ngIf="c===0" >{{bread.url}} <b> ></b> </li>
+              <li class="float-left list-unstyled m-2" *ngIf="c===1">{{bread.url}}  <b> ></b> </li>
+              <li class="float-left list-unstyled m-2"  *ngIf="c===2" >Diagnostic DSDIBA- {{bread.url |  date:'dd/MM/yyyy'}}  <b> ></b> </li>
+              <li class="float-left list-unstyled m-2" *ngIf="c===3">{{bread.url}}</li>
+            </ng-template>
+          </ng-template>
+      </div>
+    </div>
+  </nav>
   <div id="regio-cos" role="main">
     <div class="row">
       <div class="col-sm-12" id="contingut">

@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {CustomInput} from "../../../../shared";
+import {CustomInput, GlobalService} from "../../../../shared";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Ambit, Diagnosis, Risc} from "../../models/diagnostic";
 import {TabsFormService} from "../../services/tabsForm.service";
 import {Router} from "@angular/router";
-import {Ambits} from "../../models/tab-class-form";
+import {Ambits, BreadCrums} from "../../models/tab-class-form";
 import {Evaluacions} from "../../../files";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
@@ -17,10 +17,12 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
   ]
 })
 export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnInit {
-
+  public breadcrum: BreadCrums [] = [{url: 'Inici' , name: ''} , {url: 'Expedient' , name: ''} , {url: 'Diagnostic' , name: ''} , {url: 'Valoracio del diagnostic' , name: ''}];
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output() tabActivated: EventEmitter <void> = new EventEmitter();
+  @Input() nomExpedient:string;
+  @Input() nomDiagnostic:string;
   @Input() idDiagnostic: number;
   @Input()
   get diagnostico():any {
@@ -37,13 +39,15 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
 
   constructor(private tabsService: TabsFormService,
               private _router: Router,
-              private modalService: NgbModal){
+              private modalService: NgbModal,
+              private global: GlobalService ){
    super();
-
+  this.global.setBreadCrum(this.breadcrum);
   }
   ngOnInit(): void {
     this.getRiscos();
     this.tabActivated.emit();
+    this.setCrum();
   }
 
   public emitEnd() {
@@ -100,7 +104,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
       console.log(err);
     });
     setTimeout(_ => {
-      this._router.navigate(['/observations', {'id': this.idDiagnostic, 'date': this.value.data, 'exp': this.idExpedient }]);
+      this._router.navigate(['/observations', {'id': this.idDiagnostic, 'date': this.value.data, 'exp': this.idExpedient , 'codi': this.nomExpedient}]);
     }, 100);
 
   }
@@ -115,6 +119,15 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
     return this.riscos.filter(data => {
      return data.id !== evaluacion.risc.id;
     });
+  }
+  public setCrum(){
+    if(this.nomDiagnostic && this.nomExpedient) {
+      this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient '+ this.nomExpedient.toString(), name: ''}, {url: this.nomDiagnostic, name: ''}, {
+        url: 'Valoracion Final',
+        name: ''
+      }];
+      this.global.setBreadCrum(this.breadcrum);
+    }
   }
 
 

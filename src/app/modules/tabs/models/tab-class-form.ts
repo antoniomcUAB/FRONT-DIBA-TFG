@@ -135,6 +135,16 @@ export class DisabledEconomia {
   e2: boolean = false;
   e3: boolean = false;
 }
+export class ArrayBreadCrums {
+  breadCrums: BreadCrums[] = [];
+  public setCrums (breadCrum: BreadCrums[]) {
+    this.breadCrums = breadCrum;
+  }
+}
+export class BreadCrums{
+  url: string;
+  name: string;
+}
 
 
 

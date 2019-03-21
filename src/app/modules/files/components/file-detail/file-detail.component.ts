@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilesDetailService } from '../../services/file-detail.service';
 import {
@@ -17,6 +17,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { area, line, curveLinear } from 'd3-shape';
 import { Professional } from "../../../home/models/professional";
+import {BreadCrums} from "../../../tabs/models/tab-class-form";
+import {HomeService} from "../../../home/services/home.service";
+import {GlobalService} from "../../../../shared";
 
 export const colorVulnerabilitat = '#66bb6a';
 export const colorRisc = '#ffee58';
@@ -62,6 +65,8 @@ export class FileDetailComponent {
   dataUnityFamily = null;
   closeResult: string;
 
+  public breadcrum: BreadCrums [] = [];
+
   /* Charts */
   /** options **/
   showXAxis = true;
@@ -88,16 +93,17 @@ export class FileDetailComponent {
               private _router: Router,
               private _service: FilesDetailService,
               private _translateService: TranslateService,
+              private global: GlobalService,
               private modalService: NgbModal) {
 
     this.id = this._route.snapshot.params['id'];
     this.idProfessional = this._route.snapshot.params['idProfessional'];
-
     this.getCurrentModel();
     this.getProfessionalData(this.idProfessional);
     this.getFile();
     this.getTypePerson();
-
+    this.getTypePerson();
+    this.setCrum();
     /* Tabla Valoraciones realizadas */
     this.options.setColumns([
       {
@@ -355,6 +361,9 @@ export class FileDetailComponent {
   getFile() {
     this._service.getFileById(this.id).subscribe( (data: Expedient) => {
       this.expedient = data;
+      console.log(this.expedient);
+      this.setCrum();
+      this.global.setBreadCrum(this.breadcrum);
     }, (error) => {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
@@ -423,12 +432,12 @@ export class FileDetailComponent {
     this.diagnosis.professional = this.professional;
     this.diagnosis.versioModel = this.model;
     /** Call Service **/
-    this._service.createDiagnosis(this.diagnosis, this.expedient.id, this.model.id)
-      .subscribe((result) => {
-        this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id, 'ID': this.id , 'professionalID': this.idProfessional}]);
-      }, (error) => {
-        console.log("ERROR - al crear diagnostico \n " + error);
-      });
+    this._service.createDiagnosis(this.diagnosis, this.expedient.id, this.model.id).subscribe((result) => {
+      this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id, 'ID': this.id , 'professionalID': this.idProfessional, 'ValoracioName': result.data}]);
+    }, (error) => {
+      console.log("ERROR - al crear diagnostico \n " + error);
+    });
+
   }
 
   /* Update Unity Family Member */
@@ -558,6 +567,11 @@ export class FileDetailComponent {
       return checkBaixa || checkRef;
     } else {
       return true;
+    }
+  }
+  public setCrum() {
+    if (this.expedient) {
+      this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient ' + this.expedient.codi, name: ''}];
     }
   }
 }

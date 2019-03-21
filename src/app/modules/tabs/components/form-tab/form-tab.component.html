@@ -170,7 +170,7 @@
                           name="frequencySelected{{e}}{{i}}"
                           (change)="getValueFrequencia(getFirstPregunta(pregunta.id,ambit, entorn),pregunta.id) ">
                     <option disabled selected value></option>
-                    <option  *ngFor="let frequencia of getFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.gravetat?.descripcio,pregunta.selectors)" > {{frequencia.frequencia.descripcio}}  </option>
+                    <option  *ngFor="let frequencia of getFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.gravetat?.descripcio,pregunta.selectors)"> {{frequencia.frequencia.descripcio}}  </option>
                   </select>
                 </div>
               </div>

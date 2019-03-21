@@ -21,6 +21,7 @@ import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
+import {HomeService} from "./modules/home/services/home.service";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import {HttpClientModule} from '@angular/common/http';
     }),
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [],
+  providers: [HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

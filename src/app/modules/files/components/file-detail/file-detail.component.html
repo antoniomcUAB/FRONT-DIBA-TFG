@@ -417,11 +417,11 @@
                 </td>
                 <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
                   <a *ngIf="item.estat.descripcio === 'VALIDAT'"
-                     [routerLink]="['/observations', {'id': item.id,'date': item.data,'exp': expedient.id}]" > <i class="fa fa-eye"></i>
+                     [routerLink]="['/observations', {'id': item.id,'date': item.data,'exp': expedient.id,'codi':expedient.codi}]" > <i class="fa fa-eye"></i>
                   </a>
                   <span class="px-2" *ngIf="item.estat.descripcio ==='BORRADOR'"> </span>
                   <a *ngIf="item.estat.descripcio === 'BORRADOR'"
-                     [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id,'professionalID':idProfessional}]" >
+                     [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id,'professionalID':idProfessional,'ValoracioName': item.data}]" >
                     <i class="fa fa-pencil-square-o"> </i>
                   </a>
                 </td>
