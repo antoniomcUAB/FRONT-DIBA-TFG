@@ -149,7 +149,6 @@ export class HomeComponent implements OnInit{
   getModel() {
     this._service.getModel().subscribe( (data) => {
       this.model = data;
-      console.log(this.model);
     }, error => {
       console.log("ERROR al recuperar el datos");
     });
@@ -160,7 +159,6 @@ export class HomeComponent implements OnInit{
     this._service.getProfessionalByUsername(username).subscribe( (data: Professional) => {
       this.professional = data;
       this.professionalNomComplet = this.professional.nomComplet;
-      console.log(this.professionalNomComplet);
       /* Reload Table  */
       this.filterProfessional();
     }, error => {
@@ -173,7 +171,6 @@ export class HomeComponent implements OnInit{
     this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
       this.professional = data;
       this.professionalNomComplet = this.professional.nomComplet;
-      console.log(this.professionalNomComplet);
       /* Reload Table  */
       this.filterProfessional();
     }, error => {

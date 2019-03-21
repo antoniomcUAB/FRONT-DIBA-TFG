@@ -361,7 +361,6 @@ export class FileDetailComponent {
   getFile() {
     this._service.getFileById(this.id).subscribe( (data: Expedient) => {
       this.expedient = data;
-      console.log(this.expedient);
       this.setCrum();
       this.global.setBreadCrum(this.breadcrum);
     }, (error) => {

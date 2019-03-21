@@ -15,7 +15,6 @@ export class GlobalService {
     GlobalService.layout = interfaceBreadCrum;
   }
   public setBreadCrum(breadcrum: BreadCrums[]) {
-    console.log(breadcrum);
     if (GlobalService.layout)
     GlobalService.layout.setBreadCrum(breadcrum);
   }

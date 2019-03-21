@@ -53,7 +53,6 @@ export class ObservationsComponent implements OnInit{
   getObservations(id: number) {
     this._service.getDetailObservations(id).subscribe( (data: Diagnosis) => {
       this.diagnosis = data;
-      console.log(this.diagnosis);
       this.ambits = data.ambit;
       this.evaluations = data.valoracio.evaluacions;
     }, error => {

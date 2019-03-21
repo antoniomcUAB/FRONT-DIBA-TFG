@@ -135,7 +135,6 @@ export class TabsComponent {
 
   }
   public activateTabs() {
-    console.log(this.someContains());
     if (this.someContains()) {
       this.tabsActivate.tabAmbitMaterialActivate = false;
       this.tabsActivate.tabValoracioDiagnosticActivate = false;
@@ -159,7 +158,6 @@ export class TabsComponent {
     if (id <= MAX_N_TABS) {
       this.index = (id + 1).toString();
     }
-    console.log(" este es el index--> " + this.index);
   }
   /*Volver atras*/
   public beforeTab() {
@@ -175,7 +173,6 @@ export class TabsComponent {
         this.personActives.push(person);
       }
     }
-    console.log(this.personActives);
   }
   /*Recargamos el diagnostico*/
   reloadDiagnostico() {

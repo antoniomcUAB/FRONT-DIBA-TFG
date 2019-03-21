@@ -177,13 +177,13 @@
               <!--/ Frequencia -->
               <!-- riskFactors sense valoracio economica-->
               <div class="col-2" *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')" >
-                <label *ngIf=" i === 0" for="t3riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
+                <label *ngIf=" i === 0" for="t4riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
                 <input type="text"
                        [ngClass]="{'warning' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'RISC',
                                    'danger' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'ALT RISC',
                                    'success' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'VULNERABILITAT',
                                    'info' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'SENSE VALORACIÓ' }"
-                       class="form-control text-center" id="t3riskFactor"
+                       class="form-control text-center" id="t4riskFactor"
                        disabled
                        [value]="getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio">
               </div>
