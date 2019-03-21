@@ -199,7 +199,6 @@ export class FormTabComponent extends CustomInput implements OnInit {
       this.tabsService.putEconomicQuestion(this.idDiagnostic, this.preguntaEconomica.factorEconomic).subscribe((result: Preguntas) => {
         this.preguntaEconomica = result;
         this.reloadDiagnostico();
-        console.log(this.value);
       }, (err) => {
         console.log(err);
       });
@@ -309,7 +308,6 @@ export class FormTabComponent extends CustomInput implements OnInit {
       }
       this.tabsService.putContextQuestion(objContext.factor,
         this.idDiagnostic, objContext).subscribe((result) => {
-        console.log(contexto.id);
         for (let i = 0; i < this.value.ambit.length; i++) {
           if (this.value.ambit[i].ambit.id === ambit.id) {
             this.value.ambit[i].contextualitzacio.push(result);

@@ -116,7 +116,6 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterfa
   }
 
   setBreadCrum(breadCrum: BreadCrums[]) {
-    console.log(breadCrum);
     this.breadcrum = breadCrum;
   }
 }

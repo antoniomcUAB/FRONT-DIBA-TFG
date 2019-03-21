@@ -22,7 +22,6 @@ export class ModelPDFComponent {
   getModel() {
     this._service.getModel().subscribe( (data) => {
       this.model = data;
-      console.log(this.model);
       this.tableQueryContext();
       this.tableQuerySituation();
     }, error => {
