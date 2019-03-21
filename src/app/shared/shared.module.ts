@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +29,6 @@ import { TextMaskModule } from 'angular2-text-mask';
     MatFormFieldModule,
     ReactiveFormsModule,
     TranslateModule,
-    HttpClientModule,
     LoadingBarRouterModule,
     NgbModule.forRoot(),
     MatSidenavModule,
@@ -45,7 +43,6 @@ import { TextMaskModule } from 'angular2-text-mask';
   exports: [
     CommonModule,
     FormsModule,
-    HttpClientModule,
     LoadingBarRouterModule,
     MatSidenavModule,
     NgbModule,

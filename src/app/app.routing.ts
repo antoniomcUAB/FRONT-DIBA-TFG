@@ -41,6 +41,10 @@ export const AppRoutes: Routes = [
     component: AuthLayoutComponent,
     children: [
       {
+        path: 'auth',
+        loadChildren: './modules/auth/auth.routing#AuthRoutingModule'
+      },
+      {
         path: 'error',
         loadChildren: './error/error.module#ErrorModule'
       }

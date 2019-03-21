@@ -5,5 +5,5 @@ export const environment = {
   serverURL: env.serverURL,
   apiURL: env.apiURL,
   whitelistedDomains: env.whitelistedDomains,
-  blacklistedDomains: env.blacklistedDomains
+  blacklistedRoutes: env.blacklistedRoutes
 };

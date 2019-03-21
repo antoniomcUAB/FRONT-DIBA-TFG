@@ -4,9 +4,9 @@ import { environment } from "../../../../environments/environment";
 export function jwtOptionsFactory(tokenService: TokenService) {
   return {
     headerName: 'Authentication',
-    authScheme: 'Bearer',
+    authScheme: 'Bearer ',
     whitelistedDomains: environment.whitelistedDomains,
-    blacklistedRoutes: environment.blacklistedDomains,
+    blacklistedRoutes: environment.blacklistedRoutes,
     tokenGetter: () => {
       return tokenService.getToken();
     }

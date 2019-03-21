@@ -12,6 +12,7 @@ import {SharedModule} from '../../shared';
     AuthService,
     TokenService
   ],
-  declarations: [LoginComponent]
+  declarations: [LoginComponent],
+  exports: [LoginComponent]
 })
 export class AuthModule { }

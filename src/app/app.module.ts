@@ -20,6 +20,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {BrowserModule} from '@angular/platform-browser';
     AuthModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     SharedModule,
     JwtModule.forRoot({
       jwtOptionsProvider: {

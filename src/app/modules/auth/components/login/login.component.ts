@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  error;
   user = new User();
   constructor(
     private _authService: AuthService,
@@ -19,7 +19,11 @@ export class LoginComponent implements OnInit {
     this._authService.doLogin(this.user).subscribe( data => {
       if (data) {
         this._router.navigate ( [ '/' ] );
+      } else {
+        this.error = 'Unauthorized';
       }
+    }, (err) => {
+      this.error = err.message;
     });
   }
 
