@@ -148,6 +148,7 @@ deploy-weblogic:dev:
   only:
   - develop
   variables:
+    WAR_FILE: 'ds-diba-frontend.war'
     WAR_FOLDER: '/home/weblogic/war'
     DEPLOYMENT_KEY: $DEPLOYMENT_DEV_KEY
     DEPLOYMENT_SERVER: $DEPLOYMENT_DEV_SERVER
@@ -163,7 +164,7 @@ deploy-weblogic:dev:
   - ssh-add ~/.ssh/id_rsa
   - ssh-keyscan -H $DEPLOYMENT_SERVER >> ~/.ssh/known_hosts
   script:
-  - scp -r ./java-build/target/*.war ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${WAR_FOLDER}/
+  - scp -r ./java-build/target/*.war ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${WAR_FOLDER}/${WAR_FILE}
   - ssh ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} "/home/weblogic/redeployFront.sh"
 
 ## PROD
