@@ -19,6 +19,7 @@ export class ObservationsComponent implements OnInit{
   public exp: number; /* Id del Expediente*/
   public date: string; /*Date del Diagnostico */
   public codi: string; /*Date del Diagnostico */
+  public professionalID: string; /* id del Profesional*/
 
   public diagnosis: Diagnosis;
   public ambits: Ambit;
@@ -34,14 +35,15 @@ export class ObservationsComponent implements OnInit{
     this.id = this._route.snapshot.params['id']; /*Obtenemos el id del diagnostico*/
     this.date = this._route.snapshot.params['date']; /*Obtenemos la fecha del diagnostico*/
     this.exp = this._route.snapshot.params['exp']; /*Obtenemos el id del expediente*/
-    this.codi = this._route.snapshot.params['codi']; /*Obtenemos el id del expediente*/
+    this.codi = this._route.snapshot.params['codi']; /*Obtenemos el codi del expediente*/
+    this.professionalID = this._route.snapshot.params['professionalID']; /*Obtenemos el id del professional*/
 
     /* Get Last version Model */
     this.getObservations(this.id);
     this.getFile();
   }
   public setCrum() {
-    if(this.exp && this.date) {
+    if (this.exp && this.date) {
       this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient '+ this.codi.toString(), name: ''}, {url: this.date, name: ''}, {
         url: 'Resum valoració',
         name: ''

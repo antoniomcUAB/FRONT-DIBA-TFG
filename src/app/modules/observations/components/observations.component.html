@@ -325,7 +325,7 @@
   <!-- Return to Back -->
   <div class="row m-3">
     <div class="col-12 mb-3">
-      <button type="button" class="float-right btn btn-primary no-print" [routerLink]="['/home']"><i class="fa fa-chevron-left"></i> {{ "FORM.go-back" | translate }}</button>
+      <button type="button" class="float-right btn btn-primary no-print" [routerLink]="['/file-detail', {'id': exp, 'idProfessional': professionalID }]" ><i class="fa fa-chevron-left"></i> {{ "FORM.go-back" | translate }}</button>
     </div>
   </div>
   <!--/ Return to Back -->
