@@ -25,7 +25,7 @@ export const colorRisc = '#ffee58';
 export const colorAltRisc = '#ef5350';
 export const colorSense = '#29b6f6';
 export const colors = [
-  '#5c6bc0', '#66bb6a', '#29b6f6', '#ffee58', '#ef5350', '#868e96'
+  '#ffee58', '#66bb6a', '#ef5350', '#ffee58', '#ef5350', '#868e96'
 ];
 
 @Component({
@@ -67,7 +67,7 @@ export class FileDetailComponent {
 
   /* Charts */
   /** Bar options **/
-  curve = shape.curveBasis;
+  curve = shape.curveLinear;
   autoScale = true;
   timeline = false;
   showXAxis = true;
@@ -78,22 +78,23 @@ export class FileDetailComponent {
   tooltipDisabled = true;
   xAxisLabel = 'Evaluacions';
   showYAxisLabel = true;
-  yAxisLabel = 'Risc';
+  yAxisLabel = 'Risc Global';
   yAxisLabelAutonomia = 'Risc Ambit Autonomia';
   yAxisLabelMaterial = 'Risc Ambit Material i instrumental';
   yAxisLabelRelacional = 'Risc Ambit Relacional';
   showGridLines = true;
-  barPadding = 8;
-  roundDomains = true;
+  barPadding = 16;
+  roundDomains = false;
   colorScheme = {domain: colors};
   schemeType = 'ordinal';
 
   /** Line options **/
-  gradientLine = false;
+  gradientLine = true;
   roundDomainsLine = false;
   rangeFillOpacity = 0.15;
 
   colorGeneral;
+  colorGeneralBar;
   colorAutonomia;
   colorMaterial;
   colorRelacional;
@@ -169,40 +170,69 @@ export class FileDetailComponent {
   /* Charts */
   getDataChart(diagnosisValidated) {
     let ambit: ChartAmbit;
-    let colorChart: ChartAmbit;
     this.chartsAutonomiaValue = [];
     this.chartsMaterialValue = [];
     this.chartsRelacionalValue = [];
+    let colorChart: any;
+    this.colorAutonomia = [];
+    this.colorMaterial = [];
+    this.colorRelacional = [];
+
     for (const diagnostic of diagnosisValidated) {
       for (const evaluacion of diagnostic.valoracio.evaluacions) {
         if (evaluacion.ambit.ambit.descripcio.toUpperCase() === "AUTONOMIA") {
           ambit = new ChartAmbit();
-          colorChart = new ChartAmbit();
+          colorChart = [];
           ambit.name = 'DSDIBA-' + diagnostic.valoracio.data;
-          ambit.value = evaluacion.risc.value;
           colorChart.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          ambit.value = evaluacion.risc.value;
           if (evaluacion.risc.value === 1) {
-            colorChart.name = colorVulnerabilitat;
+            colorChart.value = colorVulnerabilitat;
           } else if (evaluacion.risc.value === 2) {
-            colorChart.name = colorRisc;
+            colorChart.value = colorRisc;
           } else {
-            colorChart.name = colorAltRisc;
+            colorChart.value = colorAltRisc;
           }
+          /* Push Charts & Colors */
           this.chartsAutonomiaValue.push(ambit);
           this.colorAutonomia.push(colorChart);
+
         } else if (evaluacion.ambit.ambit.descripcio.toUpperCase() === "MATERIAL I INSTRUMENTAL") {
           ambit = new ChartAmbit();
+          colorChart = [];
           ambit.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          colorChart.name = 'DSDIBA-' + diagnostic.valoracio.data;
           ambit.value = evaluacion.risc.value;
+          if (evaluacion.risc.value === 1) {
+            colorChart.value = colorVulnerabilitat;
+          } else if (evaluacion.risc.value === 2) {
+            colorChart.value = colorRisc;
+          } else {
+            colorChart.value = colorAltRisc;
+          }
+          /* Push Charts & Colors */
           this.chartsMaterialValue.push(ambit);
+          this.colorMaterial.push(colorChart);
         } else if (evaluacion.ambit.ambit.descripcio.toUpperCase() === "RELACIONAL") {
           ambit = new ChartAmbit();
+          colorChart = [];
           ambit.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          colorChart.name = 'DSDIBA-' + diagnostic.valoracio.data;
           ambit.value = evaluacion.risc.value;
+          if (evaluacion.risc.value === 1) {
+            colorChart.value = colorVulnerabilitat;
+          } else if (evaluacion.risc.value === 2) {
+            colorChart.value = colorRisc;
+          } else {
+            colorChart.value = colorAltRisc;
+          }
+          /* Push Charts & Colors */
           this.chartsRelacionalValue.push(ambit);
+          this.colorRelacional.push(colorChart);
         }
       }
     }
+    /* Charts Line Group */
     this.chartsGroupValue = [
       {
         name: 'Autonomia',
@@ -217,6 +247,46 @@ export class FileDetailComponent {
         series: this.chartsRelacionalValue
       }
     ];
+    this.colorGeneral = [
+      {
+        name: 'Autonomia',
+        value: colorRisc
+      },
+      {
+        name: 'Material',
+        value: colorAltRisc
+      },
+      {
+        name: 'Relacional',
+        value: colorVulnerabilitat
+      }
+    ];
+    this.colorGeneralBar = [
+      {
+        name: 'Autonomia',
+        series: this.colorAutonomia
+      },
+      {
+        name: 'Material',
+        series: this.colorMaterial
+      },
+      {
+        name: 'Relacional',
+        series: this.colorRelacional
+      }
+    ];
+  }
+
+  formatPercent(val) {
+    if (val === 0) {
+      return "Sense Valoració";
+    } if (val === 1) {
+      return "Vulnerabilitat";
+    } else if (val === 2) {
+      return "Risc";
+    } else if (val === 3) {
+      return "Risc Alt";
+    }
   }
 
   select(data) {

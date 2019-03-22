@@ -211,6 +211,16 @@ h3.popover-header {
   color:black;
 }
 
+.pills-chart .tab-content {
+  border: none !important;
+}
+
+.pills-chart .nav-pills .nav-link {
+  border-radius: 0.25rem;
+  border: 1px solid;
+  margin: -1em 0.5em 2em;
+}
+
 @media print {
   .no-print, .no-print * {
     display: none !important;
