@@ -8,17 +8,16 @@ import {
   Evaluacions,
   Expedient,
   Model,
-  ModelQuerySituation,
   Persona,
   TipusPersona
 } from '../../models/expedient';
+import * as shape from 'd3-shape';
 import { TableListOptions, TableListResponse } from '../../../../shared/modules/table-list';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { area, line, curveLinear } from 'd3-shape';
 import { Professional } from "../../../home/models/professional";
 import {BreadCrums} from "../../../tabs/models/tab-class-form";
-import {HomeService} from "../../../home/services/home.service";
 import {GlobalService} from "../../../../shared";
 
 export const colorVulnerabilitat = '#66bb6a';
@@ -26,7 +25,7 @@ export const colorRisc = '#ffee58';
 export const colorAltRisc = '#ef5350';
 export const colorSense = '#29b6f6';
 export const colors = [
-  '#5c6bc0', '#66bb6a', '#29b6f6', '#ffee58', '#ef5350', '#868e96'
+  '#ffee58', '#66bb6a', '#ef5350', '#ffee58', '#ef5350', '#868e96'
 ];
 
 @Component({
@@ -42,7 +41,6 @@ export class FileDetailComponent {
   diagnosis: Diagnosis;
 
   /* Chart variables */
-  arrayDiagnosis: Diagnosis[];
   diagnosisValidated: Diagnosis[];
   chartsGroupValue: ChartGroup[];
   chartsAutonomiaValue: ChartAmbit[];
@@ -68,26 +66,38 @@ export class FileDetailComponent {
   public breadcrum: BreadCrums [] = [];
 
   /* Charts */
-  /** options **/
+  /** Bar options **/
+  curve = shape.curveLinear;
+  autoScale = true;
+  timeline = false;
   showXAxis = true;
   showYAxis = true;
   gradient = true;
   showLegend = false;
   showXAxisLabel = true;
-  tooltipDisabled = false;
+  tooltipDisabled = true;
   xAxisLabel = 'Evaluacions';
   showYAxisLabel = true;
-  yAxisLabel = 'Risc';
+  yAxisLabel = 'Risc Global';
+  yAxisLabelAutonomia = 'Risc Ambit Autonomia';
+  yAxisLabelMaterial = 'Risc Ambit Material i instrumental';
+  yAxisLabelRelacional = 'Risc Ambit Relacional';
   showGridLines = true;
   barPadding = 16;
-  roundDomains = true;
+  roundDomains = false;
   colorScheme = {domain: colors};
   schemeType = 'ordinal';
+
+  /** Line options **/
+  gradientLine = true;
+  roundDomainsLine = false;
+  rangeFillOpacity = 0.15;
+
   colorGeneral;
+  colorGeneralBar;
   colorAutonomia;
   colorMaterial;
   colorRelacional;
-  colorGlobal;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -155,180 +165,128 @@ export class FileDetailComponent {
     this.optionsUF.pagination = false;
     this.optionsUF.footer = false;
     this.reloadDataTable(this.id);
+  }
 
-    this.getDataChart();
+  /* Charts */
+  getDataChart(diagnosisValidated) {
+    let ambit: ChartAmbit;
+    this.chartsAutonomiaValue = [];
+    this.chartsMaterialValue = [];
+    this.chartsRelacionalValue = [];
+    let colorChart: any;
+    this.colorAutonomia = [];
+    this.colorMaterial = [];
+    this.colorRelacional = [];
 
-    /* Chart */
-    /** Autonomia **/
-    this.chartsAutonomiaValue = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: 1
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: 5
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: 0
-      }
-    ];
-    this.colorAutonomia = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: colorVulnerabilitat
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: colorRisc
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: colorSense
-      }
-    ];
+    for (const diagnostic of diagnosisValidated) {
+      for (const evaluacion of diagnostic.valoracio.evaluacions) {
+        if (evaluacion.ambit.ambit.descripcio.toUpperCase() === "AUTONOMIA") {
+          ambit = new ChartAmbit();
+          colorChart = [];
+          ambit.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          colorChart.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          ambit.value = evaluacion.risc.value;
+          if (evaluacion.risc.value === 1) {
+            colorChart.value = colorVulnerabilitat;
+          } else if (evaluacion.risc.value === 2) {
+            colorChart.value = colorRisc;
+          } else {
+            colorChart.value = colorAltRisc;
+          }
+          /* Push Charts & Colors */
+          this.chartsAutonomiaValue.push(ambit);
+          this.colorAutonomia.push(colorChart);
 
-    /** Material **/
-    this.chartsMaterialValue = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: 5
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: 5
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: 5
+        } else if (evaluacion.ambit.ambit.descripcio.toUpperCase() === "MATERIAL I INSTRUMENTAL") {
+          ambit = new ChartAmbit();
+          colorChart = [];
+          ambit.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          colorChart.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          ambit.value = evaluacion.risc.value;
+          if (evaluacion.risc.value === 1) {
+            colorChart.value = colorVulnerabilitat;
+          } else if (evaluacion.risc.value === 2) {
+            colorChart.value = colorRisc;
+          } else {
+            colorChart.value = colorAltRisc;
+          }
+          /* Push Charts & Colors */
+          this.chartsMaterialValue.push(ambit);
+          this.colorMaterial.push(colorChart);
+        } else if (evaluacion.ambit.ambit.descripcio.toUpperCase() === "RELACIONAL") {
+          ambit = new ChartAmbit();
+          colorChart = [];
+          ambit.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          colorChart.name = 'DSDIBA-' + diagnostic.valoracio.data;
+          ambit.value = evaluacion.risc.value;
+          if (evaluacion.risc.value === 1) {
+            colorChart.value = colorVulnerabilitat;
+          } else if (evaluacion.risc.value === 2) {
+            colorChart.value = colorRisc;
+          } else {
+            colorChart.value = colorAltRisc;
+          }
+          /* Push Charts & Colors */
+          this.chartsRelacionalValue.push(ambit);
+          this.colorRelacional.push(colorChart);
+        }
       }
-    ];
-    this.colorMaterial = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: colorRisc
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: colorRisc
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: colorRisc
-      }
-    ];
-    this.chartsRelacionalValue = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: 3
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: 5
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: 10
-      }
-    ];
-    this.colorRelacional = [
-      {
-        name: 'DSDIBA-05/03/2019',
-        value: colorVulnerabilitat
-      },
-      {
-        name: 'DSDIBA-05/04/2019',
-        value: colorRisc
-      },
-      {
-        name: 'DSDIBA-05/05/2019',
-        value: colorAltRisc
-      }
-    ];
+    }
+    /* Charts Line Group */
     this.chartsGroupValue = [
       {
-        name: "Autonomia",
-        series: [
-          {
-          name: 'DSDIBA-05/03/2019',
-          value: 1
-          },
-          {
-            name: 'DSDIBA-05/04/2019',
-            value: 5
-          },
-          {
-            name: 'DSDIBA-05/05/2019',
-            value: 10
-          }
-        ]
+        name: 'Autonomia',
+        series: this.chartsAutonomiaValue
       },
       {
         name: 'Material',
-        series: [
-          {
-            name: 'DSDIBA-05/03/2019',
-            value: 1
-          },
-          {
-            name: 'DSDIBA-05/04/2019',
-            value: 5
-          },
-          {
-            name: 'DSDIBA-05/05/2019',
-            value: 10
-          }
-        ]
+        series: this.chartsMaterialValue
       },
       {
         name: 'Relacional',
-        series: [
-          {
-            name: 'DSDIBA-05/03/2019',
-            value: 1
-          },
-          {
-            name: 'DSDIBA-05/04/2019',
-            value: 5
-          },
-          {
-            name: 'DSDIBA-05/05/2019',
-            value: 10
-          }
-        ]
-      },
+        series: this.chartsRelacionalValue
+      }
     ];
     this.colorGeneral = [
       {
-        name: 'DSDIBA-05/03/2019',
-        value: 1
+        name: 'Autonomia',
+        value: colorRisc
       },
       {
-        name: 'DSDIBA-05/04/2019',
-        value: 5
+        name: 'Material',
+        value: colorAltRisc
       },
       {
-        name: 'DSDIBA-05/05/2019',
-        value: 10
+        name: 'Relacional',
+        value: colorVulnerabilitat
+      }
+    ];
+    this.colorGeneralBar = [
+      {
+        name: 'Autonomia',
+        series: this.colorAutonomia
+      },
+      {
+        name: 'Material',
+        series: this.colorMaterial
+      },
+      {
+        name: 'Relacional',
+        series: this.colorRelacional
       }
     ];
   }
 
-  /* Charts */
-  getDataChart() {
-    this.diagnosisValidated = [];
-    this.arrayDiagnosis = [];
-    this.chartsAutonomiaValue = [];
-    /** Get services **/
-    this._service.getDetailObservations(this.id).subscribe((data: Expedient ) => {
-      this.arrayDiagnosis = data.diagnostic;
-      for (const diagnostic of this.arrayDiagnosis) {
-        if (diagnostic.estat.descripcio.toUpperCase() === "VALIDAT") {
-          this.diagnosisValidated.push(diagnostic);
-        }
-      }
-    });
+  formatPercent(val) {
+    if (val === 0) {
+      return "Sense Valoració";
+    } if (val === 1) {
+      return "Vulnerabilitat";
+    } else if (val === 2) {
+      return "Risc";
+    } else if (val === 3) {
+      return "Risc Alt";
+    }
   }
 
   select(data) {
@@ -363,6 +321,13 @@ export class FileDetailComponent {
       this.expedient = data;
       this.setCrum();
       this.global.setBreadCrum(this.breadcrum);
+      this.diagnosisValidated = [];
+      for (const diagnostic of this.expedient.diagnostic) {
+        if (diagnostic.estat.descripcio.toUpperCase() === "VALIDAT") {
+          this.diagnosisValidated.push(diagnostic);
+        }
+      }
+      this.getDataChart(this.diagnosisValidated);
     }, (error) => {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });

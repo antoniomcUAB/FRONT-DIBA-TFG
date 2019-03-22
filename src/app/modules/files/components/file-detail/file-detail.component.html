@@ -419,8 +419,7 @@
                   <a *ngIf="item.estat.descripcio === 'VALIDAT'"
                      [routerLink]="['/observations', {'id': item.id,'date': item.data,'exp': expedient.id,'codi':expedient.codi,'professionalID':idProfessional}]" > <i class="fa fa-eye"></i>
                   </a>
-                  <span class="px-2" *ngIf="item.estat.descripcio ==='BORRADOR'"> </span>
-                  <a *ngIf="item.estat.descripcio === 'BORRADOR'"
+                  <a *ngIf="item.estat.descripcio === 'BORRADOR' && idProfessional == item.professional.id"
                      [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id,'professionalID':idProfessional,'ValoracioName': item.data}]" >
                     <i class="fa fa-pencil-square-o"> </i>
                   </a>
@@ -451,9 +450,10 @@
                             [legend]="showLegend"
                             [showXAxisLabel]="showXAxisLabel"
                             [showYAxisLabel]="showYAxisLabel"
+                            [yAxisTickFormatting]='formatPercent'
                             [tooltipDisabled]="tooltipDisabled"
                             [xAxisLabel]="xAxisLabel"
-                            [yAxisLabel]="yAxisLabel"
+                            [yAxisLabel]="yAxisLabelAutonomia"
                             [showGridLines]="showGridLines"
                             [barPadding]="barPadding"
                             [roundDomains]="roundDomains"
@@ -479,10 +479,11 @@
                             [yAxis]="showYAxis"
                             [legend]="showLegend"
                             [showXAxisLabel]="showXAxisLabel"
+                            [yAxisTickFormatting]='formatPercent'
                             [showYAxisLabel]="showYAxisLabel"
                             [tooltipDisabled]="tooltipDisabled"
                             [xAxisLabel]="xAxisLabel"
-                            [yAxisLabel]="yAxisLabel"
+                            [yAxisLabel]="yAxisLabelMaterial"
                             [showGridLines]="showGridLines"
                             [barPadding]="barPadding"
                             [roundDomains]="roundDomains"
@@ -509,9 +510,10 @@
                             [legend]="showLegend"
                             [showXAxisLabel]="showXAxisLabel"
                             [showYAxisLabel]="showYAxisLabel"
+                            [yAxisTickFormatting]='formatPercent'
                             [tooltipDisabled]="tooltipDisabled"
                             [xAxisLabel]="xAxisLabel"
-                            [yAxisLabel]="yAxisLabel"
+                            [yAxisLabel]="yAxisLabelRelacional"
                             [showGridLines]="showGridLines"
                             [barPadding]="barPadding"
                             [roundDomains]="roundDomains"
@@ -524,30 +526,92 @@
                   </ngb-tab>
                   <ngb-tab title="General" tabindex="active">
                     <ng-template ngbTabContent>
-                      <div class="p-5 h-100 d-table m-auto">
-                        <div>
-                          <ngx-charts-bar-vertical
-                            class="chart-container"
-                            [scheme]="colorScheme"
-                            [customColors]="colorGeneral"
-                            [schemeType]="schemeType"
-                            [results]="chartsGroupValue"
-                            [gradient]="gradient"
-                            [xAxis]="showXAxis"
-                            [yAxis]="showYAxis"
-                            [legend]="showLegend"
-                            [showXAxisLabel]="showXAxisLabel"
-                            [showYAxisLabel]="showYAxisLabel"
-                            [tooltipDisabled]="tooltipDisabled"
-                            [xAxisLabel]="xAxisLabel"
-                            [yAxisLabel]="yAxisLabel"
-                            [showGridLines]="showGridLines"
-                            [barPadding]="barPadding"
-                            [roundDomains]="roundDomains"
-                            (select)="select($event)"
-                            (legendLabelClick)="onLegendLabelClick($event)">
-                          </ngx-charts-bar-vertical>
-                        </div>
+                      <div class="p-5 h-100 d-table m-auto pills-chart">
+                        <ngb-tabset type="pills">
+                          <ngb-tab title="Linear Chart">
+                            <ng-template ngbTabContent>
+                              <ngx-charts-line-chart
+                                class="chart-container"
+                                [scheme]="colorScheme"
+                                [customColors]="colorGeneral"
+                                [schemeType]="schemeType"
+                                [results]="chartsGroupValue"
+                                [legend]="showLegend"
+                                (legendLabelClick)="onLegendLabelClick($event)"
+                                [gradient]="gradientLine"
+                                [xAxis]="showXAxis"
+                                [yAxis]="showYAxis"
+                                [yAxisTickFormatting]='formatPercent'
+                                [showXAxisLabel]="showXAxisLabel"
+                                [showYAxisLabel]="showYAxisLabel"
+                                [xAxisLabel]="xAxisLabel"
+                                [yAxisLabel]="yAxisLabel"
+                                [autoScale]="autoScale"
+                                [timeline]="timeline"
+                                [showGridLines]="showGridLines"
+                                [curve]="curve"
+                                [rangeFillOpacity]="rangeFillOpacity"
+                                [roundDomains]="roundDomainsLine"
+                                [tooltipDisabled]="true"
+                                (select)="select($event)">
+                              </ngx-charts-line-chart>
+                            </ng-template>
+                          </ngb-tab>
+                          <ngb-tab title="Area Chart">
+                            <ng-template ngbTabContent>
+                              <ngx-charts-area-chart
+                                class="chart-container"
+                                [scheme]="colorScheme"
+                                [customColors]="colorGeneral"
+                                [schemeType]="schemeType"
+                                [results]="chartsGroupValue"
+                                [legend]="showLegend"
+                                (legendLabelClick)="onLegendLabelClick($event)"
+                                [gradient]="gradientLine"
+                                [xAxis]="showXAxis"
+                                [yAxis]="showYAxis"
+                                [yAxisTickFormatting]='formatPercent'
+                                [showXAxisLabel]="showXAxisLabel"
+                                [showYAxisLabel]="showYAxisLabel"
+                                [xAxisLabel]="xAxisLabel"
+                                [yAxisLabel]="yAxisLabel"
+                                [autoScale]="autoScale"
+                                [timeline]="timeline"
+                                [showGridLines]="showGridLines"
+                                [curve]="curve"
+                                [roundDomains]="roundDomainsLine"
+                                [tooltipDisabled]="tooltipDisabled"
+                                (select)="select($event)">
+                              </ngx-charts-area-chart>
+                            </ng-template>
+                          </ngb-tab>
+                          <ngb-tab title="Vertical Bar">
+                            <ng-template ngbTabContent>
+                              <ngx-charts-bar-vertical-2d
+                                class="chart-container"
+                                [scheme]="colorScheme"
+                                [customColors]="colorGeneral"
+                                [schemeType]="schemeType"
+                                [results]="chartsGroupValue"
+                                [gradient]="gradient"
+                                [tooltipDisabled]="tooltipDisabled"
+                                [xAxis]="showXAxis"
+                                [yAxis]="showYAxis"
+                                [legend]="showLegend"
+                                [yAxisTickFormatting]='formatPercent'
+                                (legendLabelClick)="onLegendLabelClick($event)"
+                                [showXAxisLabel]="showXAxisLabel"
+                                [showYAxisLabel]="showYAxisLabel"
+                                [xAxisLabel]="xAxisLabel"
+                                [yAxisLabel]="yAxisLabel"
+                                [showGridLines]="showGridLines"
+                                [barPadding]="barPadding"
+                                [roundDomains]="roundDomains"
+                                (select)="select($event)">
+                              </ngx-charts-bar-vertical-2d>
+                            </ng-template>
+                          </ngb-tab>
+                        </ngb-tabset>
                       </div>
                     </ng-template>
                   </ngb-tab>
