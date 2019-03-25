@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {User} from '../resources/data/user';
 import {Observable} from 'rxjs';
 import {GlobalService} from "../../../shared";
@@ -8,14 +8,15 @@ import {catchError, map} from "rxjs/operators";
 
 @Injectable()
 export class AuthService extends GlobalService {
-
+  headers: HttpHeaders = new HttpHeaders();
   constructor(private _http: HttpClient,
               private _tokenService: TokenService) {
     super();
+    this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://dsdiba.demo.in2.es');
   }
 
   doLogin(user: User): Observable<any> {
-    return this._http.post(`${this.apiURL}/dsdiba/api/login`, user, {responseType: 'text'})
+    return this._http.post(`${this.apiURL}/dsdiba/api/login`, user, {responseType: 'text', headers: this.headers})
       .pipe(
         map((response: HttpResponse<string>) => {
           const resp = response.toLocaleString().replace("Authorization:Bearer","");
