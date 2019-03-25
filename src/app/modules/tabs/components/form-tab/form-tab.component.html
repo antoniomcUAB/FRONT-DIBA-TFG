@@ -44,7 +44,7 @@
     <div class="p-3 bg-primary border border-dark">
       <h5 class="text-white ">Situació social</h5>
     </div>
-    <div class="form-group row bg-grey-300 m-0 mt-3 mb-0 ">
+    <div class="form-group col-12 row bg-grey-300 m-0 mt-3 mb-0 ">
     <ng-template ngFor [ngForOf]="data.ambits" let-ambit let-firts="index">
       <ng-template ngFor [ngForOf]="ambit.entorns" let-entorn let-e="index">
         <ng-template [ngIf]="(groupRelacional.social && entorn.descripcio === 'Entorn Social' )
