@@ -159,7 +159,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     return el1 && el2 ? el1.id === el2.id : el1 === el2;
   }
   /*Funcion para abrir el content y crear la pregunta economica */
-  open(content , preguntaSocial: string , preguntaid: number , ambit: Ambit , entorn: Entorns) {
+  openPreg(content , preguntaSocial: string , preguntaid: number , ambit: Ambit , entorn: Entorns) {
     if ( !this.getFirstPregunta(preguntaid , ambit, entorn)) {
       this.newPregunta(preguntaSocial, preguntaid, ambit, entorn).subscribe( pregunta => {
         this.preguntaEconomica = pregunta;
@@ -167,6 +167,14 @@ export class FormTabComponent extends CustomInput implements OnInit {
     } else {
      this.preguntaEconomica = this.getFirstPregunta(preguntaid , ambit, entorn);
     }
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  /*Funcion para abrir el content y crear la pregunta economica */
+  open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

@@ -15,7 +15,6 @@ export class AuthService extends GlobalService {
   }
 
   doLogin(user: User): Observable<any> {
-     console.log("entra")
     return this._http.post(`${this.apiURL}/dsdiba/api/login`, user, {responseType: 'text'})
       .pipe(
         map((response: HttpResponse<string>) => {
