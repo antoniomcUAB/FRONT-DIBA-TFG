@@ -12,11 +12,11 @@ export class AuthService extends GlobalService {
   constructor(private _http: HttpClient,
               private _tokenService: TokenService) {
     super();
-    this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://dsdiba.demo.in2.es');
+    //this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://dsdiba.demo.in2.es');
   }
 
   doLogin(user: User): Observable<any> {
-    return this._http.post(`${this.apiURL}/dsdiba/api/login`, user, {responseType: 'text', headers: this.headers})
+    return this._http.post(`${this.apiURL}/dsdiba/api/login`, user, {responseType: 'text'})
       .pipe(
         map((response: HttpResponse<string>) => {
           const resp = response.toLocaleString().replace("Authorization:Bearer","");
