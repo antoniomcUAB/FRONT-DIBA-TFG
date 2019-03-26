@@ -26,4 +26,26 @@ ngb-popover-window h3.popover-header {
   background-color: rgba(137,21,54,0.8);
 }
 
+@media only screen and (max-width: 1200px) {
+  .desaparece{
+    display: block;
+  }
+  .aparece{
+    display: none;
+  }
+  i{
+    display: inline-block;
+  }
+
+}
+
+@media only screen and (min-width: 1200px) {
+  .desaparece{
+    display: none;
+  }
+  .apl{
+    float: left;
+  }
+}
+
 
