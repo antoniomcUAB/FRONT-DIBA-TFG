@@ -22,6 +22,7 @@ export class ModelPDFComponent {
   getModel() {
     this._service.getModel().subscribe( (data) => {
       this.model = data;
+      console.log(this.model);
       this.tableQueryContext();
       this.tableQuerySituation();
     }, error => {
@@ -30,23 +31,27 @@ export class ModelPDFComponent {
   }
 
   tableQuerySituation() {
-    for (const i in this.model.ambits) {
-      this.tableSituation[i] = new ModelQuerySituation();
-      this.tableSituation[i].ambits = this.model.ambits[i].descripcio;
-      for (const entorns of this.model.ambits[i].entorns) {
-        for (const j in entorns.preguntes) {
-          this.tableSituation[i].situacionSocial[j] = new SituacionSocial();
-          this.tableSituation[i].situacionSocial[j].descripcio = entorns.preguntes[j].social;
-          this.tableSituation[i].situacionSocial[j].definicio = entorns.preguntes[j].definicio;
-          for (const k in entorns.preguntes[j].selectors) {
-            this.tableSituation[i].situacionSocial[j].gravetat[k] = new Gravedad();
-            this.tableSituation[i].situacionSocial[j].gravetat[k].descripcio = entorns.preguntes[j].selectors[k].gravetat.descripcio;
-            this.tableSituation[i].situacionSocial[j].gravetat[k].evidencia = entorns.preguntes[j].selectors[k].evidencia;
-            for (const l in entorns.preguntes[j].selectors[k].frequencia) {
-              this.tableSituation[i].situacionSocial[j].gravetat[k].frequencia[l] = new Frecuencia();
-              this.tableSituation[i].situacionSocial[j].gravetat[k].frequencia[l].descripcio = entorns.preguntes[j].selectors[k].frequencia[l].frequencia.descripcio;
-              this.tableSituation[i].situacionSocial[j].gravetat[k].frequencia[l].evidencia = entorns.preguntes[j].selectors[k].frequencia[l].evidencia;
-              this.tableSituation[i].situacionSocial[j].gravetat[k].frequencia[l].risc = entorns.preguntes[j].selectors[k].frequencia[l].risc.descripcio;
+    for (const ambit of this.model.ambits) {
+      const amb = new ModelQuerySituation();
+      amb.ambits = ambit.descripcio;
+      this.tableSituation.push(amb);
+      for (const entorns of ambit.entorns) {
+        for (const pregunta of entorns.preguntes) {
+          const pr = new SituacionSocial();
+          pr.descripcio = pregunta.social;
+          pr.definicio = pregunta.definicio;
+         amb.situacionSocial.push(pr);
+          for (const tors of pregunta.selectors) {
+            const slec = new Gravedad();
+            slec.descripcio = tors.gravetat.descripcio;
+            slec.evidencia = tors.evidencia;
+            pr.gravetat.push(slec);
+            for (const f of tors.frequencia) {
+              const freq = new Frecuencia();
+              freq.descripcio = f.frequencia.descripcio;
+              freq.evidencia = f.evidencia;
+              freq.risc = f.risc.descripcio;
+              slec.frequencia.push(freq);
             }
           }
         }

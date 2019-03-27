@@ -198,7 +198,6 @@ export class ModelQuerySituation {
   ambits: string;
   situacionSocial: SituacionSocial[] = [];
 }
-
 export class SituacionSocial {
   descripcio: string;
   definicio: string;
