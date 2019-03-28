@@ -29,3 +29,7 @@ input, select {
 textarea {
   height: auto !important;
 }
+@media print {
+  body {-webkit-print-color-adjust: exact;}
+  .pepe {-webkit-print-color-adjust: exact;}
+}

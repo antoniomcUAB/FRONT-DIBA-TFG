@@ -10,3 +10,6 @@
 .bg-primary-80 {
   background-color: rgba(137,21,54,0.8);
 }
+@media print{
+  .doNotPrint{display:none !important;}
+}

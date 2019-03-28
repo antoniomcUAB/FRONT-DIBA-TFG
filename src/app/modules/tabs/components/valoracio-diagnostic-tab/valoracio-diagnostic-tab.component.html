@@ -2,14 +2,14 @@
 <section *ngIf="value">
   <div class="row m-3" >
     <ng-container>
-      <div class="col-12">
+      <div class="col-xl-12">
         <div class="card ">
           <div class="card-header text-white font-weight-bold bg-grey-400">
             RESUM VALORACIÓ
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-6">
+              <div class="col-xl-6">
                 <table class="table table-bordered">
                   <tbody>
                   <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio let-v="index">
@@ -31,7 +31,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="col-6">
+              <div class="col-xl-6">
                 <table class="table table-bordered">
                   <thead class="table-active bg-info">
                   <tr>
@@ -72,7 +72,7 @@
   <!-- Ambito -->
   <div class="row m-3" *ngFor="let ambit of value.ambit;let i = index">
     <ng-container *ngIf="ambit?.ambit?.descripcio?.toUpperCase() !== 'GLOBALITAT DEL CAS'">
-      <div class="col-12">
+      <div class="col-xl-12">
         <div class="card">
           <div class="card-header text-white font-weight-bold"
                [ngClass]="{'bg-warning text-black-50' : ambit?.ambit?.descripcio?.toUpperCase() === 'AUTONOMIA',
@@ -83,7 +83,7 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-6">
+              <div class="col-xl-6">
                 <table class="table table-bordered">
                   <thead class="table-active">
                   <th>{{ "OBS.ssocial" | translate }}</th>
@@ -163,7 +163,7 @@
                   </ng-container>
                 </table>
               </div>
-              <div class="col-6">
+              <div class="col-xl-6">
                 <table class="table table-bordered">
                   <thead class="table-active">
                   <th>{{ "OBS.factor" | translate }}</th>
@@ -195,8 +195,8 @@
             </div>
             <!-- Observations Ambits -->
             <div class="form-group row">
-              <div class="col-12 px-3">
-                <label for="fileObservationAutonomy" class="col-form-label">
+              <div class="col-xl-12 px-3">
+                <label for="fileObservationAutonomy" class="col-xl-form-label">
                   <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
                 </label>
                 <textarea [ngModel]="ambit?.observacions" class="form-control" type="text" name="ob{{i}}"
@@ -213,14 +213,14 @@
   <!-- Global -->
   <div class="row m-3" *ngFor="let global of value.ambit;let i = index">
     <ng-container *ngIf="global.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'">
-      <div class="col-12">
+      <div class="col-xl-12">
         <div class="card">
           <div class="card-header text-white font-weight-bold bg-info">
             {{ global.ambit?.descripcio.toUpperCase() }}
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-6">
+              <div class="col-xl-6">
                 <table class="table table-bordered">
                   <thead class="table-active">
                   <th>{{ "OBS.factor" | translate }}</th>
@@ -245,8 +245,8 @@
                   </tbody>
                 </table>
               </div>
-              <div class="col-6 px-3">
-                <label for="fileObservationAutonomy" class="col-form-label">
+              <div class="col-xl-6 px-3">
+                <label for="fileObservationAutonomy" class="col-xl-form-label">
                   <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
                 </label>
                 <textarea class="form-control" type="text" value="{{ global.observacions }}" name="observationsss{{i}}"
@@ -263,7 +263,7 @@
 
   <!-- Return to Back -->
   <div class="row my-3">
-    <div class="col-12 mb-3 text-center">
+    <div class="col-xl-12 mb-3 text-center">
       <button  class="align-middle btn btn-outline-primary no-print btn-lg" type="submit" style="width: 20%;" > {{ "FORM.validation" | translate }}</button>
     </div>
   </div>

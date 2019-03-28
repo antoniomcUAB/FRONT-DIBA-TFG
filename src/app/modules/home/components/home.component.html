@@ -43,7 +43,7 @@
 
       <!-- Add New File -->
       <div class="form-group row">
-        <div class="col-12 text-center pt-4 pb-3">
+        <div class="col-xl-12 text-center pt-4 pb-3">
           <button type="button" class="btn btn-primary btn-large" (click)="open(content)"> {{ "FORM.newFile" | translate }} </button>
         </div>
       </div>
@@ -87,7 +87,7 @@
                        type="text"
                        [required]="true" />
                 <div class="input-group">
-                  <span *ngIf="checkCode" class="col-12 text-center alert alert-danger">{{ "FORM.expExists" | translate }}</span>
+                  <span *ngIf="checkCode" class="col-xl-12 text-center alert alert-danger">{{ "FORM.expExists" | translate }}</span>
                 </div>
               </div>
             </div>

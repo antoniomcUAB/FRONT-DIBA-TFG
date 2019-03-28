@@ -1,8 +1,8 @@
 .bg-primary-20 {
-  background-color: rgba(137,21,54,0.2);
+  background-color: rgba(137,21,54,0.2)!important;
 }
 .bg-primary-40 {
-  background-color: rgba(137,21,54,0.4);
+  background-color: rgba(137,21,54,0.4)!important;
 }
 .bg-primary-60 {
   background-color: rgba(137,21,54,0.6);
@@ -10,3 +10,40 @@
 .bg-primary-80 {
   background-color: rgba(137,21,54,0.8);
 }
+@media print{
+  .doNotPrint{display:none !important;}
+
+  .bg-primary-exact {
+    -webkit-print-color-adjust: exact;
+    background-color: rgb(137,21,54)!important;
+  }
+  .bg-primary-40 {
+    -webkit-print-color-adjust: exact;
+    background-color: rgba(137,21,54,0.4)!important;
+  }
+  .bg-primary-60 {
+    -webkit-print-color-adjust: exact;
+    background-color: rgba(137,21,54,0.6)!important;
+  }
+  .bg-primary-80 {
+    -webkit-print-color-adjust: exact;
+    background-color: rgba(137,21,54,0.8)!important;
+  }
+  .verde{
+    -webkit-print-color-adjust: exact;
+    background-color: #d4edda !important;
+  }
+  .rojo{
+    -webkit-print-color-adjust: exact;
+    background-color: #f8d7da !important;
+  }
+  .amarillo{
+    -webkit-print-color-adjust: exact;
+    background-color: #fff3cd !important;
+  }
+  .azul{
+    -webkit-print-color-adjust: exact;
+    background-color: #d1ecf1 !important;
+  }
+}
+
