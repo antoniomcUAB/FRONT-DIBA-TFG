@@ -9,6 +9,8 @@ import {HomeService} from "../../modules/home/services/home.service";
 import {ArrayBreadCrums, BreadCrums} from "../../modules/tabs/models/tab-class-form";
 import {BreadcrumInterface} from "../resources/breadcrum-interface";
 import {GlobalService} from "../../shared";
+import {User} from "../../modules/auth/resources/data/user";
+import {Professional} from "../../modules/home/models/professional";
 
 const SMALL_WIDTH_BREAKPOINT = 991;
 
@@ -27,6 +29,9 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterfa
   private _router: Subscription;
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
+  idProfessional = 19669;
+  professional: Professional;
+
   routeOptions: Options;
 
   options = {
@@ -43,7 +48,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterfa
   @ViewChild('sidebar') sidebar;
   @ViewChild('sidemenu') sidemenu;
 
-  constructor (
+  constructor (private _service: HomeService,
     private _element: ElementRef,
     private router: Router,
     private route: ActivatedRoute,
@@ -55,6 +60,17 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterfa
       this.mediaMatcher = mql;
     }));
     this.global.registerLayout(this);
+
+    this.getProfessionalData(this.idProfessional);
+  }
+
+  /** GET PROFESSIONAL DATA **/
+  getProfessionalData(id: number) {
+    this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
+      this.professional = data;
+    }, error => {
+      console.log("ERROR al recuperar el datos");
+    });
   }
 
   ngOnInit(): void {

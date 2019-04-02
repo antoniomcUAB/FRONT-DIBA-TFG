@@ -9,7 +9,7 @@
     <div class="card-body">
       <div class="form-group row">
         <!-- File ID -->
-        <div class="col-6">
+        <div class="col-12 col-md-6">
           <div class="col-12">
             <label for="fileId"
                    class="col-form-label">
@@ -24,7 +24,7 @@
         </div>
         <!--/ File ID -->
         <!-- File Owner -->
-        <div class="col-6">
+        <div class="col-12 col-md-6">
           <div class="col-12">
             <label for="owner"
                    class="col-form-label">
@@ -41,7 +41,7 @@
       </div>
       <div class="form-group row">
         <!-- File Date -->
-        <div class="col-6">
+        <div class="col-12 col-md-6">
           <div class="col-12">
             <label for="fileDate"
                    class="col-form-label">
@@ -56,7 +56,7 @@
         </div>
         <!--/ File Date -->
         <!-- File Family -->
-        <div class="col-6">
+        <div class="col-12 col-md-6">
           <div class="col-12">
             <label for="totalFamilia"
                    class="col-form-label">
@@ -78,12 +78,13 @@
             <label class="col-form-label">
               {{ "FORM.fileUFamily" | translate }}
             </label>
-            <app-table-list [tableData]="dataUnityFamily"
-                            [options]="optionsUF"
-                            [rowTemplate]="unityFamily"
-                            (reloadData)="reloadDataTable()">
+            <div class="table-responsive">
+              <app-table-list [tableData]="dataUnityFamily"
+                              [options]="optionsUF"
+                              [rowTemplate]="unityFamily"
+                              (reloadData)="reloadDataTable()">
 
-              <ng-template #unityFamily let-item >
+                <ng-template #unityFamily let-item >
                   <td class="text-center" [ngClass]="{'info' : item.referencia === true}">
                     {{item.tipusPersona.descripcio}}
                     <i *ngIf="item.referencia === true"
@@ -197,8 +198,9 @@
                     </ng-template>
                     <!--/ Modal -->
                   </td>
-              </ng-template>
-            </app-table-list>
+                </ng-template>
+              </app-table-list>
+            </div>
           </div>
         </div>
       </div>
@@ -228,13 +230,14 @@
             </div>
             <form #FormCreateMember="ngForm">
               <div class="modal-body">
-                <div class="form-group">
+                <div class="form-group" *ngIf="checkPersonRef()">
                   <label class="custom-control custom-checkbox">
                     <input id="person-ref"
                            name="referencia"
                            type="checkbox"
                            class="custom-control-input"
-                           [(ngModel)]="member.referencia">
+                           [(ngModel)]="member.referencia"
+                           (change)="changeRef($event)">
                     <span class="custom-control-label">
                       {{ "TABLE.isPersonRef" | translate }}
                     </span>
@@ -243,7 +246,7 @@
                 </div>
                 <div class="form-group">
                   <label for="date-register">
-                    {{ "TABLE.dataRegister" | translate }} {{member.dataAlta}}
+                    {{ "TABLE.dataRegister" | translate }}
                     <span class="text-primary">*</span>
                   </label>
                   <div class="input-group">
@@ -260,15 +263,15 @@
                 <div class="form-group">
                   <label for="relation-register">{{ "TABLE.relation" | translate }} <span class="text-primary">*</span></label>
                   <div class="input-group">
-                    <select id="relation-register"
+                    <select *ngIf="isCheckPersonRef === false"
+                            id="relation-register"
                             name="tipusPersona"
                             class="form-control"
                             [(ngModel)]="member.tipusPersona"
                             [required]="true">
-                      <option *ngFor="let type of personType"
-                              [ngValue]="type">
-                        {{ type.descripcio }}
-                      </option>
+                        <option *ngFor="let type of personType" [ngValue]="type">
+                          {{ type.descripcio }}
+                        </option>
                     </select>
                   </div>
                 </div>
@@ -297,8 +300,9 @@
                     <input id="date-birthday"
                            name="dataNaixement"
                            class="form-control"
-                           placeholder="dd-mm-yyyy"
-                           type="date"
+                           placeholder="dd/mm/yyyy"
+                           type="text"
+                           ngbDatepicker #d="ngbDatepicker"
                            max="{{ toDate | date:'yyyy-MM-dd' }}"
                            [(ngModel)]="member.dataNaixement"
                            [required]="true">
@@ -393,48 +397,46 @@
       <div class="form-group row">
         <div class="col-12 px-3">
           <label for="fileObservation"
-                 class="col-form-label">
+                 class="col-form-label col-12">
             <i class="fa fa-eye"></i>
             {{ "OBSTABLE.obs" | translate }}
           </label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div [ngClass]="{'col-12' : obsData?.length <= 1, 'col-6' : obsData?.length > 1}"
-               class="text-center float-left">
-            <!-- Table List Diagnosis -->
-            <app-table-list [tableData]="obsData"
-                            [options]="options"
-                            [rowTemplate]="myRowInitDysplay"
-                            (reloadData)="reloadData()">
-              <ng-template #myRowInitDysplay let-item>
-                <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
-                  DSDIBA-{{item.data | date:'dd/MM/yyyy'}}
-                </td>
-                <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
-                  {{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}
-                </td>
-                <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
-                  <a *ngIf="item.estat.descripcio === 'VALIDAT'"
-                     [routerLink]="['/observations', {'id': item.id,'date': item.data,'exp': expedient.id,'codi':expedient.codi,'professionalID':idProfessional}]" > <i class="fa fa-eye"></i>
-                  </a>
-                  <a *ngIf="item.estat.descripcio === 'BORRADOR' && idProfessional == item.professional.id"
-                     [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id,'professionalID':idProfessional,'ValoracioName': item.data}]" >
-                    <i class="fa fa-pencil-square-o"> </i>
-                  </a>
-                </td>
-              </ng-template>
-            </app-table-list>
-            <!--/ Table List Diagnosis -->
+          <div [ngClass]="{'col-12' : obsData?.length <= 2, 'col-12 col-xl-6 float-left' : obsData?.length > 2}"
+               class="text-center">
+            <div class="table-responsive">
+              <!-- Table List Diagnosis -->
+              <app-table-list [tableData]="obsData"
+                              [options]="options"
+                              [rowTemplate]="myRowInitDysplay"
+                              (reloadData)="reloadData()">
+                <ng-template #myRowInitDysplay let-item>
+                  <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
+                    DSDIBA-{{item.data | date:'dd/MM/yyyy'}}
+                  </td>
+                  <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
+                    {{item.professional.nom}} {{item.professional.cognom1}} {{item.professional.cognom2}}
+                  </td>
+                  <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
+                    <a *ngIf="item.estat.descripcio === 'VALIDAT'"
+                       [routerLink]="['/observations', {'id': item.id,'date': item.data,'exp': expedient.id,'codi':expedient.codi,'professionalID':idProfessional}]" > <i class="fa fa-eye"></i>
+                    </a>
+                    <a *ngIf="item.estat.descripcio === 'BORRADOR' && idProfessional == item.professional.id"
+                       [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id,'professionalID':idProfessional,'ValoracioName': item.data}]" >
+                      <i class="fa fa-pencil-square-o"> </i>
+                    </a>
+                  </td>
+                </ng-template>
+              </app-table-list>
+              <!--/ Table List Diagnosis -->
+            </div>
           </div>
-          <div class="col-6 float-left" *ngIf="obsData?.length > 1">
+          <div class="col-12 col-xl-6 float-left d-none d-sm-block" *ngIf="obsData?.length > 2">
             <!-- Chart -->
             <div class="card shadow-none">
               <label class="px-4 m-0"><i class="fa fa-bar-chart"></i> Gràfics estadístics</label>
               <div class="card-body pt-0">
                 <ngb-tabset>
-                  <ngb-tab title="Autonomia">
+                  <ngb-tab title="Autonomia funcional">
                     <ng-template ngbTabContent>
                       <div class="p-5 h-100 d-table m-auto">
                         <div>

@@ -20,7 +20,7 @@ import {GlobalService} from "../../../shared";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   /* Variables Professional */
   // idProfessional = 30151;
   // idProfessional = 30152;
@@ -96,6 +96,12 @@ export class HomeComponent implements OnInit{
       filterable: true,
       filterType: FilterType.date
     }, {
+      name: 'diagnosticsValidats',
+      title: this._translateService.instant('TABLE.numberDiagnostic'),
+    }, {
+      name: 'diagnosticsPendents',
+      title: this._translateService.instant('TABLE.diagnosticsPendents'),
+    }, {
       name: 'estat',
       title: this._translateService.instant('TABLE.expedient'),
       sortable: true,
@@ -103,7 +109,7 @@ export class HomeComponent implements OnInit{
     }]);
     this.options.filterable = true;
     this.options.actions = false;
-    this.options.itemsPerPage = 10;
+    this.options.itemsPerPage = 20;
     /* Reload Table */
     this.reloadData();
   }
@@ -133,6 +139,12 @@ export class HomeComponent implements OnInit{
       filterable: true,
       filterType: FilterType.date
     }, {
+      name: 'diagnosticsValidats',
+      title: this._translateService.instant('TABLE.numberDiagnostic'),
+    }, {
+      name: 'diagnosticsPendents',
+      title: this._translateService.instant('TABLE.diagnosticsPendents'),
+    }, {
       name: 'estat',
       title: this._translateService.instant('TABLE.expedient'),
       sortable: true,
@@ -140,7 +152,7 @@ export class HomeComponent implements OnInit{
     }]);
     this.options.filterable = true;
     this.options.actions = false;
-    this.options.itemsPerPage = 10;
+    this.options.itemsPerPage = 20;
     /* Reload Table */
     this.reloadData();
   }

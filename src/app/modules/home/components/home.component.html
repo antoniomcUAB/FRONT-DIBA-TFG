@@ -3,10 +3,7 @@
 <!--/ Search Component -->
 
 <!-- Home Component -->
-  <section id="home" class="tabs-primary">
-    <h1 class="text-center mt-5">{{ professional?.municipi?.descripcio }}</h1>
-    <h2 class="text-center mb-4">{{ "TITLE.home-h2" | translate }}</h2>
-
+  <section id="home" class="tabs-primary top-up">
     <ngb-tabset (tabChange)="beforeChange($event)">
       <ngb-tab id="my-files" title="Els meus expedients">
       </ngb-tab>
@@ -16,30 +13,38 @@
 
     <div class="card font-weight-bold p-3">
       <!-- Table -->
-      <app-table-list [tableData]="data"
-                      [options]="options"
-                      [rowTemplate]="myRow"
-                      (reloadData)="reloadData()">
+      <div class=" table-responsive">
+        <app-table-list [tableData]="data"
+                        [options]="options"
+                        [rowTemplate]="myRow"
+                        (reloadData)="reloadData()">
 
-        <ng-template #myRow let-item>
-          <td class="bg-table text-black-50 text-center">
-            <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.codi}}</a>
-          </td>
-          <td class="text-center">
-            <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.dataCreacio | date:'dd/MM/yyyy'}}</a>
-          </td>
-          <td>
-            <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.professional.nomComplet}}</a>
-          </td>
-          <td class="text-center">
-            <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.dataValidacio | date:'dd/MM/yyyy' }}</a>
-          </td>
-          <td class="text-center text-capitalize" [ngClass]="{'warning' : item.estat.descripcio === 'INCOMPLET', 'success' : item.estat.descripcio === 'COMPLET'}">
-            <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.estat.descripcio}}</a>
-          </td>
-        </ng-template>
-      </app-table-list>
-      <!--/ Table -->
+          <ng-template #myRow let-item>
+            <td class="bg-table text-black-50 text-center">
+              <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.codi}}</a>
+            </td>
+            <td class="text-center">
+              <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.dataCreacio | date:'dd/MM/yyyy'}}</a>
+            </td>
+            <td>
+              <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.professional.nomComplet}}</a>
+            </td>
+            <td class="text-center">
+              <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.dataValidacio | date:'dd/MM/yyyy' }}</a>
+            </td>
+            <td class="text-center">
+              <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.diagnosticsValidats}}</a>
+            </td>
+            <td class="text-center">
+              <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.diagnostic.length-item.diagnosticsValidats}}</a>
+            </td>
+            <td class="text-center text-capitalize" [ngClass]="{'warning' : item.estat.descripcio === 'INCOMPLET', 'success' : item.estat.descripcio === 'COMPLET'}">
+              <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.estat.descripcio}}</a>
+            </td>
+          </ng-template>
+        </app-table-list>
+        <!--/ Table -->
+      </div>
 
       <!-- Add New File -->
       <div class="form-group row">
