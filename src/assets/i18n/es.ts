@@ -42,7 +42,9 @@ export let TRANSLATION = {
     'no'                   : 'No',
     'unsuscription'        : 'Afegir persona de referència',
     'doYouWantUnsuscription' : 'És aquesta la persona de referència? ',
-    'unidadFamiliar': 'Unitat convivència'
+    'unidadFamiliar': 'Unitat convivència',
+    'numberDiagnostic'     : 'Diagnòstics Realitzats',
+    'diagnosticsPendents'  : 'Diagnòstics Pendents'
   },
   'OBSTABLE': {
     'obs'           : 'Valoracions realitzades'

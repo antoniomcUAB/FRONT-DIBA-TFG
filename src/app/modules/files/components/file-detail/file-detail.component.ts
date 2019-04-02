@@ -55,6 +55,7 @@ export class FileDetailComponent {
   personType: TipusPersona;
   toDate = new Date();
   dateUnsuscription: number;
+  isCheckPersonRef = false;
 
   /** Tables options **/
   options = new TableListOptions();
@@ -76,12 +77,12 @@ export class FileDetailComponent {
   showLegend = false;
   showXAxisLabel = true;
   tooltipDisabled = true;
-  xAxisLabel = 'Evaluacions';
+  xAxisLabel = 'Avaluacions';
   showYAxisLabel = true;
   yAxisLabel = 'Risc Global';
-  yAxisLabelAutonomia = 'Risc Ambit Autonomia';
-  yAxisLabelMaterial = 'Risc Ambit Material i instrumental';
-  yAxisLabelRelacional = 'Risc Ambit Relacional';
+  yAxisLabelAutonomia = 'Risc Àmbit Autonomia';
+  yAxisLabelMaterial = 'Risc Àmbit Material i instrumental';
+  yAxisLabelRelacional = 'Risc Àmbit Relacional';
   showGridLines = true;
   barPadding = 16;
   roundDomains = false;
@@ -507,6 +508,24 @@ export class FileDetailComponent {
       if (index.id === persona.id) {
         index.referencia = true;
       }
+    }
+  }
+
+  /* Check Person References */
+  checkPersonRef() {
+    for (const person of this.expedient.persona) {
+      if (person.referencia === true) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  changeRef(event) {
+    if (event.target.checked === true) {
+      this.isCheckPersonRef = true;
+    } else {
+      this.isCheckPersonRef = false;
     }
   }
 

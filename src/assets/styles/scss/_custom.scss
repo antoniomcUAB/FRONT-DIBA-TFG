@@ -229,3 +229,9 @@ h3.popover-header {
     background: #000 !important;
   }
 }
+
+@media(max-width: 767px) {
+  .nav-tabs li.nav-item {
+    width: 100% !important;
+  }
+}

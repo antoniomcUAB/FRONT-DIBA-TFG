@@ -6,6 +6,7 @@ export class Expedient {
   codi: string;               // Codigo Expediente
   dataCreacio: number;        // Fecha de creación
   dataValidacio: number;      // Fecha de validación
+  diagnosticsValidats: number; // Diagnosticos Validados
   totalFamilia: number;       // Nº Nucleo Familiar
   persona: Persona[];         // Nucleo Familiar
   estat: Estado;              // Estado

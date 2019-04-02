@@ -8,3 +8,17 @@
 .table .table-header th input {
   padding: 1rem;
 }
+
+.top-up {
+  margin-top: -30px;
+}
+
+@media(max-width: 767px) {
+  .top-up {
+    margin-top: 0px;
+  }
+
+  .nav-tabs li.nav-item {
+    width: 100% !important;
+  }
+}
