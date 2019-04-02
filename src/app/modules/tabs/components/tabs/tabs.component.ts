@@ -238,7 +238,7 @@ export class TabsComponent {
   }
   public setCrum() {
     if ( this.expedient) {
-      this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient ' + this.expedient.codi.toString(), name: ''} , {url: this.nombreValoracio, name: ''}];
+      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient ' + this.expedient.codi.toString(), name: [this.expedientID.toString(),this.idProfesional.toString()]} , {url: this.nombreValoracio, name: []}];
     this.global.setBreadCrum(this.breadcrum);
   }
   }

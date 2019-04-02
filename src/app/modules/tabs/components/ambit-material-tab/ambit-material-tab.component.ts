@@ -14,7 +14,7 @@ import {Persona} from "../../../files";
   ]
 })
 export class AmbitMaterialTabComponent extends CustomInput implements OnInit{
-  public breadcrum: BreadCrums [] = [{url: 'Inici' , name: ''} , {url: 'Expedient' , name: ''} , {url: 'Diagnostic' , name: ''} , {url: 'Material' , name: ''}];
+  public breadcrum: BreadCrums [] = [{url: 'Inici' , name: []} , {url: 'Expedient' , name: []} , {url: 'Diagnostic' , name: []} , {url: 'Material' , name: []}];
   ambits: Ambits = new Ambits(); /*Ambitos del modelo*/
   context: string = 'MATERIAL I INSTRUMENTAL'; /*Contexto en el que nos encontramos*/
   @Input() personsSelector: Persona [] = []; /*Selector de personas Activas*/
@@ -49,9 +49,9 @@ export class AmbitMaterialTabComponent extends CustomInput implements OnInit{
   }
   public setCrum(){
     if (this.nomDiagnostic && this.nomExpedient) {
-      this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient '+this.nomExpedient.toString(), name: ''}, {url: this.nomDiagnostic, name: ''}, {
+      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+this.nomExpedient.toString(), name: []}, {url: this.nomDiagnostic, name: []}, {
         url: 'Ambit Material',
-        name: ''
+        name: []
       }];
       this.global.setBreadCrum(this.breadcrum);
     }

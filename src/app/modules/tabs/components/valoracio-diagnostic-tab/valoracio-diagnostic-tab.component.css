@@ -10,3 +10,35 @@
 .bg-primary-80 {
   background-color: rgba(137,21,54,0.8);
 }
+.border_top{
+  border-top: black;
+  border-right: black;
+  border-left:  black;
+  border-style: solid;
+}
+.border_bot{
+  border-bottom: black;
+  border-right: black;
+  border-left:  black;
+  border-style: solid;
+}
+.rojo_1{
+  color: white;
+  background-color: rgb(137,21,54);
+  border-color:  rgb(137,21,54);
+}
+.rojo_2{
+  color: white;
+  background-color: rgb(137,51,84);
+  border-color:  rgb(137,51,84);
+}
+.rojo_3{
+  color: white;
+  background-color: rgb(137,81,104);
+  border-color:  rgb(137,81,104);
+}
+.rojo_4{
+  color: white;
+  background-color: rgb(137,101,114);
+  border-color:  rgb(137,101,114);
+}

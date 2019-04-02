@@ -22,6 +22,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
   private _innerData: Ambits; /* Data del diagnostico con toda la informacio */
   public disabledEconomia: DisabledEconomia = new DisabledEconomia(); /* Parametro especifico para desbloquear las preguntas economicas*/
   public disabledHabitatge: DisabledHabitatge = new DisabledHabitatge(); /* Parametro especifico para desbloquear las preguntas habitatge*/
+  public viewContext: boolean = false; /* parametro para mostrar los factores de contexto*/
   closeResult: string;
   cleanSelects: string = null; /* Variable per netejar Formulari*/
   preguntaEconomica: Preguntas; /* Variable para guardar la pregunta economica*/
@@ -40,18 +41,45 @@ export class FormTabComponent extends CustomInput implements OnInit {
     if (value && this.idDiagnostic) {
       this._innerData = value;
       this.reloadDiagnostico();
+      this.comprobarContext();
     }
   }
+
   /*Devolvemos el valor del diagnostico*/
   get data(): Ambits {
     return this._innerData;
   }
+
   constructor(private modalService: NgbModal,
               private tabsService: TabsFormService,
               private _router: Router) {
     super();
   }
+
   ngOnInit() {
+    this.isGlobal();
+  }
+
+  public comprobarContext() {
+    if (this.value.ambit ) {
+    for (const ambit of this.value.ambit) {
+      if (ambit.ambit.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS' && ambit.ambit.descripcio.toUpperCase() === this.contextualitzacio.toUpperCase() && ambit.contextualitzacio) {
+        if (ambit.contextualitzacio.length === 0) {
+          this.viewContext = false;
+        } else {
+          this.viewContext = true;
+        }
+      }
+    }
+  }
+}
+
+  public isGlobal() {
+  if (this.contextualitzacio) {
+    if (this.contextualitzacio.toUpperCase() === 'GLOBALITAT DEL CAS') {
+      this.viewContext = true;
+    }
+    }
   }
   /*Funcion para determinar sobre las preguntas de Economia y Habitatge , si deben estar desactivas */
   public getPreguntaDisabled(id: number) {
@@ -85,7 +113,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       }
   }
   /*Funcion para setear las preguntas de Economia y Habitatge a desactivas */
-  public set (id:number) {
+  public set (id: number) {
     switch (id) {
       case 28299:
         this.disabledHabitatge.h2 = true;
@@ -118,6 +146,9 @@ export class FormTabComponent extends CustomInput implements OnInit {
       default:
         break;
     }
+  }
+  public print(){
+    console.log("asdfsdf");
   }
   /*Funcion para setear las preguntas de Economia y Habitatge a activadas */
   public unSet (id:number) {
@@ -435,7 +466,6 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
   /*Funcion recoger la primera pregunta de cada bloque  */
   getFirstPregunta(id: number, ambit: Ambit , entorn: Entorns) {
-
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
 
     if (!amb) {console.log("Error Ambito"); return false; }

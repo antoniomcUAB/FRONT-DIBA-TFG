@@ -31,6 +31,7 @@ export class TabsFormService extends GlobalService {
       map(data => {
         for (let cont of data.ambits) {
           let exit = false;
+          let exit2 = false;
           for (let context of cont.factors_context) {
             if (!context.fctots) {
               context.fctots = null;
@@ -38,6 +39,10 @@ export class TabsFormService extends GlobalService {
             if (context.gravetat.descripcio !== 'Protecció' && !exit) {
               context.primera = 'Si';
               exit = true;
+            }
+            if (context.infants && !exit2) {
+              context.nen = 'Si';
+              exit2 = true;
             }
           }
         }

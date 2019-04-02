@@ -17,7 +17,7 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
   ]
 })
 export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnInit {
-  public breadcrum: BreadCrums [] = [{url: 'Inici' , name: ''} , {url: 'Expedient' , name: ''} , {url: 'Diagnostic' , name: ''} , {url: 'Valoracio del diagnostic' , name: ''}];
+  public breadcrum: BreadCrums [] = [{url: 'Inici' , name: []} , {url: 'Expedient' , name: []} , {url: 'Diagnostic' , name: []} , {url: 'Valoracio del diagnostic' , name: []}];
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output() tabActivated: EventEmitter <void> = new EventEmitter();
@@ -115,16 +115,16 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
       console.log(err);
     });
   }
-  public getFilterRiscos(evaluacion:Evaluacions) {
+  public getFilterRiscos(evaluacion: Evaluacions) {
     return this.riscos.filter(data => {
      return data.id !== evaluacion.risc.id;
     });
   }
   public setCrum(){
-    if(this.nomDiagnostic && this.nomExpedient) {
-      this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient '+ this.nomExpedient.toString(), name: ''}, {url: this.nomDiagnostic, name: ''}, {
+    if (this.nomDiagnostic && this.nomExpedient) {
+      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.nomExpedient.toString(), name: []}, {url: this.nomDiagnostic, name: []}, {
         url: 'Valoracion Final',
-        name: ''
+        name: []
       }];
       this.global.setBreadCrum(this.breadcrum);
     }

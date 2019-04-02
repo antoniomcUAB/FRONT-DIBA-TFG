@@ -535,7 +535,7 @@ export class FileDetailComponent {
   }
   public setCrum() {
     if (this.expedient) {
-      this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient ' + this.expedient.codi, name: ''}];
+    this.breadcrum = [{url: 'Inici', name : []}, {url: 'Expedient ' + this.expedient.codi, name: [ this.id.toString(), this.idProfessional.toString()]}];
     }
   }
 }

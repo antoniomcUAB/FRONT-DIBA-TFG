@@ -96,8 +96,8 @@
       <div class="navbar-collapse collapse">
           <ng-template [ngIf]="breadcrum">
             <ng-template ngFor [ngForOf]="breadcrum" let-bread let-c="index">
-              <li class="float-left list-unstyled m-2"   *ngIf="c===0" >{{bread.url}} <b> ></b> </li>
-              <li class="float-left list-unstyled m-2" *ngIf="c===1">{{bread.url}}  <b> ></b> </li>
+              <li class="float-left list-unstyled m-2" [routerLink]="['/']"  *ngIf="c===0" ><a>{{bread.url}}</a> <b> ></b> </li>
+              <li class="float-left list-unstyled m-2" [routerLink]="['/file-detail', {'id':bread.name[0],'idProfessional':bread.name[1]}]" *ngIf="c===1"><a>{{bread.url}}</a>  <b> ></b> </li>
               <li class="float-left list-unstyled m-2"  *ngIf="c===2" >Diagnostic DSDIBA- {{bread.url |  date:'dd/MM/yyyy'}}  <b> ></b> </li>
               <li class="float-left list-unstyled m-2" *ngIf="c===3">{{bread.url}}</li>
             </ng-template>

@@ -14,7 +14,7 @@ import {Persona} from "../../../files";
   ]
 })
 export class GlobalitatTabComponent extends CustomInput implements OnInit {
-  public breadcrum: BreadCrums [] = [{url: 'Inici' , name: ''} , {url: 'Expedient' , name: ''} , {url: 'Diagnostic' , name: ''} , {url: 'Globalitat del cas' , name: ''}];
+  public breadcrum: BreadCrums [] = [{url: 'Inici' , name: []} , {url: 'Expedient' , name: []} , {url: 'Diagnostic' , name: []} , {url: 'Globalitat del cas' , name: []}];
   ambits: Ambits = new Ambits();
   context: string = 'Globalitat del cas';
   @Input() personsSelector: Persona [] = [];
@@ -53,9 +53,9 @@ export class GlobalitatTabComponent extends CustomInput implements OnInit {
   }
   public setCrum(){
     if(this.nomDiagnostic && this.nomExpedient) {
-      this.breadcrum = [{url: 'Inici', name: ''}, {url: 'Expedient '+ this.nomExpedient.toString(), name: ''}, {url: this.nomDiagnostic, name: ''}, {
+      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.nomExpedient.toString(), name: []}, {url: this.nomDiagnostic, name: []}, {
         url: 'Globalitat del cas',
-        name: ''
+        name: []
       }];
       this.global.setBreadCrum(this.breadcrum);
     }

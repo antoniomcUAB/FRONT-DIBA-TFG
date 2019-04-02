@@ -15,6 +15,7 @@ export class Factor {
 }
 export class FactorsContext {
   primera:string;
+  nen:string;
   descripcio: string;
   fctots: string;
   infants: boolean;
@@ -143,7 +144,7 @@ export class ArrayBreadCrums {
 }
 export class BreadCrums{
   url: string;
-  name: string;
+  name: string[]=[];
 }
 
 
