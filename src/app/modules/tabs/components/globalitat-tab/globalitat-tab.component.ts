@@ -19,6 +19,8 @@ export class GlobalitatTabComponent extends CustomInput implements OnInit {
   context: string = 'Globalitat del cas';
   @Input() personsSelector: Persona [] = [];
   @Input() idDiagnostic: number;
+  @Input() idExpedient:string;
+  @Input() idProfessional:string;
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output() tabActivated: EventEmitter <void> = new EventEmitter();
@@ -53,7 +55,7 @@ export class GlobalitatTabComponent extends CustomInput implements OnInit {
   }
   public setCrum(){
     if(this.nomDiagnostic && this.nomExpedient) {
-      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.nomExpedient.toString(), name: []}, {url: this.nomDiagnostic, name: []}, {
+      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.nomExpedient.toString(), name: [this.idExpedient,this.idProfessional]}, {url: this.nomDiagnostic, name: []}, {
         url: 'Globalitat del cas',
         name: []
       }];

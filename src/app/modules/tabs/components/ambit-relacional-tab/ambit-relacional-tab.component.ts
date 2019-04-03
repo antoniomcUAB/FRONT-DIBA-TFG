@@ -22,6 +22,8 @@ export class AmbitRelacionalTabComponent extends CustomInput implements OnInit{
   @Output () endForm: EventEmitter<boolean> = new EventEmitter(); /*Objeto para decidir que entornos estan Activados*/
   @Output () before: EventEmitter<boolean> = new EventEmitter(); /*Emite cuando se quiere cambiar de Tab*/
   @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional(); /*Emite cuando se quiere volver atras*/
+  @Input() idExpedient:string;
+  @Input() idProfessional:string;
   @Input() nomExpedient:string;
   @Input() nomDiagnostic:string;
 
@@ -49,7 +51,7 @@ export class AmbitRelacionalTabComponent extends CustomInput implements OnInit{
   }
   public setCrum(){
     if(this.nomDiagnostic && this.nomExpedient) {
-      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient ' + this.nomExpedient.toString(), name: []}, {url: this.nomDiagnostic, name: []}, {
+      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient ' + this.nomExpedient.toString(), name: [this.idExpedient,this.idProfessional]}, {url: this.nomDiagnostic, name: []}, {
         url: 'Ambit Relacional',
         name: []
       }];

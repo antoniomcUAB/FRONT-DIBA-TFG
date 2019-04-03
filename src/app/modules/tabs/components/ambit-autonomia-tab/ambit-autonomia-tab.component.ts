@@ -22,6 +22,8 @@ export class AmbitAutonomiaTabComponent extends CustomInput implements OnInit{
   @Input() idDiagnostic: number; /* El id del diagnostico*/
   @Input() nomExpedient:string;
   @Input() nomDiagnostic:string;
+  @Input() idExpedient:string;
+  @Input() idProfessional:string;
   @Output () endForm: EventEmitter<boolean> = new EventEmitter(); /*Emitimos ccuando quieran pasar a la siguiente pestaña*/
   @Output () before: EventEmitter<boolean> = new EventEmitter(); /*Emitimos ccuando quieran volver a la pestaña anterior*/
   @Output () active: EventEmitter<boolean> = new EventEmitter(); /*Emitimos cuando se active el tab*/
@@ -56,7 +58,7 @@ export class AmbitAutonomiaTabComponent extends CustomInput implements OnInit{
   }
   public setCrum(){
     if(this.nomDiagnostic && this.nomExpedient) {
-      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.nomExpedient.toString(), name: []}, {url: this.nomDiagnostic, name: []}, {
+      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.nomExpedient.toString(), name: [this.idExpedient,this.idProfessional ]}, {url: this.nomDiagnostic, name: []}, {
         url: 'Ambit Autonomia',
         name: []
       }];

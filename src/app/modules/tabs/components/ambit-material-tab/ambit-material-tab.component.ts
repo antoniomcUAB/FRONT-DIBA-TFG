@@ -21,6 +21,8 @@ export class AmbitMaterialTabComponent extends CustomInput implements OnInit{
   @Input() nomExpedient:string;
   @Input() nomDiagnostic:string;
   @Input() idDiagnostic: number; /*Id del diagnostico actual*/
+  @Input() idExpedient:string;
+  @Input() idProfessional:string;
   @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial(); /*Objeto para decidir que entornos estan Activados*/
   @Output () endForm: EventEmitter<boolean> = new EventEmitter(); /*Emite cuando se quiere cambiar de Tab*/
   @Output () before: EventEmitter<boolean> = new EventEmitter(); /*Emite cuando se quiere volver atras*/
@@ -49,7 +51,7 @@ export class AmbitMaterialTabComponent extends CustomInput implements OnInit{
   }
   public setCrum(){
     if (this.nomDiagnostic && this.nomExpedient) {
-      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+this.nomExpedient.toString(), name: []}, {url: this.nomDiagnostic, name: []}, {
+      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+this.nomExpedient.toString(), name: [this.idExpedient,this.idProfessional]}, {url: this.nomDiagnostic, name: []}, {
         url: 'Ambit Material',
         name: []
       }];

@@ -13,7 +13,7 @@ import {GlobalService} from "../../../shared";
   templateUrl: './observations.component.html',
   styleUrls: ['./observations.component.scss']
 })
-export class ObservationsComponent implements OnInit{
+export class ObservationsComponent implements OnInit {
   public breadcrum: BreadCrums [] = [];
   public id: number; /* Id del Diagnostico*/
   public exp: number; /* Id del Expediente*/
@@ -44,7 +44,7 @@ export class ObservationsComponent implements OnInit{
   }
   public setCrum() {
     if (this.exp && this.date) {
-      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.codi.toString(), name: []}, {url: this.date, name: []}, {
+      this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.codi.toString(), name: [this.exp.toString(),this.professionalID.toString()]}, {url: this.date, name: []}, {
         url: 'Resum valoració',
         name: []
       }];
