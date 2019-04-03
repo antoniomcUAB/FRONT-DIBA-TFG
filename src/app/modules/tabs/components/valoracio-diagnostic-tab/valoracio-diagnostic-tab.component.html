@@ -45,7 +45,7 @@
                   <ng-template ngFor [ngForOf]="value.valoracio?.evaluacions" let-evaluacio let-v="index">
                     <ng-template [ngIf]="evaluacio && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
                       <tr>
-                        <th class="bg-primary text-white"    *ngIf="v===0"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
+                        <th class="bg-primary text-white"    *ngIf="v===0 && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'AUTONOMIA'"> Autonomia Funcional </th>
                         <th class="bg-primary-80 text-white" *ngIf="v===1"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
                         <th class="bg-primary-60 text-white" *ngIf="v===2"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
                         <th class="bg-primary-40 text-white" *ngIf="v===3"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
