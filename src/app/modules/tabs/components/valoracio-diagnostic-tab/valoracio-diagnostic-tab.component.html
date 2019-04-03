@@ -1,4 +1,8 @@
-
+<section id="print" class="row">
+  <div class="col-xl-12">
+    <button type="button" class="float-right btn btn-outline-primary doNotPrint" (click)="onPrint();"><i class="fa fa-file-pdf-o"></i> {{ "RESUMEN.pdf" | translate }}</button>
+  </div>
+</section>
 <section *ngIf="value">
   <div class="row m-3" >
     <ng-container>

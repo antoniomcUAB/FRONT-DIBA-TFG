@@ -109,6 +109,9 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
     }, 100);
 
   }
+  onPrint() {
+    window.print();
+  }
   public getRiscos() {
     this.tabsService.getRiscos().subscribe((result) => {
      this.riscos = result;
