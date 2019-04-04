@@ -98,9 +98,13 @@ export class HomeComponent implements OnInit {
     }, {
       name: 'diagnosticsValidats',
       title: this._translateService.instant('TABLE.numberDiagnostic'),
+      sortable: false,
+      filterable: false
     }, {
       name: 'diagnosticsPendents',
       title: this._translateService.instant('TABLE.diagnosticsPendents'),
+      sortable: false,
+      filterable: false
     }, {
       name: 'estat',
       title: this._translateService.instant('TABLE.expedient'),
@@ -141,9 +145,13 @@ export class HomeComponent implements OnInit {
     }, {
       name: 'diagnosticsValidats',
       title: this._translateService.instant('TABLE.numberDiagnostic'),
+      sortable: false,
+      filterable: false
     }, {
       name: 'diagnosticsPendents',
       title: this._translateService.instant('TABLE.diagnosticsPendents'),
+      sortable: false,
+      filterable: false
     }, {
       name: 'estat',
       title: this._translateService.instant('TABLE.expedient'),
