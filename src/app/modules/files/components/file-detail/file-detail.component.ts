@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilesDetailService } from '../../services/file-detail.service';
 import {
   ChartAmbit,
   ChartGroup,
   Diagnosis,
-  Evaluacions,
   Expedient,
   Model,
   Persona,
@@ -20,6 +19,13 @@ import { Professional } from "../../../home/models/professional";
 import {BreadCrums} from "../../../tabs/models/tab-class-form";
 import {GlobalService} from "../../../../shared";
 
+/* import { NgbDatepickerConfig,
+         NgbCalendar,
+         NgbDate,
+         NgbDatepickerI18n,
+         NgbDateStruct,
+         NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';*/
+
 export const colorVulnerabilitat = '#66bb6a';
 export const colorRisc = '#ffee58';
 export const colorAltRisc = '#ef5350';
@@ -28,11 +34,94 @@ export const colors = [
   '#ffee58', '#66bb6a', '#ef5350', '#ffee58', '#ef5350', '#868e96'
 ];
 
+/*
+const I18N_VALUES = {
+  'es': {
+    weekdays: ['Dl','Dt','Dc','Dj','Dv','Ds','Dg'],
+    months: ['Gen','Feb','Mar','Abr','Mai','Jun','Jul','Ago','Set','Oct','Nov','Des'],
+  }
+};
+
+@Injectable()
+export class I18n {
+  language = 'es';
+}
+
+@Injectable()
+export class CustomDatepickerI18n extends NgbDatepickerI18n {
+
+  constructor(private _i18n: I18n) {
+    super();
+  }
+
+  getWeekdayShortName(weekday: number): string {
+    return I18N_VALUES[this._i18n.language].weekdays[weekday - 1];
+  }
+  getMonthShortName(month: number): string {
+    return I18N_VALUES[this._i18n.language].months[month - 1];
+  }
+  getMonthFullName(month: number): string {
+    return this.getMonthShortName(month);
+  }
+
+  getDayAriaLabel(date: NgbDateStruct): string {
+    return `${date.day}/${date.month}/${date.year}`;
+  }
+}
+
+function padNumber(value: number) {
+  if (isNumber(value)) {
+    return `0${value}`.slice(-2);
+  } else {
+    return "";
+  }
+}
+
+function isNumber(value: any): boolean {
+  return !isNaN(toInteger(value));
+}
+
+function toInteger(value: any): number {
+  return parseInt(`${value}`, 10);
+}
+
+
+@Injectable()
+export class NgbDateFRParserFormatter extends NgbDateParserFormatter {
+  parse(value: string): NgbDateStruct {
+    if (value) {
+      const dateParts = value.trim().split('/');
+      if (dateParts.length === 1 && isNumber(dateParts[0])) {
+        return {year: toInteger(dateParts[0]), month: null, day: null};
+      } else if (dateParts.length === 2 && isNumber(dateParts[0]) && isNumber(dateParts[1])) {
+        return {year: toInteger(dateParts[1]), month: toInteger(dateParts[0]), day: null};
+      } else if (dateParts.length === 3 && isNumber(dateParts[0]) && isNumber(dateParts[1]) && isNumber(dateParts[2])) {
+        return {year: toInteger(dateParts[2]), month: toInteger(dateParts[1]), day: toInteger(dateParts[0])};
+      }
+    }
+    return null;
+  }
+
+  format(date: NgbDateStruct): string {
+    let stringDate = "";
+    if (date) {
+      stringDate += isNumber(date.day) ? padNumber(date.day) + "/" : "";
+      stringDate += isNumber(date.month) ? padNumber(date.month) + "/" : "";
+      stringDate += date.year;
+    }
+    return stringDate;
+  }
+} */
+
 @Component({
   selector: 'app-file-detail',
   templateUrl: './file-detail.component.html',
-  styleUrls: ['./file-detail.component.css']
+  styleUrls: ['./file-detail.component.css'],
+  providers: [] /* [NgbDatepickerConfig, I18n,
+    {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n},
+    {provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter}] */
 })
+
 export class FileDetailComponent {
   model: Model;
   professional: Professional;
@@ -53,9 +142,13 @@ export class FileDetailComponent {
   personActives: Persona[] = [];
   observations: string;
   personType: TipusPersona;
-  toDate = new Date();
   dateUnsuscription: number;
   isCheckPersonRef = false;
+
+  toDate = new Date();
+  day;
+  month;
+  year;
 
   /** Tables options **/
   options = new TableListOptions();
@@ -105,7 +198,20 @@ export class FileDetailComponent {
               private _service: FilesDetailService,
               private _translateService: TranslateService,
               private global: GlobalService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal/*,
+              private config: NgbDatepickerConfig,
+              private calendar: NgbCalendar*/) {
+
+    /* Calendar */
+    /* this.toDate = this.calendar.getToday();
+    this.day = this.calendar.getToday().day;
+    this.month = this.calendar.getToday().month;
+    this.year = this.calendar.getToday().year;
+
+    config.minDate = {year: 1970, month: 1, day: 1};
+    config.maxDate = {year: this.year, month: this.month, day: this.day};
+    config.outsideDays = 'hidden';
+    config.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6; */
 
     this.id = this._route.snapshot.params['id'];
     this.idProfessional = this._route.snapshot.params['idProfessional'];
@@ -522,8 +628,10 @@ export class FileDetailComponent {
   }
 
   changeRef(event) {
+    this.isCheckPersonRef = false;
     if (event.target.checked === true) {
       this.isCheckPersonRef = true;
+      this.member.tipusPersona = {id: 19565, descripcio: 'Persona Principal'};
     } else {
       this.isCheckPersonRef = false;
     }
