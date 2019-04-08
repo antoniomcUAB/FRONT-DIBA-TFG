@@ -23,6 +23,15 @@ export class AmbitMaterialTabComponent extends CustomInput implements OnInit{
   @Input() idDiagnostic: number; /*Id del diagnostico actual*/
   @Input() idExpedient:string;
   @Input() idProfessional:string;
+  public versioModel:number;
+  /*Esperamos a que llegue el valor del diagnostico*/
+  @Input()
+  set versio(id:number) {
+    if (id) {
+      this.versioModel = id;
+      this.reloadData();
+    }
+  }
   @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial(); /*Objeto para decidir que entornos estan Activados*/
   @Output () endForm: EventEmitter<boolean> = new EventEmitter(); /*Emite cuando se quiere cambiar de Tab*/
   @Output () before: EventEmitter<boolean> = new EventEmitter(); /*Emite cuando se quiere volver atras*/
@@ -31,13 +40,12 @@ export class AmbitMaterialTabComponent extends CustomInput implements OnInit{
   constructor(private _service: TabsFormService,
               private global: GlobalService) {
     super();
-    this.reloadData();
   }
 
 
   /*Funcion que llama al servicio de recargar el modelo*/
   reloadData() {
-    this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
+    this._service.getFilesFormModel(this.versioModel.toString()).subscribe((tab: Ambits ) => {
       this.ambits = tab;
     });
   }

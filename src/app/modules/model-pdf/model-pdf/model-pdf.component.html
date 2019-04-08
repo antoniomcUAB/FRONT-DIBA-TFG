@@ -59,12 +59,11 @@
                           {{ ambit.ambits.toUpperCase() }}
                         </div>
 
-                        <div class="col-10">
+                        <div class="col-10" >
                           <ng-template ngFor
                                        [ngForOf]="ambit.situacionSocial"
                                        let-situacionSocial>
-
-                            <div class="row">
+                            <div class="row" >
 
                               <div class="col-2 d-flex justify-content-center flex-column border border-left-0">{{ situacionSocial.descripcio }}</div>
                               <div class="col-2 d-flex justify-content-center flex-column border border-left-0">{{ situacionSocial.definicio }}</div>

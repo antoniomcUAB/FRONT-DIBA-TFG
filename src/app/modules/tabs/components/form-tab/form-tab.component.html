@@ -13,7 +13,6 @@
   <div class="modal-header">
     <h4 class="modal-title" id=""><span class="text-primary">La família/unitat conviència té dificultats per:</span></h4>
   </div>
-
   <form *ngIf="preguntaEconomica">
     <div class="modal-body">
       <div class="form-group col-xl-12">
@@ -69,7 +68,7 @@
                 <label *ngIf="i === 0 " class="col-12" for="ssb00" >{{ "TABLE.basicSocialSituation" | translate }} </label>
                 <label *ngIf="i !== 0 "class="desaparece">{{ "TABLE.basicSocialSituation" | translate }}</label>
                 <div *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')" class="position-relative">
-                  <input type="text" class="form-control " [value]= "pregunta.social " disabled  >
+                  <a href="/dsdiba/model-pdf#{{pregunta.id}}"> <input type="text" class="form-control " [value]= "pregunta.social " disabled  ></a>
                   <i class= "fa fa-question-circle position-absolute top-right" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.social" container="body"></i>
                 </div>
                 </div>
@@ -102,7 +101,7 @@
                     <label class="custom-control custom-checkbox p-0 pl-2 apply">
                       <input type="checkbox"
                              class="custom-control-input position-relative"
-                             [disabled]="getPreguntaDisabled(pregunta.id)"
+                             [disabled]="getPreguntaDisabled(pregunta.social)"
                              [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)"
                              (click)=" newPregunta(pregunta.social , pregunta.id , ambit, entorn);"
                              name="aplica{{e}}{{i}}">

@@ -24,6 +24,15 @@ export class AmbitAutonomiaTabComponent extends CustomInput implements OnInit{
   @Input() nomDiagnostic:string;
   @Input() idExpedient:string;
   @Input() idProfessional:string;
+  public versioModel:number;
+  /*Esperamos a que llegue el valor del diagnostico*/
+  @Input()
+  set versio(id:number) {
+    if (id) {
+      this.versioModel = id;
+      this.reloadData();
+    }
+  }
   @Output () endForm: EventEmitter<boolean> = new EventEmitter(); /*Emitimos ccuando quieran pasar a la siguiente pestaña*/
   @Output () before: EventEmitter<boolean> = new EventEmitter(); /*Emitimos ccuando quieran volver a la pestaña anterior*/
   @Output () active: EventEmitter<boolean> = new EventEmitter(); /*Emitimos cuando se active el tab*/
@@ -32,9 +41,7 @@ export class AmbitAutonomiaTabComponent extends CustomInput implements OnInit{
   constructor(private _service: TabsFormService,
               private global: GlobalService) {
     super();
-    this.reloadData();
     this.activate();
-
   }
 
 
@@ -44,9 +51,9 @@ export class AmbitAutonomiaTabComponent extends CustomInput implements OnInit{
   }
   /*Recargamos el modelo*/
   reloadData() {
-    this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
-      this.ambits = tab;
-    });
+      this._service.getFilesFormModel(this.versioModel.toString()).subscribe((tab: Ambits) => {
+        this.ambits = tab;
+      });
   }
   /*Emitimos el before*/
   public emitBefore() {

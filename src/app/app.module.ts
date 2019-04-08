@@ -13,7 +13,7 @@ import {
   AccordionLinkDirective,
   AccordionDirective } from './core';
 import {AuthModule, jwtOptionsFactory, TokenService} from './modules/auth';
-import {RouterModule} from '@angular/router';
+import {ExtraOptions, RouterModule} from '@angular/router';
 import {AppRoutes} from './app.routing';
 import {TranslateLoaderFactory} from './app-translate';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -22,6 +22,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {HomeService} from "./modules/home/services/home.service";
+
+const routerOptions: ExtraOptions = {
+  useHash: false,
+  anchorScrolling: 'enabled',
+};
 
 @NgModule({
   declarations: [
@@ -55,7 +60,7 @@ import {HomeService} from "./modules/home/services/home.service";
         useFactory: TranslateLoaderFactory
       }
     }),
-    RouterModule.forRoot(AppRoutes)
+    RouterModule.forRoot(AppRoutes , routerOptions)
   ],
   providers: [HomeService],
   bootstrap: [AppComponent]

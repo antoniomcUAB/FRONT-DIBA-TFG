@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Injectable, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Entorns, Ambits, EnvironmentMaterial, EnvironmentRelacional, SelectorGravetat, FactorsContext, DisabledEconomia, DisabledHabitatge,} from '../../models/tab-class-form';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
@@ -6,7 +6,7 @@ import {CustomInput} from "../../../../shared";
 import {TabsFormService} from '../../services/tabsForm.service';
 import {Contextualitzacio, Frequencia, Gravetat, Preguntas, Ambit, Entorn, Diagnosis, FactorEconomic} from "../../models/diagnostic";
 import {Persona} from "../../../files";
-import {Router} from "@angular/router";
+import {ExtraOptions, Router} from "@angular/router";
 import {Observable, Subject} from "rxjs";
 
 @Component({
@@ -82,30 +82,30 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
   }
   /*Funcion para determinar sobre las preguntas de Economia y Habitatge , si deben estar desactivas */
-  public getPreguntaDisabled(id: number) {
-      switch (id) {
-        case 28299:
+  public getPreguntaDisabled(name: string) {
+      switch (name) {
+        case 'Manca d\'habitatge estable (H.1)':
           return this.disabledHabitatge.h1;
           break;
-        case 28306:
+        case 'Habitatge deficient (H.2)':
           return this.disabledHabitatge.h2;
           break;
-        case 28312:
+        case 'Habitatge insegur (H.3)':
          return this.disabledHabitatge.h3;
           break;
-        case 28323:
+        case 'Habitatge massificat (H.4)':
           return this.disabledHabitatge.h4;
           break;
-        case 28333:
+        case 'Risc de pérdua o manca serveis/subministraments (H.5)':
           return this.disabledHabitatge.h5;
           break;
-        case 28345:
+        case 'Sense ingressos estables (E.1)':
           return this.disabledEconomia.e1;
           break;
-        case 28351:
+        case 'Ingressos insuficients (E.2)':
           return this.disabledEconomia.e2;
           break;
-        case 28359:
+        case 'Administració deficient dels ingressos (E.3)':
           return this.disabledEconomia.e3;
           break;
         default:
@@ -113,72 +113,69 @@ export class FormTabComponent extends CustomInput implements OnInit {
       }
   }
   /*Funcion para setear las preguntas de Economia y Habitatge a desactivas */
-  public set (id: number) {
-    switch (id) {
-      case 28299:
+  public set (name: string) {
+    switch (name) {
+      case 'Manca d\'habitatge estable (H.1)':
         this.disabledHabitatge.h2 = true;
         this.disabledHabitatge.h3 = true;
         this.disabledHabitatge.h4 = true;
         this.disabledHabitatge.h5 = true;
         break;
-      case 28306:
+      case 'Habitatge deficient (H.2)':
         this.disabledHabitatge.h1 = true;
         break;
-      case 28312:
+      case 'Habitatge insegur (H.3)':
         this.disabledHabitatge.h1 = true;
         break;
-      case 28323:
+      case 'Habitatge massificat (H.4)':
         this.disabledHabitatge.h1 = true;
         break;
-      case 28333:
+      case 'Risc de pérdua o manca serveis/subministraments (H.5)':
         this.disabledHabitatge.h1 = true;
         break;
-      case 28345:
+      case 'Sense ingressos estables (E.1)':
         this.disabledEconomia.e2 = true;
         this.disabledEconomia.e3 = true;
         break;
-      case 28351:
+      case 'Ingressos insuficients (E.2)':
         this.disabledEconomia.e1 = true;
         break;
-      case 28359:
+      case 'Administració deficient dels ingressos (E.3)':
         this.disabledEconomia.e1 = true;
         break;
       default:
         break;
     }
   }
-  public print(){
-    console.log("asdfsdf");
-  }
   /*Funcion para setear las preguntas de Economia y Habitatge a activadas */
-  public unSet (id:number) {
-    switch (id) {
-      case 28299:
+  public unSet (name: string) {
+    switch (name) {
+      case 'Manca d\'habitatge estable (H.1)':
         this.disabledHabitatge.h2 = false;
         this.disabledHabitatge.h3 = false;
         this.disabledHabitatge.h4 = false;
         this.disabledHabitatge.h5 = false;
         break;
-      case 28306:
+      case 'Habitatge deficient (H.2)':
         this.disabledHabitatge.h1 = false;
         break;
-      case 28312:
+      case 'Habitatge insegur (H.3)':
         this.disabledHabitatge.h1 = false;
         break;
-      case 28323:
+      case 'Habitatge massificat (H.4)':
         this.disabledHabitatge.h1 = false;
         break;
-      case 28333:
+      case 'Risc de pérdua o manca serveis/subministraments (H.5)':
         this.disabledHabitatge.h1 = false;
         break;
-      case 28345:
+      case 'Sense ingressos estables (E.1)':
         this.disabledEconomia.e2 = false;
         this.disabledEconomia.e3 = false;
         break;
-      case 28351:
+      case 'Ingressos insuficients (E.2)':
         this.disabledEconomia.e1 = false;
         break;
-      case 28359:
+      case 'Administració deficient dels ingressos (E.3)':
         this.disabledEconomia.e1 = false;
         break;
       default:
@@ -242,7 +239,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         console.log(err);
       });
     } else {
-      this.unSet(this.preguntaEconomica.situacioSocial.id);
+      this.unSet(this.preguntaEconomica.situacioSocial.social);
       this.tabsService.DeletePregunta(this.preguntaEconomica.id).subscribe(() => {
         this.reloadDiagnostico();
       }, (err) => {
@@ -359,11 +356,10 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
   /*Funcion para añadir pregunta al diagnostico */
   public newPregunta(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns): Observable<Preguntas> {
-
     const subject = new Subject<Preguntas>();
     const preguntas = this.getPreguntas(idSocial, ambit, entorn);
     if (preguntas && preguntas.length >= 1) {
-      this.unSet(idSocial);
+      this.unSet(pregunta);
       /* Si hay entorno y ya existe eliminala */
       this.tabsService.cleanPreguntes(this.idDiagnostic, idSocial).subscribe(() => {
         this.reloadDiagnostico();
@@ -373,7 +369,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         console.log(err);
       });
     } else {
-      this.set(idSocial);
+      this.set(pregunta);
       /* Si hay entorno y no existe llama a back , añadelo al objeto*/
       this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta, idSocial), this.idDiagnostic).subscribe((result) => {
         for (let i = 0; i < this.value.ambit.length; i++) {

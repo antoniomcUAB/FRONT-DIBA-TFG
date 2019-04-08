@@ -122,9 +122,9 @@
                   <ng-template ngFor [ngForOf]="evaluations" let-evaluacio let-v="index">
                     <ng-template [ngIf]="evaluacio && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
                       <tr>
-                        <th class="bg-primary bg-primary-exact text-white"  *ngIf="v===0"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
-                        <th class="bg-primary-80 text-white" *ngIf="v===1"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
-                        <th class="bg-primary-60 text-white" *ngIf="v===2"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
+                        <th class="bg-primary bg-primary-exact text-white"    *ngIf="v===0 && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'AUTONOMIA'"> Autonomia Funcional </th>
+                        <th class="bg-primary-80 text-white" *ngIf="v===1 && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL'">Material i instrumental</th>
+                        <th class="bg-primary-60 text-white" *ngIf="v===2&& evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'RELACIONAL'"> Relacional</th>
                         <th class="bg-primary-40 text-white" *ngIf="v===3"> Risc {{evaluacio?.ambit?.ambit?.descripcio.toLocaleLowerCase()}}</th>
 
                         <th class="text-center" [ngClass]="{'warning amarillo' : evaluacio?.risc?.descripcio.toUpperCase() === 'RISC',
@@ -306,8 +306,8 @@
               <div class="col-xl-6">
                 <table class="table table-bordered">
                   <thead class="table-active">
-                  <th>{{ "OBS.factor" | translate }}</th>
-                  <th class="text-center">{{ "OBS.person" | translate }}</th>
+                  <th class="bg-primary-exact">{{ "OBS.factor" | translate }}</th>
+                  <th class="text-center bg-primary-exact">{{ "OBS.person" | translate }}</th>
                   </thead>
                   <tbody>
                   <ng-container *ngIf="global.contextualitzacio?.length > 0" >

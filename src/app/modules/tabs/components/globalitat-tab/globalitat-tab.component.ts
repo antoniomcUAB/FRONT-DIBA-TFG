@@ -21,6 +21,15 @@ export class GlobalitatTabComponent extends CustomInput implements OnInit {
   @Input() idDiagnostic: number;
   @Input() idExpedient:string;
   @Input() idProfessional:string;
+  public versioModel:number;
+  /*Esperamos a que llegue el valor del diagnostico*/
+  @Input()
+  set versio(id:number) {
+    if (id) {
+      this.versioModel = id;
+      this.reloadData();
+    }
+  }
   @Output () endForm: EventEmitter<boolean> = new EventEmitter();
   @Output () before: EventEmitter<boolean> = new EventEmitter();
   @Output() tabActivated: EventEmitter <void> = new EventEmitter();
@@ -30,7 +39,6 @@ export class GlobalitatTabComponent extends CustomInput implements OnInit {
   constructor(private _service: TabsFormService,
               private global: GlobalService) {
     super();
-    this.reloadData();
     this.setCrum();
     global.setBreadCrum(this.breadcrum);
   }
@@ -43,7 +51,7 @@ export class GlobalitatTabComponent extends CustomInput implements OnInit {
 
 
   reloadData() {
-    this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
+    this._service.getFilesFormModel(this.versioModel.toString()).subscribe((tab: Ambits ) => {
       this.ambits = tab;
     });
   }

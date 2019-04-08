@@ -26,8 +26,8 @@ export class TabsFormService extends GlobalService {
   constructor(public _http: HttpClient) {
     super();
   }
-  getFilesFormModel( ): Observable<Ambits> {
-    return this._http.get<Ambits>(`${this.apiURL}/dsdiba/api/model`).pipe(
+  getFilesFormModel( versio?:string ): Observable<Ambits> {
+    return this._http.get<Ambits>(`${this.apiURL}/dsdiba/api/model/${versio}`).pipe(
       map(data => {
         for (let cont of data.ambits) {
           let exit = false;

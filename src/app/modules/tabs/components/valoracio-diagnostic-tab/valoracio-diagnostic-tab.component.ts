@@ -25,6 +25,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   @Input() nomDiagnostic: string;
   @Input() idDiagnostic: number;
   @Input() idProfessional: string;
+  @Input() versioModel: number;
   @Input()
   get diagnostico():any {
     return this.value;

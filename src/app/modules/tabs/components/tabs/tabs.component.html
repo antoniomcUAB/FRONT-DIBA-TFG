@@ -29,7 +29,8 @@
                                 [nomDiagnostic]="nombreValoracio"
                                [nomExpedient]="expedient.codi"
                                 [idProfessional]="idProfesional"
-                               [idExpedient]="expedientID">
+                               [idExpedient]="expedientID"
+                                [versio]="diagnostico.versioModel.id">
       </app-ambit-autonomia-tab>
 
     </ng-template>
@@ -46,8 +47,18 @@
                       (tabActivated)="tabsActivate.tabAmbitMaterialActivate = false">
       </app-check-form>
 
-      <app-ambit-material-tab *ngIf="stay"  (endForm)="enableNext('tab-preventchange3')" (before)="beforeTab()" [groupMaterial] ="entornsMaterial" [(ngModel)]="diagnostico" [personsSelector]="personActives" [idDiagnostic]="diagnosisID" [nomDiagnostic]="nombreValoracio" [nomExpedient]="expedient.codi"   [idProfessional]="idProfesional"
-                              [idExpedient]="expedientID">
+      <app-ambit-material-tab *ngIf="stay"
+                              (endForm)="enableNext('tab-preventchange3')"
+                              (before)="beforeTab()"
+                              [groupMaterial] ="entornsMaterial"
+                              [(ngModel)]="diagnostico"
+                              [personsSelector]="personActives"
+                              [idDiagnostic]="diagnosisID"
+                              [nomDiagnostic]="nombreValoracio"
+                              [nomExpedient]="expedient.codi"
+                              [idProfessional]="idProfesional"
+                              [idExpedient]="expedientID"
+                              [versio]="diagnostico.versioModel.id">
       </app-ambit-material-tab>
 
     </ng-template>
@@ -60,7 +71,7 @@
       </app-check-form>
 
       <app-ambit-relacional-tab *ngIf="stay"  (endForm)="enableNext('tab-preventchange4')" (before)="beforeTab()" [groupRelacional] ="entornsRelacional" [(ngModel)]="diagnostico" [personsSelector]="personActives" [idDiagnostic]="diagnosisID" [nomDiagnostic]="nombreValoracio" [nomExpedient]="expedient.codi"   [idProfessional]="idProfesional"
-                                [idExpedient]="expedientID">
+                                [idExpedient]="expedientID" [versio]="diagnostico.versioModel.id">
       </app-ambit-relacional-tab>
     </ng-template>
   </ngb-tab>
@@ -69,16 +80,15 @@
     <ng-template ngbTabContent>
 
       <app-globalitat-tab   (endForm)="enableNext('tab-preventchange5')" (before)="beforeTab()" (tabActivated)="tabsActivate.tabGlobalitatCasActivate = false" [(ngModel)]="diagnostico" [personsSelector]="personActives" [idDiagnostic]="diagnosisID"[nomDiagnostic]="nombreValoracio" [nomExpedient]="expedient.codi"  [idProfessional]="idProfesional"
-                            [idExpedient]="expedientID">
+                            [idExpedient]="expedientID" [versio]="diagnostico.versioModel.id">
       </app-globalitat-tab>
     </ng-template>
   </ngb-tab>
   <ngb-tab id="tab-preventchange5" [disabled]="tabsActivate.tabValoracioDiagnosticActivate" >
-    <ng-template ngbTabTitle > <p> Valoració del diagnòstic</p> </ng-template>
+    <ng-template ngbTabTitle > <p> Valoració del Cas</p> </ng-template>
     <ng-template ngbTabContent>
 
-      <app-valoracio-diagnostic-tab  [idExpedient]="expedientID" (before)="beforeTab()" (tabActivated)="tabsActivate.tabValoracioDiagnosticActivate = false" [diagnostico]="diagnostico"  [idDiagnostic]="diagnosisID" [nomDiagnostic]="nombreValoracio" [nomExpedient]="expedient.codi"  [idProfessional]="idProfesional"
-                                     [idExpedient]="expedientID"> </app-valoracio-diagnostic-tab>
+      <app-valoracio-diagnostic-tab  [idExpedient]="expedientID" (before)="beforeTab()" (tabActivated)="tabsActivate.tabValoracioDiagnosticActivate = false" [diagnostico]="diagnostico"  [idDiagnostic]="diagnosisID" [nomDiagnostic]="nombreValoracio" [nomExpedient]="expedient.codi"  [idProfessional]="idProfesional" > </app-valoracio-diagnostic-tab>
     </ng-template>
   </ngb-tab>
 

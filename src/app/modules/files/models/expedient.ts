@@ -200,6 +200,7 @@ export class ModelQuerySituation {
   situacionSocial: SituacionSocial[] = [];
 }
 export class SituacionSocial {
+  id: string;
   descripcio: string;
   definicio: string;
   gravetat: Gravedad [] = [];

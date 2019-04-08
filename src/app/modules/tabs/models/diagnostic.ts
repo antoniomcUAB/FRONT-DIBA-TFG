@@ -10,6 +10,12 @@ export class Diagnosis {
   observacions: string;         // Observaciones
   professional: Professional;   // Profesional
   valoracio: Valoracio = new Valoracio();         // Valoración
+  versioModel: VersioModel;
+}
+export class VersioModel{
+  data: number;
+  id: number;
+  versio: string;
 }
 export class Valoracio {
   data: string;

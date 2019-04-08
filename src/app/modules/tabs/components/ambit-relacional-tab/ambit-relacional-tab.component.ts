@@ -26,18 +26,26 @@ export class AmbitRelacionalTabComponent extends CustomInput implements OnInit{
   @Input() idProfessional:string;
   @Input() nomExpedient:string;
   @Input() nomDiagnostic:string;
+  public versioModel:number;
+  /*Esperamos a que llegue el valor del diagnostico*/
+  @Input()
+  set versio(id:number) {
+    if (id) {
+      this.versioModel = id;
+      this.reloadData();
+    }
+  }
 
   /*Recargamos el modelo*/
   constructor(private _service: TabsFormService,
               private global: GlobalService) {
     super();
-    this.reloadData();
   }
 
 
   /*Funcion que llama al servicio de recargar el modelo*/
   reloadData() {
-    this._service.getFilesFormModel().subscribe((tab: Ambits ) => {
+    this._service.getFilesFormModel(this.versioModel.toString()).subscribe((tab: Ambits ) => {
       this.ambits = tab;
     });
   }

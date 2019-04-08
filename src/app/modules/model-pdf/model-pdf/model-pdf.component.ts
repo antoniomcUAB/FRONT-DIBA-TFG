@@ -22,7 +22,6 @@ export class ModelPDFComponent {
   getModel() {
     this._service.getModel().subscribe( (data) => {
       this.model = data;
-      console.log(this.model);
       this.tableQueryContext();
       this.tableQuerySituation();
     }, error => {
@@ -38,6 +37,7 @@ export class ModelPDFComponent {
       for (const entorns of ambit.entorns) {
         for (const pregunta of entorns.preguntes) {
           const pr = new SituacionSocial();
+          pr.id = pregunta.id;
           pr.descripcio = pregunta.social;
           pr.definicio = pregunta.definicio;
          amb.situacionSocial.push(pr);
