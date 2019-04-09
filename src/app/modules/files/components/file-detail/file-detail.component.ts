@@ -577,6 +577,7 @@ export class FileDetailComponent {
 
   /* Open Modal New Member */
   openModalNewMember(content) {
+    this.isCheckPersonRef = false;
     this.member = new Persona();
     this.open(content);
   }

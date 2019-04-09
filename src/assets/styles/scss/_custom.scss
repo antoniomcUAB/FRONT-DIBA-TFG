@@ -235,3 +235,12 @@ h3.popover-header {
     width: 100% !important;
   }
 }
+
+.custom-control-label::before {
+  background: #fff;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  color: #fff;
+  background: #A41E34;
+}
