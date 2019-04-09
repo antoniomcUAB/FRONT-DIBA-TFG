@@ -265,12 +265,9 @@ export class FormTabComponent extends CustomInput implements OnInit {
     if (this.value.ambit) {
     for (const ambit of this.value.ambit) {
       if (ambit.ambit.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL') {
-        console.log("hola");
         for (const entorn of ambit.entorn) {
           if (entorn.descripcio.toUpperCase() === 'ENTORN HABITATGE') {
-            console.log("hola2");
             for (const pregunta of entorn.pregunta) {
-              console.log(pregunta.situacioSocial.social);
               if (pregunta.situacioSocial.social === 'Manca d\'habitatge estable (H.1)') {
                 this.set(pregunta.situacioSocial.social);
               }
@@ -562,7 +559,6 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
   /*Funcion seleccionar la persona y asignarle el valor */
   changePersona(pregunta: Preguntas, value) {
-    console.log(value);
     pregunta.persona = value;
     if (!value) {
       this.tabsService.cleanPreguntes(this.idDiagnostic, pregunta.situacioSocial.id).subscribe(() => {
@@ -622,8 +618,6 @@ export class FormTabComponent extends CustomInput implements OnInit {
         pregunta.frequencia = new Frequencia();
       }
       for (const freq of resultFreq) {
-        console.log(value);
-        console.log(freq.descripcio);
         if (freq.descripcio === value) {
           pregunta.frequencia = freq;
           this.tabsService.PutQuestionAndGetRisc(pregunta , this.idDiagnostic).subscribe((result) => {

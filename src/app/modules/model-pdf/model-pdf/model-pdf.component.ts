@@ -13,7 +13,7 @@ export class ModelPDFComponent {
   model;
   tableContext: ModelQueryContext[] = [];
   tableSituation: ModelQuerySituation[] = [];
-  public id: HTMLElement;
+  public id: any;
   constructor(private _service: HomeService,
               private _route: ActivatedRoute) {
     /* Get Current Model */
@@ -22,9 +22,11 @@ export class ModelPDFComponent {
   }
   scroll() {
     setTimeout(_ => {
-      this.id.scrollIntoView(true);
+      let f = document.getElementById(this.id);
+      console.log(f);
+      f.scrollIntoView();
 
-    }, 600);
+    }, 500);
   }
 
   /** GET MODEL **/
