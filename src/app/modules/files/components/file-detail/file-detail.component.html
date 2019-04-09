@@ -142,11 +142,16 @@
                               <input id="date-unsubscribe"
                                      name="dataBaixa"
                                      class="form-control"
-                                     placeholder="dd/mm/yyyy"
-                                     type="date"
+                                     placeholder="dd/mm/aaaa"
+                                     type="text"
+                                     (click)="Unsuscription.toggle();"
+                                     ngbDatepicker #Unsuscription="ngbDatepicker"
                                      max="{{ toDate | date:'yyyy-MM-dd' }}"
                                      [(ngModel)]="dateUnsuscription"
                                      [required]="true">
+                              <div class="input-group-append">
+                                <button class="btn btn-primary fa fa-calendar" (click)="Unsuscription.toggle();" type="button"></button>
+                              </div>
                             </div>
                           </div>
                           <div class="form-group"
@@ -254,172 +259,6 @@
                            name="dataAlta"
                            class="form-control"
                            placeholder="dd/mm/aaaa"
-                           type="date"
-                           max="{{ toDate | date:'yyyy-MM-dd' }}"
-                           [(ngModel)]="member.dataAlta"
-                           [required]="true">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="relation-register">{{ "TABLE.relation" | translate }} <span class="text-primary">*</span></label>
-                  <div class="input-group">
-                    <select
-                            id="relation-register"
-                            name="tipusPersona"
-                            class="form-control"
-                            [(ngModel)]="member.tipusPersona"
-                            [required]="true">
-                      <option *ngFor="let type of personType" [ngValue]="type">
-                        {{ type.descripcio }}
-                      </option>
-                    </select>
-                    <!-- <select *ngIf="isCheckPersonRef === true"
-                                     id="ref"
-                                     name="tipusPersona"
-                                     class="form-control"
-                                     [(ngModel)]="member.tipusPersona"
-                                     [required]="true">
-                    <option [ngValue]="member.tipusPersona">
-                      {{ member.tipusPersona.descripcio }}
-                    </option>
-                  </select> -->
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="sex-register">
-                    {{ "TABLE.sex" | translate }}
-                    <span class="text-primary">*</span>
-                  </label>
-                  <div class="input-group">
-                    <select id="sex-register"
-                            name="sexe"
-                            class="form-control"
-                            [(ngModel)]="member.sexe"
-                            [required]="true">
-                      <option>Home</option>
-                      <option>Dona</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="date-birthday">
-                    {{ "TABLE.birthday" | translate }}
-                    <span class="text-primary">*</span>
-                  </label>
-                  <div class="input-group">
-                    <input id="date-birthday"
-                           name="dataNaixement"
-                           class="form-control"
-                           placeholder="dd/mm/aaaa"
-                           type="date"
-                           max="{{ toDate | date:'yyyy-MM-dd' }}"
-                           [(ngModel)]="member.dataNaixement"
-                           [required]="true">
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit"
-                        class="btn btn-outline-dark"
-                        [disabled]="FormCreateMember.invalid"
-                        *ngIf="!member.referencia"
-                        (click)="createMember(member); modal.close('Save click')">
-                  {{ "FORM.save" | translate }}
-                </button>
-                <button type="submit"
-                        class="btn btn-outline-dark"
-                        [disabled]="FormCreateMember.invalid"
-                        *ngIf="member.referencia"
-                        (click)="open(unsuscription); modal.close('Save click')">
-                  {{ "FORM.save" | translate }}
-                </button>
-                <button type="button"
-                        class="btn btn-primary"
-                        aria-label="Close"
-                        (click)="modal.dismiss('Cross click')">
-                  {{ "FORM.cancel" | translate }}
-                </button>
-              </div>
-            </form>
-          </ng-template>
-          <!--/ Modal -->
-          <!-- Modal Confirmation Unsuscription Member Ref -->
-          <ng-template #unsuscription let-modal>
-            <div class="modal-header">
-              <h4 class="modal-title"
-                  id="modal-unsuscription">
-                          <span class="text-primary">
-                            {{ "TABLE.unsuscription" | translate }}
-                          </span>
-              </h4>
-              <button type="button"
-                      class="close bg-primary text-white"
-                      aria-label="Close"
-                      (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body text-center">
-              <p class="mt-3">{{ "TABLE.doYouWantUnsuscription" | translate }}</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button"
-                      class="btn btn-outline-primary btn-large"
-                      (click)="createMember(member); modal.close('Save click')" >
-                {{ "TABLE.yes" | translate }}
-              </button>
-              <button type="button"
-                      class="btn btn-primary btn-large"
-                      aria-label="Close"
-                      (click)="modal.dismiss('Cross click')">
-                {{ "TABLE.no" | translate }}
-              </button>
-            </div>
-          </ng-template>
-          <!--/ Modal Confirmation Unsuscription Member Ref -->
-
-          <!-- Modal New Member
-          <ng-template #newMember let-modal>
-            <div class="modal-header">
-              <h4 class="modal-title"
-                  id="modal-register">
-                <span class="text-primary">
-                  {{ "TABLE.toRegister" | translate }}
-                </span>
-              </h4>
-              <button type="button"
-                      class="close bg-primary text-white"
-                      aria-label="Close"
-                      (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form #FormCreateMember="ngForm">
-              <div class="modal-body">
-                <div class="form-group" *ngIf="checkPersonRef()">
-                  <label class="custom-control custom-checkbox">
-                    <input id="person-ref"
-                           name="referencia"
-                           type="checkbox"
-                           class="custom-control-input"
-                           [(ngModel)]="member.referencia"
-                           (change)="changeRef($event)">
-                    <span class="custom-control-label">
-                      {{ "TABLE.isPersonRef" | translate }}
-                    </span>
-                    <span class="custom-control-description"></span>
-                  </label>
-                </div>
-                <div class="form-group">
-                  <label for="date-register">
-                    {{ "TABLE.dataRegister" | translate }}
-                    <span class="text-primary">*</span>
-                  </label>
-                  <div class="input-group">
-                    <input id="date-register"
-                           name="dataAlta"
-                           class="form-control"
-                           placeholder="dd/mm/aaaa"
                            type="text"
                            (click)="dataAlta.toggle();"
                            ngbDatepicker #dataAlta="ngbDatepicker"
@@ -449,8 +288,8 @@
                             class="form-control"
                             [(ngModel)]="member.tipusPersona"
                             [required]="true">
-                      <option [ngValue]="member.tipusPersona">
-                        {{ member.tipusPersona.descripcio }}
+                      <option [ngValue]="typeMemberRef">
+                        {{ typeMemberRef.descripcio }}
                       </option>
                     </select>
                   </div>
@@ -549,7 +388,7 @@
               </button>
             </div>
           </ng-template>
-          Modal Confirmation Unsuscription Member Ref -->
+          <!-- Modal Confirmation Unsuscription Member Ref -->
 
         </div>
       </div>
@@ -857,3 +696,4 @@
   </div>
 </section>
 <!--/ Form Detail -->
+

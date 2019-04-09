@@ -13,18 +13,18 @@ import {
 import * as shape from 'd3-shape';
 import { TableListOptions, TableListResponse } from '../../../../shared/modules/table-list';
 import { TranslateService } from '@ngx-translate/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { area, line, curveLinear } from 'd3-shape';
 import { Professional } from "../../../home/models/professional";
 import {BreadCrums} from "../../../tabs/models/tab-class-form";
 import {GlobalService} from "../../../../shared";
 
-/* import { NgbDatepickerConfig,
+import { NgbDatepickerConfig,
          NgbCalendar,
          NgbDate,
          NgbDatepickerI18n,
          NgbDateStruct,
-         NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';*/
+         NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 export const colorVulnerabilitat = '#66bb6a';
 export const colorRisc = '#ffee58';
@@ -34,11 +34,10 @@ export const colors = [
   '#ffee58', '#66bb6a', '#ef5350', '#ffee58', '#ef5350', '#868e96'
 ];
 
-/*
 const I18N_VALUES = {
   'es': {
-    weekdays: ['Dl','Dt','Dc','Dj','Dv','Ds','Dg'],
-    months: ['Gen','Feb','Mar','Abr','Mai','Jun','Jul','Ago','Set','Oct','Nov','Des'],
+    weekdays: ['Dl', 'Dt', 'Dc', 'Dj', 'Dv', 'Ds', 'Dg'],
+    months: ['Gen', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Des'],
   }
 };
 
@@ -85,7 +84,6 @@ function toInteger(value: any): number {
   return parseInt(`${value}`, 10);
 }
 
-
 @Injectable()
 export class NgbDateFRParserFormatter extends NgbDateParserFormatter {
   parse(value: string): NgbDateStruct {
@@ -111,15 +109,16 @@ export class NgbDateFRParserFormatter extends NgbDateParserFormatter {
     }
     return stringDate;
   }
-} */
+}
 
 @Component({
   selector: 'app-file-detail',
   templateUrl: './file-detail.component.html',
   styleUrls: ['./file-detail.component.css'],
-  providers: [] /* [NgbDatepickerConfig, I18n,
+  providers: [NgbDatepickerConfig, I18n,
     {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n},
-    {provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter}] */
+    {provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter},
+    {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
 })
 
 export class FileDetailComponent {
@@ -138,6 +137,7 @@ export class FileDetailComponent {
 
   id: number;
   member: Persona;
+  typeMemberRef: TipusPersona;
   newRefMember: Persona;
   personActives: Persona[] = [];
   observations: string;
@@ -145,7 +145,7 @@ export class FileDetailComponent {
   dateUnsuscription: number;
   isCheckPersonRef = false;
 
-  toDate = new Date();
+  toDate;
   day;
   month;
   year;
@@ -198,12 +198,12 @@ export class FileDetailComponent {
               private _service: FilesDetailService,
               private _translateService: TranslateService,
               private global: GlobalService,
-              private modalService: NgbModal/*,
+              private modalService: NgbModal,
               private config: NgbDatepickerConfig,
-              private calendar: NgbCalendar*/) {
+              private calendar: NgbCalendar) {
 
     /* Calendar */
-    /* this.toDate = this.calendar.getToday();
+    this.toDate = new Date();
     this.day = this.calendar.getToday().day;
     this.month = this.calendar.getToday().month;
     this.year = this.calendar.getToday().year;
@@ -211,7 +211,6 @@ export class FileDetailComponent {
     config.minDate = {year: 1970, month: 1, day: 1};
     config.maxDate = {year: this.year, month: this.month, day: this.day};
     config.outsideDays = 'hidden';
-    config.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6; */
 
     this.id = this._route.snapshot.params['id'];
     this.idProfessional = this._route.snapshot.params['idProfessional'];
@@ -444,6 +443,13 @@ export class FileDetailComponent {
   getTypePerson() {
     this._service.getTypePerson().subscribe( (data: TipusPersona) => {
       this.personType = data;
+      // @ts-ignore
+      for (const principal of this.personType) {
+        if (principal.descripcio.toUpperCase() === 'PERSONA PRINCIPAL') {
+          this.typeMemberRef = principal;
+        }
+      }
+
     }, (error) => {
       console.log("ERROR - al recuperar tipos de persona \n " + error);
     });
@@ -631,7 +637,8 @@ export class FileDetailComponent {
     this.isCheckPersonRef = false;
     if (event.target.checked === true) {
       this.isCheckPersonRef = true;
-      this.member.tipusPersona = {id: 19565, descripcio: 'Persona Principal'};
+
+      this.member.tipusPersona = this.typeMemberRef;
     } else {
       this.isCheckPersonRef = false;
     }
