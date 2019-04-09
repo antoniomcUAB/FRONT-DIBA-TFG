@@ -3,6 +3,8 @@
     <button type="button" class="float-right btn btn-outline-primary doNotPrint" (click)="onPrint();"><i class="fa fa-file-pdf-o"></i> Generar Esborrany </button>
   </div>
 </section>
+<div id="waterMark" style="display: none">
+</div>
 <section *ngIf="value">
   <div class="row m-3" >
     <ng-container>
@@ -71,7 +73,6 @@
       </div>
     </ng-container>
   </div>
-
   <form #formTab="ngForm" ngNativeValidate (submit)="open(validation)">
   <!-- Ambito -->
   <div class="row m-3" *ngFor="let ambit of value.ambit;let i = index">

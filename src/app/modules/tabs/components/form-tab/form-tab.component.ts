@@ -6,7 +6,7 @@ import {CustomInput} from "../../../../shared";
 import {TabsFormService} from '../../services/tabsForm.service';
 import {Contextualitzacio, Frequencia, Gravetat, Preguntas, Ambit, Entorn, Diagnosis, FactorEconomic} from "../../models/diagnostic";
 import {Persona} from "../../../files";
-import {ExtraOptions, Router} from "@angular/router";
+import {ActivatedRoute, ExtraOptions, Router} from "@angular/router";
 import {Observable, Subject} from "rxjs";
 
 @Component({
@@ -23,6 +23,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
   public disabledEconomia: DisabledEconomia = new DisabledEconomia(); /* Parametro especifico para desbloquear las preguntas economicas*/
   public disabledHabitatge: DisabledHabitatge = new DisabledHabitatge(); /* Parametro especifico para desbloquear las preguntas habitatge*/
   public viewContext: boolean = false; /* parametro para mostrar los factores de contexto*/
+  public id;
   closeResult: string;
   cleanSelects: string = null; /* Variable per netejar Formulari*/
   preguntaEconomica: Preguntas; /* Variable para guardar la pregunta economica*/
@@ -52,7 +53,8 @@ export class FormTabComponent extends CustomInput implements OnInit {
 
   constructor(private modalService: NgbModal,
               private tabsService: TabsFormService,
-              private _router: Router) {
+              private _router: Router,
+              private _route: ActivatedRoute) {
     super();
   }
 
@@ -214,7 +216,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     if (value) {
       this.preguntaEconomica.factorEconomic.push(factorEconomic);
     } else {
-      for (let i = 0; i< this.preguntaEconomica.factorEconomic.length; i++) {
+      for (let i = 0; i < this.preguntaEconomica.factorEconomic.length; i++) {
         if (this.preguntaEconomica.factorEconomic[i].id === factorEconomic.id) {
           this.preguntaEconomica.factorEconomic.splice(i,1);
         }
@@ -262,25 +264,28 @@ export class FormTabComponent extends CustomInput implements OnInit {
   public comprobar() {
     if (this.value.ambit) {
     for (const ambit of this.value.ambit) {
-      if (ambit.ambit.id === 28297) {
+      if (ambit.ambit.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL') {
+        console.log("hola");
         for (const entorn of ambit.entorn) {
-          if (entorn.id === 28298) {
+          if (entorn.descripcio.toUpperCase() === 'ENTORN HABITATGE') {
+            console.log("hola2");
             for (const pregunta of entorn.pregunta) {
-              if (pregunta.situacioSocial.id === 28299) {
-                this.set(pregunta.situacioSocial.id);
+              console.log(pregunta.situacioSocial.social);
+              if (pregunta.situacioSocial.social === 'Manca d\'habitatge estable (H.1)') {
+                this.set(pregunta.situacioSocial.social);
               }
-              if (pregunta.situacioSocial.id === 28306 || pregunta.situacioSocial.id === 28312 || pregunta.situacioSocial.id === 28323 || pregunta.situacioSocial.id === 28333) {
-                this.set(pregunta.situacioSocial.id);
+              if (pregunta.situacioSocial.social === 'Habitatge deficient (H.2)' || pregunta.situacioSocial.social === 'Habitatge insegur (H.3)' || pregunta.situacioSocial.social === 'Habitatge massificat (H.4)' || pregunta.situacioSocial.social === 'Risc de pérdua o manca serveis/subministraments (H.5)') {
+                this.set(pregunta.situacioSocial.social);
               }
             }
           }
-          if(entorn.id === 28344) {
+          if (entorn.descripcio.toUpperCase() === 'ENTORN ECONÓMIC') {
             for (const pregunta of entorn.pregunta) {
-              if (pregunta.situacioSocial.id === 28345) {
-                this.set(pregunta.situacioSocial.id);
+              if (pregunta.situacioSocial.social === 'Sense ingressos estables (E.1)') {
+                this.set(pregunta.situacioSocial.social);
               }
-              if (pregunta.situacioSocial.id === 28351 || pregunta.situacioSocial.id === 28359) {
-                this.set(pregunta.situacioSocial.id);
+              if (pregunta.situacioSocial.social === 'Ingressos insuficients (E.2)' || pregunta.situacioSocial.social === 'Administració deficient dels ingressos (E.3)') {
+                this.set(pregunta.situacioSocial.social);
               }
             }
           }
@@ -526,14 +531,14 @@ export class FormTabComponent extends CustomInput implements OnInit {
 
   }
   /*Funcion setear de la frequencia escojida , el valor de ella,  al objeto  */
-  public getValueFrequencia(pregunta: Preguntas , id: number ) {
+  public getValueFrequencia(pregunta: Preguntas , id: number, frequencia?:string ) {
 
     this.tabsService.getValuesFrequencia().subscribe((resultFreq: Frequencia[]) => {
       if(!pregunta.frequencia) {
         pregunta.frequencia = new Frequencia();
       }
       for (const freq of resultFreq) {
-        if (freq.descripcio === pregunta.frequencia.descripcio) {
+        if (freq.descripcio === frequencia) {
               pregunta.frequencia = freq;
               this.tabsService.PutQuestionAndGetRisc(pregunta , this.idDiagnostic).subscribe((result) => {
                 pregunta.factor = result.factor;
@@ -557,6 +562,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
   /*Funcion seleccionar la persona y asignarle el valor */
   changePersona(pregunta: Preguntas, value) {
+    console.log(value);
     pregunta.persona = value;
     if (!value) {
       this.tabsService.cleanPreguntes(this.idDiagnostic, pregunta.situacioSocial.id).subscribe(() => {
@@ -609,13 +615,15 @@ export class FormTabComponent extends CustomInput implements OnInit {
     });
   }
   /*Funcion que te deuvlve la frequencia para cada una de las preguntas repetidas */
-  public getFrequenciRepeat(pregunta: Preguntas , value ) {
+  public getFrequenciRepeat(pregunta: Preguntas , value:string ) {
 
     this.tabsService.getValuesFrequencia().subscribe((resultFreq: Frequencia[]) => {
       if (!pregunta.frequencia) {
         pregunta.frequencia = new Frequencia();
       }
       for (const freq of resultFreq) {
+        console.log(value);
+        console.log(freq.descripcio);
         if (freq.descripcio === value) {
           pregunta.frequencia = freq;
           this.tabsService.PutQuestionAndGetRisc(pregunta , this.idDiagnostic).subscribe((result) => {

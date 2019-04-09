@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AmbitContext, Frecuencia, Gravedad, ModelQueryContext, ModelQuerySituation, SituacionSocial } from "../../files";
 import { HomeService } from "../../home/services/home.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-model-pdf',
@@ -12,10 +13,18 @@ export class ModelPDFComponent {
   model;
   tableContext: ModelQueryContext[] = [];
   tableSituation: ModelQuerySituation[] = [];
-
-  constructor(private _service: HomeService) {
+  public id: HTMLElement;
+  constructor(private _service: HomeService,
+              private _route: ActivatedRoute) {
     /* Get Current Model */
     this.getModel();
+    this.id = this._route.snapshot.params['id'];
+  }
+  scroll() {
+    setTimeout(_ => {
+      this.id.scrollIntoView(true);
+
+    }, 600);
   }
 
   /** GET MODEL **/
@@ -24,6 +33,7 @@ export class ModelPDFComponent {
       this.model = data;
       this.tableQueryContext();
       this.tableQuerySituation();
+      this.scroll();
     }, error => {
       console.log("ERROR al recuperar el datos");
     });

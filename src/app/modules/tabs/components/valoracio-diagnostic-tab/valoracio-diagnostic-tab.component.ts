@@ -26,6 +26,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   @Input() idDiagnostic: number;
   @Input() idProfessional: string;
   @Input() versioModel: number;
+  public view: boolean;
   @Input()
   get diagnostico():any {
     return this.value;
@@ -45,6 +46,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
               private global: GlobalService ){
    super();
   this.global.setBreadCrum(this.breadcrum);
+  this.view = false;
   }
   ngOnInit(): void {
     this.getRiscos();
@@ -111,6 +113,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
 
   }
   onPrint() {
+    this.view = true;
     window.print();
   }
   public getRiscos() {
