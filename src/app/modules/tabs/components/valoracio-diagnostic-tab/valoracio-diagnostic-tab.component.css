@@ -43,6 +43,9 @@
   border-color:  rgb(137,101,114);
 }
 @media print{
+  #waterMark{
+    display: block!important;
+  }
   .doNotPrint{display:none !important;}
   .exact-grey{
     -webkit-print-color-adjust: exact;
@@ -130,4 +133,16 @@
   border-right: black;
   border-left:  black;
   border-style: solid;
+}
+#waterMark {
+  position: absolute;
+  display: block;
+  min-width: 100%;
+  opacity: 0.5;
+  text-align: center;
+  background-image: url( "../../../../../assets/images/waterMark.svg");
+  z-index: 999999;
+  padding-top: 20%;
+  background-repeat: repeat-y;
+  height: 100%;
 }

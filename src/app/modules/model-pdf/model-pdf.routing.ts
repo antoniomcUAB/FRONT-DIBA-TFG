@@ -9,5 +9,12 @@ export const ModelPDFRoutes: Routes = [
     data: {
       heading: 'ModelPDF'
     }
+  },
+  {
+    path: ':id',
+    component: ModelPDFComponent,
+    data: {
+      heading: 'ModelPDF'
+    }
   }
 ];

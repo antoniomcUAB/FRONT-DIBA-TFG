@@ -36,6 +36,7 @@
 </ng-template>
 <!--/ Factores Economicos -->
 <!--/ titulo -->
+
 <form #formTab="ngForm" ngNativeValidate (ngSubmit)="emitEnd()" *ngIf="data && value">
   <div class="card-body pt-0">
     <ng-template [ngIf]="contextualitzacio.toLocaleUpperCase() !== 'GLOBALITAT DEL CAS'">
@@ -68,7 +69,7 @@
                 <label *ngIf="i === 0 " class="col-12" for="ssb00" >{{ "TABLE.basicSocialSituation" | translate }} </label>
                 <label *ngIf="i !== 0 "class="desaparece">{{ "TABLE.basicSocialSituation" | translate }}</label>
                 <div *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')" class="position-relative">
-                  <a href="/dsdiba/model-pdf#{{pregunta.id}}"> <input type="text" class="form-control " [value]= "pregunta.social " disabled  ></a>
+                  <a href="/dsdiba/model-pdf/{{pregunta.id}}"> <input type="text" class="form-control " [value]= "pregunta.social " disabled  ></a>
                   <i class= "fa fa-question-circle position-absolute top-right" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.social" container="body"></i>
                 </div>
                 </div>
@@ -124,11 +125,11 @@
                       <i class="fa fa-user-plus"> </i>
                       </div>
                     </div>
-                    <select class="form-control" id="t2person"
+                    <select class="form-control" id="t2person" #t2person="ngModel"
                             [value]="cleanSelects"
                             [disabled]="!getFirstPregunta(pregunta.id , ambit, entorn ) "
                             [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn )?.persona"
-                            (ngModelChange)="changePersona( getFirstPregunta( pregunta.id , ambit, entorn ), $event)"
+                            (change)="changePersona( getFirstPregunta( pregunta.id , ambit, entorn ), t2person.value)"
                             [compareWith]="compare"
                             name="persona{{e}}{{i}}">
                       <option value="" *ngIf="!getFirstPregunta(pregunta.id , ambit, entorn )"></option>
@@ -149,15 +150,15 @@
                                                                                  triggers="mouseenter:mouseleave" [popoverTitle]=" 'TABLE.severity' | translate  "
                                                                                  container="body"></i></label>
                   <label *ngIf="i !== 0 " class="desaparece">{{ "TABLE.severity" | translate }}</label>
-                  <select class="form-control" id="t10severity"
+                  <select class="form-control" id="t10severity" #t10severity="ngModel"
                           [required]="getFirstPregunta(pregunta.id , ambit, entorn)"
                           [value]="cleanSelects"
                           [disabled]="!getFirstPregunta(pregunta.id , ambit, entorn)"
                           [ngModel]="getFirstPregunta(pregunta.id , ambit, entorn)?.gravetat?.descripcio"
-                          (ngModelChange)="getValueGravetat(getFirstPregunta(pregunta.id , ambit, entorn), ambit , entorn , $event)"
+                          (change)="getValueGravetat(getFirstPregunta(pregunta.id , ambit, entorn), ambit , entorn , t10severity.value)"
                           name="severitySelected{{e}}{{i}}">
                     <option disabled selected value></option>
-                    <option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>
+                    <option *ngFor="let option of pregunta.selectors " [value]="option.gravetat.descripcio"> {{option.gravetat.descripcio}}  </option>
                   </select>
                 </div>
               </div>
@@ -173,15 +174,14 @@
                                                                                    [popoverTitle]=" 'TABLE.frequency' | translate  "
                                                                                    container="body"></i></label>
                   <label  *ngIf="i !== 0 " class="desaparece">{{ "TABLE.frequency" | translate }}</label>
-                  <select class="form-control" id="t1frequency" [required]="getFirstPregunta(pregunta.id,ambit, entorn)"
+                  <select class="form-control" id="t1frequency" #t1frequency="ngModel" [required]="getFirstPregunta(pregunta.id,ambit, entorn)"
                           [value]="cleanSelects"
                           [disabled]="!getFirstPregunta(pregunta.id,ambit, entorn)"
                           [ngModel]="getFirstPregunta(pregunta.id,ambit, entorn)?.frequencia?.descripcio"
-                          (ngModelChange)="getFirstPregunta(pregunta.id,ambit, entorn).frequencia.descripcio = $event"
                           name="frequencySelected{{e}}{{i}}"
-                          (change)="getValueFrequencia(getFirstPregunta(pregunta.id,ambit, entorn),pregunta.id) ">
+                          (change)="getValueFrequencia(getFirstPregunta(pregunta.id,ambit, entorn) , pregunta.id , t1frequency.value) ">
                     <option disabled selected value></option>
-                    <option  *ngFor="let frequencia of getFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.gravetat?.descripcio,pregunta.selectors)"> {{frequencia.frequencia.descripcio}}  </option>
+                    <option  *ngFor="let frequencia of getFrequencia(getFirstPregunta(pregunta.id,ambit, entorn)?.gravetat?.descripcio,pregunta.selectors)" [value]="frequencia.frequencia.descripcio" >{{frequencia.frequencia.descripcio}}</option>
                   </select>
                 </div>
               </div>
@@ -241,9 +241,9 @@
                   <div class="col-12">
                     <label class="desaparece">{{ "TABLE.person" | translate }}</label>
                     <div class="input-group mb-2 mr-sm-2">
-                      <select class="form-control"
+                      <select class="form-control" id="rpeatPersons" #rpeatPersons="ngModel"
                               [ngModel]="getPreguntaRepeat(method.id,ambit,entorn)?.persona"
-                              (ngModelChange)="changePersona(getPreguntaRepeat(method.id,ambit,entorn), $event)"
+                              (change)="changePersona(getPreguntaRepeat(method.id,ambit,entorn), rpeatPersons.value)"
                               name="personasdfc{{i}}{{x}}"
                               [compareWith]="compare">
                         <option disabled selected [ngValue]="null" ></option>
@@ -260,14 +260,14 @@
                   <div class="col-xl-1">
                     <div class="col-12">
                       <label class="desaparece">{{ "TABLE.severity" | translate }}</label>
-                      <select class="form-control"
+                      <select class="form-control" #severID="ngModel"
                               [value]="cleanSelects"
                               [ngModel]="getPreguntaRepeat(method.id,ambit,entorn)?.gravetat?.descripcio"
-                              (ngModelChange)="getValueSeverity(getPreguntaRepeat(method.id,ambit,entorn), $event)"
-                              id="severiyt22{{x}}{{i}}"
+                              (change)="getValueSeverity(getPreguntaRepeat(method.id,ambit,entorn),severID.value)"
+                              id="severID"
                               name="severity22{{i}}{{x}}">
                         <option disabled selected value></option>
-                        <option *ngFor="let option of pregunta.selectors "> {{option.gravetat.descripcio}}  </option>
+                        <option *ngFor="let option of pregunta.selectors " [value]="option.gravetat.descripcio"> {{option.gravetat.descripcio}}  </option>
                       </select>
                     </div>
                   </div>
@@ -276,14 +276,14 @@
                   <div class="col-xl-1">
                     <div class="col-12">
                       <label class="desaparece">{{ "TABLE.frequency" | translate }}</label>
-                      <select class="form-control" id="t16frequency"
+                      <select class="form-control" id="t16frequency" #t16frequency="ngModel"
                               [required]="pregunta.apl"
                               [value]="cleanSelects"
                               [ngModel]="getPreguntaRepeat(method.id,ambit,entorn)?.frequencia?.descripcio"
-                              (ngModelChange)="getFrequenciRepeat(getPreguntaRepeat(method.id,ambit,entorn), $event)"
+                              (change)="getFrequenciRepeat(getPreguntaRepeat(method.id,ambit,entorn), t16frequency.value)"
                       name="frequensdci{{x}}{{i}}">
                           <option disabled selected value></option>
-                          <option *ngFor="let frequencia of getFrequencia(getPreguntaRepeat(method.id,ambit,entorn)?.gravetat?.descripcio,pregunta.selectors)"> {{frequencia.frequencia.descripcio}}  </option>
+                          <option *ngFor="let frequencia of getFrequencia(getPreguntaRepeat(method.id,ambit,entorn)?.gravetat?.descripcio,pregunta.selectors)" [value]="frequencia.frequencia.descripcio"> {{frequencia.frequencia.descripcio}}  </option>
                       </select>
                     </div>
                   </div>
@@ -439,12 +439,12 @@
                 <label class="aparece" for="t1person" *ngIf="c!==0 && cont.primera">{{ "TABLE.person" | translate }} </label>
                 <label class="desaparece" for="t1person" *ngIf="(c!==0) ">{{ "TABLE.person" | translate }} </label>
 
-                <select class="form-control" id="t1person" name="personas{{c}}"
+                <select class="form-control" id="t1person" name="personas{{c}}" #t1person="ngModel"
                         [required]="getFirtsContexto(cont.id , ambit , cont )?.membreUnic"
                         [value]="cleanSelects"
                         [disabled]="!getFirtsContexto(cont.id , ambit , cont )?.membreUnic || getFirtsContexto(cont.id , ambit , cont )?.mesUc"
                         [ngModel]="getFirtsContexto(cont.id , ambit , cont )?.persona"
-                        (ngModelChange)="changePersonaSelector(getFirtsContexto(cont.id , ambit , cont ), $event)"
+                        (change)="changePersonaSelector(getFirtsContexto(cont.id , ambit , cont ), t1person.value)"
                         [compareWith]="compare">
 
                   <option disabled selected value></option>
