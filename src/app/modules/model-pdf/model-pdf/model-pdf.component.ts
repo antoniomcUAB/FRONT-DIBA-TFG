@@ -1,5 +1,14 @@
 import { Component } from '@angular/core';
-import { AmbitContext, Frecuencia, Gravedad, ModelQueryContext, ModelQuerySituation, SituacionSocial } from "../../files";
+import {
+  AmbitContext,
+  Frecuencia,
+  Gravedad,
+  ModelQueryContext,
+  ModelQuerySituation,
+  SituacionSocial,
+  EntornsQuery,
+  AmbitQuery
+} from "../../files";
 import { HomeService } from "../../home/services/home.service";
 import {ActivatedRoute} from "@angular/router";
 
@@ -44,15 +53,19 @@ export class ModelPDFComponent {
   tableQuerySituation() {
     for (const ambit of this.model.ambits) {
       const amb = new ModelQuerySituation();
-      amb.ambits = ambit.descripcio;
+      amb.ambits = new AmbitQuery();
+      amb.ambits.descripcio = ambit.descripcio;
       this.tableSituation.push(amb);
-      for (const entorns of ambit.entorns) {
-        for (const pregunta of entorns.preguntes) {
+      for (const entorns in ambit.entorns) {
+        const ent = new EntornsQuery();
+        ent.descripcio = ambit.entorns[entorns].descripcio;
+        amb.ambits.entorns.push(ent);
+        for (const pregunta of ambit.entorns[entorns].preguntes) {
           const pr = new SituacionSocial();
           pr.id = pregunta.id;
           pr.descripcio = pregunta.social;
           pr.definicio = pregunta.definicio;
-         amb.situacionSocial.push(pr);
+         amb.ambits.entorns[entorns].situacionSocial.push(pr);
           for (const tors of pregunta.selectors) {
             const slec = new Gravedad();
             slec.descripcio = tors.gravetat.descripcio;

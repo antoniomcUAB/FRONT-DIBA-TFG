@@ -44,8 +44,20 @@
 }
 @media print{
   #waterMark{
-    display: block!important;
+    min-height: 300vh;
+    position: relative;
+    margin: 0;
   }
+  #waterMark:before {
+     content: “”;
+     position: absolute;
+     z-index: 9999;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     background: url('../../../../../assets/images/waterMark.svg') 0 0/100% 100vh;
+   }
   .doNotPrint{display:none !important;}
   .exact-grey{
     -webkit-print-color-adjust: exact;

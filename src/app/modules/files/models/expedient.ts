@@ -196,7 +196,14 @@ export class ChartAmbit {
 
 /* Model Query Situation */
 export class ModelQuerySituation {
-  ambits: string;
+  ambits: AmbitQuery = new AmbitQuery();
+}
+ export class AmbitQuery{
+   descripcio: string;
+   entorns: EntornsQuery [] = [];
+ }
+export class EntornsQuery {
+  descripcio:string;
   situacionSocial: SituacionSocial[] = [];
 }
 export class SituacionSocial {
