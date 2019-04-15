@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   professionalNomComplet: string;
   model;
   breadcrum: BreadCrums [] = [{url: 'Inici', name: []}];
+
   /* Variables Table */
   data: any[] = [];
   options = new TableListOptions();

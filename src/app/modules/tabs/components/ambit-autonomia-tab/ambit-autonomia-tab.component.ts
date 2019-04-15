@@ -66,7 +66,7 @@ export class AmbitAutonomiaTabComponent extends CustomInput implements OnInit{
   public setCrum(){
     if(this.nomDiagnostic && this.nomExpedient) {
       this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.nomExpedient.toString(), name: [this.idExpedient,this.idProfessional ]}, {url: this.nomDiagnostic, name: []}, {
-        url: 'Ambit Autonomia',
+        url: 'Àmbit Autonomia',
         name: []
       }];
       this.global.setBreadCrum(this.breadcrum);

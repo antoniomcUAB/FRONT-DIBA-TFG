@@ -96,6 +96,7 @@ export class TabsFormService extends GlobalService {
   putEconomicQuestion(idDiagnostico: number , factorEconomic: FactorEconomic[]): Observable<Preguntas> {
   return this._http.put<Preguntas>(`${this.apiURL}/dsdiba/api/pregunta/economia/${idDiagnostico}`, factorEconomic).pipe(
     map( data => {
+      console.log(data);
       return data;
     })
   );

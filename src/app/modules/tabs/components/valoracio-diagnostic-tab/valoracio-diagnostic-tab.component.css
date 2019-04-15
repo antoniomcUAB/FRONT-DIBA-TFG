@@ -43,20 +43,15 @@
   border-color:  rgb(137,101,114);
 }
 @media print{
-  #waterMark{
-    min-height: 300vh;
-    position: relative;
-    margin: 0;
-  }
-  #waterMark:before {
-     content: “”;
+  #waterMark {
+    display: block!important;
      position: absolute;
-     z-index: 9999;
+     z-index: 9999999;
      top: 0;
      bottom: 0;
      left: 0;
      right: 0;
-     background: url('../../../../../assets/images/waterMark.svg') 0 0/100% 100vh;
+     background: url('../../../../../assets/images/waterMark.svg');
    }
   .doNotPrint{display:none !important;}
   .exact-grey{
