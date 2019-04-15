@@ -16,6 +16,7 @@ export class VersioModel{
   data: number;
   id: number;
   versio: string;
+  llistaPE: string [] = [];
 }
 export class Valoracio {
   data: string;

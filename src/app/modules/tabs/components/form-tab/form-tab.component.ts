@@ -63,59 +63,61 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
 
   public comprobarContext() {
-    if (this.value.ambit ) {
-    for (const ambit of this.value.ambit) {
-      if (ambit.ambit.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS' && ambit.ambit.descripcio.toUpperCase() === this.contextualitzacio.toUpperCase() && ambit.contextualitzacio) {
-        if (ambit.contextualitzacio.length === 0) {
-          this.viewContext = false;
-        } else {
-          this.viewContext = true;
+    if (this.value.ambit) {
+      for (const ambit of this.value.ambit) {
+        if (ambit.ambit.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS' && ambit.ambit.descripcio.toUpperCase() === this.contextualitzacio.toUpperCase() && ambit.contextualitzacio) {
+          if (ambit.contextualitzacio.length === 0) {
+            this.viewContext = false;
+          } else {
+            this.viewContext = true;
+          }
         }
       }
     }
   }
-}
 
   public isGlobal() {
-  if (this.contextualitzacio) {
-    if (this.contextualitzacio.toUpperCase() === 'GLOBALITAT DEL CAS') {
-      this.viewContext = true;
-    }
+    if (this.contextualitzacio) {
+      if (this.contextualitzacio.toUpperCase() === 'GLOBALITAT DEL CAS') {
+        this.viewContext = true;
+      }
     }
   }
+
   /*Funcion para determinar sobre las preguntas de Economia y Habitatge , si deben estar desactivas */
   public getPreguntaDisabled(name: string) {
-      switch (name) {
-        case 'Manca d\'habitatge estable (H.1)':
-          return this.disabledHabitatge.h1;
-          break;
-        case 'Habitatge deficient (H.2)':
-          return this.disabledHabitatge.h2;
-          break;
-        case 'Habitatge insegur (H.3)':
-         return this.disabledHabitatge.h3;
-          break;
-        case 'Habitatge massificat (H.4)':
-          return this.disabledHabitatge.h4;
-          break;
-        case 'Risc de pérdua o manca serveis/subministraments (H.5)':
-          return this.disabledHabitatge.h5;
-          break;
-        case 'Sense ingressos estables (E.1)':
-          return this.disabledEconomia.e1;
-          break;
-        case 'Ingressos insuficients (E.2)':
-          return this.disabledEconomia.e2;
-          break;
-        case 'Administració deficient dels ingressos (E.3)':
-          return this.disabledEconomia.e3;
-          break;
-        default:
-          return false;
-      }
+    switch (name) {
+      case 'Manca d\'habitatge estable (H.1)':
+        return this.disabledHabitatge.h1;
+        break;
+      case 'Habitatge deficient (H.2)':
+        return this.disabledHabitatge.h2;
+        break;
+      case 'Habitatge insegur (H.3)':
+        return this.disabledHabitatge.h3;
+        break;
+      case 'Habitatge massificat (H.4)':
+        return this.disabledHabitatge.h4;
+        break;
+      case 'Risc de pérdua o manca serveis/subministraments (H.5)':
+        return this.disabledHabitatge.h5;
+        break;
+      case 'Sense ingressos estables (E.1)':
+        return this.disabledEconomia.e1;
+        break;
+      case 'Ingressos insuficients (E.2)':
+        return this.disabledEconomia.e2;
+        break;
+      case 'Administració deficient dels ingressos (E.3)':
+        return this.disabledEconomia.e3;
+        break;
+      default:
+        return false;
+    }
   }
+
   /*Funcion para setear las preguntas de Economia y Habitatge a desactivas */
-  public set (name: string) {
+  public set(name: string) {
     switch (name) {
       case 'Manca d\'habitatge estable (H.1)':
         this.disabledHabitatge.h2 = true;
@@ -149,8 +151,9 @@ export class FormTabComponent extends CustomInput implements OnInit {
         break;
     }
   }
+
   /*Funcion para setear las preguntas de Economia y Habitatge a activadas */
-  public unSet (name: string) {
+  public unSet(name: string) {
     switch (name) {
       case 'Manca d\'habitatge estable (H.1)':
         this.disabledHabitatge.h2 = false;
@@ -184,18 +187,30 @@ export class FormTabComponent extends CustomInput implements OnInit {
         break;
     }
   }
+
   /*Funcion para comparar 2 instancias de objetos */
   compare(el1, el2) {
     return el1 && el2 ? el1.id === el2.id : el1 === el2;
   }
+
   /*Funcion para abrir el content y crear la pregunta economica */
-  openPreg(content , preguntaSocial: string , preguntaid: number , ambit: Ambit , entorn: Entorns) {
-    if ( !this.getFirstPregunta(preguntaid , ambit, entorn)) {
-      this.newPregunta(preguntaSocial, preguntaid, ambit, entorn).subscribe( pregunta => {
-        this.preguntaEconomica = pregunta;
-      });
-    } else {
-     this.preguntaEconomica = this.getFirstPregunta(preguntaid , ambit, entorn);
+  openPreg(content) {
+    let trobat = true;
+    for (const ambit of this.value.ambit) {
+      for (const ent of ambit.entorn ) {
+        for (const preg of ent.pregunta) {
+          if (this.value.versioModel.llistaPE.find(item => item === preg.situacioSocial.id.toString() )) {
+            if ( this.preguntaEconomica) {
+              if (this.preguntaEconomica.situacioSocial.id.toString() !== preg.situacioSocial.id.toString()) {
+                this.preguntaEconomica.factorEconomic = [];
+                this.preguntaEconomica = preg;
+              }
+            } else {
+              this.preguntaEconomica = preg;
+            }
+          }
+        }
+      }
     }
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -203,6 +218,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
   /*Funcion para abrir el content y crear la pregunta economica */
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -211,28 +227,31 @@ export class FormTabComponent extends CustomInput implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
   /*Funcion para añadir pregunta Economica al diagnostico */
-  public addPreguntaEconomica(factorEconomic: FactorEconomic , value) {
+  public addPreguntaEconomica(factorEconomic: FactorEconomic, value) {
     if (value) {
       this.preguntaEconomica.factorEconomic.push(factorEconomic);
     } else {
       for (let i = 0; i < this.preguntaEconomica.factorEconomic.length; i++) {
         if (this.preguntaEconomica.factorEconomic[i].id === factorEconomic.id) {
-          this.preguntaEconomica.factorEconomic.splice(i,1);
+          this.preguntaEconomica.factorEconomic.splice(i, 1);
         }
       }
     }
   }
+
   /*Funcion para recoger pregunta Economica del diagnostico */
   public getPreguntaEconomica(factorEconomic: FactorEconomic) {
-    for ( const eco of this.preguntaEconomica.factorEconomic ) {
-        if (eco.id && eco.id === factorEconomic.id) {
-          return eco;
-        }
+    for (const eco of this.preguntaEconomica.factorEconomic) {
+      if (eco.id && eco.id === factorEconomic.id) {
+        return eco;
+      }
     }
   }
+
   /*Funcion para recoger el riesgo de pregunta Economica */
-  public getRiscEconomic(){
+  public getRiscEconomic() {
     if (this.preguntaEconomica.factorEconomic.length > 0) {
       this.tabsService.putEconomicQuestion(this.idDiagnostic, this.preguntaEconomica.factorEconomic).subscribe((result: Preguntas) => {
         this.preguntaEconomica = result;
@@ -260,29 +279,31 @@ export class FormTabComponent extends CustomInput implements OnInit {
       return `with: ${reason}`;
     }
   }
+
   /*Funcion comprobar si alguna pregunta de habitat o economia debe de estar desactivada*/
   public comprobar() {
     if (this.value.ambit) {
-    for (const ambit of this.value.ambit) {
-      if (ambit.ambit.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL') {
-        for (const entorn of ambit.entorn) {
-          if (entorn.descripcio.toUpperCase() === 'ENTORN HABITATGE') {
-            for (const pregunta of entorn.pregunta) {
-              if (pregunta.situacioSocial.social === 'Manca d\'habitatge estable (H.1)') {
-                this.set(pregunta.situacioSocial.social);
-              }
-              if (pregunta.situacioSocial.social === 'Habitatge deficient (H.2)' || pregunta.situacioSocial.social === 'Habitatge insegur (H.3)' || pregunta.situacioSocial.social === 'Habitatge massificat (H.4)' || pregunta.situacioSocial.social === 'Risc de pérdua o manca serveis/subministraments (H.5)') {
-                this.set(pregunta.situacioSocial.social);
+      for (const ambit of this.value.ambit) {
+        if (ambit.ambit.descripcio.toUpperCase() === 'MATERIAL I INSTRUMENTAL') {
+          for (const entorn of ambit.entorn) {
+            if (entorn.descripcio.toUpperCase() === 'ENTORN HABITATGE') {
+              for (const pregunta of entorn.pregunta) {
+                if (pregunta.situacioSocial.social === 'Manca d\'habitatge estable (H.1)') {
+                  this.set(pregunta.situacioSocial.social);
+                }
+                if (pregunta.situacioSocial.social === 'Habitatge deficient (H.2)' || pregunta.situacioSocial.social === 'Habitatge insegur (H.3)' || pregunta.situacioSocial.social === 'Habitatge massificat (H.4)' || pregunta.situacioSocial.social === 'Risc de pérdua o manca serveis/subministraments (H.5)') {
+                  this.set(pregunta.situacioSocial.social);
+                }
               }
             }
-          }
-          if (entorn.descripcio.toUpperCase() === 'ENTORN ECONÓMIC') {
-            for (const pregunta of entorn.pregunta) {
-              if (pregunta.situacioSocial.social === 'Sense ingressos estables (E.1)') {
-                this.set(pregunta.situacioSocial.social);
-              }
-              if (pregunta.situacioSocial.social === 'Ingressos insuficients (E.2)' || pregunta.situacioSocial.social === 'Administració deficient dels ingressos (E.3)') {
-                this.set(pregunta.situacioSocial.social);
+            if (entorn.descripcio.toUpperCase() === 'ENTORN ECONÓMIC') {
+              for (const pregunta of entorn.pregunta) {
+                if (pregunta.situacioSocial.social === 'Sense ingressos estables (E.1)') {
+                  this.set(pregunta.situacioSocial.social);
+                }
+                if (pregunta.situacioSocial.social === 'Ingressos insuficients (E.2)' || pregunta.situacioSocial.social === 'Administració deficient dels ingressos (E.3)') {
+                  this.set(pregunta.situacioSocial.social);
+                }
               }
             }
           }
@@ -290,7 +311,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       }
     }
   }
-  }
+
   /*Funcion para recargar el diagnostico*/
   reloadDiagnostico() {
     this.tabsService.getDiagnostic(this.idDiagnostic).subscribe((result: Diagnosis) => {
@@ -300,10 +321,12 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+
   /*Funcion para emitir que hemos terminado*/
   public emitEnd() {
     this.endForm.emit();
   }
+
   /*Funcion para limpiar el diagnostico*/
   public clean() {
     let ambitID: number;
@@ -319,6 +342,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+
   /*Funcion para añadir una nueva pregunta al contexto*/
   public newPreguntaContext(ambit: Ambit, contexto: FactorsContext, membre: string) {
     const contextoEncontrado = this.getContextos(ambit.id, ambit, contexto);
@@ -356,6 +380,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       });
     }
   }
+
   /*Funcion para añadir pregunta al diagnostico */
   public newPregunta(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns): Observable<Preguntas> {
     const subject = new Subject<Preguntas>();
@@ -392,14 +417,15 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
     return subject;
   }
+
   /*Funcion para limitar el despliegue de situaciones repetitivas */
-  public maxPreguntasRepetitivas(idSocial: number, ambit: Ambit , entorn: Entorns) {
+  public maxPreguntasRepetitivas(idSocial: number, ambit: Ambit, entorn: Entorns) {
     let maximum = 0;
-    for ( const ambits of this.value.ambit ) {
-      for ( const entorns of ambits.entorn ) {
-         maximum = 0;
-        for ( const pregunta of entorns.pregunta ){
-          if ( pregunta.situacioSocial.id === idSocial){
+    for (const ambits of this.value.ambit) {
+      for (const entorns of ambits.entorn) {
+        maximum = 0;
+        for (const pregunta of entorns.pregunta) {
+          if (pregunta.situacioSocial.id === idSocial) {
             maximum += 1;
             if (maximum >= this.personsSelector.length) {
               return false;
@@ -410,8 +436,9 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
     return true;
   }
+
   /*Funcion para añadir una pregunta socialo repetida dentro del mismo array de pregunta , ya que pertenecen a la misma pregunta con el mismo id de situacion social */
-  public addPreguntaRepeat(pregunta: string , idSocial: number, ambit: Ambit , entorn: Entorns) {
+  public addPreguntaRepeat(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns) {
     if (this.maxPreguntasRepetitivas(idSocial, ambit, entorn)) {
       this.tabsService.PutQuestionAndGetRisc(new Preguntas(pregunta, idSocial), this.idDiagnostic).subscribe((result) => {
         for (let i = 0; i < this.value.ambit.length; i++) {
@@ -426,6 +453,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       });
     }
   }
+
   /*Funcion recoger una pregunta repetida dentro de el bloque de preguntas */
   public getPreguntaRepeat(id: number, ambit: Ambit, entorn: Entorn) {
 
@@ -437,36 +465,46 @@ export class FormTabComponent extends CustomInput implements OnInit {
               if (this.value.ambit[i].entorn[x].pregunta[z].id === id) {
                 return this.value.ambit[i].entorn[x].pregunta[z];
               }
-              }
             }
           }
         }
       }
     }
+  }
+
   /*Funcion para determinar si existen preguntas en eso ambito  */
-  public getPreguntas(id: number , ambit: Ambit , entorn: Entorns ): Preguntas[] {
+  public getPreguntas(id: number, ambit: Ambit, entorn: Entorns): Preguntas[] {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
-    if (!amb) { return [] }
-      const ent = amb.entorn.find(item => item.id === entorn.id);
-      return ent.pregunta.filter(item => {
-        return item.situacioSocial.id === id;
-      });
+    if (!amb) {
+      return []
+    }
+    const ent = amb.entorn.find(item => item.id === entorn.id);
+    return ent.pregunta.filter(item => {
+      return item.situacioSocial.id === id;
+    });
   }
+
   /*Funcion recoger las preguntas del contexto */
-  public getContextos(id: number , ambit: Ambit , contexto: FactorsContext ): Contextualitzacio {
+  public getContextos(id: number, ambit: Ambit, contexto: FactorsContext): Contextualitzacio {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
-    if (!amb) {return null }
-      const context = amb.contextualitzacio.find(item => item.factor.id === contexto.id);
-      if (!context) {
-        return null;
-      }
-      return context;
+    if (!amb) {
+      return null
+    }
+    const context = amb.contextualitzacio.find(item => item.factor.id === contexto.id);
+    if (!context) {
+      return null;
+    }
+    return context;
   }
+
   /*Funcion recoger la primera pregunta de cada bloque  */
-  getFirstPregunta(id: number, ambit: Ambit , entorn: Entorns) {
+  getFirstPregunta(id: number, ambit: Ambit, entorn: Entorns) {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
 
-    if (!amb) {console.log("Error Ambito"); return false; }
+    if (!amb) {
+      console.log("Error Ambito");
+      return false;
+    }
     if (entorn) {
       const ent = amb.entorn.find(item => item.id === entorn.id);
       if (!ent) {
@@ -478,27 +516,30 @@ export class FormTabComponent extends CustomInput implements OnInit {
       });
     }
   }
+
   /*Funcion recoger la primera pregunta del contexto de cada bloque  */
-  getFirtsContexto(id: number, ambit: Ambit , contexto: FactorsContext) {
+  getFirtsContexto(id: number, ambit: Ambit, contexto: FactorsContext) {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
-        if(!amb) {
-          console.log("Error Contexto");
-          return false;
-        }
-      return amb.contextualitzacio.find(item => item.factor.id === contexto.id);
+    if (!amb) {
+      console.log("Error Contexto");
+      return false;
     }
+    return amb.contextualitzacio.find(item => item.factor.id === contexto.id);
+  }
+
   /*Funcion recoger la frequencia para cada selector  */
-  public getFrequencia (gravetat: string, selectorsGravetat: SelectorGravetat[]) {
+  public getFrequencia(gravetat: string, selectorsGravetat: SelectorGravetat[]) {
     if (gravetat) {
-      return selectorsGravetat.find( data => {
+      return selectorsGravetat.find(data => {
         return data.gravetat.descripcio === gravetat;
       }).frequencia;
     } else {
       return [];
     }
   }
+
   /*Funcion recoger la gravetat para cada selector  */
-  public getValueGravetat( pregunta: Preguntas, ambit: Ambit , entorn: Entorn , gravetat: string) {
+  public getValueGravetat(pregunta: Preguntas, ambit: Ambit, entorn: Entorn, gravetat: string) {
     this.tabsService.getValuesGravetat().subscribe((result: Gravetat[]) => {
       for (const grave of result) {
         if (grave.descripcio === gravetat) {
@@ -506,11 +547,11 @@ export class FormTabComponent extends CustomInput implements OnInit {
             for (let x = 0; x < this.value.ambit[i].entorn.length; x++) {
               for (let z = 0; z < this.value.ambit[i].entorn[x].pregunta.length; z++) {
                 if (this.value.ambit[i].entorn[x].pregunta[z].id === pregunta.id) {
-                  if(!this.value.ambit[i].entorn[x].pregunta[z].gravetat) {
+                  if (!this.value.ambit[i].entorn[x].pregunta[z].gravetat) {
                     this.value.ambit[i].entorn[x].pregunta[z].gravetat = new Gravetat();
                   }
                   this.value.ambit[i].entorn[x].pregunta[z].gravetat = grave;
-                  this.tabsService.PutQuestionAndGetRisc(pregunta,this.idDiagnostic).subscribe((result) => {
+                  this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
                     this.value.ambit[i].entorn[x].pregunta[z] = result;
                     this.value.ambit[i].entorn[x].pregunta[z].frequencia = new Frequencia();
                   }, (err) => {
@@ -518,38 +559,40 @@ export class FormTabComponent extends CustomInput implements OnInit {
                   });
                 }
               }
-          }
             }
           }
         }
+      }
     }, (err) => {
       console.log(err);
     });
 
   }
+
   /*Funcion setear de la frequencia escojida , el valor de ella,  al objeto  */
-  public getValueFrequencia(pregunta: Preguntas , id: number, frequencia?:string ) {
+  public getValueFrequencia(pregunta: Preguntas, id: number, frequencia?: string) {
 
     this.tabsService.getValuesFrequencia().subscribe((resultFreq: Frequencia[]) => {
-      if(!pregunta.frequencia) {
+      if (!pregunta.frequencia) {
         pregunta.frequencia = new Frequencia();
       }
       for (const freq of resultFreq) {
         if (freq.descripcio === frequencia) {
-              pregunta.frequencia = freq;
-              this.tabsService.PutQuestionAndGetRisc(pregunta , this.idDiagnostic).subscribe((result) => {
-                pregunta.factor = result.factor;
-              }, (err) => {
-                console.log(err);
-              });
+          pregunta.frequencia = freq;
+          this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
+            pregunta.factor = result.factor;
+          }, (err) => {
+            console.log(err);
+          });
         }
       }
     }, (err) => {
       console.log(err);
     });
   }
+
   /*Funcion para enviar la question que te devuelve el riesgo  */
-  public putQuestionAndGetRisc(pregunta:Preguntas) {
+  public putQuestionAndGetRisc(pregunta: Preguntas) {
     this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
       this.reloadDiagnostico();
       pregunta = result;
@@ -557,6 +600,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+
   /*Funcion seleccionar la persona y asignarle el valor */
   changePersona(pregunta: Preguntas, value) {
     pregunta.persona = value;
@@ -566,21 +610,22 @@ export class FormTabComponent extends CustomInput implements OnInit {
       }, (err) => {
         console.log(err);
       });
-    }
-    else {
+    } else {
       this.putQuestionAndGetRisc(pregunta);
     }
   }
+
   /*Funcion seleccionar la persona y asignarle el valor */
   changePersonaSelector(context: Contextualitzacio, value) {
     context.persona = value;
     this.tabsService.putContextQuestion(context.factor,
       this.idDiagnostic, context).subscribe((result) => {
-        context.factor = result.factor;
+      context.factor = result.factor;
     }, (err) => {
       console.log(err);
     });
   }
+
   /*Funcion setear de la gravedad escojida , el valor de ella,  al objeto  */
   public getValueSeverity(pregunta: Preguntas, value) {
     this.tabsService.getValuesGravetat().subscribe((result: Gravetat[]) => {
@@ -610,8 +655,9 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+
   /*Funcion que te deuvlve la frequencia para cada una de las preguntas repetidas */
-  public getFrequenciRepeat(pregunta: Preguntas , value:string ) {
+  public getFrequenciRepeat(pregunta: Preguntas, value: string) {
 
     this.tabsService.getValuesFrequencia().subscribe((resultFreq: Frequencia[]) => {
       if (!pregunta.frequencia) {
@@ -620,7 +666,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       for (const freq of resultFreq) {
         if (freq.descripcio === value) {
           pregunta.frequencia = freq;
-          this.tabsService.PutQuestionAndGetRisc(pregunta , this.idDiagnostic).subscribe((result) => {
+          this.tabsService.PutQuestionAndGetRisc(pregunta, this.idDiagnostic).subscribe((result) => {
             pregunta.factor = result.factor;
           }, (err) => {
             console.log(err);
@@ -631,22 +677,24 @@ export class FormTabComponent extends CustomInput implements OnInit {
       console.log(err);
     });
   }
+
   /*Funcion que elimina cada una de las preguntas repetidas*/
-  public deleteRepeat(pregunta:Preguntas) {
-      this.tabsService.DeletePregunta(pregunta.id).subscribe((result) => {
-        this.reloadDiagnostico();
-      }, (err) => {
-        console.log(err);
-      });
+  public deleteRepeat(pregunta: Preguntas) {
+    this.tabsService.DeletePregunta(pregunta.id).subscribe((result) => {
+      this.reloadDiagnostico();
+    }, (err) => {
+      console.log(err);
+    });
   }
+
   /*Funcion que filtra las personas repetidas*/
-  public getFilterPersonas(idSocial: number , personaSelec:Persona ) {
+  public getFilterPersonas(idSocial: number, personaSelec: Persona) {
     let personas: string [] = [];
     let ffpp: Persona [] = [];
-    for ( const ambits of this.value.ambit ) {
-      for ( const entorns of ambits.entorn ) {
-        for ( const pregunta of entorns.pregunta ) {
-          if ( pregunta.situacioSocial.id === idSocial ) {
+    for (const ambits of this.value.ambit) {
+      for (const entorns of ambits.entorn) {
+        for (const pregunta of entorns.pregunta) {
+          if (pregunta.situacioSocial.id === idSocial) {
             if (pregunta.persona) {
               personas.push(pregunta.persona.id);
             }
@@ -657,10 +705,17 @@ export class FormTabComponent extends CustomInput implements OnInit {
     ffpp = this.personsSelector.filter(data => {
       return !personas.find(item => item === data.id);
     });
-    if ( personaSelec) {
+    if (personaSelec) {
       ffpp.push(personaSelec);
     }
     return ffpp;
+  }
+
+  public llistaPE(id:string){
+    if (this.value.versioModel.llistaPE.find(item => item === id)) {
+      return true;
+    }
+    return false;
   }
 
 }

@@ -3,7 +3,7 @@
     <button type="button" class="float-right btn btn-outline-primary doNotPrint" (click)="onPrint();"><i class="fa fa-file-pdf-o"></i> Generar Esborrany </button>
   </div>
 </section>
-<div id="waterMark">
+<div id="waterMark" style="display: none">
 </div>
 <section *ngIf="value">
   <div class="row m-3" >
@@ -151,13 +151,14 @@
                         <select class="form-control risc-pro"
                                 id="t2person"
                                 name="persona{{i}}"
+                                #t2person="ngModel"
                                 [ngModel]="evaluacion?.riscProfessional?.descripcio"
-                                (ngModelChange)="setRisc(evaluacion.riscProfessional, ambit , $event)"
+                                (change)="setRisc(evaluacion.riscProfessional, ambit , t2person.value)"
                                 [ngClass]="{'warning amarillo' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'RISC',
                                             'danger rojo ' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'ALT RISC',
                                             'success verde' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'VULNERABILITAT',
                                             'info azul' : evaluacion?.riscProfessional?.descripcio?.toUpperCase() === 'SENSE VALORACI&#211;' }">
-                          <option *ngFor="let risc of getFilterRiscos(evaluacion)"> {{risc.descripcio}} </option>
+                          <option *ngFor="let risc of getFilterRiscos(evaluacion)" [value]="risc.descripcio"> {{risc.descripcio}} </option>
                         </select>
 
                       </td>
@@ -165,9 +166,9 @@
                     <tr *ngIf=" evaluacion?.riscProfessional?.descripcio && evaluacion?.riscProfessional?.descripcio !== 'Sense Valoració'">
                       <td class="text-right">Justificació risc professional</td>
                       <td class="text-center">
-                        <textarea required="true" class="form-control" type="text" id="fileRiscProfesionalObservation" name="b{{i}}"
+                        <textarea required="true" class="form-control" type="text" id="fileRiscProfesionalObservation" #fileRiscProfesionalObservation="ngModel" name="b{{i}}"
                                   [ngModel]="evaluacion?.justificacio"
-                                  (ngModelChange)="evaluacion.justificacio = $event">
+                                  (change)="evaluacion.justificacio = fileRiscProfesionalObservation.value">
 
                         </textarea>
 
@@ -224,7 +225,7 @@
                   <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
                 </label>
                 <textarea [ngModel]="ambit?.observacions" class="form-control" type="text" name="ob{{i}}"
-                          (ngModelChange)="ambit.observacions = $event" id="fileObservationAutonomy"></textarea>
+                          (change)="ambit.observacions = fileObservationAutonomy.value" id="fileObservationAutonomy" #fileObservationAutonomy="ngModel" ></textarea>
               </div>
             </div>
             <!--/ Observations Ambits -->
@@ -276,7 +277,7 @@
                 </label>
                 <textarea class="form-control" type="text" value="{{ global.observacions }}" name="observationsss{{i}}"
                           [ngModel]="global?.observacions"
-                            (ngModelChange)="global.observacions = $event" id="fileObservationGlobal"></textarea>
+                            (change)="global.observacions = fileObservationGlobal.value" id="fileObservationGlobal" #fileObservationGlobal="ngModel"></textarea>
               </div>
             </div>
           </div>
