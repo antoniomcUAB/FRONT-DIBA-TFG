@@ -200,7 +200,10 @@ export class FormTabComponent extends CustomInput implements OnInit {
       for (const ent of ambit.entorn) {
         for (const preg of ent.pregunta) {
           if (this.value.versioModel.llistaPE.find(item => item === preg.situacioSocial.id.toString())) {
-            this.preguntaEconomica = preg;
+            let pregunta = new Preguntas("", 1);
+            pregunta = Object.assign(pregunta, preg);
+            pregunta.factorEconomic = preg.factorEconomic.slice();
+            this.preguntaEconomica = pregunta;
           }
         }
       }
@@ -208,20 +211,27 @@ export class FormTabComponent extends CustomInput implements OnInit {
     if (!this.preguntaEconomica) {
       this.newPregunta(pregunta, idSocial, ambit, entorn).subscribe(data => {
         this.preguntaEconomica = data;
-        this.preguntaEconomicaCopia = this.preguntaEconomica;
+        this.preguntaEconomicaCopia = Object.assign({}, this.preguntaEconomica);
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          if(reason) {
+            this.getRiscEconomic();
+          }
         });
       });
     } else {
-      this.preguntaEconomicaCopia = this.preguntaEconomica;
-      console.log(this.preguntaEconomicaCopia);
+      // this.preguntaEconomicaCopia = Object.assign({}, this.preguntaEconomica);
+      // this.preguntaEconomica.factorEconomic = this.preguntaEconomicaCopia.factorEconomic.slice();
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
+        console.log(result);
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        if(reason) {
+          this.getRiscEconomic();
+        }
       });
     }
   }
