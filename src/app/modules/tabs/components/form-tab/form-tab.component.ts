@@ -27,6 +27,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
   closeResult: string;
   cleanSelects: string = null; /* Variable per netejar Formulari*/
   preguntaEconomica: Preguntas; /* Variable para guardar la pregunta economica*/
+  preguntaEconomicaCopia: Preguntas; /* Variable para guardar la pregunta economica*/
   @ViewChild('formTab') formValues; /*Variable para Guardar el valor del formulario*/
   @Input() groupRelacional: EnvironmentRelacional = new EnvironmentRelacional(); /*Filtro de entornos , antes de cargar las preguntas*/
   @Input() groupMaterial: EnvironmentMaterial = new EnvironmentMaterial(); /*Filtro de entornos , antes de cargar las preguntas*/
@@ -194,31 +195,40 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
 
   /*Funcion para abrir el content y crear la pregunta economica */
-  openPreg(content) {
-    let trobat = true;
+  openPreg(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns, content) {
     for (const ambit of this.value.ambit) {
-      for (const ent of ambit.entorn ) {
+      for (const ent of ambit.entorn) {
         for (const preg of ent.pregunta) {
-          if (this.value.versioModel.llistaPE.find(item => item === preg.situacioSocial.id.toString() )) {
-            if ( this.preguntaEconomica) {
-              if (this.preguntaEconomica.situacioSocial.id.toString() !== preg.situacioSocial.id.toString()) {
-                this.preguntaEconomica.factorEconomic = [];
-                this.preguntaEconomica = preg;
-              }
-            } else {
-              this.preguntaEconomica = preg;
-            }
+          if (this.value.versioModel.llistaPE.find(item => item === preg.situacioSocial.id.toString())) {
+            this.preguntaEconomica = preg;
           }
         }
       }
     }
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    if (!this.preguntaEconomica) {
+      this.newPregunta(pregunta, idSocial, ambit, entorn).subscribe(data => {
+        this.preguntaEconomica = data;
+        this.preguntaEconomicaCopia = this.preguntaEconomica;
+        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+      });
+    } else {
+      this.preguntaEconomicaCopia = this.preguntaEconomica;
+      console.log(this.preguntaEconomicaCopia);
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
   }
 
+  public CopiaOn() {
+    this.preguntaEconomica = this.preguntaEconomicaCopia;
+  }
   /*Funcion para abrir el content y crear la pregunta economica */
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -243,9 +253,11 @@ export class FormTabComponent extends CustomInput implements OnInit {
 
   /*Funcion para recoger pregunta Economica del diagnostico */
   public getPreguntaEconomica(factorEconomic: FactorEconomic) {
-    for (const eco of this.preguntaEconomica.factorEconomic) {
-      if (eco.id && eco.id === factorEconomic.id) {
-        return eco;
+    if (this.preguntaEconomica) {
+      for (const eco of this.preguntaEconomica.factorEconomic) {
+        if (eco.id && eco.id === factorEconomic.id) {
+          return eco;
+        }
       }
     }
   }

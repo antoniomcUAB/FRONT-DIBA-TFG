@@ -30,7 +30,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="getRiscEconomic(); modal.dismiss('Cross click')">Guardar</button>
-      <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancelar</button>
+      <button type="button" class="btn btn-primary" aria-label="Close" (click)="modal.dismiss('Cross click');CopiaOn()">Cancelar</button>
     </div>
   </form>
 </ng-template>
@@ -76,7 +76,7 @@
               <div class="col-xl-5 pr-0" *ngIf="llistaPE(pregunta.id.toString())" >
                 <div class="col-12">
                   <div class="position-relative col-3 pt-1 pl-0 pb-4" *ngIf=" i === 0 ">
-                    <button type="button" class=" col-12 btn btn-outline-primary" [disabled]="getPreguntaDisabled(pregunta.id)" (click)="openPreg(valoration );" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
+                    <button type="button" class=" col-12 btn btn-outline-primary" [disabled]="getPreguntaDisabled(pregunta.id)" (click)="openPreg(pregunta.social,pregunta.id,ambit,entorn,valoration);" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
                   </div>
                   <label *ngIf="i === 0" class="col-12 pl-5" for="ssb00" >{{ "TABLE.basicSocialSituation" | translate }} </label>
                   <label *ngIf="i !== 0 "class="desaparece">{{ "TABLE.basicSocialSituation" | translate }}</label>
@@ -84,7 +84,7 @@
                   <div class="form-group row col-12 pr-0 mr-0 pl-5">
                     <div class="position-relative col-12 pl-0 pr-0">
 
-                      <input  type="text" class="form-control col-12  "[value]= "pregunta.social " disabled >
+                      <a href="/dsdiba/model-pdf/{{pregunta.id}}"><input  type="text" class="form-control col-12  "[value]= "pregunta.social " disabled ></a>
                       <i class= "fa fa-question-circle position-absolute top-right" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.social" container="body"></i>
                     </div>
 
@@ -96,9 +96,9 @@
 
               <!-- Aplicatiu -->
               <div class="col-xl-1"  >
-                <div class="col-12" *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')&& !pregunta.social.includes('Sense ingressos estables (E.1)')" >
+                <div class="col-12" *ngIf="!llistaPE(pregunta.id.toString())" >
                   <div class="apl form-group align-items-center col-12 text-center">
-                    <label *ngIf=" i === 0" > {{ "TABLE.apl" | translate }}</label>
+                    <label *ngIf=" i === 0|| pregunta.social.includes('Administració deficient dels ingressos (E.3)')" > {{ "TABLE.apl" | translate }}</label>
                     <label *ngIf="i !== 0 " class="desaparece">{{ "TABLE.apl" | translate }}</label>
                     <label class="custom-control custom-checkbox p-0 pl-2 apply">
                       <input type="checkbox"
@@ -116,9 +116,9 @@
               <!--/ Aplicatiu -->
 
               <!-- Persones -->
-              <div class="col-xl-2" *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')&& !pregunta.social.includes('Sense ingressos estables (E.1)')">
+              <div class="col-xl-2" *ngIf="!llistaPE(pregunta.id.toString())">
                 <div class="col-12">
-                  <label  *ngIf=" i === 0" for="t2person" >{{ "TABLE.person" | translate }} </label>
+                  <label  *ngIf=" i === 0 || pregunta.social.includes('Administració deficient dels ingressos (E.3)')" for="t2person" >{{ "TABLE.person" | translate }} </label>
                   <label *ngIf="i !== 0 " class="desaparece">{{ "TABLE.person" | translate }}</label>
                   <div  class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
@@ -142,9 +142,9 @@
               </div>
               <!--/ Persones -->
               <!-- Severity -->
-              <div class="col-xl-1" *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')&& !pregunta.social.includes('Sense ingressos estables (E.1)')">
+              <div class="col-xl-1" *ngIf="!llistaPE(pregunta.id.toString())">
                 <div class="col-12">
-                  <label *ngIf=" i === 0" for="t10severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle"
+                  <label *ngIf=" i === 0 || pregunta.social.includes('Administració deficient dels ingressos (E.3)')" for="t10severity" >{{ "TABLE.severity" | translate }} <i class="fa fa-question-circle"
 
                                                                                  aria-hidden="true" [ngbPopover] =  "'EMERGENTS.Gravetat' | translate "
                                                                                  placement="right"
@@ -165,9 +165,9 @@
               </div>
               <!--/ Severity -->
               <!-- Frequencia -->
-              <div class="col-xl-1" *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')&& !pregunta.social.includes('Sense ingressos estables (E.1)')">
+              <div class="col-xl-1" *ngIf="!llistaPE(pregunta.id.toString())">
                 <div class="col-12">
-                  <label *ngIf=" i === 0" for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle"
+                  <label *ngIf=" i === 0 || pregunta.social.includes('Administració deficient dels ingressos (E.3)')" for="t1frequency" >{{ "TABLE.frequency" | translate }} <i class="fa fa-question-circle"
                                                                                    aria-hidden="true"
                                                                                     [ngbPopover] =  "'EMERGENTS.Frequencia' | translate "
                                                                                    placement="right"
@@ -188,9 +188,9 @@
               </div>
               <!--/ Frequencia -->
               <!-- riskFactors sense valoracio economica-->
-              <div class="col-xl-2" *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)') && !pregunta.social.includes('Sense ingressos estables (E.1)')" >
+              <div class="col-xl-2" *ngIf="!llistaPE(pregunta.id.toString())" >
                 <div class="col-12">
-                <label *ngIf=" i === 0" for="t4riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
+                <label *ngIf=" i === 0 || pregunta.social.includes('Administració deficient dels ingressos (E.3)')" for="t4riskFactor" >{{ "TABLE.riskFactors" | translate }}</label>
                   <label *ngIf="i !== 0 " class="desaparece">{{ "TABLE.riskFactors" | translate }}</label>
                 <input type="text"
                        [ngClass]="{'warning' : getFirstPregunta(pregunta.id,ambit, entorn)?.factor?.descripcio?.toUpperCase() === 'RISC',
@@ -203,7 +203,7 @@
                 </div>
               </div>
               <!-- riskFactors amb valoracio economica-->
-              <div class="col-xl-6" *ngIf="pregunta.social.includes('Ingressos insuficients (E.2)') || pregunta.social.includes('Sense ingressos estables (E.1)')" >
+              <div class="col-xl-6" *ngIf="llistaPE(pregunta.id.toString())" >
                 <div class="col-12">
                   <div class="position-relative col-3 pl-0 pt-2 pb-5" *ngIf=" i === 0 ">
                   </div>
