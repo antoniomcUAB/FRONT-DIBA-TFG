@@ -90,7 +90,7 @@
                 <table class="table table-bordered">
                   <thead class="table-active bg-info">
                   <tr>
-                    <ng-template ngFor [ngForOf]="evaluations" let-evaluacio>
+                    <ng-template ngFor [ngForOf]="diagnosis?.valoracio?.evaluacions" let-evaluacio>
                       <ng-template [ngIf]="evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS' ">
                         <th colspan="2" class="text-white bg-grey-400 border_top exact-grey">Valoració de risc del cas</th>
                       </ng-template>
@@ -100,7 +100,7 @@
                   <tbody >
                   <ng-container>
                     <tr>
-                      <ng-template ngFor [ngForOf]="evaluations" let-evaluacio>
+                      <ng-template ngFor [ngForOf]="diagnosis?.valoracio?.evaluacions" let-evaluacio>
                         <ng-template [ngIf]="evaluacio?.ambit?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS' ">
                           <th class="border_bot"
                               [ngClass]="{'warning amarillo' : evaluacio.risc?.descripcio.toUpperCase() === 'RISC',
@@ -119,7 +119,7 @@
               <div class="col-xl-12">
                 <table class="table table-bordered">
                   <tbody>
-                  <ng-template ngFor [ngForOf]="evaluations" let-evaluacio let-v="index">
+                  <ng-template ngFor [ngForOf]="diagnosis?.valoracio?.evaluacions" let-evaluacio let-v="index">
                     <ng-template [ngIf]="evaluacio && evaluacio?.ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
                       <tr>
                         <th class="bg-primary bg-primary-exact text-white"    *ngIf="v===0 ">
@@ -157,7 +157,7 @@
   </div>
   <!-- Ambito -->
 
-  <div class="row m-3" *ngFor="let ambit of ambits">
+  <div class="row m-3" *ngFor="let ambit of diagnosis?.ambit">
     <ng-container *ngIf="ambit?.ambit?.descripcio.toUpperCase() !== 'GLOBALITAT DEL CAS'">
       <div class="col-xl-12">
         <div class="card">

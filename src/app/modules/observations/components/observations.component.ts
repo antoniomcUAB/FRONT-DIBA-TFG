@@ -3,10 +3,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
 import {ObservationsService} from "../services/observations.service";
-import {Diagnosis, Evaluacions, Ambit, Expedient} from "../../files";
+import { Evaluacions, Ambit, Expedient} from "../../files";
 import {BreadCrums} from "../../tabs/models/tab-class-form";
 import {HomeService} from "../../home/services/home.service";
 import {GlobalService} from "../../../shared";
+import {Diagnosis} from "../../tabs/models/diagnostic";
 
 @Component({
   selector: 'app-observations',
@@ -22,7 +23,7 @@ export class ObservationsComponent implements OnInit {
   public professionalID: string; /* id del Profesional*/
 
   public diagnosis: Diagnosis;
-  public ambits: Ambit;
+  public ambits: Ambit[] = [];
   public evaluations: Evaluacions;
   public expedientID: string;
 
@@ -55,8 +56,6 @@ export class ObservationsComponent implements OnInit {
   getObservations(id: number) {
     this._service.getDetailObservations(id).subscribe( (data: Diagnosis) => {
       this.diagnosis = data;
-      this.ambits = data.ambit;
-      this.evaluations = data.valoracio.evaluacions;
     }, error => {
       console.log("ERROR - al recuperar Diagnostico");
     });
