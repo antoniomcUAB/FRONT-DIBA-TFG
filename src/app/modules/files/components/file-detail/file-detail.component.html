@@ -86,7 +86,7 @@
 
                 <ng-template #unityFamily let-item >
                   <td class="text-center" [ngClass]="{'info' : item.referencia === true}">
-                    {{item.tipusPersona.descripcio}}
+                    {{item?.tipusPersona?.descripcio}}
                     <i *ngIf="item.referencia === true"
                        class="icon ion-information-circled float-left"
                        placement="right"

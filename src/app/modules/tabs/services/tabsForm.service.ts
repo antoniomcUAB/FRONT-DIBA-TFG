@@ -111,9 +111,32 @@ export class TabsFormService extends GlobalService {
   putValidationDiagnostic( idExpedient: number , diagnostic: Diagnosis): Observable<Diagnosis> {
   return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/valorar/${diagnostic.id}`).pipe(
     map( data => {
+      let sortValoracio: Valoracio = new Valoracio();
       if (!data.valoracio.evaluacions) {
         data.valoracio.evaluacions = [];
       }
+      for (let eva of data.valoracio.evaluacions) {
+        if (eva.ambit.ambit.descripcio.toUpperCase() === "AUTONOMIA") {
+            sortValoracio.evaluacions.push(eva);
+        }
+      }
+      for (let eva of data.valoracio.evaluacions) {
+        if (eva.ambit.ambit.descripcio.toUpperCase() === "MATERIAL I INSTRUMENTAL") {
+          sortValoracio.evaluacions.push(eva);
+        }
+      }
+      for (let eva of data.valoracio.evaluacions) {
+        if (eva.ambit.ambit.descripcio.toUpperCase() === "RELACIONAL") {
+          sortValoracio.evaluacions.push(eva);
+        }
+      }
+      for (let eva of data.valoracio.evaluacions) {
+        if (eva.ambit.ambit.descripcio.toUpperCase() === "GLOBALITAT DEL CAS") {
+          sortValoracio.evaluacions.push(eva);
+        }
+      }
+      data.valoracio = sortValoracio;
+      console.log(data);
       return data;
       })
   );
