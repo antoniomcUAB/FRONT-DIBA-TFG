@@ -212,7 +212,7 @@
                   </tbody>
                 </table>
                 <!-- Result Automatic Evaluations -->
-                <table class="table table-borderless" *ngFor="let evaluacion of evaluations">
+                <table class="table table-borderless" *ngFor="let evaluacion of diagnosis?.valoracio?.evaluacions">
                   <ng-container *ngIf="evaluacion.ambit.id === ambit.id">
                     <tbody>
                       <!-- Result Automatic Evaluations -->
@@ -294,7 +294,7 @@
                 <label for="fileObservationAutonomy" class="col-xl-form-label">
                   <i class="fa fa-pencil-square-o"></i> {{ "FORM.fileObs" | translate }}
                 </label>
-                <textarea class="form-control" type="text" value="{{ ambit.observacions }}" id="fileObservationAutonomy" disabled="disabled"></textarea>
+                <textarea class="form-control" type="text" value="{{ ambit?.observacions }}" id="fileObservationAutonomy" disabled="disabled"></textarea>
               </div>
             </div>
             <!--/ Observations Ambits -->
@@ -305,7 +305,7 @@
   </div>
 
   <!-- Global -->
-  <div class="row m-3" *ngFor="let global of ambits">
+  <div class="row m-3" *ngFor="let global of diagnosis?.ambit">
     <ng-container *ngIf="global?.ambit?.descripcio.toUpperCase() === 'GLOBALITAT DEL CAS'">
       <div class="col-xl-12">
         <div class="card">

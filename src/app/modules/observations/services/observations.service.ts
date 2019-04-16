@@ -17,7 +17,7 @@ export class ObservationsService extends GlobalService {
   getDetailObservations(id: number): Observable<Diagnosis> {
     return this._http.get<Diagnosis>(`${this.apiURL}/dsdiba/api/diagnostic/${id}`).pipe(
       map( data => {
-        let sortValoracio: Valoracio = new Valoracio();
+        const sortValoracio: Valoracio = new Valoracio();
         for (let eva of data.valoracio.evaluacions) {
           if (eva.ambit.ambit.descripcio.toUpperCase() === "AUTONOMIA") {
             sortValoracio.evaluacions.push(eva);

@@ -109,7 +109,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
     });
     setTimeout(_ => {
       this._router.navigate(['/observations', {'id': this.idDiagnostic, 'date': this.value.data, 'exp': this.idExpedient , 'codi': this.nomExpedient}]);
-    }, 100);
+    }, 300);
 
   }
   onPrint() {
@@ -131,7 +131,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   public setCrum(){
     if (this.nomDiagnostic && this.nomExpedient) {
       this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.nomExpedient.toString(), name: [this.idExpedient.toString(), this.idProfessional.toString()]}, {url: this.nomDiagnostic, name: []}, {
-        url: 'Valoracion Final',
+        url: 'Valoració final',
         name: []
       }];
       this.global.setBreadCrum(this.breadcrum);
