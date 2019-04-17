@@ -30,14 +30,14 @@
     <to>index.html</to>
   </rule>
 
-  <rule match-type="wildcard">
-    <from>*/auth*</from>
-    <to>index.html</to>
+  <rule>
+    <from>^/auth(.*)$</from>
+    <to>/index.html</to>
   </rule>
 
-  <rule match-type="wildcard">
-    <from>(.*)\/model-pdf\/*.*</from>
-    <to>index.html</to>
+  <rule>
+    <from>^/model-pdf(.*)$</from>
+    <to>/index.html</to>
   </rule>
 
   <rule match-type="wildcard">
