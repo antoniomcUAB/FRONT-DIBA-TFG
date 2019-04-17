@@ -30,8 +30,7 @@ export class ObservationsComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
               private _location: Location,
               private _service: ObservationsService,
-              private global: GlobalService,
-              private _translateService: TranslateService) {
+              private global: GlobalService) {
 
     this.id = this._route.snapshot.params['id']; /*Obtenemos el id del diagnostico*/
     this.date = this._route.snapshot.params['date']; /*Obtenemos la fecha del diagnostico*/

@@ -131,7 +131,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   public setCrum() {
     if (this.nomDiagnostic && this.nomExpedient) {
       this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient '+ this.nomExpedient.toString(), name: [this.idExpedient.toString(), this.idProfessional.toString()]}, {url: this.nomDiagnostic, name: []}, {
-        url: 'Valoració final',
+        url: 'Valoració del cas',
         name: []
       }];
       this.global.setBreadCrum(this.breadcrum);

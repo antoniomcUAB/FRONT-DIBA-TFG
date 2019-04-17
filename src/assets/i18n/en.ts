@@ -12,7 +12,7 @@ export let TRANSLATION = {
     'updateDate': 'Fecha ultima valoracion',
     'actions': 'Acciones',
     'apl': 'Apl.',
-    'aplMas': 'Mes d\'una persona UC',
+    'aplMas': 'Més d\'una persona UC',
     'aplUna': '1 membre UC/si',
     'person': 'Persona',
     'severity': 'Gravedad',

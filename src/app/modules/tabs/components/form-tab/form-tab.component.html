@@ -76,7 +76,7 @@
               <div class="col-xl-5 pr-0" *ngIf="llistaPE(pregunta.id.toString())" >
                 <div class="col-12">
                   <div class="position-relative col-3 pt-1 pl-0 pb-4" *ngIf=" i === 0 ">
-                    <button type="button" class=" col-12 btn btn-outline-primary" [disabled]="getPreguntaDisabled(pregunta.id)" (click)="openPreg(pregunta.social,pregunta.id,ambit,entorn,valoration);" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoracio </button>
+                    <button type="button" class=" col-12 btn btn-outline-primary" [disabled]="getPreguntaDisabled(pregunta.id)" (click)="openPreg(pregunta.social,pregunta.id,ambit,entorn,valoration);" ><i class="fa fa-search-plus" aria-hidden="true"></i> Valoració </button>
                   </div>
                   <label *ngIf="i === 0" class="col-12 pl-5" for="ssb00" >{{ "TABLE.basicSocialSituation" | translate }} </label>
                   <label *ngIf="i !== 0 "class="desaparece">{{ "TABLE.basicSocialSituation" | translate }}</label>
@@ -488,7 +488,7 @@
       <button type="button" class="btn btn-danger ml-3 mb-1" (click)="open(esborrar);"><i class="fa fa-times" aria-hidden="true"></i> Esborrar </button>
     </div>
     <div class="form-group col-xl-6 float-right text-right">
-      <button  type="submit"  class="mr-3 mb-1 btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Seguent </button>
+      <button  type="submit"  class="mr-3 mb-1 btn btn-outline-success" ><i class="fa fa-arrow-right" aria-hidden="true"></i> Següent </button>
     </div>
 
   </div>

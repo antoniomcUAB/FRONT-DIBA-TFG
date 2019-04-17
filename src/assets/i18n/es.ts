@@ -14,7 +14,7 @@ export let TRANSLATION = {
     'updateDate'           : 'Data última valoració',
     'actions'              : 'Accions',
     'apl'                  : 'Aplica',
-    'aplMas'               : 'Mes d\'una persona UC',
+    'aplMas'               : 'Més d\'una persona UC',
     'aplUna'               : '1 membre UC/si',
     'person'               : 'Persona',
     'severity'             : 'Gravetat',
