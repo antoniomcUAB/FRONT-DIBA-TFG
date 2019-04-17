@@ -68,7 +68,7 @@
                   <label *ngIf="i === 0 || pregunta.social.includes('Administració deficient dels ingressos (E.3)')" class="col-12" for="ssb00" >{{ "TABLE.basicSocialSituation" | translate }} </label>
                   <label *ngIf="i !== 0 "class="desaparece">{{ "TABLE.basicSocialSituation" | translate }}</label>
                 <div *ngIf="!pregunta.social.includes('Ingressos insuficients (E.2)')" class="position-relative">
-                  <a href="/dsdiba/model-pdf/{{pregunta.id}}"> <input type="text" class="form-control " [value]= "pregunta.social " disabled  ></a>
+                  <a href="/dsdiba/model-pdf/{{pregunta.id}}" target="_blank" > <input type="text" class="form-control " [value]= "pregunta.social " disabled  ></a>
                   <i class= "fa fa-question-circle position-absolute top-right" aria-hidden="true" [ngbPopover]="pregunta.definicio" placement="right" triggers="mouseenter:mouseleave" [popoverTitle]="pregunta.social" container="body"></i>
                 </div>
                 </div>
