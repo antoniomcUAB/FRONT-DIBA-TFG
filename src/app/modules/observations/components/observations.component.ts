@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {TranslateService} from "@ngx-translate/core";
 import {ObservationsService} from "../services/observations.service";
 import { Evaluacions, Ambit, Expedient} from "../../files";
 import {BreadCrums} from "../../tabs/models/tab-class-form";
-import {HomeService} from "../../home/services/home.service";
 import {GlobalService} from "../../../shared";
 import {Diagnosis} from "../../tabs/models/diagnostic";
 
