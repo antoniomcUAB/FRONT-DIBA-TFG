@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {User} from '../resources/data/user';
+import {User} from '../resources/user';
 import {Observable} from 'rxjs';
 import {GlobalService} from "../../../shared";
 import {TokenService} from "./token.service";
