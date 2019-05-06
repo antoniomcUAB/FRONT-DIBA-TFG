@@ -1,4 +1,4 @@
-import {User} from "../../resources/data/user";
+import {User} from "../../resources/user";
 
 export class LoginRs {
   access_token: string;

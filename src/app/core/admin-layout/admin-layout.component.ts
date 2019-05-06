@@ -9,7 +9,7 @@ import {HomeService} from "../../modules/home/services/home.service";
 import {ArrayBreadCrums, BreadCrums} from "../../modules/tabs/models/tab-class-form";
 import {BreadcrumInterface} from "../resources/breadcrum-interface";
 import {GlobalService} from "../../shared";
-import {User} from "../../modules/auth/resources/data/user";
+import {User} from "../../modules/auth/resources/user";
 import {Professional} from "../../modules/home/models/professional";
 
 const SMALL_WIDTH_BREAKPOINT = 991;
