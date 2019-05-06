@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../resources/data/user";
+import {User} from "../../resources/user";
 import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {TokenService} from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -10,23 +11,27 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   error;
-  user = new User();
+
   constructor(
     private _authService: AuthService,
-    private _router: Router) {
-    this.user.username = "PROFESSIONAL";
-    this.user.password = "PROFESSIONAL";
-    this._authService.doLogin(this.user).subscribe( data => {
-      if (data) {
-        this._router.navigate ( [ '/' ] );
-      } else {
-        this.error = 'Unauthorized';
-      }
-    }, (err) => {
-      this.error = err.message;
-    });
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private readonly _tokenService: TokenService) {
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    try {
+      const token = this._route.snapshot.params['tokenId'];
+          if (token) {
+            this._tokenService.setToken(token);
+            this._router.navigate(['/']);
+          } else {
+            console.log("Error login");
+          }
+    } catch (e) {
+      console.log("Error login");
+    }
 
+  }
 }
+

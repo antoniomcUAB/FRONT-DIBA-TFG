@@ -2,11 +2,14 @@ import { Routes } from '@angular/router';
 
 import { AdminLayoutComponent } from './core';
 import { AuthLayoutComponent } from './core';
+import {AuthenticatedGuard} from "./modules/auth";
 
 export const AppRoutes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [AuthenticatedGuard],
+    canActivateChild: [AuthenticatedGuard],
     children: [
       {
         path: 'home',

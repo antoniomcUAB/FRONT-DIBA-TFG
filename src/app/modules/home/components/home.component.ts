@@ -11,7 +11,7 @@ import {Expedient} from "../../files";
 import { HomeService } from '../services/home.service';
 /* Constants */
 import { digit } from './constants';
-import {User} from "../../auth/resources/data/user";
+import {User} from "../../auth/resources/user";
 import {BreadCrums} from "../../tabs/models/tab-class-form";
 import {GlobalService} from "../../../shared";
 
@@ -22,8 +22,6 @@ import {GlobalService} from "../../../shared";
 })
 export class HomeComponent implements OnInit {
   /* Variables Professional */
-  // idProfessional = 30151;
-  // idProfessional = 30152;
   idProfessional = 19669;
   user = new User();
 
