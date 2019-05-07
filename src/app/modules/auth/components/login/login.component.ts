@@ -10,7 +10,6 @@ import {TokenService} from '../../services/token.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  error;
 
   constructor(
     private _authService: AuthService,
@@ -18,11 +17,16 @@ export class LoginComponent implements OnInit {
     private _route: ActivatedRoute,
     private readonly _tokenService: TokenService) {
   }
+  public token: string;
 
   ngOnInit(): void {
     try {
-      const token = this._route.snapshot.params['tokenId'];
-          if (token) {
+      let docu = document.location.href;
+      let token = this._route.snapshot.params['tokenId'];
+      console.log(token);
+      console.log(docu);
+
+          if (!token) {
             this._tokenService.setToken(token);
             this._router.navigate(['/']);
           } else {

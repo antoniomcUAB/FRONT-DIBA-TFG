@@ -23,8 +23,8 @@ export class AuthenticatedGuard implements CanActivate, CanActivateChild {
 
   private _validateToken(): boolean {
     if (!this._tokenService.isValid()) {
-      this._tokenService.removeToken();
-     // window.location.href = environment.authUrl;
+      // this._tokenService.removeToken();
+    // window.location.href = environment.authUrl;
     }
     return !!this._tokenService.getToken();
   }

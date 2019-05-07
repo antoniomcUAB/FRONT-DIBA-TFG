@@ -3,6 +3,7 @@ import { AuthService } from './services/auth.service';
 import { TokenService } from './services/token.service';
 import { LoginComponent } from './components/login/login.component';
 import {SharedModule} from '../../shared';
+import {AuthenticatedGuard} from "./services/authenticated.guard";
 
 @NgModule({
   imports: [
@@ -10,6 +11,7 @@ import {SharedModule} from '../../shared';
   ],
   providers: [
     AuthService,
+    AuthenticatedGuard,
     TokenService
   ],
   declarations: [LoginComponent],
