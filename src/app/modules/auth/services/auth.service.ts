@@ -12,7 +12,9 @@ export class AuthService extends GlobalService {
   constructor(private _http: HttpClient,
               private _tokenService: TokenService) {
     super();
-    //this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://dsdiba.demo.in2.es');
+    //TODO: cambios para pruebas en local
+    this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://dsdiba.demo.in2.es');
+    // this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
   }
 
   doLogin(user: User): Observable<any> {

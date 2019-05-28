@@ -17,4 +17,4 @@ import {AuthenticatedGuard} from "./services/authenticated.guard";
   declarations: [LoginComponent],
   exports: [LoginComponent]
 })
-export class AuthModule { }
+export class AuthModule {}

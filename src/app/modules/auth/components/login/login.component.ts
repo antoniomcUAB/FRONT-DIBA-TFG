@@ -21,13 +21,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     try {
-      let docu = document.location.href;
-      let token = this._route.snapshot.params['tokenId'];
-      console.log(token);
-      console.log(docu);
+      const url = new URL(document.location.href.toString());
+      const tokenID =  url.searchParams.get("tokenId");
 
-          if (!token) {
-            this._tokenService.setToken(token);
+          if (tokenID !== undefined) {
+            this._tokenService.setToken(tokenID);
             this._router.navigate(['/']);
           } else {
             console.log("Error login");
