@@ -24,6 +24,10 @@ export class LoginComponent implements OnInit {
       const url = new URL(document.location.href.toString());
       const tokenID =  url.searchParams.get("tokenId");
 
+      console.log("------------------------------------");
+      alert("OJO ESTAMOS PASANDO POR NUESTRA APLICIÓN");
+      console.log("------------------------------------");
+
           if (tokenID !== undefined) {
             this._tokenService.setToken(tokenID);
             this._router.navigate(['/']);
