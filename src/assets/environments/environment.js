@@ -1,6 +1,6 @@
 const env = {
   // serverURL: 'dsdiba.api.demo.in2.es',  DES
-  serverURL: 'http://localhost:8090', //DES
+  serverURL: 'http://localhost:4200', //DES
   apiURL   : 'http://dsdiba.api.demo.in2.es', // DES
   // apiURL   : 'http://localhost:8090', // LOCAL
   whitelistedDomains: ['dsdiba.api.demo.in2.es', 'localhost:8090'],

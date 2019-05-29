@@ -4,11 +4,10 @@
   <div  class="form-group row col-12">
     <div class="form-group col-12">
     <h3 *ngIf="!access">Hi ha alguna situació que afecti a l'àmbit d'autonomia ?</h3>
-    <h3 *ngIf="access">Quins entorns has de treballar ?</h3>
+    <h3 *ngIf="access">Hi ha alguna situació de risc en aquests entorns?</h3>
     </div>
   </div>
   <!--/ Titulo-->
-
 <!-- Basic -->
   <div *ngIf="!access" class="form-group row col-12">
   <div  class="form-group col-12">
@@ -30,38 +29,44 @@
 
   <!--/ Ambit Material -->
   <form *ngIf="access && ambit==='material' " class="form-group row col-12"  (ngSubmit)="groupMaterial;emitStayMaterial()" >
-    <div  class="form-group row col-12">
-      <div class="form-group col-12">
-        <label  class="custom-control custom-radio">
-          <input id="house" name="house" type="checkbox" class="custom-control-input" [(ngModel)]="groupMaterial.house">
-          <span class="custom-control-label">Entorn Habitatge</span>
-        </label>
-      </div>
+
+    <div class="apl form-group align-items-center col-12 ">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox"
+               class="custom-control-input position-relative"
+               name="aplica"
+               [(ngModel)]="groupMaterial.house">
+        <span class="custom-control-label">Entorn Habitatge</span>
+        <span class="custom-control-description"></span>
+      </label>
     </div>
 
-    <div  class="form-group row col-12 ">
-      <div class="form-group col-12">
-        <label  class="custom-control custom-radio">
-          <input id="economic" name="economic" type="checkbox" class="custom-control-input" [(ngModel)]="groupMaterial.economic" >
-          <span class="custom-control-label">Entorn Econòmic</span>
-        </label>
-      </div>
+    <div class="apl form-group align-items-center col-12 ">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox"
+               class="custom-control-input position-relative"
+               name="aplica"
+               [(ngModel)]="groupMaterial.economic">
+        <span class="custom-control-label">Entorn Econòmic</span>
+        <span class="custom-control-description"></span>
+      </label>
     </div>
 
-    <div  class="form-group row col-12 ">
-      <div class="form-group col-12">
-        <label  class="custom-control custom-radio">
-          <input id="work" name="work" type="checkbox" class="custom-control-input" [(ngModel)]="groupMaterial.work">
-          <span class="custom-control-label">Entorn Laboral</span>
-        </label>
-      </div>
+    <div class="apl form-group align-items-center col-12 ">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox"
+               class="custom-control-input position-relative"
+               name="aplica"
+               [(ngModel)]="groupMaterial.work">
+        <span class="custom-control-label">Entorn Laboral</span>
+        <span class="custom-control-description"></span>
+      </label>
     </div>
 
-    <div  class="form-group row col-12 ">
+
       <div class="form-group col-12">
         <button type="submit" class="btn btn-outline-dark"  >Següent</button>
       </div>
-    </div>
 
   </form>
   <!--/ Ambit Material -->
@@ -69,38 +74,44 @@
 
 <!-- Ambit relacional -->
 <form *ngIf="access && ambit==='relacional'" class="form-group row col-12"  (ngSubmit)="groupRelacional;emitStayRelacional()" >
-  <div  class="form-group row col-12">
-    <div class="form-group col-12">
-      <label  class="custom-control custom-radio">
-        <input id="school" name="school" type="checkbox" class="custom-control-input" [(ngModel)]="groupRelacional.school">
-        <span class="custom-control-label">Entorn escolar</span>
-      </label>
-    </div>
+
+  <div class="apl form-group align-items-center col-12 ">
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox"
+             class="custom-control-input position-relative"
+             name="aplica"
+             [(ngModel)]="groupRelacional.school">
+      <span class="custom-control-label">Entorn escolar</span>
+      <span class="custom-control-description"></span>
+    </label>
   </div>
 
-  <div  class="form-group row col-12 ">
-    <div class="form-group col-12">
-      <label  class="custom-control custom-radio">
-        <input id="familiar" name="familiar" type="checkbox" class="custom-control-input" [(ngModel)]="groupRelacional.family" >
-        <span class="custom-control-label">Entorn familiar</span>
-      </label>
-    </div>
+  <div class="apl form-group align-items-center col-12 ">
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox"
+             class="custom-control-input position-relative"
+             name="aplica"
+             [(ngModel)]="groupRelacional.family">
+      <span class="custom-control-label">Entorn familiar</span>
+      <span class="custom-control-description"></span>
+    </label>
   </div>
 
-  <div  class="form-group row col-12 ">
-    <div class="form-group col-12">
-      <label  class="custom-control custom-radio">
-        <input id="social" name="social" type="checkbox" class="custom-control-input" [(ngModel)]="groupRelacional.social">
-        <span class="custom-control-label">Entorn Social</span>
-      </label>
-    </div>
+  <div class="apl form-group align-items-center col-12 ">
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox"
+             class="custom-control-input position-relative"
+             name="aplica"
+             [(ngModel)]="groupRelacional.social">
+      <span class="custom-control-label">Entorn comunitari</span>
+      <span class="custom-control-description"></span>
+    </label>
   </div>
 
-  <div  class="form-group row col-12 ">
-    <div class="form-group col-12">
- <button type="submit" class="btn btn-outline-dark"  >Següent</button>
+
+    <div class="form-group col-12 align-items-center">
+ <button type="submit" class="btn btn-outline-dark">Següent</button>
     </div>
-  </div>
 </form>
 
   <!--/ Ambit relacional -->
