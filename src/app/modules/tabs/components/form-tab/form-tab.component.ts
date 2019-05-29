@@ -193,7 +193,20 @@ export class FormTabComponent extends CustomInput implements OnInit {
   compare(el1, el2) {
     return el1 && el2 ? el1.id === el2.id : el1 === el2;
   }
-
+  pregInAmbit(ambitValue:string) {
+    let x = true;
+    console.log(ambitValue);
+    for (const ambit of this.value.ambit) {
+      if(ambitValue.toUpperCase() === ambit.ambit.descripcio.toUpperCase()){
+      for (const ent of ambit.entorn) {
+        if (ent.pregunta.length > 0) {
+          x = false;
+        }
+      }
+    }
+    }
+    return x;
+  }
   /*Funcion para abrir el content y crear la pregunta economica */
   openPreg(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns, content) {
     for (const ambit of this.value.ambit) {

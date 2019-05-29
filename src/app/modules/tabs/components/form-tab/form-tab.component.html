@@ -355,7 +355,7 @@
     <ng-template [ngIf]="!viewContext">
       <ng-template [ngIf]="contextualitzacio.toUpperCase()!=='GLOBALITAT DEL CAS'">
       <div class="form-group row border m-0 mt-3 mb-0">
-        <button type="button" class="btn btn-primary mr-3 col-xl-12" (click)="viewContext = true" ><i class="fa fa-arrow-down" aria-hidden="true"></i> Expandir Factors De Context  <i class="fa fa-arrow-down" aria-hidden="true"></i> </button>
+        <button type="button" class="btn btn-primary mr-3 col-xl-12" (click)="viewContext = true" [disabled]="pregInAmbit(contextualitzacio)" ><i class="fa fa-arrow-down" aria-hidden="true" ></i> Expandir Factors De Context  <i class="fa fa-arrow-down" aria-hidden="true"></i> </button>
       </div>
       </ng-template>
     </ng-template>
