@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../resources/user";
 import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TokenService} from '../../services/token.service';
@@ -18,28 +17,32 @@ export class LoginComponent implements OnInit {
     private readonly _tokenService: TokenService) {
   }
   public token: string;
+  public error: boolean = false;
 
   ngOnInit(): void {
     try {
       const url = new URL(document.location.href.toString());
       const tokenID =  url.searchParams.get("tokenId");
-      console.log(tokenID);
-      if (tokenID !== undefined) {
+      if (tokenID !== undefined && tokenID !== null) {
             this._tokenService.setToken(tokenID);
             this._router.navigate(['/']);
           } else {
-            console.log("Error login_1");
+          this._router.navigate(['/error']);
           }
     } catch (e) {
-      const tokenID2 = window.location.href;
-      const tokensplit = tokenID2.split("tokenId=");
-      const tokensplit2 = tokensplit[1].split("%20");
-      const tokensplit3 = tokensplit2[0] + " " + tokensplit2[1];
-      if (tokensplit !== undefined) {
-        this._tokenService.setToken(tokensplit3);
-        this._router.navigate(['/']);
-      } else {
-        console.log("Error login_ie");
+      try {
+        const tokenID2 = window.location.href;
+        const tokensplit = tokenID2.split("tokenId=");
+        const tokensplit2 = tokensplit[1].split("%20");
+        const tokensplit3 = tokensplit2[0] + " " + tokensplit2[1];
+        if (tokensplit !== undefined && tokensplit !== null) {
+          this._tokenService.setToken(tokensplit3);
+          this._router.navigate(['/']);
+        } else {
+          this._router.navigate(['/error']);
+        }
+      }catch (e) {
+        this._router.navigate(['/error']);
       }
     }
 

@@ -23,7 +23,7 @@ export let TRANSLATION = {
     'types'                : 'Tipus',
     'basicSocialSituation' : 'Situació social bàsica',
     'contextFactor'        : 'Factor de contextualització',
-    'expedient'            : 'Estat expedient',
+    'expedient'            : 'Estat diagnòstics',
     'relation'             : 'Relació',
     'sex'                  : 'Sexe',
     'birthday'             : 'Data naixement',

@@ -38,7 +38,7 @@
             <td class="text-center">
               <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.diagnostic.length-item.diagnosticsValidats}}</a>
             </td>
-            <td class="text-center text-capitalize" [ngClass]="{'warning' : item.estat.descripcio === 'INCOMPLET', 'success' : item.estat.descripcio === 'COMPLET'}">
+            <td class="text-center text-capitalize" [ngClass]="{'warning' : item.estat.descripcio === 'PENDENTS', 'success' : item.estat.descripcio === 'COMPLETS'}">
               <a [routerLink]="['/file-detail', {'id': item.id, 'idProfessional': idProfessional}]">{{item.estat.descripcio}}</a>
             </td>
           </ng-template>

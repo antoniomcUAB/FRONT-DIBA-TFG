@@ -4,6 +4,7 @@ import { TokenService } from './services/token.service';
 import { LoginComponent } from './components/login/login.component';
 import {SharedModule} from '../../shared';
 import {AuthenticatedGuard} from "./services/authenticated.guard";
+import { ErrorLoginPageComponent } from './components/error-login-page/error-login-page.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import {AuthenticatedGuard} from "./services/authenticated.guard";
     AuthenticatedGuard,
     TokenService
   ],
-  declarations: [LoginComponent],
-  exports: [LoginComponent]
+  declarations: [LoginComponent, ErrorLoginPageComponent],
+  exports: [LoginComponent , ErrorLoginPageComponent]
 })
 export class AuthModule {}
