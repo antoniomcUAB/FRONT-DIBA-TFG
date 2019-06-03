@@ -17,6 +17,7 @@
     <div class="modal-body">
       <div class="form-group col-xl-12">
         <ng-template ngFor [ngForOf]="data?.factorEconomic" let-economic let-x="index">
+          <ng-template [ngIf]=" x<9">
           <label class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input"
                    [ngModel]="getPreguntaEconomica(economic)"
@@ -25,6 +26,21 @@
             <span class="custom-control-label"></span>
             <span class="custom-control-description"><b>{{x+1}}.</b> {{economic.descripcio}}</span>
           </label>
+          </ng-template>
+          <ng-template [ngIf]=" x>=9">
+            <ng-template [ngIf]=" x===9">
+            <div  class="modal-footer">
+            </div>
+            </ng-template>
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"
+                     [ngModel]="getPreguntaEconomica(economic)"
+                     (ngModelChange)="addPreguntaEconomica(economic,$event)"
+                     name="x{{x}}">
+              <span class="custom-control-label"></span>
+              <span class="custom-control-description"> {{economic.descripcio}}</span>
+            </label>
+          </ng-template>
         </ng-template>
       </div>
     </div>
@@ -355,7 +371,7 @@
     <ng-template [ngIf]="!viewContext">
       <ng-template [ngIf]="contextualitzacio.toUpperCase()!=='GLOBALITAT DEL CAS'">
       <div class="form-group row border m-0 mt-3 mb-0">
-        <button type="button" class="btn btn-primary mr-3 col-xl-12" (click)="viewContext = true" [disabled]="pregInAmbit(contextualitzacio)" ><i class="fa fa-arrow-down" aria-hidden="true" ></i> Expandir Factors De Context  <i class="fa fa-arrow-down" aria-hidden="true"></i> </button>
+        <button type="button" class="btn btn-primary mr-3 col-xl-12" (click)="viewContext = true;" [disabled]="pregInAmbit(contextualitzacio)" ><i class="fa fa-arrow-down" aria-hidden="true" ></i> Expandir Factors De Context  <i class="fa fa-arrow-down" aria-hidden="true"></i> </button>
       </div>
       </ng-template>
     </ng-template>

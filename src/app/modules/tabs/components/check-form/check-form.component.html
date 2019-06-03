@@ -29,7 +29,11 @@
 
   <!--/ Ambit Material -->
   <form *ngIf="access && ambit==='material' " class="form-group row col-12"  (ngSubmit)="groupMaterial;emitStayMaterial()" >
-
+    <div class="apl form-group align-items-center col-12 ">
+      <label >
+        <div style="color: #6b6b6b">(Selecciona els entorns que apliquin)</div>
+      </label>
+    </div>
     <div class="apl form-group align-items-center col-12 ">
       <label class="custom-control custom-checkbox">
         <input type="checkbox"
@@ -75,6 +79,12 @@
 <!-- Ambit relacional -->
 <form *ngIf="access && ambit==='relacional'" class="form-group row col-12"  (ngSubmit)="groupRelacional;emitStayRelacional()" >
 
+  <div class="apl form-group align-items-center col-12 ">
+    <label >
+      <div style="color: #6b6b6b">(Selecciona els entorns que apliquin)</div>
+    </label>
+  </div>
+  
   <div class="apl form-group align-items-center col-12 ">
     <label class="custom-control custom-checkbox">
       <input type="checkbox"

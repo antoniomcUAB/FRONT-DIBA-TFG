@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService, TokenService} from "../..";
-import {ActivatedRoute, Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-error-login-page',
@@ -9,11 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class ErrorLoginPageComponent implements OnInit {
 
-  constructor(
-    private _authService: AuthService,
-    private _router: Router,
-    private _route: ActivatedRoute,
-    private readonly _tokenService: TokenService) {
+  constructor() {
   }
 
   ngOnInit() {

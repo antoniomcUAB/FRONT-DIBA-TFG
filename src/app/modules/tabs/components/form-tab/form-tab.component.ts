@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Injectable, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Entorns, Ambits, EnvironmentMaterial, EnvironmentRelacional, SelectorGravetat, FactorsContext, DisabledEconomia, DisabledHabitatge,} from '../../models/tab-class-form';
+import {Entorns, Ambits, EnvironmentMaterial, EnvironmentRelacional, SelectorGravetat, FactorsContext, DisabledEconomia, DisabledHabitatge} from '../../models/tab-class-form';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "../../../../shared";
@@ -24,6 +24,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
   public disabledHabitatge: DisabledHabitatge = new DisabledHabitatge(); /* Parametro especifico para desbloquear las preguntas habitatge*/
   public viewContext: boolean = false; /* parametro para mostrar los factores de contexto*/
   public id;
+  public firts:boolean = false;
   closeResult: string;
   cleanSelects: string = null; /* Variable per netejar Formulari*/
   preguntaEconomica: Preguntas; /* Variable para guardar la pregunta economica*/
@@ -154,8 +155,8 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
 
   /*Funcion para setear las preguntas de Economia y Habitatge a activadas */
-  public unSet(name: string) {
-    switch (name) {
+  public unSet ( name: string ) {
+    switch ( name ) {
       case 'Manca d\'habitatge estable (H.1)':
         this.disabledHabitatge.h2 = false;
         this.disabledHabitatge.h3 = false;
@@ -190,23 +191,31 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
 
   /*Funcion para comparar 2 instancias de objetos */
-  compare(el1, el2) {
+  compare( el1, el2 ) {
     return el1 && el2 ? el1.id === el2.id : el1 === el2;
   }
-  pregInAmbit(ambitValue:string) {
+
+
+  pregInAmbit(ambitValue: string) {
     let x = true;
-    console.log(ambitValue);
+    let a;
     for (const ambit of this.value.ambit) {
-      if(ambitValue.toUpperCase() === ambit.ambit.descripcio.toUpperCase()){
+      if (ambitValue.toUpperCase() === ambit.ambit.descripcio.toUpperCase()) {
+        a = ambit;
       for (const ent of ambit.entorn) {
         if (ent.pregunta.length > 0) {
           x = false;
+          }
         }
       }
     }
+    if (x === true) {
+      this.viewContext = false;
     }
     return x;
   }
+
+
   /*Funcion para abrir el content y crear la pregunta economica */
   openPreg(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns, content) {
     for (const ambit of this.value.ambit) {
@@ -242,7 +251,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
         console.log(result);
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        if(reason) {
+        if ( reason ) {
           this.getRiscEconomic();
         }
       });
@@ -352,10 +361,12 @@ export class FormTabComponent extends CustomInput implements OnInit {
     this.tabsService.getDiagnostic(this.idDiagnostic).subscribe((result: Diagnosis) => {
       this.value = result;
       this.comprobar();
+      this.pregInAmbit(this.contextualitzacio);
     }, (err) => {
       console.log(err);
     });
   }
+
 
   /*Funcion para emitir que hemos terminado*/
   public emitEnd() {
@@ -379,7 +390,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
   }
 
   /*Funcion para añadir una nueva pregunta al contexto*/
-  public newPreguntaContext(ambit: Ambit, contexto: FactorsContext, membre: string) {
+  public newPreguntaContext(ambit: Ambit, contexto: FactorsContext, membre?: string) {
     const contextoEncontrado = this.getContextos(ambit.id, ambit, contexto);
     if (contextoEncontrado) {
       /* Si hay entorno y ya existe eliminala*/
@@ -397,11 +408,13 @@ export class FormTabComponent extends CustomInput implements OnInit {
     } else {
       /* Si hay contexto y no existe llama a back , añadelo al objeto*/
       const objContext = new Contextualitzacio(contexto.descripcio, contexto.id);
-      if (membre === 'unic') {
-        objContext.membreUnic = true;
-      }
-      if (membre === 'mes') {
-        objContext.mesUc = true;
+      if ( membre ) {
+        if (membre === 'unic') {
+          objContext.membreUnic = true;
+        }
+        if (membre === 'mes') {
+          objContext.mesUc = true;
+        }
       }
       this.tabsService.putContextQuestion(objContext.factor,
         this.idDiagnostic, objContext).subscribe((result) => {
@@ -416,6 +429,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
   }
 
+
   /*Funcion para añadir pregunta al diagnostico */
   public newPregunta(pregunta: string, idSocial: number, ambit: Ambit, entorn: Entorns): Observable<Preguntas> {
     const subject = new Subject<Preguntas>();
@@ -424,6 +438,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       this.unSet(pregunta);
       /* Si hay entorno y ya existe eliminala */
       this.tabsService.cleanPreguntes(this.idDiagnostic, idSocial).subscribe(() => {
+
         this.reloadDiagnostico();
         subject.complete();
       }, (err) => {
@@ -452,6 +467,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     }
     return subject;
   }
+
 
   /*Funcion para limitar el despliegue de situaciones repetitivas */
   public maxPreguntasRepetitivas(idSocial: number, ambit: Ambit, entorn: Entorns) {
@@ -511,7 +527,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
   public getPreguntas(id: number, ambit: Ambit, entorn: Entorns): Preguntas[] {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
     if (!amb) {
-      return []
+      return [];
     }
     const ent = amb.entorn.find(item => item.id === entorn.id);
     return ent.pregunta.filter(item => {
@@ -523,7 +539,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
   public getContextos(id: number, ambit: Ambit, contexto: FactorsContext): Contextualitzacio {
     const amb = this.value.ambit.find(item => item.ambit.id === ambit.id);
     if (!amb) {
-      return null
+      return null;
     }
     const context = amb.contextualitzacio.find(item => item.factor.id === contexto.id);
     if (!context) {
@@ -746,7 +762,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     return ffpp;
   }
 
-  public llistaPE(id:string){
+  public llistaPE(id: string) {
     if (this.value.versioModel.llistaPE.find(item => item === id)) {
       return true;
     }

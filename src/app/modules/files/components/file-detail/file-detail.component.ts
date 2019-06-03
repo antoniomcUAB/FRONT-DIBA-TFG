@@ -474,7 +474,7 @@ export class FileDetailComponent {
         if (a.referencia) {
             return -1;
         } else {
-          if (a.dataBaixa < b.dataBaixa) {
+          if (a.dataNaixement < b.dataNaixement && !b.referencia) {
             return -1;
           }
         }

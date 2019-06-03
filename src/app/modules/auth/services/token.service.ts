@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {TokenData} from '../resources/token-data';
 import {RoleEnum} from '../resources/role.enum';
+import {ActivatedRoute, Router} from "@angular/router";
 
 const helper = new JwtHelperService();
 @Injectable()
 export class TokenService {
 
-  constructor() { }
+  constructor(
+    private _router: Router,
+    private _route: ActivatedRoute,
+  ) { }
 
   getToken(): string {
     return localStorage.getItem( 'access_token');
@@ -22,6 +26,9 @@ export class TokenService {
   }
 
   isValid() {
+    if ((this.getTokenData() && !this.isTokenExpired()) === false) {
+      this._router.navigate(['/error']);
+    }
     return ( this.getTokenData() && !this.isTokenExpired() );
   }
 
