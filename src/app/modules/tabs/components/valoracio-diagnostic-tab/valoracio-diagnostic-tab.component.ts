@@ -63,7 +63,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   setTitle() {
     let myDate = new Date();
     let formatData:string;
-    formatData = "Mes:" + myDate.getDate() +" / "+ (myDate.getMonth() + 1) +" / "+ myDate.getFullYear()+" - Hora: "+ myDate.getHours()+" : "+ myDate.getMinutes();
+    formatData = "Data:" + myDate.getDate() +" / "+ (myDate.getMonth() + 1) +" / "+ myDate.getFullYear()+" - Hora: "+ myDate.getHours()+" : "+ myDate.getMinutes();
 
     this.titleService.setTitle( '#DS-DIBA - ' + this.nomExpedient +" - "+ formatData );
   }
