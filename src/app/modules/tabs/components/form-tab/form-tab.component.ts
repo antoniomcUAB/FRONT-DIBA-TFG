@@ -437,9 +437,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
     for (const ambits of this.value.ambit) {
       if (ambits.ambit.descripcio.toUpperCase() === this.contextualitzacio.toUpperCase()) {
         for (const entorns of ambits.entorn) {
-          console.log(entorns);
           if (entorns.pregunta.length > 0) {
-            console.log("entro");
             return;
           }
         }

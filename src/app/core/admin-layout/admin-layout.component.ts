@@ -107,7 +107,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterfa
   }
 
   setTitle( newTitle: string) {
-    this.titleService.setTitle( '#EinaDS-DIBA | ' + newTitle );
+    this.titleService.setTitle( '#DS-DIBA | ' + newTitle );
   }
 
   isOver(): boolean {

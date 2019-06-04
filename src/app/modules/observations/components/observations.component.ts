@@ -6,6 +6,7 @@ import { Evaluacions, Ambit, Expedient} from "../../files";
 import {BreadCrums} from "../../tabs/models/tab-class-form";
 import {GlobalService} from "../../../shared";
 import {Diagnosis} from "../../tabs/models/diagnostic";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-observations',
@@ -28,7 +29,9 @@ export class ObservationsComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
               private _location: Location,
               private _service: ObservationsService,
-              private global: GlobalService) {
+              private global: GlobalService,
+              private titleService: Title
+              ) {
 
     this.id = this._route.snapshot.params['id']; /*Obtenemos el id del diagnostico*/
     this.date = this._route.snapshot.params['date']; /*Obtenemos la fecha del diagnostico*/
@@ -49,7 +52,13 @@ export class ObservationsComponent implements OnInit {
       this.global.setBreadCrum(this.breadcrum);
     }
   }
+  setTitle() {
+    let myDate = new Date();
+    let formatData:string;
+    formatData = "Mes:" + myDate.getDate() +" / "+ (myDate.getMonth() + 1) +" / "+ myDate.getFullYear()+" - Hora: "+ myDate.getHours()+" : "+ myDate.getMinutes();
 
+    this.titleService.setTitle( '#DS-DIBA - ' + this.codi +" - "+ formatData );
+  }
   getObservations(id: number) {
     this._service.getDetailObservations(id).subscribe( (data: Diagnosis) => {
       this.diagnosis = data;
@@ -70,7 +79,9 @@ export class ObservationsComponent implements OnInit {
   onPrint() {
     window.print();
   }
+
   ngOnInit(): void {
     this.setCrum();
+    this.setTitle();
   }
 }
