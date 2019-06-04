@@ -376,7 +376,7 @@
       </ng-template>
     </ng-template>
 
-    <ng-template [ngIf]="viewContext">
+    <ng-template [ngIf]="viewContext || contextualitzacio.toUpperCase() ==='GLOBALITAT DEL CAS'">
     <div class="form-group row bg-grey-300 border m-0 mt-3 mb-0">
       <ng-template ngFor [ngForOf]="data.ambits" let-ambit>
       <ng-template ngFor [ngForOf]="ambit.factors_context" let-cont let-c="index">

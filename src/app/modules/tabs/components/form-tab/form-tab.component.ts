@@ -428,6 +428,21 @@ export class FormTabComponent extends CustomInput implements OnInit {
       });
     }
   }
+  public eliminarContextoPreguntas(){
+    for (const ambits of this.value.ambit) {
+      if (ambits.ambit.descripcio.toUpperCase() === this.contextualitzacio.toUpperCase()) {
+        for (const entorns of ambits.entorn) {
+          console.log(entorns);
+          if (entorns.pregunta.length > 0) {
+            console.log("entro");
+            return;
+          }
+        }
+      }
+    }
+    console.log("entro22");
+    this.clean();
+  }
 
 
   /*Funcion para añadir pregunta al diagnostico */
@@ -438,7 +453,6 @@ export class FormTabComponent extends CustomInput implements OnInit {
       this.unSet(pregunta);
       /* Si hay entorno y ya existe eliminala */
       this.tabsService.cleanPreguntes(this.idDiagnostic, idSocial).subscribe(() => {
-
         this.reloadDiagnostico();
         subject.complete();
       }, (err) => {
