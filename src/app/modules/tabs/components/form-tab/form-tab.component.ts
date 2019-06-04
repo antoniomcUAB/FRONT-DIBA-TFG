@@ -362,6 +362,7 @@ export class FormTabComponent extends CustomInput implements OnInit {
       this.value = result;
       this.comprobar();
       this.pregInAmbit(this.contextualitzacio);
+      this.eliminarContextoPreguntas();
     }, (err) => {
       console.log(err);
     });
@@ -383,7 +384,11 @@ export class FormTabComponent extends CustomInput implements OnInit {
       }
     }
     this.tabsService.cleanAmbit(this.idDiagnostic, ambitID).subscribe((result) => {
-      this.reloadDiagnostico();
+      this.tabsService.getDiagnostic(this.idDiagnostic).subscribe((result2: Diagnosis) => {
+        this.value = result2;
+      }, (err) => {
+        console.log(err);
+      });
     }, (err) => {
       console.log(err);
     });
@@ -440,7 +445,6 @@ export class FormTabComponent extends CustomInput implements OnInit {
         }
       }
     }
-    console.log("entro22");
     this.clean();
   }
 
