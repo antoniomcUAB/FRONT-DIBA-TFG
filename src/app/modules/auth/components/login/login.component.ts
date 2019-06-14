@@ -23,9 +23,11 @@ export class LoginComponent implements OnInit {
     try {
       const url = new URL(document.location.href.toString());
       const tokenID =  url.searchParams.get("tokenId");
-      if (tokenID !== undefined && tokenID !== null) {
+      const id = url.searchParams.get("professionalId");
+      console.log(id);
+      if (tokenID !== undefined && tokenID !== null && id !== null) {
             this._tokenService.setToken(tokenID);
-            this._router.navigate(['/']);
+            this._router.navigate(['/home', {'id': id}]);
           } else {
           this._router.navigate(['/error']);
           }
@@ -33,11 +35,13 @@ export class LoginComponent implements OnInit {
       try {
         const tokenID2 = window.location.href;
         const tokensplit = tokenID2.split("tokenId=");
-        const tokensplit2 = tokensplit[1].split("%20");
-        const tokensplit3 = tokensplit2[0] + " " + tokensplit2[1];
-        if (tokensplit !== undefined && tokensplit !== null) {
+        const profesionalID = tokensplit[1].split("&professionalId=");
+        console.log( "este es" + profesionalID[1]);
+        const tokensplit2 = profesionalID[0].split("%20");
+        const tokensplit3 = tokensplit2[0] + " " + tokensplit2[2];
+        if (tokensplit !== undefined && tokensplit !== null &&  profesionalID !== null) {
           this._tokenService.setToken(tokensplit3);
-          this._router.navigate(['/']);
+          this._router.navigate(['/home', {'id': profesionalID[1]}]);
         } else {
           this._router.navigate(['/error']);
         }

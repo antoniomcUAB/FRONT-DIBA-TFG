@@ -2,7 +2,7 @@
 import {Component, OnInit} from '@angular/core';
 import { FilterType, TableListOptions, TableListResponse } from '../../../shared/modules/table-list';
 import { TranslateService } from "@ngx-translate/core";
-import { Router } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal, NgbTabChangeEvent} from "@ng-bootstrap/ng-bootstrap";
 /* Models */
 import { Professional } from "../models/professional";
@@ -22,7 +22,7 @@ import {GlobalService} from "../../../shared";
 })
 export class HomeComponent implements OnInit {
   /* Variables Professional */
-  idProfessional = 19669;
+  idProfessional;
   user = new User();
 
   professional: Professional;
@@ -46,10 +46,13 @@ export class HomeComponent implements OnInit {
               private _router: Router,
               private _translateService: TranslateService,
               private modalService: NgbModal,
-              private global: GlobalService) {
+              private global: GlobalService,
+              private _route: ActivatedRoute) {
     /* Get Professional Data */
     // this.getProfessional(this.user.username);
+    this.idProfessional = this._route.snapshot.params['id']; /*Obtenemos el id del diagnostico*/
     this.getProfessionalData(this.idProfessional);
+    console.log(this.professionalNomComplet);
     /* Get Current Model */
     this.getModel();
   }
