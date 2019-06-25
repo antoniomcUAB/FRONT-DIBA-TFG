@@ -45,7 +45,7 @@ export class TabsComponent {
               private _router: Router) {
     this.diagnosisID = this._route.snapshot.params['diagnosisID'];
     this.expedientID = this._route.snapshot.params['expedientID'];
-    this.idProfesional = this._route.snapshot.params['professionalID'];
+    this.idProfesional = this._route.snapshot.params['professionalId'];
     this.nombreValoracio = this._route.snapshot.params['ValoracioName'];
     this.getFile();
 
@@ -59,14 +59,14 @@ export class TabsComponent {
   getFile() {
     this._service.getFileById(this.expedientID).subscribe((data: Expedient) => {
       this.expedient = data;
-      this.setCrum()
+      this.setCrum();
       this.getPersonActives();
     }, (error) => {
       console.log("ERROR - al recuperar el expediente \n " + error);
     });
   }
   public routeToExpedient() {
-    this._router.navigate(['/file-detail', {'id': this.expedientID, 'idProfessional': this.idProfesional}]);
+    this._router.navigate(['/file-detail', {'id': this.expedientID, 'professionalId': this.idProfesional}]);
   }
   /*Controla el cambio del tab para que no se produzca antes de lo esperado*/
   public beforeChange($event: NgbTabChangeEvent) {
@@ -237,7 +237,7 @@ export class TabsComponent {
 
   }
   public setCrum() {
-    if ( this.expedient) {
+    if ( this.expedient && this.idProfesional) {
       this.breadcrum = [{url: 'Inici', name: []}, {url: 'Expedient ' + this.expedient.codi.toString(), name: [this.expedientID.toString(),this.idProfesional.toString()]} , {url: this.nombreValoracio, name: []}];
     this.global.setBreadCrum(this.breadcrum);
   }

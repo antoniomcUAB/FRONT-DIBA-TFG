@@ -213,9 +213,12 @@ export class FileDetailComponent {
     config.outsideDays = 'hidden';
 
     this.id = this._route.snapshot.params['id'];
-    this.idProfessional = this._route.snapshot.params['idProfessional'];
+    console.log(this.id);
+    this.idProfessional = this._route.snapshot.params['professionalId'];
     this.getCurrentModel();
-    this.getProfessionalData(this.idProfessional);
+    if(this.idProfessional) {
+      this.getProfessionalData(this.idProfessional);
+    }
     this.getFile();
     this.getTypePerson();
     this.getTypePerson();
@@ -510,7 +513,7 @@ export class FileDetailComponent {
     this.diagnosis.versioModel = this.model;
     /** Call Service **/
     this._service.createDiagnosis(this.diagnosis, this.expedient.id, this.model.id).subscribe((result) => {
-      this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id, 'ID': this.id , 'professionalID': this.idProfessional, 'ValoracioName': result.data}]);
+      this._router.navigate(['/tabs', {'diagnosisID': result.id, 'expedientID': this.expedient.id, 'ID': this.id , 'professionalId': this.idProfessional, 'ValoracioName': result.data}]);
     }, (error) => {
       console.log("ERROR - al crear diagnostico \n " + error);
     });
@@ -650,22 +653,24 @@ export class FileDetailComponent {
     let checkRef = true;
     let checkBaixa = true;
     /** Check Ref exist & Unsuscription **/
-    if (this.expedient.persona.length > 0) {
-      for (const persona of this.expedient.persona) {
-        if (persona.referencia) {
+    if (this.expedient) {
+      if (this.expedient.persona.length > 0) {
+        for (const persona of this.expedient.persona) {
+          if (persona.referencia) {
+            if (!persona.dataBaixa) {
+              checkRef = false;
+            } else {
+              checkRef = true;
+            }
+          }
           if (!persona.dataBaixa) {
-            checkRef = false;
-          } else {
-            checkRef = true;
+            checkBaixa = false;
           }
         }
-        if (!persona.dataBaixa) {
-          checkBaixa = false;
-        }
+        return checkBaixa || checkRef;
+      } else {
+        return true;
       }
-      return checkBaixa || checkRef;
-    } else {
-      return true;
     }
   }
   public setCrum() {

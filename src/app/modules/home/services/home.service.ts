@@ -1,16 +1,18 @@
 import {GlobalService} from "../../../shared";
 
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {TableListOptions, TableListResponse} from "../../../shared/modules/table-list";
 import {Injectable} from "@angular/core";
 import {Professional} from "../models/professional";
 import { Expedient} from "../../files";
+import {TokenService} from "../../auth";
 
 @Injectable()
 export class HomeService extends GlobalService {
-  constructor(public _http: HttpClient) {
+  constructor(public _http: HttpClient,
+              public _token: TokenService) {
     super();
   }
 
@@ -32,8 +34,7 @@ export class HomeService extends GlobalService {
   /** GET LIST OF FILES **/
   getFiles(options: TableListOptions, idMunicipal: number): Observable<TableListResponse> {
     const pageParams = Object.assign({}, options.searchParams);
-    return this._http.get(`${this.apiURL}/dsdiba/api/expedient/llista/${idMunicipal}`,
-      {params: pageParams, observe: 'response'})
+    return this._http.get(`${this.apiURL}/dsdiba/api/expedient/llista/${idMunicipal}`, {params: pageParams, observe: 'response' })
       .pipe(map((response: HttpResponse<any>) => {
         const data = response.body.content;
             options.getPagesInfo(response.body);
@@ -46,6 +47,7 @@ export class HomeService extends GlobalService {
 
   /** CREATE FILE **/
   createFile(expedient: Expedient): Observable<Expedient> {
+    console.log(expedient);
     return this._http.put<Expedient>(`${this.apiURL}/dsdiba/api/expedient/`, expedient);
   }
 }

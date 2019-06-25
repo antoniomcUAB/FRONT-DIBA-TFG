@@ -24,10 +24,10 @@ export class LoginComponent implements OnInit {
       const url = new URL(document.location.href.toString());
       const tokenID =  url.searchParams.get("tokenId");
       const id = url.searchParams.get("professionalId");
-      console.log(id);
       if (tokenID !== undefined && tokenID !== null && id !== null) {
+        console.log(tokenID);
             this._tokenService.setToken(tokenID);
-            this._router.navigate(['/home', {'id': id}]);
+            this._router.navigate(['/home', {'professionalId': id}]);
           } else {
           this._router.navigate(['/error']);
           }
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         const tokensplit3 = tokensplit2[0] + " " + tokensplit2[2];
         if (tokensplit !== undefined && tokensplit !== null &&  profesionalID !== null) {
           this._tokenService.setToken(tokensplit3);
-          this._router.navigate(['/home', {'id': profesionalID[1]}]);
+          this._router.navigate(['/home', {'professionalId': profesionalID[1]}]);
         } else {
           this._router.navigate(['/error']);
         }

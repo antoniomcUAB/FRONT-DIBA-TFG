@@ -122,7 +122,7 @@
                           <span class="text-primary">
                             {{ "TABLE.toUnsubscribe" | translate }}:
                           </span>
-                          {{item.tipusPersona.descripcio}}
+                          {{item?.tipusPersona?.descripcio}}
                         </h4>
                         <button type="button"
                                 class="close bg-primary text-white"
@@ -170,7 +170,7 @@
                                       [(ngModel)]="newRefMember">
                                 <ng-container *ngFor="let memberRef of expedient?.persona">
                                   <option *ngIf="memberRef.id != item.id && !memberRef.dataBaixa" [ngValue]="memberRef">
-                                    {{ memberRef.tipusPersona.descripcio }}
+                                    {{ memberRef?.tipusPersona?.descripcio }}
                                   </option>
                                 </ng-container>
                               </select>

@@ -6,7 +6,11 @@ export const HomeRoutes: Routes = [
     path: '',
     component: HomeComponent,
     data: {
-      heading: 'Home'
+      id: 'Home'
     }
+  },
+  {
+    path: 'something/:id',
+    component: HomeComponent
   }
-];
+  ];

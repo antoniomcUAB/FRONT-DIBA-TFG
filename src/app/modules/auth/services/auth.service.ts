@@ -13,8 +13,8 @@ export class AuthService extends GlobalService {
               private _tokenService: TokenService) {
     super();
     //TODO: cambios para pruebas en local
-    this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://dsdiba.demo.in2.es');
-    // this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+    //this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://dsdiba.demo.in2.es');
+   this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
   }
 
   doLogin(user: User): Observable<any> {
@@ -22,6 +22,7 @@ export class AuthService extends GlobalService {
       .pipe(
         map((response: HttpResponse<string>) => {
           const resp = response.toLocaleString().replace("Authorization:Bearer","");
+          console.log(resp);
           this._tokenService.setToken(resp);
           return true;
         }, catchError(this.handleError))
