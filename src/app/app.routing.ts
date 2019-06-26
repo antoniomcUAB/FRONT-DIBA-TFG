@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './core';
 import { AuthLayoutComponent } from './core';
 import {AuthenticatedGuard} from "./modules/auth";
+import {ErrorLoginPageComponent} from "./modules/auth/components/error-login-page/error-login-page.component";
 
 export const AppRoutes: Routes = [
   {
@@ -39,7 +40,17 @@ export const AppRoutes: Routes = [
         pathMatch: 'full'
       }
     ]
-  }, {
+  },
+  {
+    path: '',
+    component: AdminLayoutComponent,
+    children: [
+      {
+      path: 'error',
+      component: ErrorLoginPageComponent
+    }]
+  },
+  {
     path: '',
     component: AuthLayoutComponent,
     children: [
@@ -52,7 +63,8 @@ export const AppRoutes: Routes = [
         loadChildren: './error/error.module#ErrorModule'
       }
     ]
-  }, {
+  },
+  {
     path: '**',
     redirectTo: 'error/404'
   }

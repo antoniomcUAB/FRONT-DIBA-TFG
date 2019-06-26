@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {Ambits, BreadCrums} from "../../models/tab-class-form";
 import {Evaluacions} from "../../../files";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-valoracio-diagnostic-tab',
@@ -43,7 +44,8 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
   constructor(private tabsService: TabsFormService,
               private _router: Router,
               private modalService: NgbModal,
-              private global: GlobalService ){
+              private global: GlobalService,
+              public titleService:Title){
    super();
   this.global.setBreadCrum(this.breadcrum);
   this.view = false;
@@ -52,10 +54,18 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
     this.getRiscos();
     this.tabActivated.emit();
     this.setCrum();
+    this.setTitle();
   }
 
   public emitEnd() {
     this.endForm.emit();
+  }
+  setTitle() {
+    let myDate = new Date();
+    let formatData:string;
+    formatData = "Data:" + myDate.getDate() +" / "+ (myDate.getMonth() + 1) +" / "+ myDate.getFullYear()+" - Hora: "+ myDate.getHours()+" : "+ myDate.getMinutes();
+
+    this.titleService.setTitle( '#DS-DIBA - ' + this.nomExpedient +" - "+ formatData );
   }
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

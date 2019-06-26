@@ -32,7 +32,6 @@ export class ModelPDFComponent {
   scroll() {
     setTimeout(_ => {
       let f = document.getElementById(this.id);
-      console.log(f);
       f.scrollIntoView();
 
     }, 500);

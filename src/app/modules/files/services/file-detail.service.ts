@@ -21,7 +21,9 @@ export class FilesDetailService extends GlobalService {
 
   /** GET PROFESSIONAL BY ID **/
   getProfessionalByID(idProfessional: number): Observable<Professional> {
-    return this._http.get<Professional>(`${this.apiURL}/dsdiba/api/professional/${idProfessional}`);
+    if(idProfessional) {
+      return this._http.get<Professional>(`${this.apiURL}/dsdiba/api/professional/${idProfessional}`);
+    }
   }
 
   /** GET FILES BY ID **/

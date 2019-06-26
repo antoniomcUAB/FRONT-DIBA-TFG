@@ -2,7 +2,7 @@
 import {Component, OnInit} from '@angular/core';
 import { FilterType, TableListOptions, TableListResponse } from '../../../shared/modules/table-list';
 import { TranslateService } from "@ngx-translate/core";
-import { Router } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal, NgbTabChangeEvent} from "@ng-bootstrap/ng-bootstrap";
 /* Models */
 import { Professional } from "../models/professional";
@@ -22,7 +22,7 @@ import {GlobalService} from "../../../shared";
 })
 export class HomeComponent implements OnInit {
   /* Variables Professional */
-  idProfessional = 19669;
+  idProfessional;
   user = new User();
 
   professional: Professional;
@@ -46,9 +46,11 @@ export class HomeComponent implements OnInit {
               private _router: Router,
               private _translateService: TranslateService,
               private modalService: NgbModal,
-              private global: GlobalService) {
+              private global: GlobalService,
+              private _route: ActivatedRoute) {
     /* Get Professional Data */
     // this.getProfessional(this.user.username);
+    this.idProfessional = this._route.snapshot.params['professionalId']; /*Obtenemos el id del diagnostico*/
     this.getProfessionalData(this.idProfessional);
     /* Get Current Model */
     this.getModel();
@@ -251,7 +253,7 @@ export class HomeComponent implements OnInit {
       this.newFile.professional = this.professional;
       /** Subscribe to Create **/
       this._service.createFile(this.newFile).subscribe((result) => {
-        this._router.navigate(['/file-detail', {'id': result.id, 'idProfessional': this.idProfessional}]);
+        this._router.navigate(['/file-detail', {'id': result.id, 'professionalId': this.idProfessional}]);
       }, (err) => {
         console.log(err);
       });

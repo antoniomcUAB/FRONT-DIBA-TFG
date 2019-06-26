@@ -39,7 +39,6 @@ export class ObservationsService extends GlobalService {
           }
         }
         data.valoracio = sortValoracio;
-        console.log(data);
         return data;
       })
     );

@@ -1,5 +1,5 @@
 import { TokenService } from '../services/token.service';
-import {environment} from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 export function jwtOptionsFactory(tokenService: TokenService) {
   return {

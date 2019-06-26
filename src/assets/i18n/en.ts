@@ -21,7 +21,7 @@ export let TRANSLATION = {
     'basicSocialSituation': 'Situacion social Basica',
     'replySocialSituation': 'Situacion social Repetitva',
     'contextFactor': 'Factor de contextualizacion',
-    'expedient': 'Estat expedient',
+    'expedient': 'Estat diagnòstics',
     'unidadFamiliar': 'Unitat convivència'
   },
   'OBSTABLE': {

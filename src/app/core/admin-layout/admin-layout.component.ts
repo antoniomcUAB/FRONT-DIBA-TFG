@@ -9,7 +9,6 @@ import {HomeService} from "../../modules/home/services/home.service";
 import {ArrayBreadCrums, BreadCrums} from "../../modules/tabs/models/tab-class-form";
 import {BreadcrumInterface} from "../resources/breadcrum-interface";
 import {GlobalService} from "../../shared";
-import {User} from "../../modules/auth/resources/user";
 import {Professional} from "../../modules/home/models/professional";
 
 const SMALL_WIDTH_BREAKPOINT = 991;
@@ -29,7 +28,8 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterfa
   private _router: Subscription;
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
-  idProfessional = 19669;
+  idProfessional;
+  idProfesionalNumber:number;
   professional: Professional;
 
   routeOptions: Options;
@@ -59,9 +59,18 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterfa
     this.mediaMatcher.addListener(mql => zone.run(() => {
       this.mediaMatcher = mql;
     }));
+
+    const tokenID2 = window.location.href;
+
+    const tokensplit = tokenID2.split("professionalId=");
+    console.log(tokensplit);
+
+    this.idProfesionalNumber = parseInt(tokensplit[1]);
+    console.log(this.idProfesionalNumber);
+
     this.global.registerLayout(this);
 
-    this.getProfessionalData(this.idProfessional);
+    this.getProfessionalData(this.idProfesionalNumber);
   }
 
   /** GET PROFESSIONAL DATA **/
@@ -107,7 +116,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterfa
   }
 
   setTitle( newTitle: string) {
-    this.titleService.setTitle( '#EinaDS-DIBA | ' + newTitle );
+    this.titleService.setTitle( '#DS-DIBA | ' + newTitle );
   }
 
   isOver(): boolean {
