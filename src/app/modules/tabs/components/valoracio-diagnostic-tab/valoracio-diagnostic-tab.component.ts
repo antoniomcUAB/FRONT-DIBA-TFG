@@ -118,7 +118,7 @@ export class ValoracioDiagnosticTabComponent  extends CustomInput implements OnI
       console.log(err);
     });
     setTimeout(_ => {
-      this._router.navigate(['/observations', {'id': this.idDiagnostic, 'date': this.value.data, 'exp': this.idExpedient , 'codi': this.nomExpedient}]);
+      this._router.navigate(['/observations', {'id': this.idDiagnostic, 'date': this.value.data, 'exp': this.idExpedient , 'codi': this.nomExpedient, 'professionalId':this.idProfessional}]);
     }, 300);
 
   }

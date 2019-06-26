@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       const tokenID =  url.searchParams.get("tokenId");
       const id = url.searchParams.get("professionalId");
       if (tokenID !== undefined && tokenID !== null && id !== null) {
-        console.log(tokenID);
+
             this._tokenService.setToken(tokenID);
             this._router.navigate(['/home', {'professionalId': id}]);
           } else {
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         const tokenID2 = window.location.href;
         const tokensplit = tokenID2.split("tokenId=");
         const profesionalID = tokensplit[1].split("&professionalId=");
-        console.log( "este es" + profesionalID[1]);
+
         const tokensplit2 = profesionalID[0].split("%20");
         const tokensplit3 = tokensplit2[0] + " " + tokensplit2[2];
         if (tokensplit !== undefined && tokensplit !== null &&  profesionalID !== null) {

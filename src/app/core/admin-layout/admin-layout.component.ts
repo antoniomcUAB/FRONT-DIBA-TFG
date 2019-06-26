@@ -63,14 +63,15 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, BreadcrumInterfa
     const tokenID2 = window.location.href;
 
     const tokensplit = tokenID2.split("professionalId=");
-    console.log(tokensplit);
 
     this.idProfesionalNumber = parseInt(tokensplit[1]);
-    console.log(this.idProfesionalNumber);
 
     this.global.registerLayout(this);
 
-    this.getProfessionalData(this.idProfesionalNumber);
+    if(this.idProfesionalNumber)
+    {
+      this.getProfessionalData(this.idProfesionalNumber);
+    }
   }
 
   /** GET PROFESSIONAL DATA **/

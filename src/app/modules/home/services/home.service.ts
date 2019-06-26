@@ -47,7 +47,7 @@ export class HomeService extends GlobalService {
 
   /** CREATE FILE **/
   createFile(expedient: Expedient): Observable<Expedient> {
-    console.log(expedient);
+
     return this._http.put<Expedient>(`${this.apiURL}/dsdiba/api/expedient/`, expedient);
   }
 }

@@ -213,10 +213,10 @@ export class FileDetailComponent {
     config.outsideDays = 'hidden';
 
     this.id = this._route.snapshot.params['id'];
-    console.log(this.id);
     this.idProfessional = this._route.snapshot.params['professionalId'];
+
     this.getCurrentModel();
-    if(this.idProfessional) {
+    if (this.idProfessional) {
       this.getProfessionalData(this.idProfessional);
     }
     this.getFile();
@@ -419,6 +419,7 @@ export class FileDetailComponent {
   getProfessionalData(id: number) {
     this._service.getProfessionalByID(id).subscribe( (data: Professional) => {
       this.professional = data;
+
     }, (error) => {
       console.log("ERROR - al recuperar el profesional \n " + error);
     });

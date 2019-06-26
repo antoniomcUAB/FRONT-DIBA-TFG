@@ -25,7 +25,7 @@ export class AuthenticatedGuard implements CanActivate, CanActivateChild {
     if (!this._tokenService.isValid()) {
       // this._tokenService.removeToken();
     // window.location.href = environment.authUrl;
-      console.log("casa");
+
     }
     return !!this._tokenService.getToken();
   }

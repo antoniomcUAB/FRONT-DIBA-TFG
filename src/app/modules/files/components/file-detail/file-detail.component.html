@@ -1,5 +1,5 @@
 <!-- Search component -->
-<app-search></app-search>
+<app-search [idProfessional]="idProfessional"></app-search>
 <!--/ Search component -->
 
 <!-- Form Detail -->
@@ -439,10 +439,10 @@
                   </td>
                   <td [ngClass]="{'warning' : item.estat.descripcio === 'BORRADOR', 'success' : item.estat.descripcio === 'VALIDAT'}">
                     <a *ngIf="item.estat.descripcio === 'VALIDAT'"
-                       [routerLink]="['/observations', {'id': item.id,'date': item.data,'exp': expedient.id,'codi':expedient.codi,'professionalID':idProfessional}]" > <i class="fa fa-eye"></i>
+                       [routerLink]="['/observations', {'id': item.id,'date': item.data,'exp': expedient.id,'codi':expedient.codi,'professionalId':idProfessional}]" > <i class="fa fa-eye"></i>
                     </a>
                     <a *ngIf="item.estat.descripcio === 'BORRADOR' && idProfessional == item.professional.id"
-                       [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id,'professionalID':idProfessional,'ValoracioName': item.data}]" >
+                       [routerLink]="['/tabs', {'diagnosisID': item.id,'expedientID': expedient.id,'professionalId':idProfessional,'ValoracioName': item.data}]" >
                       <i class="fa fa-pencil-square-o"> </i>
                     </a>
                   </td>

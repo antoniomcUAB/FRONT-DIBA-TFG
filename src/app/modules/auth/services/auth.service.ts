@@ -22,7 +22,7 @@ export class AuthService extends GlobalService {
       .pipe(
         map((response: HttpResponse<string>) => {
           const resp = response.toLocaleString().replace("Authorization:Bearer","");
-          console.log(resp);
+
           this._tokenService.setToken(resp);
           return true;
         }, catchError(this.handleError))

@@ -61,7 +61,7 @@
     <div class="form-group  row bg-grey-300 m-0 mt-3 mb-0 ">
     <ng-template ngFor [ngForOf]="data.ambits" let-ambit let-firts="index">
       <ng-template ngFor [ngForOf]="ambit.entorns" let-entorn let-e="index">
-        <ng-template [ngIf]="(groupRelacional.social && entorn.descripcio === 'Entorn Social' )
+        <ng-template [ngIf]="(groupRelacional.social && entorn.descripcio === 'Entorn Comunitari' )
       || (groupRelacional.family && entorn.descripcio === 'Entorn Familiar')
       || (groupRelacional.school && entorn.descripcio === 'Entorn Escolar')
       ||(groupMaterial.house && entorn.descripcio === 'Entorn habitatge' )
