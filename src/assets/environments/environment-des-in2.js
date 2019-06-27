@@ -5,6 +5,7 @@
   blacklistedRoutes: ['dsdiba.api.demo.in2.es/dsdiba/api/login', 'localhost:8090/dsdiba/api/login']
 };*/
 const env = {
+
   serverURL: 'http://dsdiba.demo.in2.es',
   apiURL   : 'http://dsdiba.api.demo.in2.es',
   whitelistedDomains: ['dsdiba.api.demo.in2.es'],
